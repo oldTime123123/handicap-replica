@@ -1,0 +1,200 @@
+{
+	"easycom": {
+		"custom": {
+			"^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)": "z-paging/components/z-paging$1/z-paging$1.vue",
+			"Loading": "@/components/loading/loading.vue"
+		}
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/tabbar/index",
+			"style": {
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/record/rechargeRecord"
+		}, {
+			"path": "pages/tabbar/panel",
+			"style": {
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/tabbar/news",
+			"style": {
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/tabbar/mine",
+			"style": {
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/tabbar/construct",
+			"style": {
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/login/register"
+		},
+		{
+			"path": "pages/marks/index"
+		},
+
+		{
+			"path": "pages/login/resetPwd"
+		}, {
+			"path": "pages/setting/setting"
+		}, {
+			"path": "pages/setting/set1"
+		}, {
+			"path": "pages/setting/set2"
+		},
+		{
+			"path": "pages/setting/set3"
+		}, {
+			"path": "pages/setting/set4"
+		}, {
+			"path": "pages/mine/artcle"
+		}, {
+			"path": "pages/mine/qaq"
+		}, {
+			"path": "pages/mine/service"
+		}, {
+			"path": "pages/record/balanceRecord"
+		}, {
+			"path": "pages/record/withdrawRecord"
+		}, {
+			"path": "pages/recharge/index"
+		}, {
+			"path": "pages/recharge/bankRechrage"
+		}, {
+			"path": "pages/recharge/u_input"
+		}, {
+			"path": "pages/recharge/usdtOrder"
+		}, {
+			"path": "pages/recharge/txid"
+		}, {
+			"path": "pages/withdraw/index"
+		}, {
+			"path": "pages/withdraw/usdtWithdraw"
+		}, {
+			"path": "pages/withdraw/bankWithdraw"
+		}, {
+			"path": "pages/mine/team"
+		}, {
+			"path": "pages/mine/teamDetail"
+		}, {
+			"path": "pages/mine/share"
+		}, {
+			"path": "pages/mine/iosIntro"
+		}, {
+			"path": "pages/record/investRecord"
+		}, {
+			"path": "pages/construct/index"
+		},{
+			"path": "pages/construct/sign"
+		}, {
+			"path": "pages/construct/signSuccess"
+		}, {
+			"path": "pages/construct/signName"
+		},{
+			"path": "pages/mine/langSetting"
+		}, {
+			"path": "pages/mine/company"
+		}, {
+			"path": "pages/mine/fundTransfer"
+		}, {
+			"path": "pages/mine/charity"
+		}, {
+			"path": "pages/mine/redemption"
+		}, {
+			"path": "pages/record/redemRecod"
+		}
+	    ,{
+            "path" : "pages/act/lottery"
+        }
+        ,{
+            "path" : "pages/act/lottery-record"
+        }
+        ,{
+            "path" : "pages/act/goldEgg"
+        }  ,{
+            "path" : "pages/act/goldEggRecord"
+        }  ,{
+            "path" : "pages/linkEgg/linkEgg"
+        }, {
+			"path": "pages/act/redEnvList"
+		}, {
+			"path": "pages/act/redEnvelope"
+		}, {
+			"path": "pages/record/redenvelopeRecord"
+		}
+        ,{
+            "path" : "pages/task/index" 
+        }
+        ,{
+            "path" : "pages/coupon/recive" 
+        },{
+            "path" : "pages/coupon/couponBuyIndex"
+        },{
+            "path" : "pages/coupon/coupon"
+        }
+        ,{
+            "path" : "pages/recharge/means"
+        }
+        ,{
+            "path" : "pages/mine/investPage"
+           
+        }
+        ,{
+            "path" : "pages/mine/mission"
+            
+        }
+        ,{
+            "path" : "pages/mine/conversion"
+        }
+        ,{
+            "path" : "pages/mine/iframe"
+        }
+    ],
+
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom",
+		"navigationBarTitleText": "AGC-GPT4",
+		"style": {
+			"app-plus": {
+				"animationType": "fade-in",
+				"animationDuration": 300
+			}
+		}
+	},
+	"tabBar": {
+		"backgroundColor": "#fff",
+		"selectedColor": "#F5B04C",
+
+		"list": [
+
+		]
+	}
+}
