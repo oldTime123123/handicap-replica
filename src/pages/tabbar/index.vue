@@ -3,35 +3,39 @@
     <view class="main">
       <view style="position: relative">
         <view class="flex between topNav">
-          <image src="../../static/themeNum1/icon/kefu2.png" mode="widthFix" style="width:80rpx ; height: 80rpx;"
+          <image src="../../static/logoindex.png" mode="widthFix" style="width: 120rpx;"
             @click="handleToPage('../mine/service')"></image>
-			<view class="flex" style="align-items: center;">
-				<view style="display: flex;justify-content: right;margin-right: 20rpx;" v-if="login">
-				  <view class="topbtnSize topbtnText1" >
-				    Sign up
-				  </view>
-				  <view class="topbtnSize topbtnText2" >
-				    Login
-				  </view>
-				</view>
-				<view class="appTime" style="margin-right: 20rpx;">
-					<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
-					EST-{{servetTime}}
-				</view>
-				<image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
-				  @click="handleToPage('../mine/langSetting')"></image>
-			</view>
-         
+          <view class="flex" style="align-items: center;">
+            <view style="display: flex;justify-content: right;margin-right: 20rpx;" v-if="login">
+              <view class="topbtnSize topbtnText1">
+                Sign up
+              </view>
+              <view class="topbtnSize topbtnText2">
+                Login
+              </view>
+            </view>
+            <view class="appTime" style="margin-right: 20rpx;" v-if="!login">
+              <image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
+              EST-{{ servetTime }}
+            </view>
+            <img class="ml12 mr12" src="../../static/top1.png" alt="">
+            <img class="ml12 mr24" src="../../static/top2.png" alt="">
+            <image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
+              @click="handleToPage('../mine/langSetting')"></image>
+          </view>
 
 
-         
+
+
         </view>
+        <view style="height: 100rpx;">
 
+        </view>
         <!--  -->
         <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" next-margin="20"
-          :circular="true" style="height: 470rpx">
+          :circular="true" style="height: 400rpx">
           <swiper-item v-for="(item, index) in bannerList" :key="index">
-            <image :src="item.banner_image" mode="widthFix" style="width: 100%; height: 450rpx"></image>
+            <image :src="item.banner_image" mode="widthFix" style="width: 100%;"></image>
           </swiper-item>
         </swiper>
 
@@ -73,7 +77,7 @@
             </nut-noticebar>
           </view>
 
-          <view class="tz1">
+          <view class="tz1" @click="showDetail()">
             Detail
           </view>
         </view>
@@ -88,19 +92,20 @@
           <view class="contentCard bg1" @click="handleToPage('../mine/service')">
             Online service
           </view>
-          <view class="contentCard bg2">
+          <view class="contentCard bg2" @click="handleToPage('../mine/service')">
             Official channel
           </view>
         </view>
         <!-- content2 -->
         <view style="display: flex;flex-wrap: wrap;justify-content: space-between;margin-top: 12rpx;">
-          <view class="contentCard2" @click="handleToPage('./construct')"> 
-            <p>Share</p>
+          <view class="contentCard2" @click="handleToPage('./construct')">
+            <p style="width: 300rpx; font-size: 24rpx;line-height: 24rpx;">ShareInvite friends to recharge and get double rewards</p>
             <view>
               To share
             </view>
           </view>
-          <view class="contentCard2" @click="handleToPage('down')" style="background-image: url('../../static/imgs/index/content2-2.png');">
+          <view class="contentCard2" @click="handleToPage('down')"
+            style="background-image: url('../../static/imgs/index/content2-2.png');">
             <p>App download</p>
             <view class="contentCard2text">
               Go download
@@ -177,10 +182,10 @@
 
           <view class="flex mt30 mb48" style="justify-content: space-between;">
             <view class="invsetbtn2" :style="invsetCard == 0 ? rechangeStyle : ''" @click="invsetChange(0)">
-              Follow-up investment
+              Copy Trading
             </view>
             <view class="invsetbtn2" :style="invsetCard == 1 ? rechangeStyle : ''" @click="invsetChange(1)">
-              Regular investment
+              Cycle investment
             </view>
           </view>
           <view v-show="invsetCard == 0" style="background-color: #080F32;border-radius: 24rpx 24rpx 24rpx 24rpx;">
@@ -189,17 +194,17 @@
                 <image :src="item.pro_img" style="width:52rpx ;height: 52rpx;"></image>
                 <view class="mglr14 f28 text_bold">
                   <text class="text_white" style="color: #fff;">
-                    {{ item.pro_name }}/{{ currency }}
+                    {{ item.pro_name }}
                   </text>
-
-                  <view class="f20">Vol:{{ item.vol }}</view>
+                  <!-- /{{ currency }} -->
+                  <!-- <view class="f20">Vol:{{ item.vol }}</view> -->
 
                 </view>
               </view>
               <view class="item" style="width: 25%;">
                 <view class="f28" style="color: #fff;">{{ item.price }}</view>
               </view>
-              <view class="item flex" style="flex-direction:row-reverse;width: 15%;">
+              <view class="item flex" style="flex-direction:row-reverse;width: 15%;" v-show="false">
                 <view class=" downEl" v-if="item.is_rise == 1">
                   -{{ item.rise_rate }}%
                 </view>
@@ -209,14 +214,14 @@
                 </view>
               </view>
               <view class="btcBtn" @click="handleToPage('./panel')">
-                Follow orders
+                Copy Trading
               </view>
             </view>
-            <view class="panelbottom" >
-              <p style="display: flex;justify-content: center;align-items: center;" @click="handleToPage('./panel')"> 
-				  More 					  
-				  <img class="mr24" src="../../static/imgs/index/right.png" alt="">
-			  </p>
+            <view class="panelbottom">
+              <p style="display: flex;justify-content: center;align-items: center;" @click="handleToPage('./panel')">
+                More
+                <img class="mr24" src="../../static/imgs/index/right.png" alt="">
+              </p>
             </view>
 
           </view>
@@ -247,10 +252,10 @@
               </view>
             </view>
             <view class="panelbottom">
-			  <p style="display: flex;justify-content: center;align-items: center;" @click="handleToPage('./news')">
-					More 					  
-					<img class="mr24" src="../../static/imgs/index/right.png" alt="">
-			  </p>
+              <p style="display: flex;justify-content: center;align-items: center;" @click="handleToPage('./news')">
+                More
+                <img class="mr24" src="../../static/imgs/index/right.png" alt="">
+              </p>
             </view>
             <view class="fg"></view>
           </view>
@@ -260,18 +265,16 @@
           <view>
             <view class="assist_topic">Help FAQ</view>
             <view class="help_center">
-				<view class="" 
-					v-for="item in newsList"
-					@click="changePage(item.id)">
-					<view class=""
-					  style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
-					  <p class="ml34"> {{ item.des }}</p>
-					  <img class="mr24" src="../../static/imgs/index/right.png" alt="">
-					</view>
-					<view class="fg"></view>
-				</view>
-             
-             
+              <view class="" v-for="item in newsList" @click="changePage(item.id)">
+                <view class=""
+                  style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
+                  <p class="ml34"> {{ item.des }}</p>
+                  <img class="mr24" src="../../static/imgs/index/right.png" alt="">
+                </view>
+                <view class="fg"></view>
+              </view>
+
+
             </view>
           </view>
 
@@ -324,11 +327,11 @@
             <view
               style="width: 632rpx; display: flex;justify-content: space-between;font-size: 24rpx; text-align: center;margin: 0 auto;">
               <view style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
-                <p class="mt24" style="font-weight: 500;">265 days</p>
+                <p class="mt24" style="font-weight: 500;">{{income.day}} days</p>
                 <p class="mt12" style="font-weight: 400;color: #007FFF;">Safe operation</p>
               </view>
               <view style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
-                <p class="mt24" style="font-weight: 500;">21354354343.00 USDT</p>
+                <p class="mt24" style="font-weight: 500;">{{income.income}} USDT</p>
                 <p class="mt12" style="font-weight: 400;color: #007FFF;">Cumulative income</p>
               </view>
 
@@ -424,38 +427,38 @@ import { ref } from "vue";
 import io from 'socket.io-client'
 import { getLocale } from "i18n";
 const store = userStore();
-const showTIme  = setInterval(()=>{
-	getEasternTime()
-},1000)
-const servetTime =ref()
+const showTIme = setInterval(() => {
+  getEasternTime()
+}, 1000)
+const servetTime = ref()
 function getEasternTime() {
-	
-      const time = new Date().toLocaleString("en-US", {
-        timeZone: "America/New_York",
-        hour12: false,
-      });
-       servetTime.value = time.split(',')[1];
+
+  const time = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    hour12: false,
+  });
+  servetTime.value = time.split(',')[1];
 }
 
 const socket = ref()
 const lineData = ref('')
 const interestList = ref([])
 const time = ref()
-const httpSocket = () =>{
-		
-	if(store.$state.socket){
-		socket.value = store.$state.socket
-	}else{
-		socket.value = io('https://gptrobotai.com', { transports: ['websocket'] })
-		store.setSocket(socket.value)
-	}
-	time.value = setInterval(()=>{
-		socket.value.emit('project', { 'type': 1 })
-	},1000)
-	socket.value.on('project', (data) => {
-	  lineData.value = data.list
-	  // 在这里可以对服务器返回的数据进行处理
-	});
+const httpSocket = () => {
+
+  if (store.$state.socket) {
+    socket.value = store.$state.socket
+  } else {
+    socket.value = io('https://follow.task678.com', { transports: ['websocket'] })
+    store.setSocket(socket.value)
+  }
+  time.value = setInterval(() => {
+    socket.value.emit('project', { 'type': 1 })
+  }, 1000)
+  socket.value.on('project', (data) => {
+    lineData.value = data.list
+    // 在这里可以对服务器返回的数据进行处理
+  });
 
 }
 
@@ -464,32 +467,32 @@ let serviceTime = ref('')
 let sysTimer = ref(null)
 
 function getSysTime() {
-			if (sysTimer.value) clearInterval(sysTimer.value);
-			sysTimer.value = setInterval(() => {
-				let reg = /(\/)/g;
-				var d = new Date();
-				//得到1970年⼀⽉⼀⽇到现在的秒数
-				var len = d.getTime();
-				//本地时间与GMT时间的时间偏移差(注意：GMT这是UTC的民间名称。GMT=UTC）
-				var offset = d.getTimezoneOffset() * 60000;
-	
-				var utcTime
-				//得到现在的格林尼治时间
-				utcTime = len + offset - 3600000*5;
-				let year = new Date(utcTime).getFullYear();
-				let mon = new Date(utcTime).getMonth() + 1;
-				let day = new Date(utcTime).getDate();
-				let hours = addZero(new Date(utcTime).getHours());
-				let min = addZero(new Date(utcTime).getMinutes());
-				let sec = addZero(new Date(utcTime).getSeconds());
-				serviceTime.value = day + '/' + mon + '/' + year + ' ' + hours + ':' + min + ':' + sec;
-				uni.setStorageSync('timers', serviceTime.value);
-			}, 1000);
-		}
+  if (sysTimer.value) clearInterval(sysTimer.value);
+  sysTimer.value = setInterval(() => {
+    let reg = /(\/)/g;
+    var d = new Date();
+    //得到1970年⼀⽉⼀⽇到现在的秒数
+    var len = d.getTime();
+    //本地时间与GMT时间的时间偏移差(注意：GMT这是UTC的民间名称。GMT=UTC）
+    var offset = d.getTimezoneOffset() * 60000;
+
+    var utcTime
+    //得到现在的格林尼治时间
+    utcTime = len + offset - 3600000 * 5;
+    let year = new Date(utcTime).getFullYear();
+    let mon = new Date(utcTime).getMonth() + 1;
+    let day = new Date(utcTime).getDate();
+    let hours = addZero(new Date(utcTime).getHours());
+    let min = addZero(new Date(utcTime).getMinutes());
+    let sec = addZero(new Date(utcTime).getSeconds());
+    serviceTime.value = day + '/' + mon + '/' + year + ' ' + hours + ':' + min + ':' + sec;
+    uni.setStorageSync('timers', serviceTime.value);
+  }, 1000);
+}
 function addZero(num) {
-		let newNum = num < 10 ? '0' + num : num;
-		return newNum;
-	}
+  let newNum = num < 10 ? '0' + num : num;
+  return newNum;
+}
 const { t } = useI18n();
 const rechangeStyle = ref("background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);")
 const show = ref(false); //首页弹窗开关
@@ -649,13 +652,24 @@ const changePage = (pos) => {
 const bannerList = ref([]); //轮播图
 const barText = ref(""); //跑马灯
 const maskContent = ref(""); //普通弹窗
+const income =ref({}); //获取天数和收入
 const appData = ref({});
 const partnerList = ref([]);
 const newbanner = ref({});
 const showCharity = ref(false);
 const showParwel = ref(false);
-
+const showDetail = ()=>{
+  Toast.text(barText.value)
+}
 const getData = () => {
+  //获取天数和收入
+  request({
+    url: 'setting/show',
+    methods: 'get'
+  }).then(res => {
+    console.log(res,'setting/show');
+    income.value = res
+  })
   request({
     url: 'user/index',
     methods: 'get',
@@ -690,6 +704,7 @@ const getData = () => {
   }).then((res) => {
     // res.status == 1 ? showBar.value = true : showBar.value = false
     barText.value = res.content;
+    
   });
 
   request({
@@ -779,9 +794,9 @@ const getData = () => {
   });
 };
 // 终于可以用了
-onShow(() => { 
-	getSysTime()
-	httpSocket()
+onShow(() => {
+  getSysTime()
+  httpSocket()
 });
 
 const showLoading = ref(null);
@@ -804,10 +819,10 @@ onMounted(() => {
   }
 });
 
-onHide(()=>{
-	clearInterval(time.value)
-	clearInterval(showTIme.value)
-	
+onHide(() => {
+  clearInterval(time.value)
+  clearInterval(showTIme.value)
+
 })
 onLoad((e) => {
   assist();

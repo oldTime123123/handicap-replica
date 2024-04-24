@@ -8,30 +8,26 @@
    </topNavbar-menu> -->
 
    <view class="between pdlr30" style="padding-top: 20rpx;">
-		<view class="" >
-		</view>
-		<view class="f34">
-			{{pro_name}}/USDT
-		</view>
-	   
-		<view style="width: 30rpx;" @click="jump('../mine/panelPage')">
-			<image style="width: 48rpx;height: 48rpx;" src="../../static/gdjl.png" mode=""></image>
-		</view>
+      <view class="">
+      </view>
+      <view class="f34">
+         {{ pro_name }}/USDT
+      </view>
+
+      <view style="width: 30rpx;" @click="jump('../mine/panelPage')">
+         <image style="width: 48rpx;height: 48rpx;" src="../../static/gdjl.png" mode=""></image>
+      </view>
    </view>
-   <view class="pl40  f40 pdtb30 flex col_center">
-	   
-	   <image
-	      src="../../static/list.png"
-	      mode="aspectFit"
-	      style="width: 60upx; height: 60upx"
-	      @click="popShow = true"
-	   ></image>
-		
-		<view class="ml20">
-			Futures
-			<!-- {{ pDetial.pro_name }}/USDT{{ $t('sec.a1') }} -->
-		</view>
-	   <!-- popShow -->
+   <view class="pl40  f40 pdtb30 flex col_center" v-show="false">
+
+      <image src="../../static/list.png" mode="aspectFit" style="width: 60upx; height: 60upx" @click="popShow = true">
+      </image>
+
+      <view class="ml20">
+         Futures
+         <!-- {{ pDetial.pro_name }}/USDT{{ $t('sec.a1') }} -->
+      </view>
+      <!-- popShow -->
    </view>
    <view class="container cont1">
       <view class="heads">
@@ -65,12 +61,8 @@
             </view>
          </view>
          <view class="right-icon ml40" @click="viewOpen = !viewOpen">
-            <image
-               v-if="viewOpen"
-               src="/src/static/view-open.png"
-               mode="aspectFit"
-               style="width: 72upx; height: 72upx"
-            ></image>
+            <image v-if="viewOpen" src="/src/static/view-open.png" mode="aspectFit" style="width: 72upx; height: 72upx">
+            </image>
             <image v-else src="/src/static/view-off.png" mode="aspectFit" style="width: 72upx; height: 72upx"></image>
          </view>
       </view>
@@ -95,22 +87,14 @@
          <view style="display: flex">
             <view class="timerBtnListEl">
                Time:
-               <view
-                  class="timeItem"
-                  v-for="(item, index) in timerBtnList"
-                  :class="timerBtnInd == index ? 'actColor' : ''"
-                  @click="changeTimeSelect(item, index)"
-               >
+               <view class="timeItem" v-for="(item, index) in timerBtnList"
+                  :class="timerBtnInd == index ? 'actColor' : ''" @click="changeTimeSelect(item, index)">
                   {{ item.name }}
                </view>
             </view>
             <view class="timerBtnListEl">
-               <view
-                  class="timeItem"
-                  v-for="(item, index) in candTypeList"
-                  :class="candTypeInd == index ? 'actColor' : ''"
-                  @click="setType(item, index)"
-               >
+               <view class="timeItem" v-for="(item, index) in candTypeList"
+                  :class="candTypeInd == index ? 'actColor' : ''" @click="setType(item, index)">
                   {{ item.key }}
                </view>
             </view>
@@ -127,27 +111,19 @@
             {{ $t('sec.a6') }}
          </view>
       </view>
-	  <view
-	     class="btn-normal submit-btn h88"
-	     style="text-align: center"
-	     :class="{ 'btn-more': buyType == 1, 'btn-short': buyType == 2 }"
-	     @click="buyTostShow = true"
-	  >
-	    Follow-up investment
-	  </view>
-	  <view style="height: 100rpx;">
-	  	
-	  </view>
+      <view class="btn-normal submit-btn h88" style="text-align: center"
+         :class="{ 'btn-more': buyType == 1, 'btn-short': buyType == 2 }" @click="buyTostShow = true">
+         Copy Trading
+      </view>
+      <view style="height: 100rpx;">
+
+      </view>
 
       <!-- 时间选择 -->
       <scroll-view scroll-x="true">
          <view class="sec-scroll-view">
-            <view
-               class="sec-item"
-               :class="{ 'active-sec': times == item.time }"
-               v-for="(item, index) in pDetial.times"
-               @click="times = item.time"
-            >
+            <view class="sec-item" :class="{ 'active-sec': times == item.time }" v-for="(item, index) in pDetial.times"
+               @click="times = item.time">
                <view class="item-cont">
                   <text style="font-size: 53rpx">{{ item.time }}</text>
                   <text style="font-size: 33rpx">Sec</text>
@@ -173,7 +149,7 @@
          </view>
       </view> -->
       <!-- 购买商品金额填写栏 -->
-     <!-- <view class="cont-block" v-show="false">
+      <!-- <view class="cont-block" v-show="false">
          <view class="block-item block-grow-item">
             <view class="item-label">
                <view class="label-title label-flex">
@@ -202,10 +178,10 @@
          </view>
       </view> -->
       <!-- 提交按钮 -->
-    
+
    </view>
-  
-  
+
+
    <!-- 下半部分 订单 -->
    <view class="order" v-show="false">
       <!-- <view class="between mt28 pdlr28" >
@@ -223,16 +199,13 @@
       <view v-show="false">
          <!-- 空内容 -->
          <view class="flex-col center pdtb160" v-if="recordList.length == 0">
-<!--            <image src="/src/static/notdata.png" mode="aspectFit" style="width: 240upx; height: 240upx"></image> -->
-            <text>{{$t('ter.a6')}}</text>
+            <!--            <image src="/src/static/notdata.png" mode="aspectFit" style="width: 240upx; height: 240upx"></image> -->
+            <text>{{ $t('ter.a6') }}</text>
          </view>
          <!-- 订单 -->
          <view class="record pb28" style="width: 100%" v-else>
-            <view
-               class="record-item pdtb28 pdlr28 mglr28 mgtb28"
-               style="background-color: #242424; border-radius: 20upx"
-               v-for="item in recordList"
-            >
+            <view class="record-item pdtb28 pdlr28 mglr28 mgtb28"
+               style="background-color: #242424; border-radius: 20upx" v-for="item in recordList">
                <view class="item-row between">
                   <view style="color: #666">{{ $t('sec.c1') }} </view>
                   <view>{{ item.product.pro_name }}</view>
@@ -253,9 +226,9 @@
                <view class="item-row between mt20">
                   <view style="color: #666">{{ $t('sec.b6') }}</view>
                   <view>
-	<!-- 					  $t('sec.b7')  -->
+                     <!-- 					  $t('sec.b7')  -->
 
-                    <text v-if="item.status == 1">{{item.rest_time}}</text>
+                     <text v-if="item.status == 1">{{ item.rest_time }}</text>
                      <text v-else-if="item.status == 2">{{ $t('sec.b8') }}</text>
                      <text v-else-if="item.status == 3">{{ $t('sec.b9') }}</text>
                   </view>
@@ -280,30 +253,23 @@
       </view>
    </view>
    <!-- 商品列表弹窗 -->
-  <nut-overlay v-model:visible="popShow" :overlay-style="{ background: 'rgba(0,0,0,0.3)' }"
-    :close-on-click-overlay="true">
+   <nut-overlay v-model:visible="popShow" :overlay-style="{ background: 'rgba(0,0,0,0.3)' }"
+      :close-on-click-overlay="true">
       <view class="pop-wrap">
-         <view
-            class="pop-head h88 pl28"
-            style="background: #1a1a1a; color: #fff"
-         >
+         <view class="pop-head h88 pl28" style="background: #1a1a1a; color: #fff">
             USDT {{ $t('sec.b15') }}
          </view>
          <view class="pop-tabs flex" style="border-bottom: 1px solid #f1f1f1">
             <view class="pop-tab h88 pdlr28" style="border-bottom: 2px solid #fff; color: #fff">USDT</view>
          </view>
-         <view class="pop-list" >
-            <view
-               class="list-item pdlr28 pdtb28  "
-               :class="{ 'active-item': pid == item.id }"
-               style="border-bottom: 1px solid #f1f1f1"
-               v-for="(item, index) in productList"
-               @click="changeProduct(item)"
-            >
+         <view class="pop-list">
+            <view class="list-item pdlr28 pdtb28  " :class="{ 'active-item': pid == item.id }"
+               style="border-bottom: 1px solid #f1f1f1" v-for="(item, index) in productList"
+               @click="changeProduct(item)">
                <view class="item-left">
                   <view>
                      <text>{{ item.pro_name }}</text>
-                     <text class="f24" >/USDT</text>
+                     <text class="f24">/USDT</text>
                   </view>
                   <view class="f24 mt8">24h / {{ item.vol }}</view>
                </view>
@@ -318,7 +284,7 @@
       </view>
    </nut-overlay>
    <!-- 下注成功弹窗 -->
-  <!-- <van-popup v-if='false' v-model:show="successPurchasePop" position="bottom" :round="true" style="background: #1a1a1a;">
+   <!-- <van-popup v-if='false' v-model:show="successPurchasePop" position="bottom" :round="true" style="background: #1a1a1a;">
       <view class="head pdtb28 pdlr28 f32" style="font-weight: bold; border-bottom: 1px solid #5b5b5b">
          {{ pDetial.pro_name }}/USDT
       </view>
@@ -349,36 +315,36 @@
       <view class="buy-btn mglr28 mgtb28" style="color: #fff;" @click="successPurchasePop = false">{{$t('all.a2')}}</view>
    </van-popup> -->
    <view class="buyTost" v-show="buyTostShow">
-   			<view class="buyCard">
-   				<view class="flex mt48 mr32" style="text-align: center;justify-content: right;">
-   					<view>Confirm Order</view>
-   					<img src="../../static/themeNum1/l_icon/down.png" alt="" class="ml176" @click="buyTost(false)">
-   				</view>
-   				<view class="paddingLR30 mt32">{{pro_name}}/USDT</view>
-   				<view class="paddingLR30 mt32">Buy amount (min: {{amount}} USDT)</view>
-   				<input v-model="amount" class="moenyIn mt16 ml32" type="text" placeholder="Please enter amount">
-   				<view class="paddingLR30 mt16 PlaceAbet flex">
-   					<view @click="amount=1000">1000</view>
-   					<view @click="amount=2000">2000</view>
-   					<view @click="amount=3000">3000</view>
-   					<view>ALL</view>
-   				</view>
-   				<view class="paddingLR30 mt24 flex"
-   					style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
-   					<view>balance: {{tradeBalance}}</view>
-   					<view>Lock Time: {{pageData.period}}</view>
-   				</view>
-   				<view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">pending
-   					incomes: {{amount+(amount*rate)}}</view>
-   				<view class="confirmBtn" @click="submitAdd">
-   					Confirm
-   				</view>
-   			</view>
-   		</view>
-<!--   <TabBar currentIndex="3"></TabBar> -->
-  <Tabbar :activeIndex="1"></Tabbar>
-  <Loading ref="showLoading"></Loading>
-  <Loading2 ref="showLoading2"></Loading2>
+      <view class="buyCard">
+         <view class="flex mt48 mr32" style="text-align: center;justify-content: right;">
+            <view>Confirm Order</view>
+            <img src="../../static/themeNum1/l_icon/down.png" alt="" class="ml176" @click="buyTost(false)">
+         </view>
+         <view class="paddingLR30 mt32">{{ pro_name }}/USDT</view>
+         <view class="paddingLR30 mt32">Buy amount (min: {{ amount }} USDT)</view>
+         <input v-model="amount" class="moenyIn mt16 ml32" type="text" placeholder="Please enter amount">
+         <view class="paddingLR30 mt16 PlaceAbet flex">
+            <view @click="amount = 1000">1000</view>
+            <view @click="amount = 2000">2000</view>
+            <view @click="amount = 3000">3000</view>
+            <view>ALL</view>
+         </view>
+         <view class="paddingLR30 mt24 flex"
+            style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
+            <view>balance: {{ tradeBalance }}</view>
+            <view>Lock Time: {{ pageData.period }}</view>
+         </view>
+         <view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">pending
+            incomes: {{ amount + (amount * rate) }}</view>
+         <view class="confirmBtn" @click="submitAdd">
+            Confirm
+         </view>
+      </view>
+   </view>
+   <!--   <TabBar currentIndex="3"></TabBar> -->
+   <Tabbar :activeIndex="1"></Tabbar>
+   <Loading ref="showLoading"></Loading>
+   <Loading2 ref="showLoading2"></Loading2>
 </template>
 
 <script setup>
@@ -401,7 +367,7 @@ let popShow = ref(false);
 const buyTostShow = ref(false)
 const amount = ref(1000)
 const buyTost = (falg) => {
-	buyTostShow.value = falg
+   buyTostShow.value = falg
 }
 function jump(url) {
    uni.navigateTo({
@@ -410,19 +376,19 @@ function jump(url) {
 }
 const chartData = ref([]);
 
-const back = () =>{
-	history.back()
+const back = () => {
+   history.back()
 }
 
 let tradeBalance = ref(0);
 
 function getUserInfo() {
-	  request({
-	  	url: '/user/index',
-	  	methods: 'GET'
-	  }).then((res) => {
-         tradeBalance.value = res.balance;
-      });
+   request({
+      url: '/user/index',
+      methods: 'GET'
+   }).then((res) => {
+      tradeBalance.value = res.balance;
+   });
 }
 
 let productList = ref([]); //产品列表
@@ -432,31 +398,28 @@ let times = ref(0); //开奖时间选择
 let buyType = ref(1); //购买类型
 let price = ref(''); //购买价格
 
-	
 
 
-	// const countdown = async(item) =>{
-	// 	// let data = await fn(item)
-	// 	// return data
-		
-	// }
+
+// const countdown = async(item) =>{
+// 	// let data = await fn(item)
+// 	// return data
+
+// }
 
 function getProductList() {
    uni.showLoading();
-	  request({
-	  	url: 'page/trade/productList',
-	  	methods: 'get'
-	  })
+   request({
+      url: 'page/trade/productList',
+      methods: 'get'
+   })
       .then((res) => {
          productList.value = res;
-		 
-		 if(!pid.value){
-			 pid.value = res[0].id
-		 }
-		 getUserInfo();
-		 getProductDetail();
-		 startTimeTwo();
-		 startTime();
+
+         config()
+
+         console.log(pid.value);
+
       })
       .catch()
       .finally((res) => uni.hideLoading());
@@ -539,6 +502,7 @@ const getKlineData = () => {
    if (pDetial.value) {
       let sys = (pDetial.value.pro_name + 'usdt').toLowerCase();
       pageData.value.symbol = sys;
+      console.log(pageData.value);
       uni.request({
          url: 'https://api.huobi.pro/market/history/kline',
          data: pageData.value,
@@ -603,16 +567,16 @@ const applyChartData = () => {
 
 function getProductDetail() {
    uni.showLoading();
-	  request({
-	  	url: 'page/trade/productInfo',
-	  	methods: 'post',
-	  	data: {
-	  	   pid: pid.value
-	  	}
-	  }).then((res) => {
-         pDetial.value = res;
-         getKlineData();
-      })
+   request({
+      url: 'page/trade/productInfo',
+      methods: 'post',
+      data: {
+         pid: pid.value
+      }
+   }).then((res) => {
+      pDetial.value = res;
+      getKlineData();
+   })
       .catch()
       .finally((res) => uni.hideLoading());
 }
@@ -622,36 +586,36 @@ let purchaseMsg = ref({});
 let purchaseTime = ref(null);
 
 function submit() {
-   if (times.value == 0){
-	   return Toast.text(proxy.$t('add.b5'));
-   } 
+   if (times.value == 0) {
+      return Toast.text(proxy.$t('add.b5'));
+   }
    if (price.value == 0) return Toast.text('Vui lòng nhập số tiền');
    uni.showLoading();
-	  request({
-	  	url: '/trade/trade',
-	  	methods: 'POST',
-	  	data: {
-	  	   pid: pid.value,
-	  	   times: times.value,
-	  	   price: price.value,
-	  	   buy_type: buyType.value
-	  	}
-	  })
+   request({
+      url: '/trade/trade',
+      methods: 'POST',
+      data: {
+         pid: pid.value,
+         times: times.value,
+         price: price.value,
+         buy_type: buyType.value
+      }
+   })
       .then((res) => {
-		  console.log(res,'ss')
+         console.log(res, 'ss')
          purchaseMsg.value = res;
          if (purchaseTime.value) clearInterval(purchaseTime.value);
-		 getRecord();
+         getRecord();
          purchaseTime.value = setInterval(() => {
             purchaseMsg.value.times--;
             if (purchaseMsg.value.times == 0) {
                clearInterval(purchaseTime.value);
                successPurchasePop.value = false;
-			  uni.showLoading()
-			  setTimeout(()=>{
-				  uni.hideLoading()
-				  getRecord();
-			  },5000)
+               uni.showLoading()
+               setTimeout(() => {
+                  uni.hideLoading()
+                  getRecord();
+               }, 5000)
             }
          }, 1000);
          Toast.text(proxy.$t('add.b1'));
@@ -667,89 +631,93 @@ let recordList = ref([]);
 
 function getRecord() {
    // uni.showLoading();
-	  request({
-	  	url: '/trade/tradeLog',
-	  	methods: 'get',
-	  	data: {
-	  	   pid: pid.value,
-	  	   page: recordPage.value,
-	  	   size: recordSize.value
-	  	}
-	  }).then((res) => {
-         recordList.value = res.data;
-      })
+   request({
+      url: '/trade/tradeLog',
+      methods: 'get',
+      data: {
+         pid: pid.value,
+         page: recordPage.value,
+         size: recordSize.value
+      }
+   }).then((res) => {
+      recordList.value = res.data;
+   })
       .catch((err) => Toast.text(err.message))
       .finally((res) => uni.hideLoading());
 }
 
-	const timer = ref(null);
-	const startTime = () => {
-	   timer.value = setInterval(() => {
-		  getKlineData();
-	   }, 5000);
-	};
-	
-		
-	const submitAdd = () =>{
-		console.log('123')
-		request({
-			url: 'activity/follow/follow',
-			methods: 'post',
-			data:{
-				amount:amount.value,
-				project_id:pid.value
-			}
-		}).then((res) => {
-		  Toast.text('successfully ordered')
-		  history.back()
-		}).catch(err=>{
-			Toast.text(err.message)
-		})
-	}
+const timer = ref(null);
+const startTime = () => {
+   timer.value = setInterval(() => {
+      getKlineData();
+   }, 5000);
+};
 
-	const rate = ref()
-	const config = () =>{
-		request({
-			url: 'activity/follow/config',
-			methods: 'get',
-		}).then((res) => {
-		   console.log(res,'sss')
-		   rate.value = res.rate/100
-		    pid.value = res.pid;
-			pro_name.value = res.pro_name
-		}).catch(err=>{
-			Toast.text(err.message)
-		})
-	}
-	const pro_name = ref()
-	onLoad((e) => {
-	   if (e.type) {
-		  buyType.value = e.type;
-	   }
-	
-	   getProductList();
-		config()
-	});
-	const timerTwo = ref()
-	const startTimeTwo = () => {
-	   timerTwo.value = setInterval(() => {
-		  // getRecord();
-	   }, 3000);
-	};
-	
 
-	onUnmounted(() => {
-		if(timerTwo.value){
-			clearInterval(timerTwo.value);
-			
-		}
-	   if (timer.value) {
-		  clearInterval(timer.value);
-	   }
-	});
-	
+const submitAdd = () => {
+   console.log('123')
+   request({
+      url: 'activity/follow/follow',
+      methods: 'post',
+      data: {
+         amount: amount.value,
+         project_id: pid.value
+      }
+   }).then((res) => {
+      Toast.text('successfully ordered')
+      history.back()
+   }).catch(err => {
+      Toast.text(err.message)
+   })
+}
 
-	const setTooltip = (chart) => {
+const rate = ref()
+const config = () => {
+   request({
+      url: 'activity/follow/config',
+      methods: 'get',
+   }).then((res) => {
+      console.log(res, 'sss')
+      rate.value = res.rate / 100
+      pid.value = res.pid;
+      pro_name.value = res.pro_name
+      getUserInfo();
+      getProductDetail();
+      startTimeTwo();
+      startTime();
+   }).catch(err => {
+      Toast.text(err.message)
+   })
+}
+const pro_name = ref()
+onLoad((e) => {
+   if (e.type) {
+      buyType.value = e.type;
+   }
+
+   getProductList();
+   config()
+});
+const timerTwo = ref()
+const startTimeTwo = () => {
+   timerTwo.value = setInterval(() => {
+      // getRecord();
+   }, 3000);
+};
+
+
+onUnmounted(() => {
+   if (timerTwo.value) {
+      clearInterval(timerTwo.value);
+
+   }
+   if (timer.value) {
+      clearInterval(timer.value);
+   }
+});
+
+
+const setTooltip = (chart) => {
    chart.applyOptions({
       priceScale: {
          position: 'right'
@@ -876,56 +844,60 @@ const changeDataType = (Arr) => {
 </script>
 
 <style lang="scss" scoped>
-	
-	.confirmBtn {
-		width: 686rpx;
-		height: 88rpx;
-		background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);
-		border-radius: 16rpx 16rpx 16rpx 16rpx;
-		line-height: 88rpx;
-		text-align: center;
-		margin: 56rpx auto 0;
-	}
-	.PlaceAbet {
-		justify-content: space-between;
-		line-height: 96rpx;
-		text-align: center;
-	
-		view {
-			width: 160rpx;
-			height: 96rpx;
-			background: #004284;
-			border-radius: 24rpx 24rpx 24rpx 24rpx;
-		}
-	}
-	.moenyIn {
-		width: 638rpx;
-		padding: 0 24rpx;
-		height: 96rpx;
-		background: #004284;
-		border-radius: 24rpx 24rpx 24rpx 24rpx;
-	}
-	.paddingLR30 {
-		padding: 0 30rpx;
-	}
+.confirmBtn {
+   width: 686rpx;
+   height: 88rpx;
+   background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);
+   border-radius: 16rpx 16rpx 16rpx 16rpx;
+   line-height: 88rpx;
+   text-align: center;
+   margin: 56rpx auto 0;
+}
 
-	.buyTost {
-		width: 100vw;
-		height: 100vh;
-		background-color: rgba(0, 0, 0, 0.50);
-		position: fixed;
-		top: 0;
-		z-index: 99;
-	
-	}
-	.buyCard {
-		width: 750rpx;
-		height: 824rpx;
-		background-color: rgba(0, 38, 76, 1);
-		overflow: hidden;
-		position: fixed;
-		bottom: 0;
-	}
+.PlaceAbet {
+   justify-content: space-between;
+   line-height: 96rpx;
+   text-align: center;
+
+   view {
+      width: 160rpx;
+      height: 96rpx;
+      background: #004284;
+      border-radius: 24rpx 24rpx 24rpx 24rpx;
+   }
+}
+
+.moenyIn {
+   width: 638rpx;
+   padding: 0 24rpx;
+   height: 96rpx;
+   background: #004284;
+   border-radius: 24rpx 24rpx 24rpx 24rpx;
+}
+
+.paddingLR30 {
+   padding: 0 30rpx;
+}
+
+.buyTost {
+   width: 100vw;
+   height: 100vh;
+   background-color: rgba(0, 0, 0, 0.50);
+   position: fixed;
+   top: 0;
+   z-index: 99;
+
+}
+
+.buyCard {
+   width: 750rpx;
+   height: 824rpx;
+   background-color: rgba(0, 38, 76, 1);
+   overflow: hidden;
+   position: fixed;
+   bottom: 100rpx;
+}
+
 .heads {
    display: flex;
    justify-content: space-between;
@@ -948,24 +920,29 @@ const changeDataType = (Arr) => {
       }
    }
 }
-.between view:nth-child(1){
-	color: #5b5b5b;
+
+.between view:nth-child(1) {
+   color: #5b5b5b;
 }
+
 .timerBtnListEl {
-   padding: 10rpx 20rpx  ;
+   padding: 10rpx 20rpx;
    display: flex;
    width: 50%;
    overflow: scroll;
    color: #ccc;
+
    .timeItem {
       // width: 100rpx;
       text-align: center;
       margin-right: 10rpx;
    }
+
    .actColor {
       color: #1a73e8;
    }
 }
+
 .cont2 {
    margin-top: 10upx;
 
@@ -1005,16 +982,16 @@ const changeDataType = (Arr) => {
 }
 
 .btn-normal {
-	position: fixed;
-	bottom: 150rpx;
-	 width: 96%;
-	 left: 50%;
-  margin-left: -48%;
+   position: fixed;
+   bottom: 150rpx;
+   width: 96%;
+   left: 50%;
+   margin-left: -48%;
 
- line-height: 88rpx;
+   line-height: 88rpx;
    height: 88rpx;
    z-index: 99;
-	background: linear-gradient( 308deg, #006BF4 0%, #04E1F4 100%) !important;
+   background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%) !important;
    border-radius: 8px 8px 8px 8px;
 }
 
@@ -1158,16 +1135,18 @@ const changeDataType = (Arr) => {
    height: 100vh;
    width: 550upx;
    background-color: #1a1a1a;
+
    .active-item {
       background-color: #242424;
-		  color: #fff !important;
+      color: #fff !important;
    }
-   .list-item{
-	   display: flex;
-	   align-items: center;
-	   justify-content: space-between;
-	   color:#848186;
-	   background-color: #1a1a1a;
+
+   .list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #848186;
+      background-color: #1a1a1a;
    }
 }
 

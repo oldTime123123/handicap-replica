@@ -18,12 +18,12 @@ if (dev == 1) {
 	COUNTRY.url = 'api.agcgpt.com',
 	COUNTRY.lang = "en",
 	COUNTRY.title = "",
-	COUNTRY.icon = "/static/logo.png"
+	COUNTRY.icon = "/static/defi.png"
 } else if (dev == 2) {
 	COUNTRY.url = 'follow.task678.com',
 	COUNTRY.lang = "en",
 	COUNTRY.title = "",
-	COUNTRY.icon = "/static/logo.png"
+	COUNTRY.icon = "/static/defi.png"
 }
 
  

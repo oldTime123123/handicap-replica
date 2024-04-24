@@ -30,7 +30,7 @@
 			</view>
 			
 			<view class=" center l_inpS mt40 l_inpBg pdlr30 color0 f32" style="margin-top:214rpx" :style="{background: store.$state.secondColor}"  @click="jumpPage">
-				{{t('all.a_c2')}}
+				{{t('all.a_c1')}}
 			</view>
 		</view>
 	</view>

@@ -5,7 +5,7 @@
 
 			<view class="flex between topNav">
 				<view class="">
-					Invest
+					Cycle investment
 				</view>
 				<view >
 					
@@ -78,11 +78,11 @@
 				{{t('new_xq.xq_a12')}}
 			</view> -->
 				<swiper :indicator-dots="false" :indicator-active-color="store.$state.contentColor" :autoplay="false"
-					:interval="3000" :duration="1000" display-multiple-items="3" :circular="false"
+					:interval="3000" :duration="1000" display-multiple-items="2" :circular="false"
 					style="height: 64rpx;">
-					<swiper-item v-for="item in text" :key='item.index' @click="rechangeIndex = item.index">
+					<swiper-item v-for="item in text" :key='item.index' @click="rechangeIndex = item.index" style="border-radius: 0.5rem;">
 						<view class="swiper_box2" :style='rechangeIndex == item.index ? rechangeStyle : ""'
-							:id="rechangeIndex == item.index ? 'swiper_box2_chose' : ''">
+							:id="rechangeIndex == item.index ? 'swiper_box2_chose' : ''" >
 							{{ item.text }}
 						</view>
 
@@ -358,10 +358,10 @@ const text = [{
 	index: 1,
 	text: t('ttn.t_t23')
 },
-{
-	index: 2,
-	text: t('ttn.t_t24')
-},
+// {
+// 	index: 2,
+// 	text: t('ttn.t_t24')
+// },
 {
 	index: 3,
 	text: t('ttn.t_t25')
@@ -615,7 +615,7 @@ onLoad(() => {
 }
 
 .swiper_box2 {
-	width: 214rpx;
+	width: 100%;
 	height: 64rpx;
 	background: #004284;
 	border-radius: 16rpx 16rpx 16rpx 16rpx;
@@ -647,5 +647,7 @@ onLoad(() => {
 
 #swiper_box2_chose {
 	background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);
+	border-radius: 0.5rem;
+	width: 100%;
 }
 </style>

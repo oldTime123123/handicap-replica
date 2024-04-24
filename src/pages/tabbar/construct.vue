@@ -5,11 +5,12 @@
 				lnvite
 			</view>
 			<view class="">
-				
+
 			</view>
 			<view class="appTime" style="margin-right: 20rpx;">
-				<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
-				EST-{{servetTime}}
+				<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode="">
+				</image>
+				EST-{{ servetTime }}
 			</view>
 		</view>
 		<view class="main" style="background: #080F32">
@@ -45,9 +46,10 @@
 						</view>
 					</view>
 					<view class="qrcode ">
-						<qrcode-vue  :value="codeUrl" :size="163" level="H" />
+						<!-- <qrcode-vue :value="codeUrl" :size="" level="H" /> -->
+						<vue-qr qid="qrid1" :callback="qrBack" :text="qrData" :size="163" :colorDark="colorValue" :logoSrc="logoSrc"></vue-qr>
 					</view>
-					<view class="down flex">
+					<view class="down flex" @click="downQr">
 						<view>
 							SAVE THE QR CODE
 						</view>
@@ -55,7 +57,7 @@
 					</view>
 				</view>
 
-				
+
 				<view class="team">
 					<view class="teamTitle mt68">
 						My Team
@@ -209,6 +211,25 @@
 <script setup>
 import Tabbar from '@/components/botTabbar/botTabbar.vue'
 import request from '../../../comm/request.ts';
+import vueQr from 'vue-qr/src/packages/vue-qr.vue'
+
+const downQr = () => {
+	Toast.text('Download completed')
+	let name = new Date().getTime();
+	let a = document.createElement("a");
+	a.style.display = "none";
+	a.download = name;
+	a.href = qrData.value;
+	document.body.appendChild(a);
+	a.click();
+}
+const qrData = ref("");
+//qr的回调，每次变动后把二维码的数据保存下来，供下载用
+const qrBack = (dataUrl, id) => {
+	//console.log('qrback:');
+	console.log(id);
+	qrData.value = dataUrl;
+}
 // import clipboardfrom from "/comm/copy.js"
 import useClipboard from 'vue-clipboard3'
 import {
@@ -247,17 +268,17 @@ const methods = {
 	},
 
 };
-const showTIme  = setInterval(()=>{
+const showTIme = setInterval(() => {
 	getEasternTime()
-},1000)
-const servetTime =ref()
+}, 1000)
+const servetTime = ref()
 function getEasternTime() {
-	
-      const time = new Date().toLocaleString("en-US", {
-        timeZone: "America/New_York",
-        hour12: false,
-      });
-       servetTime.value = time.split(',')[1];
+
+	const time = new Date().toLocaleString("en-US", {
+		timeZone: "America/New_York",
+		hour12: false,
+	});
+	servetTime.value = time.split(',')[1];
 }
 const Jumplink = url => {
 	uni.navigateTo({
@@ -292,6 +313,8 @@ const getData = () => {
 		inviteCode.value = res.invite_code
 		codeUrl.value = window.location.protocol + "//" + window.location.host +
 			"/\#/pages/login/register\?code=" + res.invite_code + "&country=" + res.country_code
+		qrData.value = window.location.protocol + "//" + window.location.host +
+			"/\#/pages/login/register\?code=" + res.invite_code + "&country=" + res.country_code
 	})
 
 	request({
@@ -306,7 +329,7 @@ const getData = () => {
 onShow(() => {
 	getData()
 })
-onHide(()=>{
+onHide(() => {
 	clearInterval(showTIme.value)
 })
 
@@ -315,15 +338,16 @@ const codeUrl = ref("")
 </script>
 
 <style lang="scss">
-	.topNav {
-	
-	  width: 100%;
-	  background-color: #0C1526;
-	  justify-content: space-between;
-	  box-sizing: border-box;
-	  padding: 16rpx 32rpx;
-	  z-index: 99;
-	}
+.topNav {
+
+	width: 100%;
+	background-color: #0C1526;
+	justify-content: space-between;
+	box-sizing: border-box;
+	padding: 16rpx 32rpx;
+	z-index: 99;
+}
+
 .flex {
 	display: flex;
 }

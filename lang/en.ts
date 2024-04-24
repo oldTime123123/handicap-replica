@@ -49,8 +49,8 @@ export default {
   },
   ttn: {
     t_t1: "Total balance",
-    t_t2: "Basic account",
-    t_t3: "Wallet account",
+    t_t2: "Documentary wallet",
+    t_t3: "Account wallet",
     t_t4: "Daily rate of return",
     t_t5: "Quantification time: after",
     t_t6: "The number of times has been used up",
@@ -62,11 +62,11 @@ export default {
     t_t12: "Recharge",
     t_t13: "Account wallet",
     t_t14:
-      "Deposits into this account can be used to invest in crowdfunding projects. Different products have different income ratios. For details, please see the project product introduction.",
-    t_t15: "Smart account",
+      "The deposits in this account can be used for investment cycle projects. Different products have different income ratios. For details, please see the project product introduction.",
+    t_t15: "Documentary wallet",
     t_t16:
-      "Deposit into this account for intelligent quantification of income. You can manually turn on intelligent quantification and obtain income 24 hours after the first deposit time. The principal will be returned upon maturity.",
-    t_t17: "Smart wallet",
+      "Deposit into this account and you can make follow-up investments every day, with daily returns of up to 1% to 10%, and the principal will be returned upon maturity.",
+    t_t17: "Documentary wallet",
     t_t18: "Account wallet",
     t_t19: "Total balance",
     t_t20: "invest-pay ",
@@ -189,6 +189,8 @@ export default {
     a_c10: "Cancel",
     a_d1: "Copy",
     a_d2: "Status",
+    b_b1: "Total wallet balance",
+    a_t1: "Tip"
   },
   record: {
     r_r1: "No more data",
@@ -563,8 +565,8 @@ export default {
     m_d3: "Level",
     m_d4: "Phone",
     m_d6: "ALL",
-    m_m1: "smart account",
-    m_m2: "wallet account",
+    m_m1: "documentary wallet",
+    m_m2: "account wallet",
     m_m3: "App Dowload",
     m_m4: "Treasure",
   },

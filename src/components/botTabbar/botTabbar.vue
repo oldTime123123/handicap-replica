@@ -58,12 +58,12 @@
 				selectPath: "/static/tabbar/home1.png",
 				pagePath: '/pages/tabbar/index',
 			}, {
-				text: 'TXN',
+				text: 'market',
 				iconPath: '/static/tabbar/qmt1.png',
 				selectPath: "/static/tabbar/qmt2.png",
 				pagePath: '/pages/tabbar/panel',
 			}, {
-				text: 'INV',
+				text: 'invest',
 				iconPath: '/static/tabbar/team2.png',
 				selectPath: "/static/tabbar/team1.png",
 				pagePath: '/pages/tabbar/news',

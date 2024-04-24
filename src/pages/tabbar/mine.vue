@@ -52,7 +52,7 @@
       <view class="balanceBox">
         <view class="vipItem">
           <!-- pic -->
-          <image :src="pageData?.vip?.pic" style="width: 100rpx; height: 80rpx"></image>
+          <!-- <image :src="pageData?.vip?.pic" style="width: 100rpx; height: 80rpx"></image> -->
         </view>
         <view class="text_center pt40">
           <view class="f24">{{ t("all.b_b1") }}</view>
@@ -88,7 +88,7 @@
           </view>
         </view>
       </view>
-      <view class="mt24" style="width: calc(100%-48rpx) ;height: 148rpx;background-image: url('../../static/mine/minebanner.png');background-size: 100% 100%;font-weight: 600;font-size: 40rpx;color: #FFFFFF;
+      <view v-show="false" class="mt24" style="width: calc(100%-48rpx) ;height: 148rpx;background-image: url('../../static/mine/minebanner.png');background-size: 100% 100%;font-weight: 600;font-size: 40rpx;color: #FFFFFF;
 line-height: 148rpx;padding-left: 48rpx;">
         Fund
       </view>
