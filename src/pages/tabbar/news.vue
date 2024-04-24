@@ -1,20 +1,21 @@
 <template>
 
 	<view style="background: #010012;  position: relative;">
-		<view style="width: 750rpx;height: 88rpx;background-color: #0C1526;text-align: center;line-height: 88rpx;font-weight: 600;font-size: 36rpx;color: #FFFFFF;">Invest</view>
 		<view class="main" style="background: #080F32;padding-bottom: 80rpx;">
 
-			<!-- <view class="flex between topNav">
-			<image src="/static/themeNum1/icon/indexLang.png" style="width:80rpx;height:80rpx"
-				@click="handleToPage('../mine/langSetting')"></image>
-			<view style="width: 70%;">
-				<nut-noticebar border-radius="40" :scrollable="true" :text="barText" color="#fff"
-					left-icon="../../static/themeNum1/icon/laba.png">
-				</nut-noticebar>
-			</view>
-			<image src="../../static/themeNum1/icon/kefu2.png" mode="widthFix" style="width:80rpx ; height: 80rpx;"
-				@click="handleToPage('../mine/service')"></image>
-		</view> -->
+			<view class="flex between topNav">
+				<view class="">
+					Invest
+				</view>
+				<view >
+					
+				</view>
+				<view class="appTime" style="margin-right: 20rpx;">
+					<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
+					EST-{{servetTime}}
+				</view>
+			
+		</view>
 			<view class="pdlr30" style="padding-top: 40rpx;">
 				<view class="flex">
 					<image style="width: 48rpx;height: 48rpx;" src="../../static/egg/icon1.png" mode=""></image>
@@ -51,7 +52,7 @@
 							{{ t('ttn.t_t2') }}
 						</view>
 						<view class="text2" style="margin-top: 0rpx;">
-							{{ pageData?.job_invest_balance }} {{ currency }} USTD
+							{{ pageData?.job_invest_balance }} {{ currency }}
 							<p>≈$ {{ pageData?.job_invest_balance }} {{ currency }}</p>
 						</view>
 					</view>
@@ -64,7 +65,7 @@
 							{{ t('ttn.t_t3') }}
 						</view>
 						<view class="text2" style="margin-top: 0rpx;">
-							{{ pageData?.job_invest_balance }} {{ currency }} USTD
+							{{ pageData?.job_invest_balance }} {{ currency }}
 							<p>≈$ {{ pageData?.job_invest_balance }} {{ currency }}</p>
 						</view>
 					</view>
@@ -443,7 +444,18 @@ const getData = () => {
 
 
 }
-
+const showTIme  = setInterval(()=>{
+	getEasternTime()
+},1000)
+const servetTime =ref()
+function getEasternTime() {
+	
+      const time = new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York",
+        hour12: false,
+      });
+       servetTime.value = time.split(',')[1];
+}
 const currency = ref()
 
 
@@ -452,7 +464,9 @@ const interest = (id) => {
 		url: '../mine/investPage?id=' + id
 	})
 }
-
+onHide(()=>{
+	clearInterval(showTIme.value)
+})
 onLoad(() => {
 	getData()
 	currency.value = uni.getStorageSync('currency')
@@ -472,6 +486,7 @@ onLoad(() => {
 
 	.text2 {
 		margin-top: 16rpx;
+		font-size: 26rpx;
 
 	}
 }
@@ -620,11 +635,13 @@ onLoad(() => {
 }
 
 .topNav {
-	padding: 23rpx 29rpx;
-	// position: absolute;
-	top: 0;
-	width: calc(100% - 58rpx);
-	z-index: 99;
+
+  width: 100%;
+  background-color: #0C1526;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 16rpx 32rpx;
+  z-index: 99;
 }
 
 

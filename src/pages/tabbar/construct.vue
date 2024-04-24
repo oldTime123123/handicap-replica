@@ -1,8 +1,17 @@
 <template>
 	<view style="background:  #060D1F;height: 100%;  position: relative;">
-		<view
-			style="width: 750rpx;height: 88rpx;background-color: #0C1526;text-align: center;line-height: 88rpx;font-weight: 600;font-size: 36rpx;color: #FFFFFF;">
-			Invest</view>
+		<view class="flex between topNav">
+			<view class="">
+				lnvite
+			</view>
+			<view class="">
+				
+			</view>
+			<view class="appTime" style="margin-right: 20rpx;">
+				<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
+				EST-{{servetTime}}
+			</view>
+		</view>
 		<view class="main" style="background: #080F32">
 			<view class="head"
 				style="width: 686rpx; height: 1094rpx;margin: 32rpx auto;background-image: url('../../static/invite/invitebanner.png');background-repeat: no-repeat;background-size: 100% 100%;">
@@ -23,20 +32,20 @@
 						<view class="InvInput">
 							{{ inviteCode }}
 						</view>
-						<view class="copyBtn textCenter88 ml24">
+						<view class="copyBtn textCenter88 ml24" @click="copyHandle(inviteCode)">
 							Copy
 						</view>
 					</view>
 					<view class="flex  mt24">
-						<view class="InvInput">
-							{{ inviteCode }}
+						<view class="InvInput" style="overflow: hidden;white-space: normal; text-overflow: ellipsis;">
+							{{ codeUrl }}
 						</view>
-						<view class="copyBtn textCenter88 ml24">
+						<view class="copyBtn textCenter88 ml24" @click="copyHandle(codeUrl)">
 							Copy
 						</view>
 					</view>
 					<view class="qrcode ">
-						<qrcode-vue :value="codeUrl" :size="163" level="H" />
+						<qrcode-vue  :value="codeUrl" :size="163" level="H" />
 					</view>
 					<view class="down flex">
 						<view>
@@ -211,7 +220,8 @@ import {
 } from '@nutui/nutui';
 import {
 	onShow,
-	onLoad
+	onLoad,
+	onHide
 } from "@dcloudio/uni-app";
 
 import {
@@ -237,14 +247,26 @@ const methods = {
 	},
 
 };
+const showTIme  = setInterval(()=>{
+	getEasternTime()
+},1000)
+const servetTime =ref()
+function getEasternTime() {
+	
+      const time = new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York",
+        hour12: false,
+      });
+       servetTime.value = time.split(',')[1];
+}
 const Jumplink = url => {
 	uni.navigateTo({
 		url: url
 	})
 }
-const copyHandle = async () => {
+const copyHandle = async (text) => {
 	try {
-		await toClipboard(codeUrl.value)
+		await toClipboard(text)
 		Toast.text('Copy' + " " + 'Status')
 	} catch (e) {
 		console.error(e)
@@ -284,12 +306,24 @@ const getData = () => {
 onShow(() => {
 	getData()
 })
+onHide(()=>{
+	clearInterval(showTIme.value)
+})
 
 const inviteCode = ref("")
 const codeUrl = ref("")
 </script>
 
 <style lang="scss">
+	.topNav {
+	
+	  width: 100%;
+	  background-color: #0C1526;
+	  justify-content: space-between;
+	  box-sizing: border-box;
+	  padding: 16rpx 32rpx;
+	  z-index: 99;
+	}
 .flex {
 	display: flex;
 }

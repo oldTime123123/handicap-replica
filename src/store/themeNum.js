@@ -28,7 +28,8 @@ export const userStore = defineStore({
 				}
 			},
 			task: {},
-			countryCode: []
+			countryCode: [],
+			socket:null
 		}
 	},
 	actions: {
@@ -57,6 +58,9 @@ export const userStore = defineStore({
 		},
 		setTask(data) {
 			this.task = data
+		},
+		setSocket(data){
+			this.socket = data
 		}
 	},
 	// 持久化存储

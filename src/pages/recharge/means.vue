@@ -4,7 +4,7 @@
 
 		<view class="pdlr49 pt33">
 
-			<view class="between">
+			<view class="flex" style="justify-content: space-between;">
 				<view class="flex between">
 					<nut-icon name="left" @click="goBack"></nut-icon>
 				</view>

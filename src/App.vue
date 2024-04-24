@@ -48,7 +48,18 @@ export default {
 .nut-navbar {
   padding: 0 !important;
 }
-
+//全局时间样式
+.appTime{
+	display: flex;
+	align-items: center;
+	height: 64rpx;
+	background: #00264C;
+	border-radius: 16rpx;
+	box-sizing: border-box;
+	padding: 16rpx;
+	font-size: 28rpx;
+	margin-right:16rpx ;
+}
 .maskItem img,
 .mt70 img {
   width: calc(100% - 45rpx) !important;

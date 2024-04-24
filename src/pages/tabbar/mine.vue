@@ -16,7 +16,11 @@
           <image class="ml20" src="../../static/themeNum1/l_icon/Untitled1.png" style="width: 29rpx; height: 25rpx"
             @click="showEye = !showEye"></image>
         </view>
-        <view>
+        <view class='flex' style="align-items: center;">
+			<view class="appTime" style="margin-right: 20rpx;">
+				<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
+				EST-{{servetTime}}
+			</view>
           <image src="/static/lang.png" style="width: 57rpx; height: 56rpx"
             @click="handleToPage('../mine/langSetting')"></image>
         </view>
@@ -279,7 +283,7 @@ import request from "../../../comm/request.ts";
 import { userStore } from "@/store/themeNum.js";
 import useClipboard from "vue-clipboard3";
 import { Toast } from "@nutui/nutui";
-import { onShow, onLoad } from "@dcloudio/uni-app";
+import { onShow, onLoad, onHide } from "@dcloudio/uni-app";
 import { onMounted } from "vue";
 const store = userStore();
 import { useI18n } from "vue-i18n";
@@ -381,6 +385,18 @@ const skip_page = (url) => {
   }
 };
 
+const showTIme  = setInterval(()=>{
+	getEasternTime()
+},1000)
+const servetTime =ref()
+function getEasternTime() {
+	
+      const time = new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York",
+        hour12: false,
+      });
+       servetTime.value = time.split(',')[1];
+}
 const choStyle = {
   background: store.$state.secondColor,
   color: "#000",
@@ -617,6 +633,9 @@ onShow(() => {
   getData();
   currency.value = uni.getStorageSync("currency");
 });
+onHide(()=>{
+	clearInterval(showTIme.value)
+})
 </script>
 
 <style lang="scss" scoped>

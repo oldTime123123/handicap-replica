@@ -1,26 +1,30 @@
 <template>
-  <view style="background: #060d1f; min-height: 100vh">
+  <view style="background: #080F32; min-height: 100vh">
     <view class="main">
       <view style="position: relative">
         <view class="flex between topNav">
-          <view class=""> </view>
           <image src="../../static/themeNum1/icon/kefu2.png" mode="widthFix" style="width:80rpx ; height: 80rpx;"
             @click="handleToPage('../mine/service')"></image>
-          <view style="width: 70%;display: flex;justify-content: right;">
-            <!-- <nut-noticebar border-radius="40" :scrollable="true" :text="barText" color="#fff"
-						left-icon="../../static/themeNum1/icon/laba.png">
-					</nut-noticebar> -->
-            <view class="topbtnSize topbtnText1" v-show="login">
-              Sign up
-            </view>
-            <view class="topbtnSize topbtnText2" v-show="login">
-              Login
-            </view>
-          </view>
+			<view class="flex" style="align-items: center;">
+				<view style="display: flex;justify-content: right;margin-right: 20rpx;" v-if="login">
+				  <view class="topbtnSize topbtnText1" >
+				    Sign up
+				  </view>
+				  <view class="topbtnSize topbtnText2" >
+				    Login
+				  </view>
+				</view>
+				<view class="appTime" style="margin-right: 20rpx;">
+					<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
+					EST-{{servetTime}}
+				</view>
+				<image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
+				  @click="handleToPage('../mine/langSetting')"></image>
+			</view>
+         
 
 
-          <image src="/static/themeNum1/icon/indexlang1.png" style="width:48rpx;height:48rpx"
-            @click="handleToPage('../mine/langSetting')"></image>
+         
         </view>
 
         <!--  -->
@@ -81,7 +85,7 @@
           <view class="contentCard bg" @click="handleToPage('../withdraw/index?balance_type=1')">
             Withdrawal
           </view>
-          <view class="contentCard bg1">
+          <view class="contentCard bg1" @click="handleToPage('../mine/service')">
             Online service
           </view>
           <view class="contentCard bg2">
@@ -90,13 +94,13 @@
         </view>
         <!-- content2 -->
         <view style="display: flex;flex-wrap: wrap;justify-content: space-between;margin-top: 12rpx;">
-          <view class="contentCard2">
+          <view class="contentCard2" @click="handleToPage('./construct')"> 
             <p>Share</p>
             <view>
               To share
             </view>
           </view>
-          <view class="contentCard2" style="background-image: url('../../static/imgs/index/content2-2.png');">
+          <view class="contentCard2" @click="handleToPage('down')" style="background-image: url('../../static/imgs/index/content2-2.png');">
             <p>App download</p>
             <view class="contentCard2text">
               Go download
@@ -204,12 +208,15 @@
                   +{{ item.rise_rate }}%
                 </view>
               </view>
-              <view class="btcBtn">
+              <view class="btcBtn" @click="handleToPage('./panel')">
                 Follow orders
               </view>
             </view>
-            <view class="panelbottom">
-              <p @click="handleToPage('./panel')">- More -</p>
+            <view class="panelbottom" >
+              <p style="display: flex;justify-content: center;align-items: center;" @click="handleToPage('./panel')"> 
+				  More 					  
+				  <img class="mr24" src="../../static/imgs/index/right.png" alt="">
+			  </p>
             </view>
 
           </view>
@@ -240,7 +247,10 @@
               </view>
             </view>
             <view class="panelbottom">
-              <p @click="handleToPage('./news')">- More -</p>
+			  <p style="display: flex;justify-content: center;align-items: center;" @click="handleToPage('./news')">
+					More 					  
+					<img class="mr24" src="../../static/imgs/index/right.png" alt="">
+			  </p>
             </view>
             <view class="fg"></view>
           </view>
@@ -250,41 +260,18 @@
           <view>
             <view class="assist_topic">Help FAQ</view>
             <view class="help_center">
-              <view class=""
-                style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
-                <p class="ml34">XXXXXXX</p>
-                <img class="mr24" src="../../static/imgs/index/right.png" alt="">
-              </view>
-              <view class="fg"></view>
-              <view class=""
-                style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
-                <p class="ml34">XXXXXXX</p>
-                <img class="mr24" src="../../static/imgs/index/right.png" alt="">
-              </view>
-              <view class="fg"></view>
-              <view class=""
-                style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
-                <p class="ml34">XXXXXXX</p>
-                <img class="mr24" src="../../static/imgs/index/right.png" alt="">
-              </view>
-              <view class="fg"></view>
-              <view class=""
-                style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
-                <p class="ml34">XXXXXXX</p>
-                <img class="mr24" src="../../static/imgs/index/right.png" alt="">
-              </view>
-              <view class="fg"></view>
-              <view class=""
-                style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
-                <p class="ml34">XXXXXXX</p>
-                <img class="mr24" src="../../static/imgs/index/right.png" alt="">
-              </view>
-              <view class="fg"></view>
-              <view class=""
-                style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
-                <p class="ml34">XXXXXXX</p>
-                <img class="mr24" src="../../static/imgs/index/right.png" alt="">
-              </view>
+				<view class="" 
+					v-for="item in newsList"
+					@click="changePage(item.id)">
+					<view class=""
+					  style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
+					  <p class="ml34"> {{ item.des }}</p>
+					  <img class="mr24" src="../../static/imgs/index/right.png" alt="">
+					</view>
+					<view class="fg"></view>
+				</view>
+             
+             
             </view>
           </view>
 
@@ -431,45 +418,78 @@ import tqbTabbar from "@/components/botTabbar/botTabbar.vue";
 import request from "../../../comm/request.ts";
 import { userStore } from "@/store/themeNum.js";
 import { Toast } from "@nutui/nutui";
-import { onShow, onLoad } from "@dcloudio/uni-app";
+import { onShow, onLoad, onHide } from "@dcloudio/uni-app";
 import { useI18n } from "vue-i18n";
 import { ref } from "vue";
 import io from 'socket.io-client'
 import { getLocale } from "i18n";
-const socket = io('https://gptrobotai.com', { transports: ['websocket'] })
+const store = userStore();
+const showTIme  = setInterval(()=>{
+	getEasternTime()
+},1000)
+const servetTime =ref()
+function getEasternTime() {
+	
+      const time = new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York",
+        hour12: false,
+      });
+       servetTime.value = time.split(',')[1];
+}
+
+const socket = ref()
 const lineData = ref('')
 const interestList = ref([])
+const time = ref()
+const httpSocket = () =>{
+		
+	if(store.$state.socket){
+		socket.value = store.$state.socket
+	}else{
+		socket.value = io('https://gptrobotai.com', { transports: ['websocket'] })
+		store.setSocket(socket.value)
+	}
+	time.value = setInterval(()=>{
+		socket.value.emit('project', { 'type': 1 })
+	},1000)
+	socket.value.on('project', (data) => {
+	  lineData.value = data.list
+	  // 在这里可以对服务器返回的数据进行处理
+	});
 
-socket.on('project', (data) => {
-  lineData.value = data.list.slice(0, 7)
-  // 在这里可以对服务器返回的数据进行处理
-
-});
-socket.emit('project', { 'type': 1 })
-// import io from 'socket.io-client'
-// const socket = io('https://gptrobotai.com',{transports: ['websocket']})
-
-
-// const lineData = ref([])
-
-// socket.on('project', (data) => {
-// 	  lineData.value = data.list
-
-// 	});
-
-//   const getLineData = () => {
-// 		const id = 1
-// 		socket.emit('project',{'type':id})
-
-// 	}
-//   const startTimer = () => {
-// 		timer.value = setInterval(() => {
-// 			getLineData()
-// 		}, 1000)
-// 	}
+}
 
 const horseLamp1 = ref(['111111111111', '2222222222222222', '333333333333333333333', '444444444444444444444444444444222222222']);
-const store = userStore();
+let serviceTime = ref('')
+let sysTimer = ref(null)
+
+function getSysTime() {
+			if (sysTimer.value) clearInterval(sysTimer.value);
+			sysTimer.value = setInterval(() => {
+				let reg = /(\/)/g;
+				var d = new Date();
+				//得到1970年⼀⽉⼀⽇到现在的秒数
+				var len = d.getTime();
+				//本地时间与GMT时间的时间偏移差(注意：GMT这是UTC的民间名称。GMT=UTC）
+				var offset = d.getTimezoneOffset() * 60000;
+	
+				var utcTime
+				//得到现在的格林尼治时间
+				utcTime = len + offset - 3600000*5;
+				let year = new Date(utcTime).getFullYear();
+				let mon = new Date(utcTime).getMonth() + 1;
+				let day = new Date(utcTime).getDate();
+				let hours = addZero(new Date(utcTime).getHours());
+				let min = addZero(new Date(utcTime).getMinutes());
+				let sec = addZero(new Date(utcTime).getSeconds());
+				serviceTime.value = day + '/' + mon + '/' + year + ' ' + hours + ':' + min + ':' + sec;
+				uni.setStorageSync('timers', serviceTime.value);
+			}, 1000);
+		}
+function addZero(num) {
+		let newNum = num < 10 ? '0' + num : num;
+		return newNum;
+	}
 const { t } = useI18n();
 const rechangeStyle = ref("background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);")
 const show = ref(false); //首页弹窗开关
@@ -759,7 +779,10 @@ const getData = () => {
   });
 };
 // 终于可以用了
-onShow(() => { });
+onShow(() => { 
+	getSysTime()
+	httpSocket()
+});
 
 const showLoading = ref(null);
 onMounted(() => {
@@ -781,6 +804,11 @@ onMounted(() => {
   }
 });
 
+onHide(()=>{
+	clearInterval(time.value)
+	clearInterval(showTIme.value)
+	
+})
 onLoad((e) => {
   assist();
   getData();
@@ -797,10 +825,10 @@ onLoad((e) => {
     return false;
   }
 
-  if (localStorage.getItem('token') == null) {
-    login.value = true
-  } else {
+  if (localStorage.getItem('token')) {
     login.value = false
+  } else {
+    login.value = true
   }
 });
 </script>
@@ -881,11 +909,13 @@ body {
 }
 
 .topNav {
-  padding: 23rpx 29rpx;
   position: absolute;
   top: 0;
-  width: calc(100% - 58rpx);
+  width: 100%;
   background-color: #0C1526;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 16rpx 32rpx;
   z-index: 99;
 }
 

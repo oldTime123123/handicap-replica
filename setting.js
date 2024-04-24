@@ -20,7 +20,7 @@ if (dev == 1) {
 	COUNTRY.title = "",
 	COUNTRY.icon = "/static/logo.png"
 } else if (dev == 2) {
-	COUNTRY.url = 'qt-gpt.task678.com',
+	COUNTRY.url = 'follow.task678.com',
 	COUNTRY.lang = "en",
 	COUNTRY.title = "",
 	COUNTRY.icon = "/static/logo.png"
