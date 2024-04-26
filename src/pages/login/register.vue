@@ -49,8 +49,8 @@
 					</view>
 				</view>
 				<!-- 第二个 -->
-				<view style="font-size: 30rpx;margin: 40rpx 0 20rpx 0;" >{{t("lo_i.l_o8")}}</view>
-				<view class="flex between  mt40  pdlr30" style="border-bottom: 2rpx solid #ffffff;height: 70rpx;">
+				<view style="font-size: 30rpx;margin: 40rpx 0 20rpx 0;" v-show="false">{{t("lo_i.l_o8")}}</view>
+				<view class="flex between  mt40  pdlr30" style="border-bottom: 2rpx solid #ffffff;height: 70rpx;"  v-show="false">
 					<view>
 						<image src="@/static/themeNum1/l_icon/name.png" style="width:40rpx;height:40rpx"></image>
 					</view>
@@ -125,7 +125,7 @@
 					</view>
 				</view>
 
-				<view class=" center l_inpS mt40  pdlr30  f32 color3" style="margin-top:112rpx;color:#000"
+				<view class=" center l_inpS mt40  pdlr30  f32 color3" style="color:#000"
 					:style="{background:store.$state.secondColor}" @click="methods.regisHandle()">
 					{{t('login.l_b2')}}
 				</view>
@@ -211,7 +211,9 @@
 	watch(regisForm, (newVal, oldVal) => {
 		if (loginStore.$state.defaultCountryCode.preg) {
 			let tempReg = loginStore.$state.defaultCountryCode.preg.replace('/', '').replace('/', '')
+	// `\b\d{7,11}\b`
 			let phoneReg = new RegExp(tempReg);
+			console.log(phoneReg.test(regisForm.value.phone));
 			if (!phoneReg.test(regisForm.value.phone)) {
 				phoneRegFlag.value = false
 				regFlag.value = false

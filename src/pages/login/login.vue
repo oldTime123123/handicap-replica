@@ -93,12 +93,12 @@
 
 
                <!-- 双按钮 -->
-				<view class=" center l_inpS f32" style="margin-top:214rpx;color:#000;"
+				<view class=" center l_inpS f32" style="margin-top:40rpx;color:#000;"
 					:style="{background:store.$state.secondColor}" @click="loginHandle">
 					{{ t("lo_i.l_o5") }}
 				</view>
 
-				<view class=" center l_inpS mt40 l_inpBg pdlr30 text_white mt40 f32"
+				<view class=" center l_inpS mt40 l_inpBg pdlr30 text_white f32"
 					:style="{color:store.$state.contentColor,background:store.$state.thirdColor,border:'1rpx solid ' + store.$state.contentColor}">
 					<view @click="jumpPage('./register')" style="height: 100%;width: 100%;" class="center">
 						{{ t("lo_i.l_o6") }}

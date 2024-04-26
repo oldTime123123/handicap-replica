@@ -24,7 +24,7 @@
 				<image class="Convert" style="width: 64rpx;height: 64rpx;"
 					src="../../static/themeNum1/icon/conversion.png" mode=""></image>
 				<view class="Savings">
-					<view class="text">
+					<view class="text" style="font-size: 24rpx;">
 						{{ t('new_xq.xq_a24') }}
 					</view>
 					<view class="num">

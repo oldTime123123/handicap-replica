@@ -3,8 +3,8 @@
     <view class="main">
       <view style="position: relative">
         <view class="flex between topNav">
-          <image src="../../static/logoindex.png" mode="widthFix" style="width: 120rpx;"
-            @click="handleToPage('../mine/service')"></image>
+          <image src="../../static/logoindex.png" mode="widthFix" style="width: 120rpx;"></image>
+          <!-- @click="handleToPage('../mine/service')" -->
           <view class="flex" style="align-items: center;">
             <view style="display: flex;justify-content: right;margin-right: 20rpx;" v-if="login">
               <view class="topbtnSize topbtnText1">
@@ -19,7 +19,7 @@
               EST-{{ servetTime }}
             </view>
             <img class="ml12 mr12" src="../../static/top1.png" alt="">
-            <img class="ml12 mr24" src="../../static/top2.png" alt="">
+            <img class="ml12 mr24" src="../../static/top2.png" alt="" v-show="!login">
             <image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
               @click="handleToPage('../mine/langSetting')"></image>
           </view>
@@ -77,10 +77,18 @@
             </nut-noticebar>
           </view>
 
-          <view class="tz1" @click="showDetail()">
-            Detail
+          <view class="tz1" @click="showtz1 = true">
+            Check
           </view>
         </view>
+        <nut-overlay v-model:visible="showtz1" :close-on-click-overlay="false">
+          <div class="overlay-body">
+            <div class="overlay-content">
+              <div @click.stop="showtz1 = false" style="position: absolute;top: 20rpx;right: 30rpx;">X</div>
+              {{ barText }}
+            </div>
+          </div>
+        </nut-overlay>
         <!-- content1 -->
         <view style="display: flex;flex-wrap: wrap;justify-content: space-between;margin-top: 12rpx;">
           <view class="contentCard" @click="handleToPage('../recharge/means?type=recharge')">
@@ -99,7 +107,8 @@
         <!-- content2 -->
         <view style="display: flex;flex-wrap: wrap;justify-content: space-between;margin-top: 12rpx;">
           <view class="contentCard2" @click="handleToPage('./construct')">
-            <p style="width: 300rpx; font-size: 24rpx;line-height: 24rpx;">ShareInvite friends to recharge and get double rewards</p>
+            <p style="width: 300rpx; font-size: 24rpx;line-height: 24rpx;">ShareInvite friends to recharge and get
+              double rewards</p>
             <view>
               To share
             </view>
@@ -174,13 +183,14 @@
 
 
         <!-- invset -->
-        <view class="mt69" v-if="newsList.length > 0">
+        <view class="mt69" v-if="true">
           <view class="f38 text_bold">
             {{ t("other.o_a3") }}
           </view>
 
 
           <view class="flex mt30 mb48" style="justify-content: space-between;">
+
             <view class="invsetbtn2" :style="invsetCard == 0 ? rechangeStyle : ''" @click="invsetChange(0)">
               Copy Trading
             </view>
@@ -316,9 +326,9 @@
             Platform Introduction
           </p>
           <view class="mt24"
-            style="width: 686rpx;height: 552rpx;background: #042659;border-radius: 16rpx 16rpx 16rpx 16rpx;overflow: hidden;">
+            style="width: 686rpx;background: #042659;border-radius: 16rpx 16rpx 16rpx 16rpx;overflow: hidden;">
             <p
-              style="width: 632rpx;height: 306rpx;overflow: hidden;margin: 34rpx auto 56rpx;font-weight: 400;font-size: 24rpx;color: #FFFFFF;">
+              style="width: 632rpx;overflow: hidden;margin: 34rpx auto 10rpx;font-weight: 400;font-size: 24rpx;color: #FFFFFF;">
               Lorem ipsum dolor sit amet consectetur. Ac donec pretium neque nibh. Diam in ac aliquam elit at cras
               porttitor. Euismod erat ipsum amet nulla. Cursus in tincidunt viverra consectetur mattis at amet sit.
               Morbi fringilla viverra ligula sed condimentum at adipiscing. Urna adipiscing eget turpis dolor mattis a
@@ -327,11 +337,11 @@
             <view
               style="width: 632rpx; display: flex;justify-content: space-between;font-size: 24rpx; text-align: center;margin: 0 auto;">
               <view style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
-                <p class="mt24" style="font-weight: 500;">{{income.day}} days</p>
+                <p class="mt24" style="font-weight: 500;">{{ income.day }} days</p>
                 <p class="mt12" style="font-weight: 400;color: #007FFF;">Safe operation</p>
               </view>
               <view style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
-                <p class="mt24" style="font-weight: 500;">{{income.income}} USDT</p>
+                <p class="mt24" style="font-weight: 500;">{{ income.income }} USDT</p>
                 <p class="mt12" style="font-weight: 400;color: #007FFF;">Cumulative income</p>
               </view>
 
@@ -530,6 +540,7 @@ const commList = ref([
     show: false,
   },
 ]);
+const showtz1 = ref(false)
 const login = ref(true)
 const assistData = ref([]);
 const interest = (id) => {
@@ -652,13 +663,13 @@ const changePage = (pos) => {
 const bannerList = ref([]); //轮播图
 const barText = ref(""); //跑马灯
 const maskContent = ref(""); //普通弹窗
-const income =ref({}); //获取天数和收入
+const income = ref({}); //获取天数和收入
 const appData = ref({});
 const partnerList = ref([]);
 const newbanner = ref({});
 const showCharity = ref(false);
 const showParwel = ref(false);
-const showDetail = ()=>{
+const showDetail = () => {
   Toast.text(barText.value)
 }
 const getData = () => {
@@ -667,7 +678,7 @@ const getData = () => {
     url: 'setting/show',
     methods: 'get'
   }).then(res => {
-    console.log(res,'setting/show');
+    console.log(res, 'setting/show');
     income.value = res
   })
   request({
@@ -704,7 +715,7 @@ const getData = () => {
   }).then((res) => {
     // res.status == 1 ? showBar.value = true : showBar.value = false
     barText.value = res.content;
-    
+
   });
 
   request({
@@ -736,20 +747,6 @@ const getData = () => {
   }).then((res) => {
     console.log(res, "sss");
     partnerList.value = res.partner;
-    // newsList.value = res.newsCenter
-
-    // commList2.value[0].value = res.platformData.production
-    // commList2.value[1].value = res.platformData.panel
-    // commList2.value[2].value = res.platformData.invest_person
-    // commList2.value[3].value = res.platformData.serve_person
-
-    // res.platformData.status = 0
-    //
-    // if (res.platformData.status < 1) {
-    // 	if (commList.value[1].url == '../mine/qaq') {
-    // 		commList.value[1].show = false
-    // 	}
-    // }
   });
   request({
     url: "user/index",
@@ -766,11 +763,11 @@ const getData = () => {
     methods: "get",
   }).then((res) => {
     newsList.value = res;
-    res.forEach(function (value, index) {
-      if (value.id == 35) {
-        newbanner.value = value;
-      }
-    });
+    // res.forEach(function (value, index) {
+    //   if (value.id == 35) {
+    //     newbanner.value = value;
+    //   }
+    // });
   });
   // 获取货币符号
   request({
@@ -825,6 +822,13 @@ onHide(() => {
 
 })
 onLoad((e) => {
+  request({
+    url: "home/article",
+    methods: "get",
+  }).then((res) => {
+    newsList.value = res;
+    console.log(newsList.value,'1111111111');
+  });
   assist();
   getData();
   if (e.code) {
@@ -1198,5 +1202,24 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   top: 0;
+}
+
+.overlay-body {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-content {
+  display: flex;
+  width: 250px;
+  height: 150px;
+  background: black;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: white;
 }
 </style>

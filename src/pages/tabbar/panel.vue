@@ -320,22 +320,35 @@
             <view>Confirm Order</view>
             <img src="../../static/themeNum1/l_icon/down.png" alt="" class="ml176" @click="buyTost(false)">
          </view>
-         <view class="paddingLR30 mt32">{{ pro_name }}/USDT</view>
+         <view class="paddingLR30 mt32 flex" style="justify-content: space-between;">
+            <view class="pt30 pb30">{{ pro_name }}/USDT</view>
+            <view @click="jump('./mine')" class="pt30 pb30 pl30 pr30"
+               style="background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);border-radius: 16rpx 16rpx 16rpx 16rpx;">
+               Deposit</view>
+         </view>
          <view class="paddingLR30 mt32">Buy amount (min: {{ amount }} USDT)</view>
-         <input v-model="amount" class="moenyIn mt16 ml32" type="text" placeholder="Please enter amount">
+         <input v-model="amountIn" class="moenyIn mt16 ml32" type="text" placeholder="Please enter amount">
+         <view>
+
+         </view>
+         <view class="paddingLR30  PlaceAbet flex">Copy wallet balance:{{ aiBalance }}</view>
          <view class="paddingLR30 mt16 PlaceAbet flex">
-            <view @click="amount = 1000">1000</view>
+
+            <!-- <view @click="amount = 1000">1000</view>
             <view @click="amount = 2000">2000</view>
-            <view @click="amount = 3000">3000</view>
-            <view>ALL</view>
+            <view @click="amount = 3000">3000</view> -->
+            <view @click="allIn()">ALL</view>
          </view>
          <view class="paddingLR30 mt24 flex"
             style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
             <view>balance: {{ tradeBalance }}</view>
-            <view>Lock Time: {{ pageData.period }}</view>
+            <view>Lock Time: {{ lockT }} min</view>
          </view>
-         <view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">pending
-            incomes: {{ amount + (amount * rate) }}</view>
+
+
+         <!-- {{ amount + (amount * rate) }} -->
+         <view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">Daily income: 1%~10%</view>
+         <view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">Lowest income: {{ aiBalance*0.01 }} ~ {{ aiBalance*0.1 }}</view>
          <view class="confirmBtn" @click="submitAdd">
             Confirm
          </view>
@@ -358,10 +371,14 @@ import { Toast } from "@nutui/nutui";
 import Tabbar from '@/components/botTabbar/botTabbar.vue';
 import Loading2 from '@/components/loading/loading2.vue';
 import FullMask from "@/components/fullMask/fullMask";
-
+//allIn
+const amountIn = ref()
+const allIn = () => {
+   amountIn.value = aiBalance.value
+}
 // import getOption from './option.js';
 const { proxy } = getCurrentInstance();
-
+const aiBalance = ref('')
 let viewOpen = ref(false);
 let popShow = ref(false);
 const buyTostShow = ref(false)
@@ -388,6 +405,7 @@ function getUserInfo() {
       methods: 'GET'
    }).then((res) => {
       tradeBalance.value = res.balance;
+      aiBalance.value = res.ai_balance
    });
 }
 
@@ -453,12 +471,13 @@ const setType = (type, index) => {
    });
    candTypeInd.value = index;
 };
+const lockT = ref('')
 const timerBtnInd = ref(0);
 const changeTimeSelect = (item, index) => {
    pageData.value.period = item.value;
    clearInterval(timer.value);
    chart.value.clearData();
-   startTime();
+   // startTime();
    getKlineData();
    timerBtnInd.value = index;
 };
@@ -508,8 +527,13 @@ const getKlineData = () => {
          data: pageData.value,
          method: 'get'
       }).then((res) => {
+
          chartData.value = res.data.data.reverse();
-         nowData.value = res.data.data[0];
+         const lengtData = res.data.data.length - 1
+         nowData.value = res.data.data[lengtData]
+
+
+
          applyChartData();
       });
    }
@@ -681,6 +705,9 @@ const config = () => {
       rate.value = res.rate / 100
       pid.value = res.pid;
       pro_name.value = res.pro_name
+      lockT.value = res.end_time
+      amount.value = res.min_price
+      amountIn.value = res.min_price
       getUserInfo();
       getProductDetail();
       startTimeTwo();
@@ -696,7 +723,7 @@ onLoad((e) => {
    }
 
    getProductList();
-   config()
+   // config()
 });
 const timerTwo = ref()
 const startTimeTwo = () => {
@@ -891,11 +918,12 @@ const changeDataType = (Arr) => {
 
 .buyCard {
    width: 750rpx;
-   height: 824rpx;
+   // height: 824rpx;
    background-color: rgba(0, 38, 76, 1);
    overflow: hidden;
    position: fixed;
    bottom: 100rpx;
+   padding-bottom: 50rpx;
 }
 
 .heads {
