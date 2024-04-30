@@ -129,6 +129,14 @@
 					:style="{background:store.$state.secondColor}" @click="methods.regisHandle()">
 					{{t('login.l_b2')}}
 				</view>
+				<view class=" center l_inpS mt40 l_inpBg pdlr30 text_white f32 mt40"
+					:style="{ color: store.$state.contentColor, background: store.$state.thirdColor, border: '1rpx solid ' + store.$state.contentColor }" @click="skip_home('./login')">
+					{{ t("lo_i.l_o5") }}
+				</view>
+				<view class=" center l_inpS mt40 l_inpBg pdlr30 text_white f32"
+					:style="{ color: store.$state.contentColor, background: store.$state.thirdColor, border: '1rpx solid ' + store.$state.contentColor }" @click="skip_home('../tabbar/index')">
+					{{ t("lo_i.l_o12") }}
+				</view>
 			</view>
 		</view>
 		<nut-popup position="left" :style="{ width: '40%', height: '100%' }" v-model:visible="showPicker">
@@ -189,6 +197,11 @@
 		if (loginStore.$state.chooseTypeInd == ind) return
 		loginStore.setChooseTypeInd(ind)
 	}
+	const skip_home = (url) => {
+	uni.navigateTo({
+		url: url
+	})
+}
 	const currenLang = uni.getStorageSync('lang')
 	// 登录表单
 	const regisForm = ref({
@@ -213,8 +226,9 @@
 			let tempReg = loginStore.$state.defaultCountryCode.preg.replace('/', '').replace('/', '')
 	// `\b\d{7,11}\b`
 			let phoneReg = new RegExp(tempReg);
-			console.log(phoneReg.test(regisForm.value.phone));
-			if (!phoneReg.test(regisForm.value.phone)) {
+			let re = /^\d{7,13}$/;
+			console.log(re.test(regisForm.value.phone));
+			if (!re.test(regisForm.value.phone)) {
 				phoneRegFlag.value = false
 				regFlag.value = false
 				return false
@@ -388,11 +402,11 @@
 					return false
 				}
 				
-				if (regisForm.value.user_name.trim() == '') {
-					Toast.text(t('add3.a_a1'))
-					regFlag.value = false
-					return false
-				}
+				// if (regisForm.value.user_name.trim() == '') {
+				// 	Toast.text(t('add3.a_a1'))
+				// 	regFlag.value = false
+				// 	return false
+				// }
 				if (regisForm.value.password.length < 6 || regisForm.value.password2.length < 6 || regisForm.value
 					.password
 					.length > 24 || regisForm.value.password2.length > 24) {

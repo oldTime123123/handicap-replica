@@ -24,6 +24,8 @@ import langfa from './fa';
 import langkk from './kk';
 import langaz from './az';
 import langVi from './vi';
+import langId from './id';
+
 const messages = {
 	'en': langEn,
 	'es': langES,
@@ -47,6 +49,10 @@ const messages = {
 	'kk':langkk,
 	'az':langaz,
 	'vi':langVi,
+	'id':langId
+}
+if (navigator.language=='id'){
+	uni.setStorageSync('lang', 'id')
 }
 if (!uni.getStorageSync('lang')) {
 	uni.setStorageSync('lang', 'en')

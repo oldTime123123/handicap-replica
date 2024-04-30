@@ -1,8 +1,11 @@
 <template>
-	<view style="background:  #060D1F;height: 100%;  position: relative;">
+	<view style="background:  #060D1F;height: 150vh;  position: relative;">
+		<nut-drag attract :boundary="{ top: 50, left: 0, bottom: 55, right: 0 }" :style="{ top: '50vh', right: '0px' }">
+			<img class="kefu" type="primary" src="../../static/kefu.png" alt="" @click="Jumplink('../mine/service')">
+		</nut-drag>
 		<view class="flex between topNav">
 			<view class="">
-				lnvite
+				{{ t('pk.t_c1') }}
 			</view>
 			<view class="">
 
@@ -27,7 +30,7 @@
 
 				<view class="InvCode mt106">
 					<view class="InvTitle">
-						Invitation Code:
+						{{ t('pk.t_c2') }}:
 					</view>
 					<view class="flex  mt24">
 						<view class="InvInput">
@@ -38,166 +41,56 @@
 						</view>
 					</view>
 					<view class="flex  mt24">
-						<view class="InvInput" style="overflow: hidden;white-space: normal; text-overflow: ellipsis;">
+						<view class="InvInput1" style="overflow: hidden;white-space: normal; text-overflow: ellipsis;">
 							{{ codeUrl }}
 						</view>
 						<view class="copyBtn textCenter88 ml24" @click="copyHandle(codeUrl)">
-							Copy
+							{{ t('pk.t_c3') }}
 						</view>
 					</view>
 					<view class="qrcode ">
 						<!-- <qrcode-vue :value="codeUrl" :size="" level="H" /> -->
-						<vue-qr qid="qrid1" :callback="qrBack" :text="qrData" :size="163" :colorDark="colorValue" :logoSrc="logoSrc"></vue-qr>
+						<vue-qr qid="qrid1" :callback="qrBack" :text="qrData" :size="163" :colorDark="colorValue"
+							:logoSrc="logoSrc"></vue-qr>
 					</view>
 					<view class="down flex" @click="downQr">
 						<view>
-							SAVE THE QR CODE
+							{{ t('pk.t_c4') }}
 						</view>
 						<img class="ml24" src="../../static/invite/down.png" alt="">
 					</view>
 				</view>
-
+				<view class="mt120">
+					<img style="width: 100%;" :src="nowlang == 'id' ? bannerList[2] : bannerList[0]" alt="">
+				</view>
 
 				<view class="team">
-					<view class="teamTitle mt68">
-						My Team
+					<view class="teamTitle mt20">
+						{{ t('pk.t_c5') }}
 					</view>
 					<view class="teamHead flex mt24 teamRadiusT">
 						<view></view>
-						<view>Level 1</view>
-						<view>Level 2</view>
-						<view>Level 3</view>
+						<view style="font-size: 24rpx;">{{ t('pk.t_c6') }} 1</view>
+						<view style="font-size: 24rpx;">{{ t('pk.t_c6') }} 2</view>
+						<view style="font-size: 24rpx;">{{ t('pk.t_c6') }} 3</view>
 					</view>
 					<view class="fg">
 
 					</view>
-					<view class="teamHead flex teamRadiusD">
-						<view>Amount</view>
-						<view>0</view>
-						<view>0</view>
-						<view>0</view>
+					<view style="font-size: 24rpx;" class="teamHead flex teamRadiusD">
+						<view>{{ t('pk.t_c7') }}</view>
+						<view>{{ team.level }}</view>
+						<view>{{ team.level2 }}</view>
+						<view>{{ team.level3 }}</view>
 					</view>
+				</view>
+
+				<view class="mt60 pb160">
+					<img style="width: 100%;" :src="nowlang == 'id' ? bannerList[3] : bannerList[1]" alt="">
 				</view>
 			</view>
 
 
-
-
-
-
-
-
-
-
-
-			<view class="pdlr37 pt33" v-show="false">
-				<!-- <view class="flex between topNav" >
-				<image src="/static/themeNum1/icon/indexLang.png" style="width:80rpx;height:80rpx"
-					@click="Jumplink('../mine/langSetting')"></image>
-				<view style="width: 70%;">
-					<nut-noticebar border-radius="40" :scrollable="true" :text="barText" color="#fff"
-						left-icon="../../static/themeNum1/icon/laba.png">
-					</nut-noticebar>
-				</view>
-				<image src="../../static/themeNum1/icon/kefu2.png" mode="widthFix" style="width:80rpx ; height: 80rpx;"
-					@click="Jumplink('../mine/service')"></image>
-			</view> -->
-
-				<view class="head">
-					<view class="head_box">
-						<view class="invte">
-							{{ t('new_xq.xq_a17') }}
-						</view>
-						<view class="text">
-							{{ t('new_xq.xq_a18') }}
-						</view>
-					</view>
-
-					<view class="details">
-						<view class="" style="font-size:24rpx ;">
-							{{ t('new_xq.xq_a19') }}
-						</view>
-						<view class="btn" @click="Jumplink('../mine/mission')">
-							{{ t('new_xq.xq_a20') }}
-						</view>
-					</view>
-				</view>
-
-				<view class="mt40" @click="Jumplink('../mine/mission')">
-					<view class="flex" style="justify-content: space-between;">
-						<view style="font-size: 36rpx;">
-							{{ t('new_xq.xq_a1') }}
-						</view>
-						<image style="width: 32rpx;height: 32rpx;" src="../../static/themeNum1/icon/go.png" mode="">
-						</image>
-
-					</view>
-					<view class="team">
-						<swiper :indicator-dots="false" :indicator-active-color="store.$state.contentColor"
-							:autoplay="false" :interval="3000" :duration="1000" display-multiple-items="1"
-							next-margin="50px" :circular="true" style="height: 222rpx">
-							<swiper-item v-for="(item, index) in eventsList" :key="index">
-								<view class="swiper_box2">
-									<view class="flex" style="justify-content: space-between; align-items: center;">
-										<view class="">
-											<view class="" style="font-size: 24rpx;margin-top: 8rpx;">
-												{{ t('new_xq.xq_a6') }} {{ item.invite_num }} {{ t('new_xq.xq_a60') }}
-											</view>
-											<view style="color: #14DBDD;margin-top: 8rpx;">
-												{{ item.price }} USDT
-											</view>
-										</view>
-										<image style="width: 48rpx;height: 48rpx;"
-											src="../../static/themeNum1/icon/backGo.png" mode=""></image>
-									</view>
-									<view class="Dividing" style="margin-top: 10rpx;margin-bottom: 12rpx;">
-
-									</view>
-									<view class="Mission_text">
-										{{ t('new_xq.xq_a7') }} {{ item.recharge_num }} {{ t('new_xq.xq_a8') }}
-									</view>
-								</view>
-							</swiper-item>
-						</swiper>
-					</view>
-				</view>
-
-				<!-- 	<view class="mt80 f40 text_center" style="margin-top: 150rpx;">
-				{{t('mine.m_s1')}}
-			</view> -->
-
-				<!-- 	<view class="center">
-				<view class="mt28 f24 topB">
-					{{t('mine.m_s2')}}
-				</view>
-			</view> -->
-				<view class="share">
-					<view class="shareBox">
-						<qrcode-vue :value="codeUrl" :size="163" level="H" />
-						<view class="mt39 center">
-							<view class="line" style="background:#fff"></view>
-							<view class="mglr27 f24" style="color: #fff;">{{ t('act.m_m1') }}</view>
-							<view class="line" style="background:#fff"></view>
-						</view>
-						<view class="mt37 f36" style="color:#4BF7F9">
-							{{ inviteCode }}
-						</view>
-						<!-- <image src="../../static/mine/erweima.png" mode="widthFix" style="width: 400rpx;"></image> -->
-					</view>
-
-					<view class="btns" @click="copyHandle" style="background-color:#4BF7F9;">
-						Copy
-					</view>
-				</view>
-				<view style="height: 50rpx;"></view>
-
-				<view class="center">
-					<!-- <image src="../../static/themeNum1/shareB.png"  style="width: 402rpx;height: 341rpx;">
-				</image> -->
-					<!-- <nut-image src="//img10.360buyimg.com/ling/jfs/t1/181258/24/10385/53029/60d04978Ef21f2d42/92baeb21f907cd24.jpg" width="100" height="100"></nut-image> -->
-				</view>
-				<!-- <view style="height: 50rpx;"></view> -->
-			</view>
 		</view>
 		<!-- <view style="height: 200rpx;">
 
@@ -212,7 +105,18 @@
 import Tabbar from '@/components/botTabbar/botTabbar.vue'
 import request from '../../../comm/request.ts';
 import vueQr from 'vue-qr/src/packages/vue-qr.vue'
+const nowlang = ref('')
+const bannerList = [
+	'../../static/inbanner1.jpg',
+	'../../static/inbanner2.jpg',
+	'../../static/inbanner3.jpg',
+	'../../static/inbanner4.jpg'
 
+]
+const getlang = () => {
+	nowlang.value = localStorage.getItem('lang')
+	console.log(nowlang.value);
+}
 const downQr = () => {
 	Toast.text('Download completed')
 	let name = new Date().getTime();
@@ -252,6 +156,7 @@ import {
 const {
 	t
 } = useI18n();
+const team = ref('')
 const eventsList = ref([])
 
 const barText = ref("") //跑马灯
@@ -294,7 +199,15 @@ const copyHandle = async (text) => {
 	}
 }
 const getData = () => {
+	//获取团队
 
+	request({
+		url: 'user/record/team/report',
+		methods: 'get',
+	}).then(res => {
+		team.value = res
+
+	})
 	request({
 		url: 'activity/inviteRechargeAward/list',
 		methods: 'get',
@@ -332,12 +245,28 @@ onShow(() => {
 onHide(() => {
 	clearInterval(showTIme.value)
 })
+onLoad(() => {
+	getlang()
+	if (localStorage.getItem('token')) {
 
+	} else {
+		uni.navigateTo(
+			{
+				url: '../login/login'
+			}
+		)
+	}
+})
 const inviteCode = ref("")
 const codeUrl = ref("")
 </script>
 
 <style lang="scss">
+.kefu {
+	width: 100rpx;
+	height: 100rpx;
+}
+
 .topNav {
 
 	width: 100%;
@@ -390,7 +319,7 @@ const codeUrl = ref("")
 .main {
 	background: url('../../static/back.png') no-repeat;
 	background-size: 100% 100%;
-	height: 1600rpx;
+	height: 2400rpx;
 
 }
 
@@ -406,7 +335,7 @@ const codeUrl = ref("")
 	background: url('../../static/egg/share_head.png') no-repeat;
 	background-size: 100% 100%;
 	width: 100%;
-	height: 350rpx;
+	// height: 350rpx;
 	margin-top: 44rpx;
 	box-sizing: border-box;
 	padding: 0rpx 32rpx;
@@ -513,6 +442,14 @@ const codeUrl = ref("")
 	font-weight: 400;
 	font-size: 28rpx;
 	color: #FFFFFF;
+}
+
+.InvInput1 {
+	width: 394rpx;
+	padding-left: 24rpx;
+	font-size: 24rpx;
+	border-radius: 16rpx 16rpx 16rpx 16rpx;
+	border: 2rpx solid #004284;
 }
 
 .copyBtn {

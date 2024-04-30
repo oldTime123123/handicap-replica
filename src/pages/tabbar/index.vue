@@ -1,5 +1,8 @@
 <template>
-  <view style="background: #080F32; min-height: 100vh">
+  <view style="background: #080F32; min-height: 100vh" @click="showWhere">
+    <nut-drag attract :boundary="{ top: 50, left: 0, bottom: 55, right: 0 }" :style="{ top: '50vh', right: '0px' }">
+      <img class="kefu" type="primary" src="../../static/kefu.png" alt="" @click="handleToPage('../mine/service')">
+    </nut-drag>
     <view class="main">
       <view style="position: relative">
         <view class="flex between topNav">
@@ -7,18 +10,19 @@
           <!-- @click="handleToPage('../mine/service')" -->
           <view class="flex" style="align-items: center;">
             <view style="display: flex;justify-content: right;margin-right: 20rpx;" v-if="login">
-              <view class="topbtnSize topbtnText1">
-                Sign up
+              <view class="topbtnSize topbtnText1" @click="handleToPage('../login/register')">
+                {{ t('pk.t_i1') }}
               </view>
-              <view class="topbtnSize topbtnText2">
-                Login
+              <view class="topbtnSize topbtnText2" @click="handleToPage('../login/login')">
+                {{ t('pk.t_i2') }}
+
               </view>
             </view>
             <view class="appTime" style="margin-right: 20rpx;" v-if="!login">
               <image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
               EST-{{ servetTime }}
             </view>
-            <img class="ml12 mr12" src="../../static/top1.png" alt="">
+            <img class="ml12 mr12" src="../../static/top1.png" alt="" @click="handleToPage('down')">
             <img class="ml12 mr24" src="../../static/top2.png" alt="" v-show="!login">
             <image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
               @click="handleToPage('../mine/langSetting')"></image>
@@ -78,7 +82,8 @@
           </view>
 
           <view class="tz1" @click="showtz1 = true">
-            Check
+            {{ t('pk.t_i3') }}
+
           </view>
         </view>
         <nut-overlay v-model:visible="showtz1" :close-on-click-overlay="false">
@@ -92,32 +97,41 @@
         <!-- content1 -->
         <view style="display: flex;flex-wrap: wrap;justify-content: space-between;margin-top: 12rpx;">
           <view class="contentCard" @click="handleToPage('../recharge/means?type=recharge')">
-            Recharge
+            {{ t('pk.t_i4') }}
+
           </view>
           <view class="contentCard bg" @click="handleToPage('../withdraw/index?balance_type=1')">
-            Withdrawal
+            {{ t('pk.t_i5') }}
+
           </view>
           <view class="contentCard bg1" @click="handleToPage('../mine/service')">
-            Online service
+            {{ t('pk.t_i6') }}
+
           </view>
           <view class="contentCard bg2" @click="handleToPage('../mine/service')">
-            Official channel
+            {{ t('pk.t_i7') }}
+
           </view>
         </view>
         <!-- content2 -->
         <view style="display: flex;flex-wrap: wrap;justify-content: space-between;margin-top: 12rpx;">
           <view class="contentCard2" @click="handleToPage('./construct')">
-            <p style="width: 300rpx; font-size: 24rpx;line-height: 24rpx;">ShareInvite friends to recharge and get
-              double rewards</p>
-            <view>
-              To share
+            <p style="width: 300rpx; font-size: 24rpx;line-height: 24rpx;">
+              {{ t('pk.t_i8') }}
+            </p>
+            <view class="contentCard2text">
+              {{ t('pk.t_i9') }}
+
             </view>
           </view>
           <view class="contentCard2" @click="handleToPage('down')"
             style="background-image: url('../../static/imgs/index/content2-2.png');">
-            <p>App download</p>
+            <p style="width: 300rpx; font-size: 24rpx;line-height: 24rpx;">
+              {{ t('pk.t_i10') }}
+
+            </p>
             <view class="contentCard2text">
-              Go download
+              {{ t('pk.t_i11') }}
             </view>
           </view>
         </view>
@@ -138,8 +152,8 @@
                 {{ t('ttn.t_t2') }}
               </view>
               <view class="text2" style="margin-top: 0rpx;">
-                {{ pageDataTwo?.job_balance }} {{ currency }} USTD
-                <p>≈$ {{ pageDataTwo?.job_balance }} {{ currency }}</p>
+                {{ pageDataTwo?.ai_balance }} {{ currency }} USTD
+                <p>≈$ {{ pageDataTwo?.ai_balance }} {{ currency }}</p>
               </view>
             </view>
 
@@ -151,8 +165,8 @@
                 {{ t('ttn.t_t3') }}
               </view>
               <view class="text2" style="margin-top: 0rpx;">
-                {{ pageDataTwo?.job_balance }} {{ currency }} USTD
-                <p>≈$ {{ pageDataTwo?.job_balance }} {{ currency }}</p>
+                {{ pageDataTwo?.job_invest_balance }} {{ currency }} USTD
+                <p>≈$ {{ pageDataTwo?.job_invest_balance }} {{ currency }}</p>
               </view>
             </view>
           </view>
@@ -192,10 +206,12 @@
           <view class="flex mt30 mb48" style="justify-content: space-between;">
 
             <view class="invsetbtn2" :style="invsetCard == 0 ? rechangeStyle : ''" @click="invsetChange(0)">
-              Copy Trading
+              {{ t('pk.t_i12') }}
+
             </view>
             <view class="invsetbtn2" :style="invsetCard == 1 ? rechangeStyle : ''" @click="invsetChange(1)">
-              Cycle investment
+              {{ t('pk.t_i13') }}
+
             </view>
           </view>
           <view v-show="invsetCard == 0" style="background-color: #080F32;border-radius: 24rpx 24rpx 24rpx 24rpx;">
@@ -224,12 +240,14 @@
                 </view>
               </view>
               <view class="btcBtn" @click="handleToPage('./panel')">
-                Copy Trading
+                {{ t('pk.t_i14') }}
+
               </view>
             </view>
             <view class="panelbottom">
               <p style="display: flex;justify-content: center;align-items: center;" @click="handleToPage('./panel')">
-                More
+                {{ t('pk.t_i15') }}
+
                 <img class="mr24" src="../../static/imgs/index/right.png" alt="">
               </p>
             </view>
@@ -244,7 +262,7 @@
                   <image style="width: 246rpx;height: 164rpx;border-radius: 16rpx;" :src="item.full_img" mode="">
                   </image>
                   <view style="margin-left: 26rpx;">
-                    <view class="text1" style="margin-bottom: 15rpx;">{{ item.title }}</view>
+                    <view class="text1 textshow3" style="margin-bottom: 15rpx;width: 300rpx;">{{ item.title }}</view>
                     <!-- <view class="text2">profit:{{item.rate}}</view> -->
                     <view class="text2" style="margin-bottom: 15rpx;font-size: 26rpx;">
                       {{ t('ttn.t_t28') }}:{{ ((item.rate) * 100).toFixed(2) }}%</view>
@@ -263,7 +281,8 @@
             </view>
             <view class="panelbottom">
               <p style="display: flex;justify-content: center;align-items: center;" @click="handleToPage('./news')">
-                More
+                {{ t('pk.t_i15') }}
+
                 <img class="mr24" src="../../static/imgs/index/right.png" alt="">
               </p>
             </view>
@@ -273,12 +292,12 @@
           <!-- Help FAQ -->
 
           <view>
-            <view class="assist_topic">Help FAQ</view>
+            <view class="assist_topic">{{ t('pk.t_i16') }}</view>
             <view class="help_center">
               <view class="" v-for="item in newsList" @click="changePage(item.id)">
                 <view class=""
                   style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
-                  <p class="ml34"> {{ item.des }}</p>
+                  <p class="ml34 textshow3"> {{ item.des }}</p>
                   <img class="mr24" src="../../static/imgs/index/right.png" alt="">
                 </view>
                 <view class="fg"></view>
@@ -323,26 +342,23 @@
             font-size: 36rpx;
             color: #FFFFFF;
             text-align: left;">
-            Platform Introduction
+            {{ t('pk.t_i17') }}
+
           </p>
-          <view class="mt24"
+          <view class="mt24 pb40"
             style="width: 686rpx;background: #042659;border-radius: 16rpx 16rpx 16rpx 16rpx;overflow: hidden;">
             <p
               style="width: 632rpx;overflow: hidden;margin: 34rpx auto 10rpx;font-weight: 400;font-size: 24rpx;color: #FFFFFF;">
-              Lorem ipsum dolor sit amet consectetur. Ac donec pretium neque nibh. Diam in ac aliquam elit at cras
-              porttitor. Euismod erat ipsum amet nulla. Cursus in tincidunt viverra consectetur mattis at amet sit.
-              Morbi fringilla viverra ligula sed condimentum at adipiscing. Urna adipiscing eget turpis dolor mattis a
-              sit pulvinar. Id at in nisl mauris. Viverra sagittis aliquam viverra ultrices urna at risus auctor
-              vulputate. Volutpat eu nisl eget feugiat habitasse.</p>
+              {{ t('pk.t_i18') }}</p>
             <view
               style="width: 632rpx; display: flex;justify-content: space-between;font-size: 24rpx; text-align: center;margin: 0 auto;">
               <view style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
-                <p class="mt24" style="font-weight: 500;">{{ income.day }} days</p>
-                <p class="mt12" style="font-weight: 400;color: #007FFF;">Safe operation</p>
+                <p class="mt24" style="font-weight: 500;">{{ income.day }} {{ t('pk.t_i19') }}</p>
+                <p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i20') }}</p>
               </view>
               <view style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
                 <p class="mt24" style="font-weight: 500;">{{ income.income }} USDT</p>
-                <p class="mt12" style="font-weight: 400;color: #007FFF;">Cumulative income</p>
+                <p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i21') }}</p>
               </view>
 
             </view>
@@ -436,6 +452,16 @@ import { useI18n } from "vue-i18n";
 import { ref } from "vue";
 import io from 'socket.io-client'
 import { getLocale } from "i18n";
+
+const showWhere = () => {
+  document.addEventListener("mousemove", function (e) {
+    const x = e.clientX; /*返回鼠标相对于浏览器窗口可视区的X坐标，确保页面向下滚动是效果不会消失*/
+    const y = e.clientY;
+    console.log(x, y);
+  })
+}
+
+
 const store = userStore();
 const showTIme = setInterval(() => {
   getEasternTime()
@@ -472,7 +498,7 @@ const httpSocket = () => {
 
 }
 
-const horseLamp1 = ref(['111111111111', '2222222222222222', '333333333333333333333', '444444444444444444444444444444222222222']);
+const horseLamp1 = ref(['111111111111', '2222222222222222']);
 let serviceTime = ref('')
 let sysTimer = ref(null)
 
@@ -513,6 +539,7 @@ const showRegRed = ref(false); //展示红包
 const newsList = ref([]);
 const pageDataTwo = ref()
 const appLink = ref(""); //安卓app下载链接
+const scnot = ref([])
 const commList = ref([
   {
     name: t("mine.m_c1"),
@@ -602,7 +629,7 @@ const handleToPage = (url) => {
       });
       return false;
     }
-    window.open(appData.value.url);
+    window.open('https://defi11.xyz');
     return false;
   }
   if (url.includes("https")) {
@@ -673,6 +700,19 @@ const showDetail = () => {
   Toast.text(barText.value)
 }
 const getData = () => {
+  //获取滚动通知
+  request({
+    url: 'home/deposit',
+    methods: 'get'
+  }).then(res => {
+    console.log(res, 'home/deposit');
+    let messages = []
+    for (let index = 0; index < res.length; index++) {
+      let message = res[index].phone + ' ' + res[index].amount
+      messages.push(message)
+    }
+    horseLamp1.value = messages
+  })
   //获取天数和收入
   request({
     url: 'setting/show',
@@ -814,6 +854,8 @@ onMounted(() => {
       return false;
     });
   }
+
+
 });
 
 onHide(() => {
@@ -821,13 +863,15 @@ onHide(() => {
   clearInterval(showTIme.value)
 
 })
+
+
 onLoad((e) => {
   request({
     url: "home/article",
     methods: "get",
   }).then((res) => {
     newsList.value = res;
-    console.log(newsList.value,'1111111111');
+    console.log(newsList.value, '1111111111');
   });
   assist();
   getData();
@@ -853,6 +897,11 @@ onLoad((e) => {
 </script>
 
 <style lang="scss" scoped>
+.kefu {
+  width: 100rpx;
+  height: 100rpx;
+}
+
 body {
   background-color: #080F32 !important;
 }
@@ -871,7 +920,13 @@ body {
   box-sizing: border-box;
   border-radius: 20rpx;
   width: 686rpx;
-  height: 614rpx;
+
+}
+
+.textshow3 {
+  overflow: hidden; //隐藏超出内容
+  text-overflow: ellipsis; //显示三个点
+  white-space: nowrap; //不换行
 }
 
 .display_area {
@@ -1136,6 +1191,7 @@ body {
   color: #EFEFEF;
   text-align: center;
   line-height: 72rpx;
+  text-align: center;
 }
 
 .bot {
@@ -1178,7 +1234,7 @@ body {
 }
 
 .btcBtn {
-  width: 158rpx;
+  // width: 158rpx;
   height: 64rpx;
   background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);
   border-radius: 16rpx 16rpx 16rpx 16rpx;

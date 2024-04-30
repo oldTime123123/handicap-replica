@@ -1,5 +1,8 @@
 <template>
   <view class="contentBg" style="background: #060d1f">
+    <nut-drag attract :boundary="{ top: 50, left: 0, bottom: 55, right: 0 }" :style="{ top: '50vh', right: '0px' }">
+      <img class="kefu" type="primary" src="../../static/kefu.png" alt="" @click="handleToPage('../mine/service')">
+    </nut-drag>
     <view class="pdlr30 pt50 topBox">
       <view class="flex between topNav">
         <view class="f32 text_bold flex col_center" v-if="showEye">
@@ -17,16 +20,16 @@
             @click="showEye = !showEye"></image>
         </view>
         <view class='flex' style="align-items: center;">
-			<view class="appTime" style="margin-right: 20rpx;">
-				<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
-				EST-{{servetTime}}
-			</view>
+          <view class="appTime" style="margin-right: 20rpx;">
+            <image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
+            EST-{{ servetTime }}
+          </view>
           <image src="/static/lang.png" style="width: 57rpx; height: 56rpx"
             @click="handleToPage('../mine/langSetting')"></image>
         </view>
       </view>
 
-      <view class="mt22 flex flex-between">
+      <view class="mt22 flex flex-between" style="align-items: center;">
         <view>
           <view class="f36 mt10 flex col_center">
             <view class="flex col_center text_bold">
@@ -42,11 +45,17 @@
             border-radius: 10rpx;
             padding: 20rpx;
             background-color: #0a87d1;
+            white-space:nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 350rpx;
           ">
-          {{ t("mine.m_s3") }}: {{ pageData?.invite_code }}
-          <image src="../../static/themeNum1/icon/copy.png" mode="widthFix" style="width: 19rpx; height: 19rpx"
-            @click="copyHandle(pageData?.invite_code)"></image>
+          {{ t("mine.m_s1") }}: {{ codeUrl }}
+          <!-- <image src="../../static/themeNum1/icon/copy.png" mode="widthFix" style="width: 19rpx; height: 19rpx"
+            @click="copyHandle(codeUrl)"></image> -->
         </view>
+        <image src="../../static/themeNum1/icon/copy.png" mode="widthFix" style="width: 30rpx; height: 30rpx"
+          @click="copyHandle(codeUrl)"></image>
       </view>
 
       <view class="balanceBox">
@@ -90,7 +99,7 @@
       </view>
       <view v-show="false" class="mt24" style="width: calc(100%-48rpx) ;height: 148rpx;background-image: url('../../static/mine/minebanner.png');background-size: 100% 100%;font-weight: 600;font-size: 40rpx;color: #FFFFFF;
 line-height: 148rpx;padding-left: 48rpx;">
-        Fund
+        {{ t('pk.t_m1') }}
       </view>
       <!-- <view class="mt30 pdlr50 pdtb30 between" :style="{ background: store.$state.secondColor, color: '#000' }"
         style="box-shadow: 0px 9px 16px 0px #54a8b0; border-radius: 20rpx" @click="handleToPage('../mine/share')">
@@ -385,17 +394,17 @@ const skip_page = (url) => {
   }
 };
 
-const showTIme  = setInterval(()=>{
-	getEasternTime()
-},1000)
-const servetTime =ref()
+const showTIme = setInterval(() => {
+  getEasternTime()
+}, 1000)
+const servetTime = ref()
 function getEasternTime() {
-	
-      const time = new Date().toLocaleString("en-US", {
-        timeZone: "America/New_York",
-        hour12: false,
-      });
-       servetTime.value = time.split(',')[1];
+
+  const time = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    hour12: false,
+  });
+  servetTime.value = time.split(',')[1];
 }
 const choStyle = {
   background: store.$state.secondColor,
@@ -556,6 +565,7 @@ const showDraw = ref(false);
 const showEgg = ref(false);
 const minTransfer = ref(-1);
 const showRedlove = ref(false);
+const codeUrl = ref('')
 const getData = () => {
   request({
     url: "user/index",
@@ -567,6 +577,8 @@ const getData = () => {
       "****" +
       res.phone.substr(res.phone.length - 4);
     pageData.value = res;
+    codeUrl.value = window.location.protocol + "//" + window.location.host +
+      "/\#/pages/login/register\?code=" + res.invite_code + "&country=" + res.country_code
   });
 
   request({
@@ -633,12 +645,29 @@ onShow(() => {
   getData();
   currency.value = uni.getStorageSync("currency");
 });
-onHide(()=>{
-	clearInterval(showTIme.value)
+onHide(() => {
+  clearInterval(showTIme.value)
+})
+onLoad(() => {
+  console.log(1111111111111111111111111111111111111);
+  if (localStorage.getItem('token')) {
+
+  } else {
+    uni.navigateTo(
+      {
+        url: '../login/login'
+      }
+    )
+  }
 })
 </script>
 
 <style lang="scss" scoped>
+.kefu {
+  width: 100rpx;
+  height: 100rpx;
+}
+
 .popUp_bottom {
   width: 100vw;
   height: 100vh;

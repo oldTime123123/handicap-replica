@@ -48,7 +48,20 @@
 		})
 	}
 	// 终于可以用了
-	onShow(() => {})
+	onShow(() => {
+
+	})
+	onLoad(() => {
+	if (localStorage.getItem('token')) {
+
+	} else {
+		uni.navigateTo(
+			{
+				url: '../login/login'
+			}
+		)
+	}
+})
 </script>
 
 <style lang="scss">

@@ -30,8 +30,7 @@
             <view class="items topLine">
               <view class="iTitle"> {{ danwei }} </view>
               <!-- <view :style="topItemStyle">{{pageData.amount ?((pageData.amount) * rate).toFixed(2):0 }}</view> -->
-              <view :style="topItemStyle"
-                >{{ pageData.amount ? (pageData.amount * rate).toFixed(2) : 0 }}
+              <view :style="topItemStyle">{{ pageData.amount ? (pageData.amount * rate).toFixed(2) : 0 }}
               </view>
             </view>
           </view>
@@ -39,21 +38,11 @@
 
         <view class="addressBox">
           <view class="typeList center mb30">
-            <view
-              class="mglr20 typeItem"
-              v-for="(item, index) in typeList"
-              :style="typeInd == index ? choStyle2 : ''"
-              @click="changeCode(index)"
-              >{{ item.name }}</view
-            >
+            <view class="mglr20 typeItem" v-for="(item, index) in typeList" :style="typeInd == index ? choStyle2 : ''"
+              @click="changeCode(index)">{{ item.name }}</view>
             <!-- <view class="mglr20 typeItem" :style="choStyle">TRC20</view> -->
           </view>
-          <qrcode-vue
-            :value="addresData"
-            v-if="addresData"
-            :size="163"
-            level="H"
-          />
+          <qrcode-vue :value="addresData" v-if="addresData" :size="163" level="H" />
 
           <view class="mt35 f26">
             {{ t("recharge.r_o6") }}
@@ -63,19 +52,11 @@
           </view>
         </view>
 
-        <view
-          class="btns mt78"
-          :style="noStyle"
-          style="box-shadow: none; background-color: #262626"
-          @click="cancleOrder"
-        >
+        <view class="btns mt78" :style="noStyle" style="box-shadow: none; background-color: #262626"
+          @click="cancleOrder">
           {{ t("recharge.r_o7") }}
         </view>
-        <view
-          class="btns color0 mt22"
-          :style="choStyle"
-          @click="changePage(pageData.order_no)"
-        >
+        <view class="btns color0 mt22" :style="choStyle" @click="changePage(pageData.order_no)">
           {{ t("recharge.r_r6") }}
         </view>
       </view>
@@ -91,19 +72,14 @@
             {{ t("recharge.r_o8") }}
           </view>
           <view class="between">
-            <view
-              :style="{
-                border: '1rpx solid' + store.$state.contentColor,
-                color: store.$state.contentColor,
-              }"
-            >
+            <view :style="{
+              border: '1rpx solid' + store.$state.contentColor,
+              color: store.$state.contentColor,
+            }">
               {{ t("all.a_c1") }}
             </view>
-            <view
-              class="color0"
-              :style="{ background: store.$state.secondColor, color: '#000' }"
-              @click="confirmHandle"
-            >
+            <view class="color0" :style="{ background: store.$state.secondColor, color: '#000' }"
+              @click="confirmHandle">
               {{ t("all.a_c2") }}
             </view>
           </view>
@@ -269,6 +245,17 @@ onHide(() => {
 onShow(() => {
   getData();
 });
+onLoad(() => {
+  if (localStorage.getItem('token')) {
+
+  } else {
+    uni.navigateTo(
+			{
+				url: '../login/login'
+			}
+		)
+  }
+})
 </script>
 
 <style lang="scss">

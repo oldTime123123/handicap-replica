@@ -14,36 +14,45 @@
 </template>
 
 <script setup>
-	import topNav from "@/components/topNav/topNav.vue"
-	import request from '../../../comm/request.ts';
-	import couRecord from '@/components/couRecord/couRecord.vue'
-	import {
-		userStore
-	} from "@/store/themeNum.js";
-	import {
-		Toast
-	} from '@nutui/nutui';
-	import {
-		onShow,
-		onLoad
-	} from "@dcloudio/uni-app";
-	const store = userStore();
-	import {
-		useI18n
-	} from 'vue-i18n'
+import topNav from "@/components/topNav/topNav.vue"
+import request from '../../../comm/request.ts';
+import couRecord from '@/components/couRecord/couRecord.vue'
+import {
+	userStore
+} from "@/store/themeNum.js";
+import {
+	Toast
+} from '@nutui/nutui';
+import {
+	onShow,
+	onLoad
+} from "@dcloudio/uni-app";
+const store = userStore();
+import {
+	useI18n
+} from 'vue-i18n'
 
-	const {
-		t
-	} = useI18n()
+const {
+	t
+} = useI18n()
 
-	const currency = uni.getStorageSync('currency')
-
-
+const currency = uni.getStorageSync('currency')
 
 
-	const showLoading = ref(null)
+
+
+const showLoading = ref(null)
+onLoad(() => {
+	if (localStorage.getItem('token')) {
+
+	} else {
+		uni.navigateTo(
+			{
+				url: '../login/login'
+			}
+		)
+	}
+})
 </script>
 
-<style lang="scss" scoped>
-	
-</style>
+<style lang="scss" scoped></style>

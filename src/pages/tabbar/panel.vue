@@ -8,6 +8,9 @@
    </topNavbar-menu> -->
 
    <view class="between pdlr30" style="padding-top: 20rpx;">
+      <nut-drag attract :boundary="{ top: 50, left: 0, bottom: 55, right: 0 }" :style="{ top: '50vh', right: '0px' }">
+         <img class="kefu" type="primary" src="../../static/kefu.png" alt="" @click="jump('../mine/service')">
+      </nut-drag>
       <view class="">
       </view>
       <view class="f34">
@@ -24,7 +27,7 @@
       </image>
 
       <view class="ml20">
-         Futures
+         {{ t('pk.t_p1') }}
          <!-- {{ pDetial.pro_name }}/USDT{{ $t('sec.a1') }} -->
       </view>
       <!-- popShow -->
@@ -60,7 +63,7 @@
                </view>
             </view>
          </view>
-         <view class="right-icon ml40" @click="viewOpen = !viewOpen">
+         <view class="right-icon ml40" @click="viewOpen = !viewOpen" v-show="false">
             <image v-if="viewOpen" src="/src/static/view-open.png" mode="aspectFit" style="width: 72upx; height: 72upx">
             </image>
             <image v-else src="/src/static/view-off.png" mode="aspectFit" style="width: 72upx; height: 72upx"></image>
@@ -113,7 +116,8 @@
       </view>
       <view class="btn-normal submit-btn h88" style="text-align: center"
          :class="{ 'btn-more': buyType == 1, 'btn-short': buyType == 2 }" @click="buyTostShow = true">
-         Copy Trading
+         {{ t('pk.t_p2') }}
+
       </view>
       <view style="height: 100rpx;">
 
@@ -317,40 +321,48 @@
    <view class="buyTost" v-show="buyTostShow">
       <view class="buyCard">
          <view class="flex mt48 mr32" style="text-align: center;justify-content: right;">
-            <view>Confirm Order</view>
+            <view> {{ t('pk.t_p3') }}
+            </view>
             <img src="../../static/themeNum1/l_icon/down.png" alt="" class="ml176" @click="buyTost(false)">
          </view>
          <view class="paddingLR30 mt32 flex" style="justify-content: space-between;">
             <view class="pt30 pb30">{{ pro_name }}/USDT</view>
             <view @click="jump('./mine')" class="pt30 pb30 pl30 pr30"
                style="background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);border-radius: 16rpx 16rpx 16rpx 16rpx;">
-               Deposit</view>
+               {{ t('pk.t_p4') }}
+            </view>
          </view>
-         <view class="paddingLR30 mt32">Buy amount (min: {{ amount }} USDT)</view>
-         <input v-model="amountIn" class="moenyIn mt16 ml32" type="text" placeholder="Please enter amount">
+         <view class="paddingLR30 mt32">{{ t('pk.t_p5') }} (min: {{ amount }} USDT)</view>
+         <input v-model="aiBalance" class="moenyIn mt16 ml32" type="text" placeholder="Please enter amount">
          <view>
 
          </view>
-         <view class="paddingLR30  PlaceAbet flex">Copy wallet balance:{{ aiBalance }}</view>
+         <view class="paddingLR30  PlaceAbet flex">{{ t('pk.t_p6') }}:{{ aiBalance }}</view>
          <view class="paddingLR30 mt16 PlaceAbet flex">
 
             <!-- <view @click="amount = 1000">1000</view>
             <view @click="amount = 2000">2000</view>
             <view @click="amount = 3000">3000</view> -->
-            <view @click="allIn()">ALL</view>
+            <view @click="allIn()">{{ t('pk.t_p7') }}</view>
          </view>
          <view class="paddingLR30 mt24 flex"
             style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
-            <view>balance: {{ tradeBalance }}</view>
-            <view>Lock Time: {{ lockT }} min</view>
+            <view>{{ t('pk.t_p8') }}: {{ tradeBalance }}</view>
+         </view>
+         <view class="paddingLR30 mt24 flex"
+            style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
+            <view>{{ t('pk.t_p9') }}: {{ lockT }} min</view>
          </view>
 
-
          <!-- {{ amount + (amount * rate) }} -->
-         <view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">Daily income: 1%~10%</view>
-         <view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">Lowest income: {{ aiBalance*0.01 }} ~ {{ aiBalance*0.1 }}</view>
+         <view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">{{ t('pk.t_p10') }}:
+            1%~10%
+         </view>
+         <view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">{{ t('pk.t_p11') }}:
+            {{
+               aiBalance * 0.01 }} ~ {{ aiBalance * 0.1 }}</view>
          <view class="confirmBtn" @click="submitAdd">
-            Confirm
+            {{ t('pk.t_p12') }}
          </view>
       </view>
    </view>
@@ -371,6 +383,12 @@ import { Toast } from "@nutui/nutui";
 import Tabbar from '@/components/botTabbar/botTabbar.vue';
 import Loading2 from '@/components/loading/loading2.vue';
 import FullMask from "@/components/fullMask/fullMask";
+import {
+   useI18n
+} from "vue-i18n";
+const {
+   t
+} = useI18n();
 //allIn
 const amountIn = ref()
 const allIn = () => {
@@ -845,6 +863,12 @@ const setSubIndicator = (name) => {
 
 const timestampToDateTime = (timestamp) => {
    // 时间戳转时间
+   const time = new Date().toLocaleString("en-US", {
+      timeZone: "America/New_York",
+      hour12: false,
+   });
+   console.log('time', time);
+   //   alert(time)
    const date = new Date(timestamp * 1000);
    const year = date.getFullYear();
    const month = ('0' + (date.getMonth() + 1)).slice(-2);
@@ -852,7 +876,8 @@ const timestampToDateTime = (timestamp) => {
    const hours = ('0' + date.getHours()).slice(-2);
    const minutes = ('0' + date.getMinutes()).slice(-2);
    const seconds = ('0' + date.getSeconds()).slice(-2);
-   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+   // console.log(`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`);
+   return time;
 };
 
 const changeDataType = (Arr) => {
@@ -868,9 +893,25 @@ const changeDataType = (Arr) => {
    });
    return newArr;
 };
+onLoad(() => {
+   if (localStorage.getItem('token')) {
+
+   } else {
+      uni.navigateTo(
+         {
+            url: '../login/login'
+         }
+      )
+   }
+})
 </script>
 
 <style lang="scss" scoped>
+.kefu {
+   width: 100rpx;
+   height: 100rpx;
+}
+
 .confirmBtn {
    width: 686rpx;
    height: 88rpx;
@@ -887,7 +928,8 @@ const changeDataType = (Arr) => {
    text-align: center;
 
    view {
-      width: 160rpx;
+      // width: 160rpx;
+      padding: 0 30rpx 0 30rpx;
       height: 96rpx;
       background: #004284;
       border-radius: 24rpx 24rpx 24rpx 24rpx;

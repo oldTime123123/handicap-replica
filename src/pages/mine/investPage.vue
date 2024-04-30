@@ -16,32 +16,16 @@
 					<view class="">
 						{{t('ttn.t_t41')}}
 					</view>
-					<view class="">
+					<view class="" style="text-align: right;">
 						{{detailData?.title}}
 					</view>
 				</view>
 				<view class="text">
 					<view class="">
-						{{t('ttn.t_t42')}}
+						{{t('ttn.t_t46')}}
 					</view>
-					<view class="">
-						{{detailData?.user_amount}}
-					</view>
-				</view>
-				<view class="text">
-					<view class="">
-						 {{t('ttn.t_t43')}}
-					</view>
-					<view class="">
-						{{(detailData?.rate*100).toFixed(2)}}%
-					</view>
-				</view>
-				<view class="text">
-					<view class="">
-						  {{t('ttn.t_t44')}}
-					</view>
-					<view class="">
-						{{detailData?.max_buy_num}}
+					<view class="" style="margin-top: 30rpx;">
+						{{parseInt(detailData?.min_num)}}
 					</view>
 				</view>
 				<view class="text">
@@ -49,15 +33,7 @@
 						 {{t('new_xq.xq_a30')}}
 					</view>
 					<view class="">
-						{{detailData?.limit==0?'No limit on purchase quantity':detailData?.limit==-1?0:detailData?.limit}}
-					</view>
-				</view>
-				<view class="text">
-					<view class="">
-						  {{t('new_xq.xq_a31')}}
-					</view>
-					<view class="">
-						{{detailData?.day}}
+						{{detailData?.limit==0?'No limit on purchase quantity':detailData?.limit==-1?0:detailData?.limit}}({{t('ttn.t_t47')}}: {{ detailData?.buy_num }} )
 					</view>
 				</view>
 				<view class="text" >
@@ -77,23 +53,54 @@
 					</view>
 				
 				</view>
-				
 				<view class="text">
 					<view class="">
-						{{t('ttn.t_t46')}}
+						  {{t('new_xq.xq_a31')}}
 					</view>
-					<view class="" style="margin-top: 30rpx;">
-						{{parseInt(detailData?.min_num)}}
+					<view class="">
+						{{detailData?.day}}
 					</view>
 				</view>
 				<view class="text">
+					<view class="">
+						 {{t('ttn.t_t43')}}
+					</view>
+					<view class="">
+						{{(detailData?.rate*100).toFixed(2)}}%
+					</view>
+				</view>
+
+
+				<!-- <view class="text">
+					<view class="">
+						{{t('ttn.t_t42')}}
+					</view>
+					<view class="">
+						{{detailData?.user_amount}}
+					</view>
+				</view>
+				
+				<view class="text">
+					<view class="">
+						  {{t('ttn.t_t44')}}111
+					</view>
+					<view class="">
+						{{detailData?.max_buy_num}}
+					</view>
+				</view> -->
+				
+				
+				
+				
+				
+				<!-- <view class="text">
 					<view class="">
 						{{t('ttn.t_t47')}}
 					</view>
 					<view class="">
-						{{detailData?.buy_num}}
+						{{}}
 					</view>
-				</view>
+				</view> -->
 				
 				<view class="btn" @click="invest">
 					 {{t('new_xq.xq_a33')}}
@@ -115,7 +122,7 @@
 						 {{t('ttn.t_t49')}}
 					</view>
 					<view class="">
-						{{detailData?.type==1?'Rebate on maturity':'Daily rebate'}}
+						{{detailData?.type==1?'One-time return of principal and interest upon maturity':'Daily rebate'}}
 					</view>
 				</view>
 				<!-- <view class="text">
@@ -126,12 +133,33 @@
 						{{detailData?.min_num}}USDT~{{detailData?.max_num}}USDT
 					</view>
 				</view> -->
+
+				<view class="text">
+					<view class="">
+						{{t('ttn.t_t46')}}
+					</view>
+					<view class="" style="margin-top: 30rpx;">
+						{{parseInt(detailData?.min_num)}}
+					</view>
+				</view>
+
+
+
 				<view class="text">
 					<view class="">
 						 {{t('ttn.t_t50')}}
 					</view>
 					<view class="">
 						{{number}}
+					</view>
+				</view>
+
+				<view class="text">
+					<view class="">
+						 {{t('ttn.t_t43')}}
+					</view>
+					<view class="">
+						{{(detailData?.rate*100).toFixed(2)}}%
 					</view>
 				</view>
 				<view class="text">
@@ -147,7 +175,7 @@
 						 {{t('ttn.t_t52')}}
 					</view>
 					<view  class="" style="font-size: 26rpx;text-align: right;">
-						{{detailData?.min_num}}*{{detailData?.day}}*{{(detailData?.rate*100).toFixed(2)}}%*{{number}} = {{t('ttn.t_t54')}} {{(Number(detailData?.min_num)*Number(detailData?.day)*Number(detailData?.rate)*Number(number)).toFixed(2)}} = {{t('ttn.t_t55')}} {{(Number(detailData?.min_num)*Number(detailData?.day)*Number(detailData?.rate)*Number(number).toFixed(2))+(Number(detailData?.min_num)*number)}}
+						{{detailData?.min_num}}*{{number}}*{{(detailData?.rate*100).toFixed(2)}}%*{{detailData?.day}} day  = {{t('ttn.t_t55')}} {{(Number(detailData?.min_num)*Number(detailData?.day)*Number(detailData?.rate)*Number(number).toFixed(2))+(Number(detailData?.min_num)*number)}}
 					</view>
 					
 				</view>
@@ -279,6 +307,15 @@
 			id.value = e.id
 			detail(e.id)
 		}
+		if (localStorage.getItem('token')) {
+
+} else {
+	uni.navigateTo(
+			{
+				url: '../login/login'
+			}
+		)
+}
 	})
 </script>
 
@@ -333,6 +370,7 @@
 		box-sizing: border-box;
 		padding: 26rpx 126rpx;
 		margin-top: 56rpx;
+		text-align: center;
 	}
 	.box1{
 		width: 100%;
@@ -355,6 +393,7 @@
 			.btn{
 				background-color: #92CC53;
 				color: #fff;
+				text-align: center;
 			}
 		}
 	}

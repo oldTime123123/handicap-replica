@@ -54,7 +54,8 @@
 					<view class="between">
 						<view> {{ t('all.a_c2') }}
 						</view>
-						<view style="background: linear-gradient( 308deg, #006BF4 0%, #04E1F4 100%);" @click="confirmHandle">{{ t('all.a_c1') }}</view>
+						<view style="background: linear-gradient( 308deg, #006BF4 0%, #04E1F4 100%);"
+							@click="confirmHandle">{{ t('all.a_c1') }}</view>
 
 					</view>
 				</div>
@@ -130,7 +131,15 @@ const getDate = () => {
 onLoad(e => {
 	getDate()
 	currency.value = uni.getStorageSync('currency')
+	if (localStorage.getItem('token')) {
 
+	} else {
+		uni.navigateTo(
+			{
+				url: '../login/login'
+			}
+		)
+	}
 })
 </script>
 

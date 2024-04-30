@@ -1,21 +1,26 @@
 <template>
 
 	<view style="background: #010012;  position: relative;">
+		<nut-drag attract :boundary="{ top: 50, left: 0, bottom: 55, right: 0 }" :style="{ top: '50vh', right: '0px' }">
+			<img class="kefu" type="primary" src="../../static/kefu.png" alt=""
+				@click="handleToPage('../mine/service')">
+		</nut-drag>
 		<view class="main" style="background: #080F32;padding-bottom: 80rpx;">
 
 			<view class="flex between topNav">
 				<view class="">
-					Cycle investment
+					{{ t('pk.t_n1') }}
 				</view>
-				<view >
-					
+				<view>
+
 				</view>
 				<view class="appTime" style="margin-right: 20rpx;">
-					<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
-					EST-{{servetTime}}
+					<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode="">
+					</image>
+					EST-{{ servetTime }}
 				</view>
-			
-		</view>
+
+			</view>
 			<view class="pdlr30" style="padding-top: 40rpx;">
 				<view class="flex">
 					<image style="width: 48rpx;height: 48rpx;" src="../../static/egg/icon1.png" mode=""></image>
@@ -52,8 +57,8 @@
 							{{ t('ttn.t_t2') }}
 						</view>
 						<view class="text2" style="margin-top: 0rpx;">
-							{{ pageData?.job_invest_balance }} {{ currency }}
-							<p>≈$ {{ pageData?.job_invest_balance }} {{ currency }}</p>
+							{{ pageData?.ai_balance }} {{ currency }}
+							<p>≈$ {{ pageData?.ai_balance }} {{ currency }}</p>
 						</view>
 					</view>
 
@@ -80,9 +85,10 @@
 				<swiper :indicator-dots="false" :indicator-active-color="store.$state.contentColor" :autoplay="false"
 					:interval="3000" :duration="1000" display-multiple-items="2" :circular="false"
 					style="height: 64rpx;">
-					<swiper-item v-for="item in text" :key='item.index' @click="rechangeIndex = item.index" style="border-radius: 0.5rem;">
+					<swiper-item v-for="item in text" :key='item.index' @click="rechangeIndex = item.index"
+						style="border-radius: 0.5rem;">
 						<view class="swiper_box2" :style='rechangeIndex == item.index ? rechangeStyle : ""'
-							:id="rechangeIndex == item.index ? 'swiper_box2_chose' : ''" >
+							:id="rechangeIndex == item.index ? 'swiper_box2_chose' : ''">
 							{{ item.text }}
 						</view>
 
@@ -444,17 +450,17 @@ const getData = () => {
 
 
 }
-const showTIme  = setInterval(()=>{
+const showTIme = setInterval(() => {
 	getEasternTime()
-},1000)
-const servetTime =ref()
+}, 1000)
+const servetTime = ref()
 function getEasternTime() {
-	
-      const time = new Date().toLocaleString("en-US", {
-        timeZone: "America/New_York",
-        hour12: false,
-      });
-       servetTime.value = time.split(',')[1];
+
+	const time = new Date().toLocaleString("en-US", {
+		timeZone: "America/New_York",
+		hour12: false,
+	});
+	servetTime.value = time.split(',')[1];
 }
 const currency = ref()
 
@@ -464,17 +470,32 @@ const interest = (id) => {
 		url: '../mine/investPage?id=' + id
 	})
 }
-onHide(()=>{
+onHide(() => {
 	clearInterval(showTIme.value)
 })
 onLoad(() => {
 	getData()
 	currency.value = uni.getStorageSync('currency')
+	console.log(localStorage.getItem('token'));
+	if (localStorage.getItem('token')) {
+		
+	} else {
+		uni.navigateTo(
+			{
+				url: '../login/login'
+			}
+		)
+	}
 
 })
 </script>
 
 <style lang="scss" scoped>
+.kefu {
+	width: 100rpx;
+	height: 100rpx;
+}
+
 .Basic {
 	box-sizing: border-box;
 	padding: 24rpx 16rpx;
@@ -636,12 +657,12 @@ onLoad(() => {
 
 .topNav {
 
-  width: 100%;
-  background-color: #0C1526;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding: 16rpx 32rpx;
-  z-index: 99;
+	width: 100%;
+	background-color: #0C1526;
+	justify-content: space-between;
+	box-sizing: border-box;
+	padding: 16rpx 32rpx;
+	z-index: 99;
 }
 
 

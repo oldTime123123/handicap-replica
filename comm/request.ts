@@ -44,9 +44,9 @@ export default function request(options: any) {
 					
 					// 重新登录 
 					if (res.data.code === 2000 && res.statusCode == 401) {
-						uni.navigateTo({
-							url:'/pages/login/login'
-						})
+						// uni.navigateTo({
+						// 	url:'/pages/login/login'
+						// })
 						return reject({
 							message: res.data.message,
 						});
@@ -54,9 +54,9 @@ export default function request(options: any) {
 
 					// 无权限
 					if (res.statusCode === 401) {
-					uni.navigateTo({
-						url:'/pages/login/login'
-					})
+					// uni.navigateTo({
+					// 	url:'/pages/login/login'
+					// })
 
 					}
 
