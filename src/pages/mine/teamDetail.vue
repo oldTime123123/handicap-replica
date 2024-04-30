@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<kefu></kefu>
 		<topNav :title="t('mine.m_d1')"></topNav>
 		<view class="pdlr30 mt50">
 			<view class="flex between" style="border-bottom: 2rpx solid #ddd;">
@@ -55,6 +56,7 @@
 </template>
 
 <script setup>
+	import kefu from "@/components/kefu/kefu.vue"
 	import topNav from "@/components/topNav/topNav.vue"
 	import request from '../../../comm/request.ts';
 	import {
