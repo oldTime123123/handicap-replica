@@ -165,15 +165,7 @@ const getBotData = () => {
 	})
 }
 onLoad(e => {
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 	redId.value = e.id
 	getBotData()
 	currency.value = uni.getStorageSync("currency")

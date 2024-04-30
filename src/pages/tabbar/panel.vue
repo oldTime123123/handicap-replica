@@ -114,8 +114,9 @@
             {{ $t('sec.a6') }}
          </view>
       </view>
+      <!-- :class="{ 'btn-more': buyType == 1, 'btn-short': buyType == 2 }" -->
       <view class="btn-normal submit-btn h88" style="text-align: center"
-         :class="{ 'btn-more': buyType == 1, 'btn-short': buyType == 2 }" @click="buyTostShow = true">
+          @click="buyTostShow = true">
          {{ t('pk.t_p2') }}
 
       </view>
@@ -327,17 +328,17 @@
          </view>
          <view class="paddingLR30 mt32 flex" style="justify-content: space-between;">
             <view class="pt30 pb30">{{ pro_name }}/USDT</view>
-            <view @click="jump('./mine')" class="pt30 pb30 pl30 pr30"
+            <view @click="jump('../recharge/means?type=recharge')" class="pt30 pb30 pl30 pr30"
                style="background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);border-radius: 16rpx 16rpx 16rpx 16rpx;">
                {{ t('pk.t_p4') }}
             </view>
          </view>
-         <view class="paddingLR30 mt32">{{ t('pk.t_p5') }} (min: {{ amount }} USDT)</view>
-         <input v-model="aiBalance" class="moenyIn mt16 ml32" type="text" placeholder="Please enter amount">
+         <view class="paddingLR30 mt32">{{ t('pk.t_p5') }} (min: {{ amount }} {{currency}})</view>
+         <input v-model="amount10" class="moenyIn mt16 ml32" type="text" placeholder="Please enter amount">
          <view>
 
          </view>
-         <view class="paddingLR30  PlaceAbet flex">{{ t('pk.t_p6') }}:{{ aiBalance }}</view>
+         <view class="paddingLR30  PlaceAbet flex">{{ t('pk.t_p6') }}:{{ aiBalance }} {{currency}}</view>
          <view class="paddingLR30 mt16 PlaceAbet flex">
 
             <!-- <view @click="amount = 1000">1000</view>
@@ -347,7 +348,7 @@
          </view>
          <view class="paddingLR30 mt24 flex"
             style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
-            <view>{{ t('pk.t_p8') }}: {{ tradeBalance }}</view>
+            <view>{{ t('pk.t_p8') }}: {{ tradeBalance }} {{currency}}</view>
          </view>
          <view class="paddingLR30 mt24 flex"
             style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
@@ -360,7 +361,7 @@
          </view>
          <view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">{{ t('pk.t_p11') }}:
             {{
-               aiBalance * 0.01 }} ~ {{ aiBalance * 0.1 }}</view>
+               (aiBalance * 0.01).toFixed(2) }} ~ {{ (aiBalance * 0.1).toFixed(2) }}</view>
          <view class="confirmBtn" @click="submitAdd">
             {{ t('pk.t_p12') }}
          </view>
@@ -416,14 +417,24 @@ const back = () => {
 }
 
 let tradeBalance = ref(0);
-
+const currency = ref()
 function getUserInfo() {
    request({
       url: '/user/index',
       methods: 'GET'
    }).then((res) => {
-      tradeBalance.value = res.balance;
+      tradeBalance.value = res.job_balance;
       aiBalance.value = res.ai_balance
+      amount10.value = res.ai_balance
+   });
+
+   // 获取货币符号
+   request({
+      url: "/setting/currency",
+      methods: "get",
+   }).then((res) => {
+      uni.setStorageSync("currency", res.currency);
+      currency.value = res.currency
    });
 }
 
@@ -433,7 +444,7 @@ let pDetial = ref({}); //商品详情
 let times = ref(0); //开奖时间选择
 let buyType = ref(1); //购买类型
 let price = ref(''); //购买价格
-
+const amount10 = ref()
 
 
 
@@ -698,11 +709,19 @@ const startTime = () => {
 
 const submitAdd = () => {
    console.log('123')
+   // if (amount10.value<amount.value) {
+   //    Toast.text(t('pk.t_p13'))
+   //    return
+   // }
+   // if (amount10.value>aiBalance.value) {
+   //    Toast.text(t('pk.t_p14'))
+   //    return
+   // }
    request({
       url: 'activity/follow/follow',
       methods: 'post',
       data: {
-         amount: amount.value,
+         amount: amount10.value,
          project_id: pid.value
       }
    }).then((res) => {
@@ -894,15 +913,7 @@ const changeDataType = (Arr) => {
    return newArr;
 };
 onLoad(() => {
-   if (localStorage.getItem('token')) {
 
-   } else {
-      uni.navigateTo(
-         {
-            url: '../login/login'
-         }
-      )
-   }
 })
 </script>
 
@@ -1057,9 +1068,9 @@ onLoad(() => {
    width: 96%;
    left: 50%;
    margin-left: -48%;
-
-   line-height: 88rpx;
-   height: 88rpx;
+   font-size: 44rpx;
+   line-height: 144rpx;
+   height: 144rpx;
    z-index: 99;
    background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%) !important;
    border-radius: 8px 8px 8px 8px;

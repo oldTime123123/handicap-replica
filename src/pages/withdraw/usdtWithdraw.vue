@@ -1,5 +1,6 @@
 <template>
 	<view class="normalBg" style="background: #060D1F">
+		<kefu></kefu>
 		<topNav :title="t('withdraw.w_w1')"></topNav>
 		<view class="pdlr45 mt70">
 
@@ -8,7 +9,9 @@
 					<view class="topItem f26">{{ t('all.b_b1') }}</view>
 					<view class="mt35 f55" style="color: #fff;">{{ currency }} {{ pageData.balance_max }} </view>
 				</view>
-
+				<view class="mt40" style="text-align: center;">
+					{{ currency }}: {{ inpVal }} = {{ (inpVal * kurs).toFixed(2) }} U
+				</view>
 				<view class="mt40 inputItem">
 					<text>{{ currency }}</text>
 					<view class="pdlr35">
@@ -75,6 +78,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -106,7 +111,7 @@ const noStyle = {
 	color: store.$state.contentColor
 }
 
-
+const kurs = ref()
 const showPassword = ref(false)
 const changePassword = () => {
 	showPassword.value = !showPassword.value
@@ -133,6 +138,13 @@ const showBindPwd = ref(true)
 const showLoading = ref(null)
 const fundPwd = ref("")
 const getData = () => {
+	//获取汇率
+	request({
+		url: 'finance/usdt/recharge/index',
+		methods: 'get'
+	}).then(res => {
+		kurs.value = res.rate
+	})
 	request({
 		url: 'finance/usdt/withdraw/index',
 		methods: 'get',
@@ -195,15 +207,7 @@ onLoad(e => {
 	if (e.balance_type) {
 		balance_type.value = e.balance_type
 	}
-	if (localStorage.getItem('token')) {
 
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
 })
 
 // 终于可以用了

@@ -1,5 +1,6 @@
 <template>
 	<view class="normalBg" style="background: #060D1F">
+		<kefu></kefu>
 		<topNav :title="t('withdraw.w_w1')" :rightIcon="'/static/themeNum1/icon/r_withdraw.png'"
 			:rightUrl="'../record/withdrawRecord'"></topNav>
 		<view class="pdlr45 mt70">
@@ -38,6 +39,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -111,15 +114,7 @@ onLoad(e => {
 	if (e.balance_type) {
 		balance_type.value = e.balance_type
 	}
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 // 终于可以用了
 onShow(() => {

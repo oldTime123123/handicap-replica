@@ -1,39 +1,41 @@
 <template>
 	<view class="normalBg" style="background: #060D1F">
+		<kefu></kefu>
 		<topNav :title="t('mine.m_t1')"></topNav>
 		<view class="pdlr30 mt70">
 			<view>
 				<view class="flex between">
 					<view class="topItem l_inpBg  flex-wrap">
-						<view class="f24">{{t('mine.m_t2')}}</view>
-						<view class="f40 text_bold mt27" style="color:#51FDFE ;">{{pageData.member_today_commission}}
+						<view class="f24">{{ t('mine.m_t2') }}</view>
+						<view class="f40 text_bold mt27" style="color:#51FDFE ;">{{ pageData.member_today_commission }}
 						</view>
 					</view>
 					<view class="topItem l_inpBg  flex-wrap">
-						<view class="f24">{{t('mine.m_t3')}}</view>
-						<view class="f40 text_bold mt27" style="color:#51FDFE ;">{{pageData.member_commission}}</view>
+						<view class="f24">{{ t('mine.m_t3') }}</view>
+						<view class="f40 text_bold mt27" style="color:#51FDFE ;">{{ pageData.member_commission }}</view>
 					</view>
 				</view>
 				<view class="flex between mt35">
 					<view class="topItem l_inpBg  flex-wrap">
-						<view class="f24">{{t('mine.m_t4')}}</view>
-						<view class="f40 text_bold mt27" style="color:#51FDFE ;">{{pageData.member}}</view>
+						<view class="f24">{{ t('mine.m_t4') }}</view>
+						<view class="f40 text_bold mt27" style="color:#51FDFE ;">{{ pageData.member }}</view>
 					</view>
 					<view class="topItem l_inpBg  flex-wrap">
 						<view class="f24">
-						<!-- {{t('mine.m_t5')}}  -->
-						Team belonging</view>
-						<view class="f40 text_bold mt27" style="color:#51FDFE ;">{{pageData.teamFirstName}}
+							<!-- {{t('mine.m_t5')}}  -->
+							Team belonging
+						</view>
+						<view class="f40 text_bold mt27" style="color:#51FDFE ;">{{ pageData.teamFirstName }}
 						</view>
 					</view>
 				</view>
 			</view>
-			
-		<!-- 	<view class="mt30">
+
+			<!-- 	<view class="mt30">
 				<image v-if="curLang =='ar' || curLang == 'fa'" src="/static/arTeam.jpg" mode="widthFix" style="width: 100%;"></image>
 				<image v-else src="/static/teamIntro.jpg" mode="widthFix" style="width: 100%;"></image>
 			</view> -->
-		<!-- 	<view class="flex mt50">
+			<!-- 	<view class="flex mt50">
 				<view :style="{background:store.$state.contentColor}" class="text_white f26"
 					style="padding:20rpx 30rpx ; border-radius: 50rpx;">{{t('mine.m_t6')}}</view>
 			</view>
@@ -96,135 +98,129 @@
 </template>
 
 <script setup>
-	import topNav from "@/components/topNav/topNav.vue"
-	import request from '../../../comm/request.ts';
-	import {
-		userStore
-	} from "@/store/themeNum.js";
-	import useClipboard from 'vue-clipboard3'
-	import {
-		Toast
-	} from '@nutui/nutui';
-	import {
-		onShow,
-		onLoad
-	} from "@dcloudio/uni-app";
-	const store = userStore();
-	const {
-		toClipboard
-	} = useClipboard()
-	import {
-		useI18n
-	} from "vue-i18n";
+import kefu from "@/components/kefu/kefu.vue"
 
-	const {
-		t
-	} = useI18n();
-	const inviteUrl = ref("")
-	const copyHandle = async (data) => {
-		try {
-			await toClipboard(data)
-			Toast.text(t('all.a_c4'))
-		} catch (e) {
-			console.error(e)
-		}
-	}
-	const curLang = uni.getStorageSync('lang')
-	const jumpPage = url => {
-		uni.navigateTo({
-			url
-		})
-	}
+import topNav from "@/components/topNav/topNav.vue"
+import request from '../../../comm/request.ts';
+import {
+	userStore
+} from "@/store/themeNum.js";
+import useClipboard from 'vue-clipboard3'
+import {
+	Toast
+} from '@nutui/nutui';
+import {
+	onShow,
+	onLoad
+} from "@dcloudio/uni-app";
+const store = userStore();
+const {
+	toClipboard
+} = useClipboard()
+import {
+	useI18n
+} from "vue-i18n";
 
-	const pageData = ref({
-		// member: 0, //团队人数
-		// member_commission: 0.00, //总团队收益
-		// member_today_commission: 0.00, //今日团队收益
-		// member_invest_amount: 0, //团队建设金额
+const {
+	t
+} = useI18n();
+const inviteUrl = ref("")
+const copyHandle = async (data) => {
+	try {
+		await toClipboard(data)
+		Toast.text(t('all.a_c4'))
+	} catch (e) {
+		console.error(e)
+	}
+}
+const curLang = uni.getStorageSync('lang')
+const jumpPage = url => {
+	uni.navigateTo({
+		url
 	})
-	const botData = ref({
-		A:{},
-		B:{},
-		C:{},
+}
+
+const pageData = ref({
+	// member: 0, //团队人数
+	// member_commission: 0.00, //总团队收益
+	// member_today_commission: 0.00, //今日团队收益
+	// member_invest_amount: 0, //团队建设金额
+})
+const botData = ref({
+	A: {},
+	B: {},
+	C: {},
+})
+const inviteCode = ref("")
+const getData = () => {
+	request({
+		url: 'user/record/team/report',
+		methods: 'get',
+	}).then(res => {
+		pageData.value = res
+		botData.value = res.member_detail
 	})
-	const inviteCode = ref("")
-	const getData = () => {
-		request({
-			url: 'user/record/team/report',
-			methods: 'get',
-		}).then(res => {
-			pageData.value = res
-			botData.value = res.member_detail
-		})
 
-		request({
-			url: 'user/index',
-			methods: 'get',
-			data: {}
-		}).then(res => {
-			inviteUrl.value = window.location.protocol + "//" + window.location.host +
-				"/\#/\?code=" + res.invite_code
-			// inviteUrl.value = window.location.protocol + "//wyf-pv.com/#/?code=" + res.invite_code
-			// pageData.value = res
-		})
-	}
-
-	// 终于可以用了
-	onShow(() => {
-		getData()
+	request({
+		url: 'user/index',
+		methods: 'get',
+		data: {}
+	}).then(res => {
+		inviteUrl.value = window.location.protocol + "//" + window.location.host +
+			"/\#/\?code=" + res.invite_code
+		// inviteUrl.value = window.location.protocol + "//wyf-pv.com/#/?code=" + res.invite_code
+		// pageData.value = res
 	})
-	onLoad(() => {
-	if (localStorage.getItem('token')) {
+}
 
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+// 终于可以用了
+onShow(() => {
+	getData()
+})
+onLoad(() => {
+
 })
 </script>
 
 <style lang="scss">
-	.topItem {
-		border-radius: 15rpx;
-		width: 48%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		padding: 35rpx 0;
-		height: 120rpx;
-	}
+.topItem {
+	border-radius: 15rpx;
+	width: 48%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 35rpx 0;
+	height: 120rpx;
+}
 
-	.levelText {
-		font-family: PingFang SC;
-		font-weight: 600;
-		color: #6068FF;
-		-webkit-text-stroke: 1rpx #FFFFFF;
-		text-stroke: 1rpx #FFFFFF;
-	}
+.levelText {
+	font-family: PingFang SC;
+	font-weight: 600;
+	color: #6068FF;
+	-webkit-text-stroke: 1rpx #FFFFFF;
+	text-stroke: 1rpx #FFFFFF;
+}
 
-	.table_head {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 27rpx 21rpx;
+.table_head {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 27rpx 21rpx;
 
-		view {
-			width: 25%;
-			text-align: center;
-			line-height: 100%;
-		}
+	view {
+		width: 25%;
+		text-align: center;
+		line-height: 100%;
 	}
+}
 
-	.linkEl {
-		height: 88rpx;
-		background: url('/static/themeNum1/img/inviteMask.png') no-repeat 100%/100%;
-		color: #fff;
-		// width: 100%;
-		border-radius: 20rpx;
-		padding: 44rpx 50rpx;
-	}
+.linkEl {
+	height: 88rpx;
+	background: url('/static/themeNum1/img/inviteMask.png') no-repeat 100%/100%;
+	color: #fff;
+	// width: 100%;
+	border-radius: 20rpx;
+	padding: 44rpx 50rpx;
+}
 </style>

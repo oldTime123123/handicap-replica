@@ -1,6 +1,6 @@
 <template>
 	<view style="padding-bottom: 150rpx; background: #060D1F">
-
+		<kefu></kefu>
 		<topNav :title="t('construct.c_s7')" style="background-color: #000;"></topNav>
 		<view class=" " style="position: relative;">
 			<image :src="'/static/sign/hetong2.jpg'" mode="widthFix" style="width: 100%;"></image>
@@ -32,6 +32,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -70,15 +72,7 @@ onLoad(e => {
 	if (e.url) {
 		imgUrl.value = e.url
 	}
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 
 const curLang = uni.getStorageSync('lang')

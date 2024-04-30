@@ -190,7 +190,7 @@ export default {
     a_c10: "Cancel",
     a_d1: "Copy",
     a_d2: "Status",
-    b_b1: "Total wallet balance",
+    b_b1: "Account wallet balance",
     a_t1: "Tip"
   },
   record: {
@@ -264,7 +264,7 @@ export default {
     xq_a15: "crowdfunding project",
     xq_a16: "investment record",
     xq_a17: "invite friends",
-    xq_a18: "Register and top up to get generous rewards",
+    xq_a18: "Invite friends to recharge and receive two rewards",
     xq_a19: "Build a team and get generous rewards",
     xq_a20: "Details",
     xq_a21: "Fund conversion",
@@ -542,7 +542,7 @@ export default {
     m_c3: "Language settings",
     m_c4: "Problem",
     m_c5: "Service",
-    m_s1: "Invite",
+    m_s1: "Invitation link",
     m_s2: "Invite friends to earn cash",
     m_s3: "Invitation code",
     m_s4: "Recommended member",
@@ -693,9 +693,9 @@ export default {
   },
   pk: {
     t_c1: "lnvite",
-    t_c2: "Invitation Code",
+    t_c2: "Invitation Code and invitation link",
     t_c3: "Copy",
-    t_c4: "SAVE THE QR CODE",
+    t_c4: "Save invitation QR code",
     t_c5: "My Team",
     t_c6: "Level",
     t_c7: "Amount",
@@ -706,7 +706,7 @@ export default {
     t_i5: "Withdrawal",
     t_i6: "Online service",
     t_i7: "Official channel",
-    t_i8: "ShareInvite friends to recharge and get tow rewards",
+    t_i8: "Invite friends to recharge and receive two rewards",
     t_i9: "To share",
     t_i10: "App download",
     t_i11: "Go download",
@@ -734,6 +734,10 @@ export default {
     t_p10: "Daily income",
     t_p11: "Lowest income",
     t_p12: "Confirm",
+    p_w1:'Click to bind withdrawal account information',
+    r_i1:'Bank Card and Wallet Payment'
+    // t_p13: "Confirm",
+    // t_p14: "Confirm",
     
 
 

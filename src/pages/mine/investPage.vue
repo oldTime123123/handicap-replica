@@ -1,5 +1,6 @@
 <template>
 	<view style="background-color: #121212;min-height: 100%;">
+		<kefu></kefu>
 		<view class="pdlr30 pt33 main">
 			<view class="between">
 				<view class="flex between">
@@ -205,6 +206,8 @@
 </template>
 
 <script setup>
+	import kefu from "@/components/kefu/kefu.vue"
+
 	import request from '../../../comm/request.ts';
 	import {
 		userStore
@@ -252,10 +255,14 @@
 	const num = ref()
 	const showLoading = ref(false)
 	const invest = () =>{
+
+		console.log(num.value,id.value,number.value);
 		if(detailData.value.buy_status == 0){
 			return Toast.text('Not available for purchase at the moment')
 		}
 		showLoading.value.loading = true
+		
+
 		request({
 			url:'lixibao/invest',
 			methods:'post',
@@ -263,7 +270,6 @@
 				amount:num.value,
 				id:id.value,
 				num:number.value
-
 			}
 		}).then(res=>{
 			setTimeout(()=>{
@@ -292,6 +298,7 @@
 			}
 		}).then(res=>{
 			detailData.value = res
+			num.value = detailData.value.min_num
 		})
 	}
 
@@ -307,15 +314,6 @@
 			id.value = e.id
 			detail(e.id)
 		}
-		if (localStorage.getItem('token')) {
-
-} else {
-	uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-}
 	})
 </script>
 

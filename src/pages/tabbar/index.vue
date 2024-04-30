@@ -1,5 +1,5 @@
 <template>
-  <view style="background: #080F32; min-height: 100vh" @click="showWhere">
+  <view style="background: #080F32;" @click="showWhere">
     <nut-drag attract :boundary="{ top: 50, left: 0, bottom: 55, right: 0 }" :style="{ top: '50vh', right: '0px' }">
       <img class="kefu" type="primary" src="../../static/kefu.png" alt="" @click="handleToPage('../mine/service')">
     </nut-drag>
@@ -141,7 +141,7 @@
             <image style="width: 48rpx;height: 48rpx;" src="../../static/egg/icon1.png" mode=""></image>
             <view class="" style="margin-left: 10rpx;">
               {{ t('ttn.t_t1') }}：{{ Number(pageDataTwo?.ai_balance) + Number(pageDataTwo?.balance) }} {{ currency }}
-              USTD
+             
             </view>
           </view>
           <view class="flex mt30"
@@ -152,8 +152,8 @@
                 {{ t('ttn.t_t2') }}
               </view>
               <view class="text2" style="margin-top: 0rpx;">
-                {{ pageDataTwo?.ai_balance }} {{ currency }} USTD
-                <p>≈$ {{ pageDataTwo?.ai_balance }} {{ currency }}</p>
+                {{ pageDataTwo?.ai_balance }} {{ currency }} 
+                <p>≈$ {{ (pageDataTwo?.ai_balance * kurs).toFixed(2) }}</p>
               </view>
             </view>
 
@@ -165,8 +165,8 @@
                 {{ t('ttn.t_t3') }}
               </view>
               <view class="text2" style="margin-top: 0rpx;">
-                {{ pageDataTwo?.job_invest_balance }} {{ currency }} USTD
-                <p>≈$ {{ pageDataTwo?.job_invest_balance }} {{ currency }}</p>
+                {{ pageDataTwo?.job_invest_balance }} {{ currency }} 
+                <p>≈$ {{ (pageDataTwo?.ai_balance * kurs).toFixed(2) }}</p>
               </view>
             </view>
           </view>
@@ -349,7 +349,9 @@
             style="width: 686rpx;background: #042659;border-radius: 16rpx 16rpx 16rpx 16rpx;overflow: hidden;">
             <p
               style="width: 632rpx;overflow: hidden;margin: 34rpx auto 10rpx;font-weight: 400;font-size: 24rpx;color: #FFFFFF;">
-              {{ t('pk.t_i18') }}</p>
+              
+              {{ income.content }}
+            </p>
             <view
               style="width: 632rpx; display: flex;justify-content: space-between;font-size: 24rpx; text-align: center;margin: 0 auto;">
               <view style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
@@ -357,7 +359,7 @@
                 <p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i20') }}</p>
               </view>
               <view style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
-                <p class="mt24" style="font-weight: 500;">{{ income.income }} USDT</p>
+                <p class="mt24" style="font-weight: 500;">{{ income.income }} {{ currency }}</p>
                 <p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i21') }}</p>
               </view>
 
@@ -624,9 +626,10 @@ const handleToPage = (url) => {
   if (url == "down") {
     var userAgent = navigator.userAgent; //获取userAgent信息
     if (userAgent.includes("iPhone")) {
-      uni.navigateTo({
-        url: "../mine/iosIntro",
-      });
+      // uni.navigateTo({
+      //   url: "../mine/iosIntro",
+      // });
+      window.open('https://defi11.xyz', '_blank');
       return false;
     }
     window.open('https://defi11.xyz');
@@ -696,10 +699,22 @@ const partnerList = ref([]);
 const newbanner = ref({});
 const showCharity = ref(false);
 const showParwel = ref(false);
+const currency  = ref('')
+const kurs = ref('')
 const showDetail = () => {
   Toast.text(barText.value)
 }
 const getData = () => {
+
+  
+
+  //获取汇率
+  request({
+    url: 'finance/usdt/recharge/index',
+    methods: 'get'
+  }).then(res => {
+    kurs.value = res.rate
+  })
   //获取滚动通知
   request({
     url: 'home/deposit',
@@ -708,7 +723,7 @@ const getData = () => {
     console.log(res, 'home/deposit');
     let messages = []
     for (let index = 0; index < res.length; index++) {
-      let message = res[index].phone + ' ' + res[index].amount
+      let message ='Account: ' + res[index].phone + ' Withdraw to account:' + res[index].amount
       messages.push(message)
     }
     horseLamp1.value = messages
@@ -721,12 +736,14 @@ const getData = () => {
     console.log(res, 'setting/show');
     income.value = res
   })
-  request({
-    url: 'user/index',
-    methods: 'get',
-  }).then(res => {
-    pageDataTwo.value = res
-  })
+  if (localStorage.getItem('token')) {
+    request({
+      url: 'user/index',
+      methods: 'get',
+    }).then(res => {
+      pageDataTwo.value = res
+    })
+  }
   request({
     url: 'lixibao/list',
     methods: 'get'
@@ -788,13 +805,15 @@ const getData = () => {
     console.log(res, "sss");
     partnerList.value = res.partner;
   });
-  request({
-    url: "user/index",
-    methods: "get",
-  }).then((res) => {
-    commList2.value[0].value = res.total_recharge;
-    commList2.value[1].value = res.total_commission;
-  });
+  if (localStorage.getItem('token')) {
+    request({
+      url: "user/index",
+      methods: "get",
+    }).then((res) => {
+      commList2.value[0].value = res.total_recharge;
+      commList2.value[1].value = res.total_commission;
+    });
+  }
   //
 
   // 是否展示红包
@@ -815,6 +834,7 @@ const getData = () => {
     methods: "get",
   }).then((res) => {
     uni.setStorageSync("currency", res.currency);
+    currency.value = res.currency
   });
 
   // app
@@ -871,7 +891,7 @@ onLoad((e) => {
     methods: "get",
   }).then((res) => {
     newsList.value = res;
-    console.log(newsList.value, '1111111111');
+    console.log(newsList.value, '');
   });
   assist();
   getData();
@@ -1118,7 +1138,7 @@ body {
 }
 
 .contentCard2 {
-  width: 686rpx;
+  width: 660rpx;
   line-height: 156rpx;
   height: 156rpx;
   background-image: url('../../static/imgs/index/content2.png');
@@ -1254,7 +1274,6 @@ body {
 
 .withdraw {
   width: 100vw;
-  height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   top: 0;

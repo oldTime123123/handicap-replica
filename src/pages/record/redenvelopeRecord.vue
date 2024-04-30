@@ -1,5 +1,6 @@
 <template>
 	<view class="normalBg" style="background: #060D1F">
+		<kefu></kefu>
 		<!-- 	<view class="nav between pdlr30 pdtb20">
 			<image src="/static/images/back.png" mode="widthFix" style="width: 38rpx;height: 36rpx;"
 				@click="methods.back">
@@ -43,6 +44,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -93,15 +96,7 @@ const currency = ref("")
 // 终于可以用了
 onLoad(() => {
 	currency.value = uni.getStorageSync('currency')
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 </script>
 

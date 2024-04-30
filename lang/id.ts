@@ -184,7 +184,7 @@ export default {
         a_c10: "Batal",
         a_d1: "Salin",
         a_d2: "Statusnya",
-        b_b1: "Total saldo dompet",
+        b_b1: "Saldo dompet akun",
         a_t1: "Kiat"
     },
     record: {
@@ -258,7 +258,7 @@ export default {
         xq_a15: "proyek crowdfunding",
         xq_a16: "catatan investasi",
         xq_a17: "undang teman",
-        xq_a18: "Daftar dan top up untuk mendapatkan hadiah besar",
+        xq_a18: "Undang teman untuk mengisi ulang dan menerima dua hadiah",
         xq_a19: "Bangun tim dan dapatkan hadiah besar",
         xq_a20: "Rincian",
         xq_a21: "Konversi dana",
@@ -536,7 +536,7 @@ export default {
         m_c3: "Pengaturan bahasa",
         m_c4: "Masalah",
         m_c5: "Layanan",
-        m_s1: "Undang",
+        m_s1: "Tautan undangan",
         m_s2: "Undang teman untuk mendapat uang",
         m_s3: "Kode undangan",
         m_s4: "Anggota yang direkomendasikan",
@@ -687,9 +687,9 @@ export default {
     },
     pk: {
         t_c1: "undang",
-        t_c2: "Kode Undangan",
+        t_c2: "Kode Undangan dan tautan undangan",
         t_c3: "Salin",
-        t_c4: "SIMPAN KODE QR",
+        t_c4: "Simpan kode QR undangan",
         t_c5: "Tim Saya",
         t_c6: "Tingkat",
         t_c7: "Jumlah",
@@ -700,7 +700,7 @@ export default {
         t_i5: "Penarikan",
         t_i6: "Layanan daring",
         t_i7: "Saluran resmi",
-        t_i8: "Berbagi, Undang teman untuk mengisi ulang dan mendapatkan hadiah derek",
+        t_i8: "Undang teman untuk mengisi ulang dan menerima dua hadiah",
         t_i9: "Untuk berbagi",
         t_i10: "Pengunduhan aplikasi",
         t_i11: "Ayo unduh",
@@ -728,13 +728,7 @@ export default {
         t_p10: "Pendapatan harian",
         t_p11: "Penghasilan terendah",
         t_p12: "Konfirmasi",
-
-
-
-
-
-
-
-
+        p_w1:'Klik untuk mengikat informasi akun penarikan',
+        r_i1:'Pembayaran Kartu Bank dan Dompet'
     },
 };

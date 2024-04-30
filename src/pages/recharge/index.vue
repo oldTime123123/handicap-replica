@@ -1,9 +1,24 @@
 <template>
 	<view class="normalBg" style="background: #060D1F">
+		<kefu></kefu>
 		<topNav :title="balance_type == 2 ? t('ttn.t_t17') : t('ttn.t_t18')"
 			:rightIcon="'/static/themeNum1/icon/r_record.png'" :rightUrl="'../record/rechargeRecord'"></topNav>
 		<view class="pdlr45 mt70">
 
+
+
+			<view class="items between" v-if="showBANK" :style="actInd == 1 ? choStyle : noChoStyle" @click="actInd = 1"
+				v-show="AreaCode.country_code == '+62'">
+				<view class="flex col_center">
+					<image src="../../static/themeNum1/icon/bank.png" style="width: 52rpx;height: 44rpx;"></image>
+					<view class="ml73 F28">
+						{{ t('pk.r_i1') }}
+					</view>
+				</view>
+				<view class="circle center" :class="actInd == 1 ? 'actChoose' : 'noChoose'">
+					<nut-icon name="checklist" v-if="actInd == 1" :color="store.$state.thirdColor"></nut-icon>
+				</view>
+			</view>
 			<view class="items between" v-if="showUSDT" :style="actInd == 0 ? choStyle : noChoStyle" @click="actInd = 0">
 				<view class="flex col_center">
 					<image src="../../static/themeNum1/icon/usdt.png" mode="widthFix"
@@ -16,19 +31,6 @@
 					<nut-icon name="checklist" v-if="actInd == 0" :color="store.$state.thirdColor"></nut-icon>
 				</view>
 			</view>
-
-			<view class="items between" v-if="showBANK" :style="actInd == 1 ? choStyle : noChoStyle" @click="actInd = 1">
-				<view class="flex col_center">
-					<image src="../../static/themeNum1/icon/bank.png" style="width: 52rpx;height: 44rpx;"></image>
-					<view class="ml73 F28">
-						Bank Card
-					</view>
-				</view>
-				<view class="circle center" :class="actInd == 1 ? 'actChoose' : 'noChoose'">
-					<nut-icon name="checklist" v-if="actInd == 1" :color="store.$state.thirdColor"></nut-icon>
-				</view>
-			</view>
-
 			<view class=" center l_inpS mt40 l_inpBg pdlr30 color0 f32" style="margin-top:214rpx"
 				:style="{ background: store.$state.secondColor }" @click="jumpPage">
 				{{ t('all.a_c1') }}
@@ -38,6 +40,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -73,7 +77,7 @@ const actInd = ref(0)
 
 const showUSDT = ref(false)
 const showBANK = ref(false)
-
+const AreaCode = ref()
 
 
 const jumpPage = () => {
@@ -91,6 +95,12 @@ const jumpPage = () => {
 }
 
 const getData = () => {
+	request({
+		url: 'user/index',
+		methods: 'get'
+	}).then(res => {
+		AreaCode.value = res
+	})
 	request({
 		url: 'setting/financeWay',
 		methods: 'get'
@@ -110,15 +120,6 @@ const balance_type = ref()
 onLoad(e => {
 	if (e.balance_type) {
 		balance_type.value = e.balance_type
-	}
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
 	}
 })
 // 终于可以用了

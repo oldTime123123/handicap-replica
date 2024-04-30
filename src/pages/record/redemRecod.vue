@@ -1,5 +1,6 @@
 <template>
 	<view class="normalBg" style="background: #060D1F">
+		<kefu></kefu>
 		<topNav :title="t('newAct.r_r15')"></topNav>
 		<view class="pdlr30 pt50">
 
@@ -32,6 +33,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -77,15 +80,7 @@ const getData = (page) => {
 }
 // 终于可以用了
 onLoad(() => {
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 </script>
 

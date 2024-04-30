@@ -14,11 +14,16 @@
 				<view>
 
 				</view>
+				<view class="flex" style="align-items: center;">
 				<view class="appTime" style="margin-right: 20rpx;">
 					<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode="">
 					</image>
 					EST-{{ servetTime }}
+
 				</view>
+				<image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
+					@click="jumplink('../mine/langSetting')"></image>
+			</view>
 
 			</view>
 			<view class="pdlr30" style="padding-top: 40rpx;">
@@ -58,7 +63,7 @@
 						</view>
 						<view class="text2" style="margin-top: 0rpx;">
 							{{ pageData?.ai_balance }} {{ currency }}
-							<p>≈$ {{ pageData?.ai_balance }} {{ currency }}</p>
+							<p>≈$ {{ (pageData?.job_invest_balance * kurs).toFixed(2) }}</p>
 						</view>
 					</view>
 
@@ -71,7 +76,7 @@
 						</view>
 						<view class="text2" style="margin-top: 0rpx;">
 							{{ pageData?.job_invest_balance }} {{ currency }}
-							<p>≈$ {{ pageData?.job_invest_balance }} {{ currency }}</p>
+							<p>≈$ {{ (pageData?.job_invest_balance * kurs).toFixed(2) }} </p>
 						</view>
 					</view>
 				</view>
@@ -104,7 +109,7 @@
 								{{ t('new_xq.xq_a13') }}
 							</view>
 						</view>
-						<view class="reachange_widt" @click="jumplink('../recharge/means?type=withdraw')">
+						<view class="reachange_widt" @click="jumplink('../withdraw/index?balance_type=1')">
 							<image style='width: 48rpx;height: 48rpx;' src="../../static/themeNum1/icon/widt.png"
 								mode="">
 							</image>
@@ -337,6 +342,8 @@ import useClipboard from 'vue-clipboard3'
 import {
 	onHide
 } from '@dcloudio/uni-app';
+const kurs = ref('')
+
 const {
 	toClipboard
 } = useClipboard()
@@ -394,6 +401,14 @@ const myList = ref()
 const userData = ref()
 const barText = ref("sfgsgdhgdhdfsfgsgdhgdhdfhfdhfd") //跑马灯
 const getData = () => {
+
+	//获取汇率
+	request({
+		url: 'finance/usdt/recharge/index',
+		methods: 'get'
+	}).then(res => {
+		kurs.value = res.rate
+	})
 	//利息宝
 	request({
 		url: 'lixibao/list',
@@ -476,17 +491,6 @@ onHide(() => {
 onLoad(() => {
 	getData()
 	currency.value = uni.getStorageSync('currency')
-	console.log(localStorage.getItem('token'));
-	if (localStorage.getItem('token')) {
-		
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
-
 })
 </script>
 

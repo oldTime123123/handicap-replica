@@ -1,5 +1,6 @@
 <template>
 	<view class="normalBg" style="background: #060D1F">
+		<kefu></kefu>
 		<topNav :title="t('add3.a_a2')"></topNav>
 		<view class="pdlr45">
 			<view class="  fqBg text_white">
@@ -105,6 +106,7 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -154,15 +156,7 @@ onMounted(() => {
 	getData()
 })
 onLoad(() => {
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 </script>
 

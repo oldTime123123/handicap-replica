@@ -1,5 +1,7 @@
 <template>
 	<view style="background: #060D1F">
+		<kefu></kefu>
+
 		<topNav :title="t('construct.c_s8')"></topNav>
 		<view class="pdlr30 mt50">
 			<view class="topBox">
@@ -150,6 +152,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -338,15 +342,7 @@ onLoad(e => {
 	} else {
 		history.back()
 	}
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 onHide(() => {
 	if (timer.value) {

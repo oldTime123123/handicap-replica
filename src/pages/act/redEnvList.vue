@@ -81,15 +81,7 @@ onMounted(() => {
 	}, 1000)
 })
 onLoad(() => {
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 </script>
 

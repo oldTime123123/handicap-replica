@@ -1,5 +1,6 @@
 <template>
   <view class="normalBg" style="background: #060d1f">
+    <kefu></kefu>
     <topNav :title="t('recharge.r_r1')" :goBackNum="2"></topNav>
     <view class="pdlr45 mt70">
       <view class="mt38">
@@ -91,6 +92,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue";
 import request from "../../../comm/request.ts";
 import useClipboard from "vue-clipboard3";

@@ -1,5 +1,6 @@
 <template>
 	<view style="background-color: #060D1F;min-height: 100vh;">
+		<kefu></kefu>
 		<view class="pdlr30 pt33">
 			<view class="between">
 				<view class="flex between">
@@ -168,6 +169,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import request from '../../../comm/request.ts';
 import {
 	userStore
@@ -243,15 +246,7 @@ const currency = ref("")
 onLoad(() => {
 	getData()
 	currency.value = uni.getStorageSync('currency')
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 
 </script>

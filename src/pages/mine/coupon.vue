@@ -1,5 +1,6 @@
 <template>
 	<view style="background: #060D1F">
+		<kefu></kefu>
 		<topNav :title="t('newAct.c_l1')"></topNav>
 
 
@@ -44,6 +45,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import couRecord from '@/components/couRecord/couRecord.vue'
@@ -118,15 +121,7 @@ onMounted((e) => {
 	getCouponList()
 })
 onLoad(() => {
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 </script>
 

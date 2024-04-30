@@ -1,5 +1,5 @@
 <template>
-	<view style="background:  #060D1F;height: 150vh;  position: relative;">
+	<view style="background: rgb(8, 15, 50);height: 150vh;  position: relative;">
 		<nut-drag attract :boundary="{ top: 50, left: 0, bottom: 55, right: 0 }" :style="{ top: '50vh', right: '0px' }">
 			<img class="kefu" type="primary" src="../../static/kefu.png" alt="" @click="Jumplink('../mine/service')">
 		</nut-drag>
@@ -10,12 +10,20 @@
 			<view class="">
 
 			</view>
-			<view class="appTime" style="margin-right: 20rpx;">
-				<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode="">
-				</image>
-				EST-{{ servetTime }}
+
+			<view class="flex" style="align-items: center;">
+				<view class="appTime" style="margin-right: 20rpx;">
+					<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode="">
+					</image>
+					EST-{{ servetTime }}
+
+				</view>
+				<image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
+					@click="Jumplink('../mine/langSetting')"></image>
 			</view>
 		</view>
+
+
 		<view class="main" style="background: #080F32">
 			<view class="head"
 				style="width: 686rpx; height: 1094rpx;margin: 32rpx auto;background-image: url('../../static/invite/invitebanner.png');background-repeat: no-repeat;background-size: 100% 100%;">
@@ -61,7 +69,8 @@
 					</view>
 				</view>
 				<view class="mt120">
-					<img style="width: 100%;" :src="nowlang == 'id' ? bannerList[2] : bannerList[0]" alt="">
+					<img @click="getImg(1)" style="width: 100%;" :src="nowlang == 'id' ? bannerList[2] : bannerList[0]"
+						alt="">
 				</view>
 
 				<view class="team">
@@ -86,7 +95,8 @@
 				</view>
 
 				<view class="mt60 pb160">
-					<img style="width: 100%;" :src="nowlang == 'id' ? bannerList[3] : bannerList[1]" alt="">
+					<img @click="getImg(2)" style="width: 100%;" :src="nowlang == 'id' ? bannerList[3] : bannerList[1]"
+						alt="">
 				</view>
 			</view>
 
@@ -95,7 +105,9 @@
 		<!-- <view style="height: 200rpx;">
 
 		</view> -->
-
+		<view class="showimg" :style="showViewer" @click="closeimg">
+			<img :src="imgurl" alt="" style="width: 100%;">
+		</view>
 	</view>
 	<Tabbar :activeIndex="3"></Tabbar>
 	<Loading ref="showLoading"></Loading>
@@ -105,6 +117,28 @@
 import Tabbar from '@/components/botTabbar/botTabbar.vue'
 import request from '../../../comm/request.ts';
 import vueQr from 'vue-qr/src/packages/vue-qr.vue'
+const showViewer = ref("display: none;");
+const imgurl = ref('')
+const getImg = (url) => {
+	console.log(111111);
+	if (url == 1 && nowlang.value == 'id') {
+		imgurl.value = bannerList[2]
+	} else if (url == 1 && nowlang.value != 'id') {
+		imgurl.value = bannerList[0]
+	} else if (url == 2 && nowlang.value == 'id') {
+		imgurl.value = bannerList[3]
+	} else if (url == 2 && nowlang.value != 'id') {
+		imgurl.value = bannerList[1]
+	}
+	showViewer.value = "display:block;";
+
+}
+const closeimg = () => {
+	showViewer.value = "display:none;";
+
+}
+
+
 const nowlang = ref('')
 const bannerList = [
 	'../../static/inbanner1.jpg',
@@ -247,21 +281,27 @@ onHide(() => {
 })
 onLoad(() => {
 	getlang()
-	if (localStorage.getItem('token')) {
 
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
 })
 const inviteCode = ref("")
 const codeUrl = ref("")
 </script>
 
 <style lang="scss">
+.showimg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0, 0, 0, .7);
+	line-height: 100vh;
+
+	img {
+		vertical-align: middle;
+	}
+}
+
 .kefu {
 	width: 100rpx;
 	height: 100rpx;
@@ -469,7 +509,7 @@ const codeUrl = ref("")
 }
 
 .down {
-	width: 480rpx;
+	// width: 480rpx;
 	height: 82rpx;
 	background: #004284;
 	border-radius: 16rpx 16rpx 16rpx 16rpx;

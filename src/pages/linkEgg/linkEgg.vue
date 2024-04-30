@@ -3,6 +3,7 @@
 		style="background: url(../../static/egg/bg.png) no-repeat  100%/100%;">
 		 -->
 	<view class="pageBg" style="background: #060D1F">
+		<kefu></kefu>
 		<view class="pt30 pl30">
 			<IconFont name="left" color="#fff" size="20" @click="jumpPage('/')"></IconFont>
 		</view>
@@ -26,6 +27,8 @@
 
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import {
 	onShow,
 	onLoad
@@ -132,15 +135,7 @@ const getSysInfo = () => {
 	});
 }
 onLoad(() => {
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 // 
 </script>

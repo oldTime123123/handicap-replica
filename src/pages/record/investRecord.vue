@@ -1,5 +1,6 @@
 <template>
 	<view class="normalBg" style="background: #060D1F">
+		<kefu></kefu>
 		<topNav :title="t('add1.a_a11')"></topNav>
 		<view class="pdlr30 pt50">
 
@@ -64,6 +65,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -128,15 +131,7 @@ const getTopData = () => {
 const id = ref()
 // 终于可以用了
 onLoad((e) => {
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 	if (e.id) {
 		pages.value.invest_id = e.id
 		getTopData()

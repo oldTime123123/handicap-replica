@@ -1,5 +1,6 @@
 <template>
 	<view class="normalBg" style="background: #060D1F">
+		<kefu></kefu>
 		<view class="between" style="height: 88rpx; padding: 0 31rpx;">
 			<view style="width: 32rpx;height: 30rpx;">
 				<image :src="store.$state.imgObj.backIcon" style="width: 100%;height: 100%;" @click="back"
@@ -39,6 +40,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import foundCanvas from "../../../comm/canvas.js";
 import request from '../../../comm/request.ts';
 import canvasC from '../../components/canvas/canvasC.vue';
@@ -137,15 +140,6 @@ onLoad((e) => {
 	if (e.id) {
 		id.value = e.id
 		getData()
-	}
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
 	}
 })
 </script>

@@ -1,5 +1,6 @@
 <template>
 	<view style="background: #060D1F">
+		<kefu></kefu>
 		<view class="between" :style="{ background: store.$state.contentColor }" style="height: 88rpx; padding: 0 31rpx;">
 			<view style="width: 48rpx;height: 48rpx;">
 				<IconFont name="rect-left" color="#fff" @click="back"></IconFont>
@@ -71,6 +72,7 @@ border-radius: 38rpx;">{{ t('newAct.r_r10') }}</view>
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
 import COUNTRY from '../../../setting.js'
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
@@ -151,15 +153,7 @@ onMounted(() => {
 	getData()
 })
 onLoad(() => {
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 </script>
 

@@ -1,5 +1,7 @@
 <template>
 	<view style="background: #060D1F">
+		<kefu></kefu>
+
 		<topNav :title="t('recharge.r_r1')"></topNav>
 		<view class="pdlr45 mt40">
 			<view class="pl14">
@@ -39,6 +41,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -135,15 +139,7 @@ onLoad(e => {
 		formData.value.order_no = e.order
 	}
 
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 </script>
 

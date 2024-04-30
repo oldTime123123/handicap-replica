@@ -1,5 +1,6 @@
 <template>
 	<view style="background: #060D1F; min-height: 100vh; position: relative;">
+		<kefu></kefu>
 		<view class="main" style="background: #060D1F">
 
 			<view class="pdlr49 pt33">
@@ -21,8 +22,8 @@
 
 
 
-				<view class="" v-show="flag">
-					<view class="Smart" @click="chooseHandle(2)">
+				<view class="" v-show="flag" @click="chooseHandle(2)">
+					<view class="Smart">
 						<view class="text">
 							{{ t('ttn.t_t15') }}
 						</view>
@@ -33,8 +34,8 @@
 						{{ t('ttn.t_t16') }}
 					</view>
 				</view>
-				<view class="mt60">
-					<view class="Smart" @click="chooseHandle(1)"
+				<view class="mt60" @click="chooseHandle(1)">
+					<view class="Smart"
 						style="background: url('../../static/egg/wallet.png') no-repeat;background-size: 100% 100%;">
 						<view class="text">
 							{{ t('ttn.t_t13') }}
@@ -83,6 +84,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import request from '../../../comm/request.ts';
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -183,15 +186,7 @@ const type = ref()
 onLoad((e) => {
 	type.value = e.type
 
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 // 终于可以用了
 onShow(() => {

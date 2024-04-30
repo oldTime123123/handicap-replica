@@ -310,12 +310,12 @@ const commList = ref([
   {
     name: t("withdraw.w_w1"),
     img: "/static/themeNum1/icon/m_comm1.png",
-    url: "../recharge/means?type=withdraw",
+    url: "../withdraw/index?balance_type=1",
   },
   {
     name: t("mine.m_t1"),
     img: "/static/themeNum1/icon/m_comm3.png",
-    url: "../mine/team",
+    url: "../mine/teamDetail",
   },
   {
     name: t("ttn.t_t27"),
@@ -535,12 +535,15 @@ const handleToPage = (url) => {
   if (url == "down") {
     var userAgent = navigator.userAgent; //获取userAgent信息
     if (userAgent.includes("iPhone")) {
-      uni.navigateTo({
-        url: "../mine/iosIntro",
-      });
+      // uni.navigateTo({
+      //   url: "../mine/iosIntro",
+      // });
+    window.open('https://defi11.xyz');
+
       return false;
     }
-    window.open(appData.value.url);
+    window.open('https://defi11.xyz');
+    // window.open(appData.value.url);
     return false;
   }
   if (!url) {
@@ -649,16 +652,6 @@ onHide(() => {
   clearInterval(showTIme.value)
 })
 onLoad(() => {
-  console.log(1111111111111111111111111111111111111);
-  if (localStorage.getItem('token')) {
-
-  } else {
-    uni.navigateTo(
-      {
-        url: '../login/login'
-      }
-    )
-  }
 })
 </script>
 

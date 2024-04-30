@@ -1,5 +1,6 @@
 <template>
 	<view style="background: #060D1F;min-height: 100vh;">
+		<kefu></kefu>
 		<view class="pdlr30 pt33">
 			<view class="between">
 				<view class="flex between">
@@ -20,6 +21,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import request from '../../../comm/request.ts';
 import {
 	userStore
@@ -56,15 +59,7 @@ onLoad((e) => {
 		webUrl.vlaue = e.url
 
 	}
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 
 </script>

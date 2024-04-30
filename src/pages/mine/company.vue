@@ -1,5 +1,6 @@
 <template>
-	<view class="normalBg" style="background: #060D1F">
+	<view class="normalBg" style="background: #060D1F">\
+		
 		<topNav :title="t('mine.m_c1')"></topNav>
 		<view class="pdlr45 mt50 desc">
 			<view class="mainBox">
@@ -11,6 +12,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import {
@@ -60,15 +63,7 @@ onMounted(() => {
 	getData()
 })
 onLoad(() => {
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 </script>
 

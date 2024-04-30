@@ -1,5 +1,6 @@
 <template>
 	<view class="share" style="background: #060D1F">
+		<kefu></kefu>
 		<view class="between" style="height: 88rpx; padding: 0 31rpx;">
 			<view style="width: 32rpx;height: 30rpx;">
 				<image :src="store.$state.imgObj.backIcon" style="width: 100%;height: 100%;" @click="back"></image>
@@ -99,6 +100,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import topNav from "@/components/topNav/topNav.vue"
 import request from '../../../comm/request.ts';
 import QrcodeVue from 'qrcode.vue'
@@ -217,15 +220,7 @@ const confirmHandle = () => {
 
 }
 onLoad(() => {
-	if (localStorage.getItem('token')) {
-
-	} else {
-		uni.navigateTo(
-			{
-				url: '../login/login'
-			}
-		)
-	}
+ 
 })
 </script>
 

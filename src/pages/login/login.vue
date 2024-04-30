@@ -1,5 +1,6 @@
 <template>
-	<view class="pdlr30  l_bg" style="background: #060D1F">
+	<view class="pdlr30  l_bg pb100" style="background: #060D1F">
+		<kefu></kefu>
 		<!-- 头部 -->
 		<view class=" pt30 between">
 			<image src="/static/themeNum1/l_icon/l_back.png" mode="widthFix" style="width:70rpx;height:70rpx"
@@ -131,6 +132,8 @@
 </template>
 
 <script setup>
+import kefu from "@/components/kefu/kefu.vue"
+
 import CryptoJS from 'crypto-js'
 import request from '../../../comm/request.ts';
 import {
