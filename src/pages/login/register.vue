@@ -501,6 +501,7 @@ import kefu from "@/components/kefu/kefu.vue"
 					try {
 						window.AndroidEM.onEvent('register')
 					} catch (e) {}
+					fbq('track', 'CompleteRegistration');
 					uni.navigateTo({
 						url: '../tabbar/index'
 					})
