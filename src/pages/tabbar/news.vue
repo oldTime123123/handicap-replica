@@ -70,7 +70,7 @@
 
 					<view class="Basic back2 flex"
 						style="width: 334rpx; height: 172rpx;justify-content: space-around;flex-direction: column;background-image: url('../../static/imgs/index/content3-2.png');"
-						@click="handleToPage('../recharge/means?type=recharge')">
+						>
 						<view class="text1">
 							{{ t('ttn.t_t3') }}
 						</view>

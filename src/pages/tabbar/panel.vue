@@ -321,10 +321,10 @@
    </van-popup> -->
    <view class="buyTost" v-show="buyTostShow">
       <view class="buyCard">
-         <view class="flex mt48 mr32" style="text-align: center;justify-content: right;">
+         <view class="flex ml32 mt48 mr32" style="text-align: center;justify-content: center; position: relative;">
             <view> {{ t('pk.t_p3') }}
             </view>
-            <img src="../../static/themeNum1/l_icon/down.png" alt="" class="ml176" @click="buyTost(false)">
+            <img style="position: absolute; top: 0; right: 0;" src="../../static/themeNum1/l_icon/down.png" alt="" class="ml176" @click="buyTost(false)">
          </view>
          <view class="paddingLR30 mt32 flex" style="justify-content: space-between;">
             <view class="pt30 pb30">{{ pro_name }}/USDT</view>
@@ -348,7 +348,7 @@
          </view>
          <view class="paddingLR30 mt24 flex"
             style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
-            <view>{{ t('pk.t_p8') }}: {{ tradeBalance }} {{currency}}</view>
+            <view>{{ t('pk.t_p8') }}: {{ aiBalance }} {{currency}}</view>
          </view>
          <view class="paddingLR30 mt24 flex"
             style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
@@ -393,7 +393,7 @@ const {
 //allIn
 const amountIn = ref()
 const allIn = () => {
-   amountIn.value = aiBalance.value
+   amount10.value = aiBalance.value
 }
 // import getOption from './option.js';
 const { proxy } = getCurrentInstance();

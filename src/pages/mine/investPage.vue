@@ -26,7 +26,7 @@
 						{{t('ttn.t_t46')}}
 					</view>
 					<view class="" style="margin-top: 30rpx;">
-						{{parseInt(detailData?.min_num)}}
+						{{parseInt(detailData?.min_num)}} {{currency}}
 					</view>
 				</view>
 				<view class="text">
@@ -140,7 +140,7 @@
 						{{t('ttn.t_t46')}}
 					</view>
 					<view class="" style="margin-top: 30rpx;">
-						{{parseInt(detailData?.min_num)}}
+						{{parseInt(detailData?.min_num)}} {{ currency }}
 					</view>
 				</view>
 
@@ -176,7 +176,7 @@
 						 {{t('ttn.t_t52')}}
 					</view>
 					<view  class="" style="font-size: 26rpx;text-align: right;">
-						{{detailData?.min_num}}*{{number}}*{{(detailData?.rate*100).toFixed(2)}}%*{{detailData?.day}} day  = {{t('ttn.t_t55')}} {{(Number(detailData?.min_num)*Number(detailData?.day)*Number(detailData?.rate)*Number(number).toFixed(2))+(Number(detailData?.min_num)*number)}}
+						{{detailData?.min_num}}*{{number}}*{{(detailData?.rate*100).toFixed(2)}}%*{{detailData?.day}} day  = {{t('ttn.t_t55')}} {{(Number(detailData?.min_num)*Number(detailData?.day)*Number(detailData?.rate)*Number(number).toFixed(2))+(Number(detailData?.min_num)*number)}} {{ currency }}
 					</view>
 					
 				</view>
@@ -307,13 +307,21 @@
 	}
 	
 	const headIndex = ref(1)
-	
+	const currency = ref('')
 	const id = ref()
 	onLoad((e)=>{
 		if(e.id){
 			id.value = e.id
 			detail(e.id)
 		}
+		// 获取货币符号
+		request({
+			url: "/setting/currency",
+			methods: "get",
+		}).then((res) => {
+			uni.setStorageSync("currency", res.currency);
+			currency.value = res.currency
+		});
 	})
 </script>
 

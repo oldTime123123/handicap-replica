@@ -74,8 +74,9 @@
 				</view>
 
 				<view class="team">
-					<view class="teamTitle mt20">
-						{{ t('pk.t_c5') }}
+					<view class="teamTitle mt20 flex">
+						<view>{{ t('pk.t_c5') }}</view> 
+						<View @click="Jumplink('../mine/teamDetail')">{{ t('pk.t_c8') }}</View>
 					</view>
 					<view class="teamHead flex mt24 teamRadiusT">
 						<view></view>
@@ -534,6 +535,7 @@ const codeUrl = ref("")
 		font-weight: 500;
 		font-size: 36rpx;
 		color: #FFFFFF;
+		justify-content: space-between;
 	}
 }
 

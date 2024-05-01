@@ -141,7 +141,7 @@
             <image style="width: 48rpx;height: 48rpx;" src="../../static/egg/icon1.png" mode=""></image>
             <view class="" style="margin-left: 10rpx;">
               {{ t('ttn.t_t1') }}：{{ Number(pageDataTwo?.ai_balance) + Number(pageDataTwo?.balance) }} {{ currency }}
-             
+
             </view>
           </view>
           <view class="flex mt30"
@@ -152,7 +152,7 @@
                 {{ t('ttn.t_t2') }}
               </view>
               <view class="text2" style="margin-top: 0rpx;">
-                {{ pageDataTwo?.ai_balance }} {{ currency }} 
+                {{ pageDataTwo?.ai_balance }} {{ currency }}
                 <p>≈$ {{ (pageDataTwo?.ai_balance * kurs).toFixed(2) }}</p>
               </view>
             </view>
@@ -160,12 +160,12 @@
 
             <view class="Basic back2 flex"
               style="width: 334rpx; height: 172rpx;justify-content: space-around;flex-direction: column;background-image: url('../../static/imgs/index/content3-2.png');"
-              @click="handleToPage('../recharge/means?type=recharge')">
+              >
               <view class="text1">
                 {{ t('ttn.t_t3') }}
               </view>
               <view class="text2" style="margin-top: 0rpx;">
-                {{ pageDataTwo?.job_invest_balance }} {{ currency }} 
+                {{ pageDataTwo?.job_invest_balance }} {{ currency }}
                 <p>≈$ {{ (pageDataTwo?.ai_balance * kurs).toFixed(2) }}</p>
               </view>
             </view>
@@ -349,7 +349,7 @@
             style="width: 686rpx;background: #042659;border-radius: 16rpx 16rpx 16rpx 16rpx;overflow: hidden;">
             <p
               style="width: 632rpx;overflow: hidden;margin: 34rpx auto 10rpx;font-weight: 400;font-size: 24rpx;color: #FFFFFF;">
-              
+
               {{ income.content }}
             </p>
             <view
@@ -359,7 +359,7 @@
                 <p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i20') }}</p>
               </view>
               <view style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
-                <p class="mt24" style="font-weight: 500;">{{ income.income }} {{ currency }}</p>
+                <p class="mt24" style="font-weight: 500;">{{ (income.income * kurs).toFixed(2) }} $</p>
                 <p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i21') }}</p>
               </view>
 
@@ -699,22 +699,17 @@ const partnerList = ref([]);
 const newbanner = ref({});
 const showCharity = ref(false);
 const showParwel = ref(false);
-const currency  = ref('')
+const currency = ref('')
 const kurs = ref('')
+var id = ref()
 const showDetail = () => {
   Toast.text(barText.value)
 }
 const getData = () => {
 
-  
 
-  //获取汇率
-  request({
-    url: 'finance/usdt/recharge/index',
-    methods: 'get'
-  }).then(res => {
-    kurs.value = res.rate
-  })
+
+
   //获取滚动通知
   request({
     url: 'home/deposit',
@@ -723,7 +718,7 @@ const getData = () => {
     console.log(res, 'home/deposit');
     let messages = []
     for (let index = 0; index < res.length; index++) {
-      let message ='Account: ' + res[index].phone + ' Withdraw to account:' + res[index].amount
+      let message = 'Account: ' + res[index].phone + ' Withdraw to account:' + res[index].amount + ' IDR'
       messages.push(message)
     }
     horseLamp1.value = messages
@@ -737,13 +732,24 @@ const getData = () => {
     income.value = res
   })
   if (localStorage.getItem('token')) {
+
+    //获取汇率
+    request({
+      url: 'finance/usdt/recharge/index',
+      methods: 'get'
+    }).then(res => {
+      kurs.value = res.rate
+    })
     request({
       url: 'user/index',
       methods: 'get',
     }).then(res => {
       pageDataTwo.value = res
+      id.value = res.id
+      
     })
   }
+
   request({
     url: 'lixibao/list',
     methods: 'get'

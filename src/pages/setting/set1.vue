@@ -14,7 +14,7 @@
 
 			<view class="inpBtn center " style="margin-top:180rpx" :style="{ background: store.$state.secondColor }"
 				@click="saveHandle">
-				{{ t('all.a_c2') }}
+				{{ t('all.a_c1') }}
 			</view>
 		</view>
 		<Loading ref="showLoading"></Loading>

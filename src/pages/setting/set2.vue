@@ -51,7 +51,7 @@
 			</view>
 
 
-			<view class="inpBtn center" style="margin-top:180rpx" :style="{ background: store.$state.secondColor }"
+			<view class="inpBtn center" style="margin-top:80rpx" :style="{ background: store.$state.secondColor }"
 				@click="saveHandle">
 				{{ t('pk.t_p12') }}
 			</view>

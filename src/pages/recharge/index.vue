@@ -7,7 +7,7 @@
 
 
 
-			<view class="items between" v-if="showBANK" :style="actInd == 1 ? choStyle : noChoStyle" @click="actInd = 1"
+			<view class="items between" v-if="showBANK" :style="actInd == 0 ? choStyle : noChoStyle" @click="actInd = 0"
 				v-show="AreaCode.country_code == '+62'">
 				<view class="flex col_center">
 					<image src="../../static/themeNum1/icon/bank.png" style="width: 52rpx;height: 44rpx;"></image>
@@ -15,11 +15,12 @@
 						{{ t('pk.r_i1') }}
 					</view>
 				</view>
-				<view class="circle center" :class="actInd == 1 ? 'actChoose' : 'noChoose'">
-					<nut-icon name="checklist" v-if="actInd == 1" :color="store.$state.thirdColor"></nut-icon>
+				<view class="circle center" :class="actInd == 0 ? 'actChoose' : 'noChoose'">
+					<nut-icon name="checklist" v-if="actInd == 0" :color="store.$state.thirdColor"></nut-icon>
 				</view>
 			</view>
-			<view class="items between" v-if="showUSDT" :style="actInd == 0 ? choStyle : noChoStyle" @click="actInd = 0">
+
+			<view class="items between" v-if="showUSDT" :style="actInd == 1 ? choStyle : noChoStyle" @click="actInd = 1">
 				<view class="flex col_center">
 					<image src="../../static/themeNum1/icon/usdt.png" mode="widthFix"
 						style="width: 55rpx;height: 55rpx;"></image>
@@ -27,8 +28,8 @@
 						USDT
 					</view>
 				</view>
-				<view class="circle center" :class="actInd == 0 ? 'actChoose' : 'noChoose'">
-					<nut-icon name="checklist" v-if="actInd == 0" :color="store.$state.thirdColor"></nut-icon>
+				<view class="circle center" :class="actInd == 1 ? 'actChoose' : 'noChoose'">
+					<nut-icon name="checklist" v-if="actInd == 1" :color="store.$state.thirdColor"></nut-icon>
 				</view>
 			</view>
 			<view class=" center l_inpS mt40 l_inpBg pdlr30 color0 f32" style="margin-top:214rpx"
@@ -82,12 +83,12 @@ const AreaCode = ref()
 
 const jumpPage = () => {
 
-	if (actInd.value == 0 && showUSDT.value) {
+	if (actInd.value == 1 && showUSDT.value) {
 		uni.navigateTo({
 			url: '../recharge/u_input?balance_type=' + balance_type.value
 
 		})
-	} else if (actInd.value == 1 && showBANK.value) {
+	} else if (actInd.value == 0 && showBANK.value) {
 		uni.navigateTo({
 			url: '../recharge/bankRechrage?balance_type=' + balance_type.value
 		})
