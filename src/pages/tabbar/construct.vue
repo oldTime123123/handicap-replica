@@ -76,7 +76,6 @@
 				<view class="team">
 					<view class="teamTitle mt20 flex">
 						<view>{{ t('pk.t_c5') }}</view> 
-						<View @click="Jumplink('../mine/teamDetail')">{{ t('pk.t_c8') }}</View>
 					</view>
 					<view class="teamHead flex mt24 teamRadiusT">
 						<view></view>
@@ -94,8 +93,10 @@
 						<view>{{ team.level3 }}</view>
 					</view>
 				</view>
+				
+				<view class="teamstyle" style="text-align: center;margin-top: 30rpx;" @click="Jumplink('../mine/teamDetail')">{{ t('pk.t_c8') }}</View>
 
-				<view class="mt60 pb160">
+				<view class="mt40 pb160">
 					<img @click="getImg(2)" style="width: 100%;" :src="nowlang == 'id' ? bannerList[3] : bannerList[1]"
 						alt="">
 				</view>
@@ -289,6 +290,12 @@ const codeUrl = ref("")
 </script>
 
 <style lang="scss">
+	.teamstyle{
+		background-color: #006BF4;
+		box-sizing: border-box;
+		padding: 25rpx;
+		border-radius: 25rpx;
+	}
 .showimg {
 	position: fixed;
 	top: 0;

@@ -4,7 +4,7 @@ import {
 } from "@/store/themeNum.js";
 const store = userStore();
 
-let dev = 2
+let dev = 1
 let COUNTRY = {
 	url: '',
 	qianzhui: '',
@@ -15,7 +15,7 @@ let COUNTRY = {
 
 // /api
 if (dev == 1) {
-	COUNTRY.url = 'api.agcgpt.com',
+	COUNTRY.url = 'tujdndhsjbd.xyz',
 	COUNTRY.lang = "en",
 	COUNTRY.title = "",
 	COUNTRY.icon = "/static/defi.png"

@@ -218,25 +218,40 @@ const pageData = ref({});
 const addresData = ref("");
 const uploadTxid = ref(false);
 const rate = ref(1);
+const maidian = (amount) =>{
+	request({
+		url: "user/record/recharge",
+		methods: "post",
+	}).then(res=>{
+		if(res.user==0){
+			fbq('track', 'FirstRecharge'); 
+		}
+	})
+}
 const getData = () => {
-  request({
-    url: "finance/usdt/recharge/index",
-    methods: "get",
-  }).then((res) => {
-    if (!res.order) {
-      history.back();
-      return false;
-    }
-    addresData.value = res.address;
-    pageData.value = res.order;
-    res.type == 1 ? (uploadTxid.value = false) : (uploadTxid.value = true);
-    rate.value = res.rate;
-    if (timer.value) {
-      clearInterval(timer.value);
-    }
-    times.value = res.order.expire_time;
-    startTimer();
-  });
+		
+		
+	  request({
+		url: "finance/usdt/recharge/index",
+		methods: "get",
+	  }).then((res) => {
+		if (!res.order) {
+		  history.back();
+		  return false;
+		}
+		addresData.value = res.address;
+		pageData.value = res.order;
+		res.type == 1 ? (uploadTxid.value = false) : (uploadTxid.value = true);
+		rate.value = res.rate;
+		maidian(res.order.amount)
+		fbq('track', 'Purchase',{value:res.order.amount,currency:'IDR'});
+		
+		if (timer.value) {
+		  clearInterval(timer.value);
+		}
+		times.value = res.order.expire_time;
+		startTimer();
+	  });
 };
 
 onHide(() => {

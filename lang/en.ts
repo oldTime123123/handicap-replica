@@ -4,7 +4,8 @@ export default {
     a2: 'High',
     a3: 'Low',
     a4: 'Now',
-    a5: 'Open'
+    a5: 'Open',
+	
   },
   sec: {
     a1: 'SecFutures',
@@ -46,7 +47,9 @@ export default {
     l_o9: "Registration password",
     l_o10: "Confirm password",
     l_o11: "Invitation cod",
-    l_o12: "Go to home page"
+    l_o12: "Go to home page",
+	l_o13:"More products are coming soon",
+	l_o14:"Remember password"
   },
   ttn: {
     t_t1: "Total balance",
@@ -307,7 +310,7 @@ export default {
     i_i5: "Currency",
     i_i6: "Last price",
     i_i7: "24h Rise & down",
-
+	a_a2:"Notice",
     a_a14: "Today's",
     a_a15: "quantification.",
     a_a16: "Obtained",
@@ -633,7 +636,7 @@ export default {
     r_r2: "Remark",
     r_r3: "Date",
     r_r4: "Investment Record",
-    r_r5: "Order ID",
+    r_r5: "Order expires",
     r_r6: "State",
     r_r7: "Production capacity",
     r_r8: "Offline",
@@ -652,7 +655,7 @@ export default {
     r_w4: "Approval Status",
     r_w5: "To Be Reviewed",
     r_w6: "Audit Successful",
-    r_w7: "Turn Down",
+    r_w7: "Fail",
     r_w8: "Cancelled",
     r_w9: "Payment Status",
     r_w10: "Payment Pending",

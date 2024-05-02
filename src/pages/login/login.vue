@@ -85,7 +85,10 @@
 				</view>
 
 
-				<view class="mt30 f24 flex" :style="{ color: store.$state.contentColor }">
+				<view class="mt30 f24 flex xuan" :style="{ color: store.$state.contentColor }" style='justify-content: space-between;'> 
+					<nut-radiogroup v-model="radioVal">
+					    <nut-radio label="1">{{t('lo_i.l_o14')}}</nut-radio>
+					</nut-radiogroup>
 					<view @click="forgetHandle">
 						{{ t('login.l_l6') }}
 					</view>
@@ -151,7 +154,8 @@ import {
 } from '@nutui/nutui';
 import {
 	computed,
-	onMounted
+	onMounted,
+	
 } from 'vue';
 import {
 	useI18n
@@ -170,6 +174,7 @@ const skip_home = () => {
 		url: '../tabbar/index'
 	})
 }
+	const radioVal = ref()
 
 // 登录表单
 const loginForm = ref({
@@ -374,7 +379,7 @@ const loginByPhone = () => {
 		}).then(res => {
 			showLoading.value.loading = false
 			Toast.text(t('login.l_l5'))
-
+			
 			if (sessionStorage.getItem('link')) {
 				let key = sessionStorage.getItem('link')
 				uni.clearStorage()
@@ -408,7 +413,13 @@ const loginByPhone = () => {
 		}).then(res => {
 			showLoading.value.loading = false
 			Toast.text(t('login.l_l5'))
-
+			console.log(radioVal.value,'123445677')
+			if(radioVal.value){
+				uni.setStorageSync('user',loginForm.value)
+				
+			}else{
+				uni.removeStorageSync('user')
+			}
 			if (sessionStorage.getItem('link')) {
 				let key = sessionStorage.getItem('link')
 				uni.clearStorage()
@@ -518,9 +529,19 @@ const imgFlag = ref(false)
 
 // 终于可以用了
 onMounted(() => {
+	
 	showLoading.value.loading = true
+	if(uni.getStorageSync('user')){
+		loginForm.value.phone = uni.getStorageSync('user').phone
+		loginForm.value.password = uni.getStorageSync('user').password
+	}
 	let curLang = uni.getStorageSync('lang')
-	uni.clearStorage()
+	uni.removeStorageSync('token')
+	uni.removeStorageSync('localVersion')
+	uni.removeStorageSync('setLang')
+	uni.removeStorageSync('currency')
+	uni.removeStorageSync('lang')
+	uni.removeStorageSync('setLang')
 	currentInd.value = 0
 	if (curLang) {
 		uni.setStorageSync('lang', curLang)
@@ -538,6 +559,8 @@ onMounted(() => {
 	}
 	getData()
 })
+
+
 </script>
 
 <style lang="scss" scoped></style>

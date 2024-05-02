@@ -50,7 +50,7 @@
 					<!-- <view class="f40">Tips</view> -->
 					<view class="f30 mt40"
 						style="text-align: center;width: 384rpx;font-weight: 400;font-size: 28rpx;color: #FFFFFF;">
-						Please note: Transferring into this account will return the principal within 360 days!
+						Please note: Transferring into this account will return the principal within 365 days!
 					</view>
 					<view class="between">
 						<view> {{ t('all.a_c2') }}

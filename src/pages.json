@@ -177,6 +177,9 @@
         ,{
             "path" : "pages/mine/panelPage"
         }
+        ,{
+            "path" : "pages/mine/notice"
+        }
     ],
 
 	"globalStyle": {

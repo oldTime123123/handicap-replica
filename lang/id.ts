@@ -47,7 +47,8 @@ export default {
         l_o9: "Kata sandi pendaftaran",
         l_o10: "Konfirmasi kata sandi",
         l_o11: "Kode undangan",
-        l_o12: "Ke halaman beranda"
+        l_o12: "Ke halaman beranda",
+		l_o13:"Lebih banyak produk akan segera hadir"
     },
     ttn: {
         t_t1: "Total saldo",
@@ -301,7 +302,7 @@ export default {
         i_i5: "Mata uang",
         i_i6: "Harga terakhir",
         i_i7: "24 jam Naik & turun",
-
+		a_a2:"Melihat",
         a_a14: "Hari ini",
         a_a15: "kuantifikasi.",
         a_a16: "Diperoleh",

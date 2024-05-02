@@ -10,7 +10,7 @@
 					<view class="mt35 f55" style="color: #fff;">{{ currency }} {{ pageData.balance_max }} </view>
 				</view>
 				<view class="mt40" style="text-align: center;">
-					{{ currency }}: {{ inpVal }} = {{ (inpVal * kurs).toFixed(2) }} U
+					{{ currency }}: {{ inpVal }} = {{ (inpVal * kurs).toFixed(2) }} USDT
 				</view>
 				<view class="mt40 inputItem">
 					<text>{{ currency }}</text>

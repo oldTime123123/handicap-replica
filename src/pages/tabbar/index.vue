@@ -23,7 +23,11 @@
               EST-{{ servetTime }}
             </view>
             <img class="ml12 mr12" src="../../static/top1.png" alt="" @click="handleToPage('down')">
-            <img class="ml12 mr24" src="../../static/top2.png" alt="" v-show="!login">
+			<nut-badge dot v-if="showBadge" right="10" top="5" size>
+				<img class="ml12 mr24" src="../../static/top2.png" @click="handleToPage('../mine/notice')" alt="" v-show="!login">
+			</nut-badge>
+			<img class="ml12 mr24" v-else src="../../static/top2.png" @click="handleToPage('../mine/notice')" alt="" v-show="!login">
+			
             <image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
               @click="handleToPage('../mine/langSetting')"></image>
           </view>
@@ -255,7 +259,7 @@
           </view>
           <view v-show="invsetCard == 1" style="background-color: #042659;border-radius: 24rpx 24rpx 24rpx 24rpx;">
             <view
-              style='background-color: #042659;box-sizing: border-box;padding: 40rpx 28rpx; margin-top: 40rpx;border-radius: 24rpx;'>
+              style='background-color: #042659;box-sizing: border-box;padding: 40rpx 28rpx 0rpx 28rpx; margin-top: 40rpx;border-radius: 24rpx;'>
               <view class="flex" style="justify-content: space-between;margin-bottom: 32rpx;align-items: center;"
                 v-for="item of interestList">
                 <view class="flex" style="align-items: center;" @click="interest(item.id)">
@@ -459,7 +463,6 @@ const showWhere = () => {
   document.addEventListener("mousemove", function (e) {
     const x = e.clientX; /*返回鼠标相对于浏览器窗口可视区的X坐标，确保页面向下滚动是效果不会消失*/
     const y = e.clientY;
-    console.log(x, y);
   })
 }
 
@@ -477,29 +480,23 @@ function getEasternTime() {
   });
   servetTime.value = time.split(',')[1];
 }
+const lineData = ref()
+const socket = io('https://tujdndhsjbd.xyz',{transports: ['websocket']})
+socket.on('project', (data) => {
+	  lineData.value = data.list
+	  // 在这里可以对服务器返回的数据进行处理
+	});
+const getLineData = () => {
+		socket.emit('project',{'type':1})
+	}
 
-const socket = ref()
-const lineData = ref('')
-const interestList = ref([])
-const time = ref()
-const httpSocket = () => {
-
-  if (store.$state.socket) {
-    socket.value = store.$state.socket
-  } else {
-    socket.value = io('https://follow.task678.com', { transports: ['websocket'] })
-    store.setSocket(socket.value)
-  }
-  time.value = setInterval(() => {
-    socket.value.emit('project', { 'type': 1 })
-  }, 1000)
-  socket.value.on('project', (data) => {
-    lineData.value = data.list
-    // 在这里可以对服务器返回的数据进行处理
-  });
-
-}
-
+	const timer = ref(null)
+	const startTimer = () => {
+		timer.value = setInterval(() => {
+			getLineData()
+		}, 1000)
+	}
+const showBadge = ref(false)
 const horseLamp1 = ref(['111111111111', '2222222222222222']);
 let serviceTime = ref('')
 let sysTimer = ref(null)
@@ -588,7 +585,6 @@ const assist = () => {
     url: "page/article/lists?page=1&size=10&pos=9",
     methods: "get",
   }).then((res) => {
-    console.log(res);
     assistData.value = res;
   });
 };
@@ -705,20 +701,25 @@ var id = ref()
 const showDetail = () => {
   Toast.text(barText.value)
 }
+const interestList = ref()
 const getData = () => {
 
 
-
+	request({
+		url: 'user/unreadNoticeNum',
+		methods: 'get'
+	}).then((res) => {
+		res > 0 ? (showBadge.value = true) : (showBadge.value = false);
+	});
 
   //获取滚动通知
   request({
     url: 'home/deposit',
     methods: 'get'
   }).then(res => {
-    console.log(res, 'home/deposit');
     let messages = []
     for (let index = 0; index < res.length; index++) {
-      let message = 'Account: ' + res[index].phone + ' Withdraw to account:' + res[index].amount + ' IDR'
+      let message = 'Account: ' + res[index].phone + 'Withdraw earnings:' + res[index].amount + ' IDR'
       messages.push(message)
     }
     horseLamp1.value = messages
@@ -728,7 +729,6 @@ const getData = () => {
     url: 'setting/show',
     methods: 'get'
   }).then(res => {
-    console.log(res, 'setting/show');
     income.value = res
   })
   if (localStorage.getItem('token')) {
@@ -808,7 +808,6 @@ const getData = () => {
     url: "home/other",
     methods: "get",
   }).then((res) => {
-    console.log(res, "sss");
     partnerList.value = res.partner;
   });
   if (localStorage.getItem('token')) {
@@ -859,7 +858,6 @@ const getData = () => {
 // 终于可以用了
 onShow(() => {
   getSysTime()
-  httpSocket()
 });
 
 const showLoading = ref(null);
@@ -885,19 +883,21 @@ onMounted(() => {
 });
 
 onHide(() => {
-  clearInterval(time.value)
-  clearInterval(showTIme.value)
+ if (timer.value) {
+ 	clearInterval(timer.value)
+ }
 
 })
 
 
 onLoad((e) => {
+	getLineData()
+	startTimer()
   request({
     url: "home/article",
     methods: "get",
   }).then((res) => {
     newsList.value = res;
-    console.log(newsList.value, '');
   });
   assist();
   getData();
@@ -1273,9 +1273,9 @@ body {
 
 
 .panelbottom {
-  height: 100rpx;
+  height: 50rpx;
   text-align: center;
-  line-height: 80rpx;
+  line-height: 50rpx;
 }
 
 .withdraw {

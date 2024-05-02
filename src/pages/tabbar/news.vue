@@ -143,8 +143,11 @@
 							</view>
 
 						</view>
+						
 					</view>
-
+					<view class="qidai">
+						{{t('lo_i.l_o13')}}
+					</view>
 				</view>
 
 				<view v-show='rechangeIndex == 2'>
@@ -495,6 +498,15 @@ onLoad(() => {
 </script>
 
 <style lang="scss" scoped>
+	.qidai{
+		width: 100%;
+		text-align: center;
+		line-height: 32rpx;
+		padding: 30rpx 0rpx;
+		background-color: #004284;
+		margin-top: 30rpx;
+		border-radius: 20rpx;
+	}
 .kefu {
 	width: 100rpx;
 	height: 100rpx;

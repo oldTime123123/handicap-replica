@@ -258,7 +258,7 @@
 
 		console.log(num.value,id.value,number.value);
 		if(detailData.value.buy_status == 0){
-			return Toast.text('Not available for purchase at the moment')
+			return Toast.text('The maximum purchase limit for this product has been exceeded. Please change to another product and try again.')
 		}
 		showLoading.value.loading = true
 		

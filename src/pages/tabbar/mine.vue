@@ -16,7 +16,7 @@
           <view class="f36 text_white" style="font-weight: 500; text-transform: none">
             {{ pageData?.phone }}
           </view>
-          <image class="ml20" src="../../static/themeNum1/l_icon/Untitled1.png" style="width: 29rpx; height: 25rpx"
+          <image class="ml20" src="../../static/themeNum1/l_icon/eyeOpen.png" style="width: 29rpx; height: 25rpx"
             @click="showEye = !showEye"></image>
         </view>
         <view class='flex' style="align-items: center;">

@@ -17,6 +17,20 @@ export default {
 </script>
 
 <style lang="scss">
+	.xuan{
+		.nut-radiogroup{
+			.nut-radio{
+				.nut-radio__icon{
+					color:#00AAFF !important;
+				}
+				.nut-radio__label {
+					color: #fff !important;
+					font-size: 0.75rem;
+					margin-left: 10px;
+				}
+			}
+		}
+	}
 .infiniteUl {
   .nut-infiniteloading {
     .nut-infinite-bottom {

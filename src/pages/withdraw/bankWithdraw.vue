@@ -10,7 +10,7 @@
 					<view class="mt35 f55" style="color: #fff;">{{ currency }} {{ pageData.balance_max }} </view>
 				</view>
 				<view class="mt40" style="text-align: center;">
-					{{ currency }}: {{ inpVal }} = {{ (inpVal*kurs).toFixed(2) }} U
+					{{ currency }}: {{ inpVal }} = {{ (inpVal*kurs).toFixed(2) }} USDT
 				</view>
 				<view class="mt40 inputItem">
 					<text>{{ currency }}</text>
@@ -19,12 +19,12 @@
 							v-model="inpVal">
 					</view>
 				</view>
-				<view class="f20 mt30 " style="color: #fff;">
+				<!-- <view class="f20 mt30 " style="color: #fff;">
 					*{{ t('withdraw.w_w2') }}
 					{{ pageData.min + "-" + pageData.max }}
-				</view>
+				</view> -->
 
-				<view class="mt38 info l_inpBg">
+				<view class="mt68 info l_inpBg">
 					<view class="between" @click="jumpPage('../setting/set2')">
 						<view style="width: 80%;">
 							{{ t('pk.p_w1') }}

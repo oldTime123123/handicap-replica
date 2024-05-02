@@ -26,6 +26,7 @@
 					<view class="vvItem">
 						<view class="f26">{{ t('rec.r_r6') }}</view>
 						<view class="">
+							
 							<text v-if="item.status == 0" class="cancle">{{ t('rec.r_s1') }}</text>
 							<text v-if="item.status == 1" class="pass">{{ t('rec.r_s2') }}</text>
 							<text v-if="item.status == 2" class="error">{{ t('rec.r_s3') }}</text>

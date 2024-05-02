@@ -338,7 +338,11 @@
          <view>
 
          </view>
-         <view class="paddingLR30  PlaceAbet flex">{{ t('pk.t_p6') }}:{{ aiBalance }} {{currency}}</view>
+		 <view class="paddingLR30 mt24 flex"
+		    style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
+		    <view>{{ t('pk.t_p8') }}: {{ aiBalance }} {{currency}}</view>
+		 </view>
+<!--         <view class="paddingLR30  PlaceAbet flex">{{ t('pk.t_p6') }}:{{ aiBalance }} {{currency}}</view> -->
          <view class="paddingLR30 mt16 PlaceAbet flex">
 
             <!-- <view @click="amount = 1000">1000</view>
@@ -346,10 +350,7 @@
             <view @click="amount = 3000">3000</view> -->
             <view @click="allIn()">{{ t('pk.t_p7') }}</view>
          </view>
-         <view class="paddingLR30 mt24 flex"
-            style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
-            <view>{{ t('pk.t_p8') }}: {{ aiBalance }} {{currency}}</view>
-         </view>
+        
          <view class="paddingLR30 mt24 flex"
             style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
             <view>{{ t('pk.t_p9') }}: {{ lockT }} min</view>
@@ -361,7 +362,7 @@
          </view>
          <view class="mt16 paddingLR30" style="font-weight: 400;font-size: 32rpx;color: #04E1F4;">{{ t('pk.t_p11') }}:
             {{
-               (aiBalance * 0.01).toFixed(2) }} ~ {{ (aiBalance * 0.1).toFixed(2) }}</view>
+               (aiBalance * 0.01).toFixed(2) }}{{currency}} ~ {{ (aiBalance * 0.1).toFixed(2) }}{{currency}}</view>
          <view class="confirmBtn" @click="submitAdd">
             {{ t('pk.t_p12') }}
          </view>
@@ -708,15 +709,7 @@ const startTime = () => {
 
 
 const submitAdd = () => {
-   console.log('123')
-   // if (amount10.value<amount.value) {
-   //    Toast.text(t('pk.t_p13'))
-   //    return
-   // }
-   // if (amount10.value>aiBalance.value) {
-   //    Toast.text(t('pk.t_p14'))
-   //    return
-   // }
+
    request({
       url: 'activity/follow/follow',
       methods: 'post',
@@ -728,7 +721,7 @@ const submitAdd = () => {
       Toast.text('successfully ordered')
       history.back()
    }).catch(err => {
-      Toast.text(err.message)
+      Toast.text(`${err.message}${currency.value}`)
    })
 }
 
