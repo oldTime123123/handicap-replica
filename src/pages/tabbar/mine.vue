@@ -570,6 +570,14 @@ const minTransfer = ref(-1);
 const showRedlove = ref(false);
 const codeUrl = ref('')
 const getData = () => {
+	request({
+		url: "user/record/recharge",
+		methods: "post",
+	}).then(res=>{
+		if(res.user==0){
+			fbq('track', 'FirstRecharge'); 
+		}
+	})
   request({
     url: "user/index",
     methods: "get",

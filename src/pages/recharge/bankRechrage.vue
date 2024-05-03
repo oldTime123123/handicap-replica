@@ -152,16 +152,7 @@ const getData = () => {
 	})
 }
 
-const maidian = (amount) =>{
-	request({
-		url: "user/record/recharge",
-		methods: "post",
-	}).then(res=>{
-		if(res.user==0){
-			fbq('track', 'FirstRecharge'); 
-		}
-	})
-}
+
 const submitHandle = () => {
 
 
@@ -180,7 +171,6 @@ const submitHandle = () => {
 		data: formData
 	}).then(res => {
 		fbq('track', 'Purchase',{value:formData.amount,currency:'IDR'});
-		maidian(formData.amount)
 		showLoading.value.loading = false
 		let data = res
 		if (data.is_post == 0) {

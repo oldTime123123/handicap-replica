@@ -218,16 +218,7 @@ const pageData = ref({});
 const addresData = ref("");
 const uploadTxid = ref(false);
 const rate = ref(1);
-const maidian = (amount) =>{
-	request({
-		url: "user/record/recharge",
-		methods: "post",
-	}).then(res=>{
-		if(res.user==0){
-			fbq('track', 'FirstRecharge'); 
-		}
-	})
-}
+
 const getData = () => {
 		
 		
@@ -243,7 +234,6 @@ const getData = () => {
 		pageData.value = res.order;
 		res.type == 1 ? (uploadTxid.value = false) : (uploadTxid.value = true);
 		rate.value = res.rate;
-		maidian(res.order.amount)
 		fbq('track', 'Purchase',{value:res.order.amount,currency:'IDR'});
 		
 		if (timer.value) {
