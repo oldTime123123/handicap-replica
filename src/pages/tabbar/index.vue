@@ -20,7 +20,7 @@
             </view>
             <view class="appTime" style="margin-right: 20rpx;" v-if="!login">
               <image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode=""></image>
-              EST-{{ servetTime }}
+              UTC+7-{{ servetTime }}
             </view>
             <img class="ml12 mr12" src="../../static/top1.png" alt="" @click="handleToPage('down')">
 			<nut-badge dot v-if="showBadge" right="10" top="5" size>

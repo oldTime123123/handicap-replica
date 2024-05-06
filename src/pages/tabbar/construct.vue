@@ -15,7 +15,7 @@
 				<view class="appTime" style="margin-right: 20rpx;">
 					<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode="">
 					</image>
-					EST-{{ servetTime }}
+					UTC+7-{{ servetTime }}
 
 				</view>
 				<image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
