@@ -905,8 +905,9 @@ const changeDataType = (Arr) => {
    });
    return newArr;
 };
-onLoad(() => {
 
+onHide(()=>{
+	clearInterval(timer.value)
 })
 </script>
 

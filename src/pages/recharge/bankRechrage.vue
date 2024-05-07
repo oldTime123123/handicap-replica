@@ -170,7 +170,6 @@ const submitHandle = () => {
 		methods: 'post',
 		data: formData
 	}).then(res => {
-		fbq('track', 'Purchase',{value:formData.amount,currency:'IDR'});
 		showLoading.value.loading = false
 		let data = res
 		if (data.is_post == 0) {

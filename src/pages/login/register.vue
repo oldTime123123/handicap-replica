@@ -634,23 +634,23 @@ import kefu from "@/components/kefu/kefu.vue"
 			})
 		}
 	})
-	onShow(()=>{
-		if(window.location.host=='defi-wallet.com'){
-			regisForm.value.invite_code = "111111"
-		}else if(window.location.host=='defi22.com'){
-			regisForm.value.invite_code = "222222"
-		}else if(window.location.host=='defi44.com'){
-			regisForm.value.invite_code = "444444"
-		}else if(window.location.host=='defi00.com'){
-			regisForm.value.invite_code = "000000"
-		}else if(window.location.host=='defi99.com'){
-			regisForm.value.invite_code = "999999"
-		}else if(window.location.host=='defiaa.com'){
-			regisForm.value.invite_code = "666666"
-		}else if(window.location.host=='defiee.com'){
-			regisForm.value.invite_code = "777777"
-		}
-	})
+	// onShow(()=>{
+	// 	if(window.location.host=='defi-wallet.com'){
+	// 		regisForm.value.invite_code = "111111"
+	// 	}else if(window.location.host=='defi22.com'){
+	// 		regisForm.value.invite_code = "222222"
+	// 	}else if(window.location.host=='defi44.com'){
+	// 		regisForm.value.invite_code = "444444"
+	// 	}else if(window.location.host=='defi00.com'){
+	// 		regisForm.value.invite_code = "000000"
+	// 	}else if(window.location.host=='defi99.com'){
+	// 		regisForm.value.invite_code = "999999"
+	// 	}else if(window.location.host=='defiaa.com'){
+	// 		regisForm.value.invite_code = "666666"
+	// 	}else if(window.location.host=='defiee.com'){
+	// 		regisForm.value.invite_code = "777777"
+	// 	}
+	// })
 </script>
 
 <style lang="scss" scoped>

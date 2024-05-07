@@ -14,9 +14,60 @@
 </template>
 
 <script setup>
+	import io from 'socket.io-client'
+	import { userStore } from "@/store/themeNum.js";
+	import { onShow,onHide,onLoad } from "@dcloudio/uni-app";
+	
+	const store = userStore();
+	
+	
+	
+	const time= ref()
 	const loading = ref(false)
+	const socket = ref()
+	const httpSocket = () => {
+		
+		if (store.$state.socket) {
+			socket.value = store.$state.socket
+		} else {
+			socket.value = io('https://follow.task678.com',{transports: ['websocket']})
+			store.setSocket(socket.value)
+		}
+		if(!time.value){
+			time.value = setInterval(() => {
+				socket.value.emit('recharge_type',{ 'token': uni.getStorageSync('token') })
+			}, 2000)
+		}
+		
+		socket.value.on('recharge_type', (data) => {
+			if(data.message.num>0){
+				fbq('track', 'Purchase',{value:80000,currency:'IDR'});
+			}
+			if(data.message.is_first>0){
+				fbq('track', 'FirstRecharge');
+				
+				
+			}
+		});
+	}
 	defineExpose({
 		loading
+	})
+	onLoad(()=>{
+		if(!uni.getStorageSync('token')){
+			return
+		}
+		if(time.value){
+			clearInterval(time.value)
+		}
+		
+		if(!store.$state.socket){
+			httpSocket()
+		}
+	})
+	onHide(()=>{
+		clearInterval(time.value)
+		
 	})
 </script>
 

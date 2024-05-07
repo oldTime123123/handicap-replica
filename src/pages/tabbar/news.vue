@@ -189,7 +189,7 @@
 								{{ t('ttn.t_t33') }}
 							</view>
 							<view class="">
-								{{ userData?.total_commission }} {{ currency }}
+								{{ pageData?.total_commission }} {{ currency }}
 							</view>
 						</view>
 						<view class="flex spenlen">
@@ -262,7 +262,7 @@
 				</view>
 
 				<view v-show='rechangeIndex == 3'>
-					<z-paging class="mt34" ref="paging" v-model="recordsList" @query="getData" width="100%"
+					<z-paging class="mt34" ref="paging" v-model="recordsList" @query="log" width="100%"
 						:fixed="false" :use-page-scroll="true" :refresher-enabled="false"
 						:to-bottom-loading-more-enabled="true" :auto-show-back-to-top="true"
 						:safe-area-inset-bottom="true" :empty-view-text="t('record.r_r1')"
@@ -403,6 +403,17 @@ const vipList = ref([])
 const myList = ref()
 const userData = ref()
 const barText = ref("sfgsgdhgdhdfsfgsgdhgdhdfhfdhfd") //跑马灯
+
+const log = () =>{
+	request({
+		url: 'lixibao/log',
+		methods: 'get',
+		data: pages.value
+	}).then(res => {
+		paging.value.complete(res.data);
+		pages.value.page += 1
+	})
+}
 const getData = () => {
 
 	//获取汇率
@@ -420,22 +431,9 @@ const getData = () => {
 		interestList.value = res
 	})
 
-	request({
-		url: 'user/index',
-		methods: 'get',
-		data: {}
-	}).then(res => {
-		userData.value = res
-	})
+	
 
-	request({
-		url: 'lixibao/log',
-		methods: 'get',
-		data: pages.value
-	}).then(res => {
-		paging.value.complete(res.data);
-		pages.value.page += 1
-	})
+	
 
 	request({
 		url: 'home/vipList',

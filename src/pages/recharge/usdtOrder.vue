@@ -198,7 +198,7 @@ const confirmHandle = () => {
   })
     .then((res) => {
       showLoading.value.loading = false;
-      Toast.text(t("all.a_c5"));
+      Toast.text(t("all.a_c9"));
       uni.navigateTo({
         url: "../tabbar/index",
       });
@@ -234,7 +234,6 @@ const getData = () => {
 		pageData.value = res.order;
 		res.type == 1 ? (uploadTxid.value = false) : (uploadTxid.value = true);
 		rate.value = res.rate;
-		fbq('track', 'Purchase',{value:res.order.amount,currency:'IDR'});
 		
 		if (timer.value) {
 		  clearInterval(timer.value);

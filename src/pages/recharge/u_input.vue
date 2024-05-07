@@ -135,7 +135,7 @@ const currency = ref("")
 const balance_type = ref()
 onLoad(e => {
 	if (e.balance_type) {
-		balance_type.value = 1
+		balance_type.value = e.balance_type
 	}
 
  

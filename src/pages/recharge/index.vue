@@ -38,6 +38,8 @@
 			</view>
 		</view>
 	</view>
+	<Loading ref="showLoading"></Loading>
+	
 </template>
 
 <script setup>
