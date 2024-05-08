@@ -40,117 +40,117 @@
 </template>
 
 <script setup>
-import kefu from "@/components/kefu/kefu.vue"
-import topNav from "@/components/topNav/topNav.vue"
-import request from '../../../comm/request.ts';
-import {
-	userStore
-} from "@/store/themeNum.js";
-import {
-	Toast
-} from '@nutui/nutui';
-import {
-	onShow,
-	onLoad
-} from "@dcloudio/uni-app";
-const store = userStore();
+	import kefu from "@/components/kefu/kefu.vue"
+	import topNav from "@/components/topNav/topNav.vue"
+	import request from '../../../comm/request.ts';
+	import {
+		userStore
+	} from "@/store/themeNum.js";
+	import {
+		Toast
+	} from '@nutui/nutui';
+	import {
+		onShow,
+		onLoad
+	} from "@dcloudio/uni-app";
+	const store = userStore();
 
-import {
-	useI18n
-} from "vue-i18n";
+	import {
+		useI18n
+	} from "vue-i18n";
 
-const {
-	t
-} = useI18n();
+	const {
+		t
+	} = useI18n();
 
-const numRate = ref(0)
-const inputNum = ref("")
-const goOrder = () => {
-	if ((inputNum.value - 0) < (pageData.value.min - 0) || (inputNum.value - 0) > (pageData.value.max - 0)) {
-		Toast.text('Please enter the correct recharge range')
-		return false
-	}
-	showLoading.value.loading = true
-	setTimeout(() => {
-		goOrder1()
-	}, 2000)
-}
-const goOrder1 = () => {
-	showLoading.value.loading = true
-	const data = {
-		amount: inputNum.value,
-		balance_type: balance_type.value
-	}
-	request({
-		url: 'finance/usdt/recharge/submit',
-		methods: 'post',
-		data: data
-	}).then(res => {
-		showLoading.value.loading = false
-
-
-		if (pageData.value.recharge_count == 0) {
-			try {
-				window.AndroidEM.onEvent('first_recharge')
-			} catch (e) { }
-		} else {
-			try {
-				window.AndroidEM.onEvent('repeatedly_recharge')
-			} catch (e) { }
-		}
-		uni.navigateTo({
-			url: './usdtOrder'
-		})
-	}).catch(err => {
-		showLoading.value.loading = false
-		uni.showToast({
-			title: err.message,
-			icon: 'none'
-		})
-	})
-}
-const rateNum = computed(() => ((inputNum.value ? inputNum.value : 0) * pageData.value.rate).toFixed(2))
-const showLoading = ref(null)
-const pageData = ref({
-	rate: 1,
-	min: 0,
-	max: 0
-})
-const getData = () => {
-	request({
-		url: 'finance/usdt/recharge/index',
-		methods: 'get'
-	}).then(res => {
-		if (res.order) {
-			uni.navigateTo({
-				url: './usdtOrder'
-			})
+	const numRate = ref(0)
+	const inputNum = ref("")
+	const goOrder = () => {
+		if ((inputNum.value - 0) < (pageData.value.min - 0) || (inputNum.value - 0) > (pageData.value.max - 0)) {
+			Toast.text('Please enter the correct recharge range')
 			return false
 		}
-		pageData.value = res
-	})
-}
-const currency = ref("")
-
-const balance_type = ref()
-onLoad(e => {
-	if (e.balance_type) {
-		balance_type.value = e.balance_type
+		showLoading.value.loading = true
+		setTimeout(() => {
+			goOrder1()
+		}, 2000)
 	}
+	const goOrder1 = () => {
+		showLoading.value.loading = true
+		const data = {
+			amount: inputNum.value,
+			balance_type: balance_type.value
+		}
+		request({
+			url: 'finance/usdt/recharge/submit',
+			methods: 'post',
+			data: data
+		}).then(res => {
+			showLoading.value.loading = false
 
- 
-})
-// 终于可以用了
-onShow(() => {
-	getData()
-	currency.value = uni.getStorageSync('currency')
-})
+
+			if (pageData.value.recharge_count == 0) {
+				try {
+					window.AndroidEM.onEvent('first_recharge')
+				} catch (e) {}
+			} else {
+				try {
+					window.AndroidEM.onEvent('repeatedly_recharge')
+				} catch (e) {}
+			}
+			uni.navigateTo({
+				url: './usdtOrder?balance_type=' + balance_type.value
+			})
+		}).catch(err => {
+			showLoading.value.loading = false
+			uni.showToast({
+				title: err.message,
+				icon: 'none'
+			})
+		})
+	}
+	const rateNum = computed(() => ((inputNum.value ? inputNum.value : 0) * pageData.value.rate).toFixed(2))
+	const showLoading = ref(null)
+	const pageData = ref({
+		rate: 1,
+		min: 0,
+		max: 0
+	})
+	const getData = () => {
+		request({
+			url: 'finance/usdt/recharge/index',
+			methods: 'get'
+		}).then(res => {
+			if (res.order) {
+				uni.navigateTo({
+					url: './usdtOrder'
+				})
+				return false
+			}
+			pageData.value = res
+		})
+	}
+	const currency = ref("")
+
+	const balance_type = ref()
+	onLoad(e => {
+		if (e.balance_type) {
+			balance_type.value = e.balance_type
+		}
+
+
+	})
+	// 终于可以用了
+	onShow(() => {
+		getData()
+		currency.value = uni.getStorageSync('currency')
+	})
 </script>
 
 <style lang="scss">
-.inpBox {
-	padding: 76rpx 70rpx 50rpx 70rpx;
-	background-color: #262626;
-	border-radius: 20rpx;
-}
+	.inpBox {
+		padding: 76rpx 70rpx 50rpx 70rpx;
+		background-color: #262626;
+		border-radius: 20rpx;
+	}
 </style>

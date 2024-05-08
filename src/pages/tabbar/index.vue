@@ -317,7 +317,7 @@
 							<view class="" v-for="item in newsList" @click="changePage(item.id)">
 								<view class=""
 									style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
-									<p class="ml34 textshow3"> {{ item.des }}</p>
+									<p class="ml34 "> {{ item.des }}</p>
 									<img class="mr24" src="../../static/imgs/index/right.png" alt="">
 								</view>
 								<view class="fg"></view>
@@ -382,7 +382,7 @@
 							</view>
 							<view
 								style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
-								<p class="mt24" style="font-weight: 500;">{{ (income.income * kurs).toFixed(2) }} $</p>
+								<p class="mt24" style="font-weight: 500;">{{ income.income }} $</p>
 								<p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i21') }}</p>
 							</view>
 
@@ -509,7 +509,7 @@
 	function getEasternTime() {
 
 		const time = new Date().toLocaleString("en-US", {
-			timeZone: "America/New_York",
+			timeZone: "Asia/Jakarta",
 			hour12: false,
 		});
 		servetTime.value = time.split(',')[1];

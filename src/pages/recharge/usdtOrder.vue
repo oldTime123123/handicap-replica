@@ -20,7 +20,7 @@
 
 						<view class="items">
 							<view class="iTitle">{{ t("recharge.r_o3") }}</view>
-							<view :style="topItemStyle">{{ pageData.amount }} USDT</view>
+							<view :style="topItemStyle">{{ pageData.amount }} IDR</view>
 						</view>
 						<view class="items topLine">
 							<view class="iTitle">{{ t("recharge.r_o4") }}</view>
@@ -32,7 +32,7 @@
 							<view class="iTitle"> {{ danwei }} </view>
 							<!-- <view :style="topItemStyle">{{pageData.amount ?((pageData.amount) * rate).toFixed(2):0 }}</view> -->
 							<view :style="topItemStyle">{{ pageData.amount ? (pageData.amount * rate).toFixed(2) : 0 }}
-								IDR
+								USDT
 							</view>
 						</view>
 					</view>
@@ -238,6 +238,9 @@
 		request({
 			url: "finance/usdt/recharge/index",
 			methods: "get",
+			data: {
+				balance_type: balance_type.value
+			}
 		}).then((res) => {
 			if (!res.order) {
 				history.back();
@@ -265,10 +268,12 @@
 	onShow(() => {
 		getData();
 	});
-	onLoad(() => {
-		if (localStorage.getItem('token')) {
-
-		} else {
+	const balance_type = ref()
+	onLoad((e) => {
+		if (e.balance_type) {
+			balance_type.value = e.balance_type
+		}
+		if (localStorage.getItem('token')) {} else {
 			uni.navigateTo({
 				url: '../login/login'
 			})

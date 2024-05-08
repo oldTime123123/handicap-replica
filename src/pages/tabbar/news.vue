@@ -475,7 +475,7 @@
 	function getEasternTime() {
 
 		const time = new Date().toLocaleString("en-US", {
-			timeZone: "America/New_York",
+			timeZone: "Asia/Jakarta",
 			hour12: false,
 		});
 		servetTime.value = time.split(',')[1];
