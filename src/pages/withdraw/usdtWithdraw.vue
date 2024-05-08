@@ -19,10 +19,10 @@
 							v-model="inpVal">
 					</view>
 				</view>
-				<view class="f20 mt30 " style="color: #fff;">
+				<!-- <view class="f20 mt30 " style="color: #fff;">
 					*{{ t('withdraw.w_w2') }}
 					{{ pageData.min + currency }} - {{ pageData.max + currency }}
-				</view>
+				</view> -->
 
 
 
@@ -78,206 +78,206 @@
 </template>
 
 <script setup>
-import kefu from "@/components/kefu/kefu.vue"
+	import kefu from "@/components/kefu/kefu.vue"
 
-import topNav from "@/components/topNav/topNav.vue"
-import request from '../../../comm/request.ts';
-import {
-	userStore
-} from "@/store/themeNum.js";
-import {
-	Toast
-} from '@nutui/nutui';
-import {
-	onShow,
-	onLoad
-} from "@dcloudio/uni-app";
-const store = userStore();
+	import topNav from "@/components/topNav/topNav.vue"
+	import request from '../../../comm/request.ts';
+	import {
+		userStore
+	} from "@/store/themeNum.js";
+	import {
+		Toast
+	} from '@nutui/nutui';
+	import {
+		onShow,
+		onLoad
+	} from "@dcloudio/uni-app";
+	const store = userStore();
 
-import {
-	useI18n
-} from "vue-i18n";
+	import {
+		useI18n
+	} from "vue-i18n";
 
-const {
-	t
-} = useI18n();
+	const {
+		t
+	} = useI18n();
 
-const choStyle = {
-	background: store.$state.contentColor,
-	boxShadow: "none ",
-	color: '#fff'
-}
-const noStyle = {
-	color: store.$state.contentColor
-}
+	const choStyle = {
+		background: store.$state.contentColor,
+		boxShadow: "none ",
+		color: '#fff'
+	}
+	const noStyle = {
+		color: store.$state.contentColor
+	}
 
-const kurs = ref()
-const showPassword = ref(false)
-const changePassword = () => {
-	showPassword.value = !showPassword.value
-}
-const numInd = ref(1)
-const buttons = ref([])
-const user = ref({})
-const pageData = ref({
+	const kurs = ref()
+	const showPassword = ref(false)
+	const changePassword = () => {
+		showPassword.value = !showPassword.value
+	}
+	const numInd = ref(1)
+	const buttons = ref([])
+	const user = ref({})
+	const pageData = ref({
 
-})
-const inpVal = ref("")
-
-const currency = ref("")
-const topNotice = ref("")
-
-// const bankNameList = ref([])
-
-const changeInpVal = (index, item) => {
-	numInd.value = index
-	inpVal.value = item
-}
-const showBindAdd = ref(true)
-const showBindPwd = ref(true)
-const showLoading = ref(null)
-const fundPwd = ref("")
-const getData = () => {
-	//获取汇率
-	request({
-		url: 'finance/usdt/recharge/index',
-		methods: 'get'
-	}).then(res => {
-		kurs.value = res.rate
 	})
-	request({
-		url: 'finance/usdt/withdraw/index',
-		methods: 'get',
-	}).then(res => {
-		pageData.value = res
-		if (res.user.payment_password) {
-			showBindPwd.value = false
+	const inpVal = ref("")
+
+	const currency = ref("")
+	const topNotice = ref("")
+
+	// const bankNameList = ref([])
+
+	const changeInpVal = (index, item) => {
+		numInd.value = index
+		inpVal.value = item
+	}
+	const showBindAdd = ref(true)
+	const showBindPwd = ref(true)
+	const showLoading = ref(null)
+	const fundPwd = ref("")
+	const getData = () => {
+		//获取汇率
+		request({
+			url: 'finance/usdt/recharge/index',
+			methods: 'get'
+		}).then(res => {
+			kurs.value = res.rate
+		})
+		request({
+			url: 'finance/usdt/withdraw/index',
+			methods: 'get',
+		}).then(res => {
+			pageData.value = res
+			if (res.user.payment_password) {
+				showBindPwd.value = false
+			}
+			if (res.user_link) {
+				showBindAdd.value = false
+			}
+		})
+	}
+
+	const submitHandle = () => {
+		if (pageData.value.check.status == 1) {
+			Toast.text(pageData.value.check.message)
+			return
 		}
-		if (res.user_link) {
-			showBindAdd.value = false
+
+		if ((inpVal.value - 0) < (pageData.value.min - 0) || (inpVal.value - 0) > (pageData.value.max - 0)) {
+			Toast.text('The amount entered is incorrect')
+			return false
 		}
+
+		showLoading.value.loading = true
+		setTimeout(() => {
+			submitHandle1()
+		}, 2000)
+	}
+	const submitHandle1 = () => {
+		const data = {
+			amount: inpVal.value,
+			password: fundPwd.value,
+			balance_type: balance_type.value
+		}
+
+		request({
+			url: 'finance/usdt/withdraw/submit',
+			methods: 'post',
+			data: data
+		}).then(res => {
+			getData();
+			showLoading.value.loading = false
+			Toast.text('submit success')
+			inpVal.value = ""
+			fundPwd.value = ""
+		}).catch(err => {
+			showLoading.value.loading = false
+			Toast.text(err.message)
+		})
+	}
+	const jumpPage = (url) => {
+		uni.navigateTo({
+			url
+		})
+	}
+	const balance_type = ref()
+	onLoad(e => {
+		if (e.balance_type) {
+			balance_type.value = e.balance_type
+		}
+
 	})
-}
 
-const submitHandle = () => {
-	if (pageData.value.check.status == 1) {
-		Toast.text(pageData.value.check.message)
-		return
-	}
-
-	if ((inpVal.value - 0) < (pageData.value.min - 0) || (inpVal.value - 0) > (pageData.value.max - 0)) {
-		Toast.text('The amount entered is incorrect')
-		return false
-	}
-
-	showLoading.value.loading = true
-	setTimeout(() => {
-		submitHandle1()
-	}, 2000)
-}
-const submitHandle1 = () => {
-	const data = {
-		amount: inpVal.value,
-		password: fundPwd.value,
-		balance_type: balance_type.value
-	}
-
-	request({
-		url: 'finance/usdt/withdraw/submit',
-		methods: 'post',
-		data: data
-	}).then(res => {
+	// 终于可以用了
+	onShow(() => {
 		getData();
-		showLoading.value.loading = false
-		Toast.text('submit success')
-		inpVal.value = ""
-		fundPwd.value = ""
-	}).catch(err => {
-		showLoading.value.loading = false
-		Toast.text(err.message)
+		currency.value = uni.getStorageSync('currency')
 	})
-}
-const jumpPage = (url) => {
-	uni.navigateTo({
-		url
-	})
-}
-const balance_type = ref()
-onLoad(e => {
-	if (e.balance_type) {
-		balance_type.value = e.balance_type
-	}
-
-})
-
-// 终于可以用了
-onShow(() => {
-	getData();
-	currency.value = uni.getStorageSync('currency')
-})
 </script>
 
 <style lang="scss">
-.topBox {
-	width: 100%;
-	height: 350rpx;
-	background: url('/static/themeNum1/img/balanceBg.png') no-repeat 100%/100%;
-}
+	.topBox {
+		width: 100%;
+		height: 350rpx;
+		background: url('/static/themeNum1/img/balanceBg.png') no-repeat 100%/100%;
+	}
 
-.bindAdd {
-	// position: absolute;
-	// left: 20rpx;
-	font-size: 20rpx;
-	// width: 60rpx;
-	padding: 0 10rpx;
-	height: 60rpx;
-	background: linear-gradient(90deg, #0A6ED8 0%, #E827FF 100%);
+	.bindAdd {
+		// position: absolute;
+		// left: 20rpx;
+		font-size: 20rpx;
+		// width: 60rpx;
+		padding: 0 10rpx;
+		height: 60rpx;
+		background: linear-gradient(90deg, #0A6ED8 0%, #E827FF 100%);
 
-	border-radius: 10rpx;
-	color: #fff;
-	text-align: center;
-	line-height: 60rpx;
-}
+		border-radius: 10rpx;
+		color: #fff;
+		text-align: center;
+		line-height: 60rpx;
+	}
 
-.info {
-	background-color: #262626;
-	border-radius: 20rpx;
-	padding: 30rpx 33rpx;
-	color: #fff;
-}
+	.info {
+		background-color: #262626;
+		border-radius: 20rpx;
+		padding: 30rpx 33rpx;
+		color: #fff;
+	}
 
-.topItem {
-	padding: 0 34rpx;
-	height: 60rpx;
-	background: #fff;
-	border-radius: 30rpx;
-	text-align: center;
-	line-height: 60rpx;
-	color: #000;
-}
+	.topItem {
+		padding: 0 34rpx;
+		height: 60rpx;
+		background: #fff;
+		border-radius: 30rpx;
+		text-align: center;
+		line-height: 60rpx;
+		color: #000;
+	}
 
-.inputItem {
-	height: 115rpx;
-	background: #FFF;
-	border-radius: 20rpx;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 50rpx;
-	color: #000;
-	padding-left: 40rpx;
-	// box-shadow: 0px 1px 51px 0px rgba(64,46,197,0.05);
-}
+	.inputItem {
+		height: 115rpx;
+		background: #FFF;
+		border-radius: 20rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 50rpx;
+		color: #000;
+		padding-left: 40rpx;
+		// box-shadow: 0px 1px 51px 0px rgba(64,46,197,0.05);
+	}
 
 
 
-.btns {
-	margin-top: 100rpx;
-	// box-shadow: 0px 11px 47px 4px rgba(247, 175, 64, 0.35);
-	height: 120rpx;
-	background-color: #fff;
-	line-height: 120rpx;
-	text-align: center;
-	border-radius: 35rpx;
-}
+	.btns {
+		margin-top: 100rpx;
+		// box-shadow: 0px 11px 47px 4px rgba(247, 175, 64, 0.35);
+		height: 120rpx;
+		background-color: #fff;
+		line-height: 120rpx;
+		text-align: center;
+		border-radius: 35rpx;
+	}
 </style>

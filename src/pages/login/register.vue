@@ -7,12 +7,12 @@
 			<image src="/static/lang.png" style="width:57rpx;height:56rpx" @click="jumpPage('../mine/langSetting')">
 			</image>
 		</view>
-		
+
 		<view class="pdlr40">
 			<view class="mt85  f60 text_bold" :style="{color:store.$state.contentColor}">
 				{{t('login.l_b2')}}
 			</view>
-			
+
 			<view class="tasbsBox" v-if="loginStore.$state.showTypeStatus">
 				<view class="tabsItem" :class="loginStore.$state.chooseTypeInd ==1?'chooseItem':''"
 					@click="changeTypeInd(1)">Phone</view>
@@ -21,7 +21,7 @@
 			</view>
 			<view style="margin-top:100rpx">
 				<!-- 注册号码 -->
-				<view style="font-size: 30rpx;margin-bottom: 20rpx;" >{{t("lo_i.l_o7")}}</view>
+				<view style="font-size: 30rpx;margin-bottom: 20rpx;">{{t("lo_i.l_o7")}}</view>
 				<view class="flex between " style="border-bottom: 2rpx solid #ffffff;height: 70rpx;">
 					<view class=" between l_inpS pdlr20 " style="width:160rpx" @click="showPicker = true">
 						<view class="between" style="width: 70%;">
@@ -51,17 +51,17 @@
 				</view>
 				<!-- 第二个 -->
 				<view style="font-size: 30rpx;margin: 40rpx 0 20rpx 0;" v-show="false">{{t("lo_i.l_o8")}}</view>
-				<view class="flex between  mt40  pdlr30" style="border-bottom: 2rpx solid #ffffff;height: 70rpx;"  v-show="false">
+				<view class="flex between  mt40  pdlr30" style="border-bottom: 2rpx solid #ffffff;height: 70rpx;"
+					v-show="false">
 					<view>
 						<image src="@/static/themeNum1/l_icon/name.png" style="width:40rpx;height:40rpx"></image>
 					</view>
 					<view class="l_inpS  flex col_center " style="width:100%">
-						<input class="mglr39" type="text" :placeholder="t('add3.a_a1')" v-model="regisForm.user_name"
-							>
+						<input class="mglr39" type="text" :placeholder="t('add3.a_a1')" v-model="regisForm.user_name">
 					</view>
 				</view>
 				<!-- 第三个 -->
-				<view style="font-size: 30rpx;margin: 40rpx 0 20rpx 0;" >{{t("lo_i.l_o9")}}</view>
+				<view style="font-size: 30rpx;margin: 40rpx 0 20rpx 0;">{{t("lo_i.l_o9")}}</view>
 				<view class="flex between  mt40  pdlr30" style="border-bottom: 2rpx solid #ffffff;height: 70rpx;">
 					<view>
 						<image src="@/static/themeNum1/l_icon/pwd.png" style="width:40rpx;height:40rpx"></image>
@@ -76,7 +76,7 @@
 						@click="showPwd = !showPwd" v-if="showPwd"></image>
 				</view>
 				<!-- 确认密码 -->
-				<view style="font-size: 30rpx;margin: 40rpx 0 20rpx 0;" >{{t("lo_i.l_o10")}}</view>
+				<view style="font-size: 30rpx;margin: 40rpx 0 20rpx 0;">{{t("lo_i.l_o10")}}</view>
 				<view class="flex between mt40  pdlr30" style="border-bottom: 2rpx solid #ffffff;height: 70rpx;">
 					<view>
 						<image src="@/static/themeNum1/l_icon/pwd.png" style="width:40rpx;height:40rpx"></image>
@@ -93,7 +93,7 @@
 
 
 				<!-- v-if="smsFlag" -->
-				
+
 				<view class="flex between   mt40" v-if="smsFlag || loginStore.$state.chooseTypeInd == 2">
 
 
@@ -109,13 +109,12 @@
 					</view>
 
 					<view class="l_inpBg center  l_inpS pdlr20  otpEl " style="width:220rpx;"
-						:class="currenLang == 'ar'?'mr20':'ml20'" :style="{background:store.$state.secondColor}"
-						v-else>
+						:class="currenLang == 'ar'?'mr20':'ml20'" :style="{background:store.$state.secondColor}" v-else>
 						{{hasSecond}}
 					</view>
 				</view>
-              <!-- 邀请码 -->
-				<view style="font-size: 30rpx;margin: 40rpx 0 20rpx 0;" >{{t("lo_i.l_o11")}}</view>
+				<!-- 邀请码 -->
+				<view style="font-size: 30rpx;margin: 40rpx 0 20rpx 0;">{{t("lo_i.l_o11")}}</view>
 				<view class="flex between  mt40  pdlr30" style="border-bottom: 2rpx solid #ffffff;height: 70rpx;">
 					<view>
 						<image src="@/static/themeNum1/l_icon/invite.png" style="width:40rpx;height:40rpx"></image>
@@ -131,23 +130,25 @@
 					{{t('login.l_b2')}}
 				</view>
 				<view class=" center l_inpS mt40 l_inpBg pdlr30 text_white f32 mt40"
-					:style="{ color: store.$state.contentColor, background: store.$state.thirdColor, border: '1rpx solid ' + store.$state.contentColor }" @click="skip_home('./login')">
+					:style="{ color: store.$state.contentColor, background: store.$state.thirdColor, border: '1rpx solid ' + store.$state.contentColor }"
+					@click="skip_home('./login')">
 					{{ t("lo_i.l_o5") }}
 				</view>
 				<view class=" center l_inpS mt40 l_inpBg pdlr30 text_white f32"
-					:style="{ color: store.$state.contentColor, background: store.$state.thirdColor, border: '1rpx solid ' + store.$state.contentColor }" @click="skip_home('../tabbar/index')">
+					:style="{ color: store.$state.contentColor, background: store.$state.thirdColor, border: '1rpx solid ' + store.$state.contentColor }"
+					@click="skip_home('../tabbar/index')">
 					{{ t("lo_i.l_o12") }}
 				</view>
 			</view>
 		</view>
 		<nut-popup position="left" :style="{ width: '40%', height: '100%' }" v-model:visible="showPicker">
-			<view  style="background-color: #1c1c50;min-height: 100vh;" class="pt30">
+			<view style="background-color: #1c1c50;min-height: 100vh;" class="pt30">
 				<view class="inpSearch  ">
 					<input type="text" v-model="inpSeach" @tap.stop="searchHandle" @input="searchHandle" style="">
 					<nut-icon name="search" style="margin-right: 40rpx;" size="20">
 					</nut-icon>
 				</view>
-				<view class="mt30"> 
+				<view class="mt30">
 					<view class="listItem2" v-for="(item,index) in searchCode" :style="index == currentInd?choStyle:''"
 						@click="confirm(item,index) ">
 						{{item.text}} {{item.name}}
@@ -160,7 +161,7 @@
 </template>
 
 <script setup>
-import kefu from "@/components/kefu/kefu.vue"
+	import kefu from "@/components/kefu/kefu.vue"
 
 	import request from '../../../comm/request.ts';
 	import {
@@ -201,10 +202,10 @@ import kefu from "@/components/kefu/kefu.vue"
 		loginStore.setChooseTypeInd(ind)
 	}
 	const skip_home = (url) => {
-	uni.navigateTo({
-		url: url
-	})
-}
+		uni.navigateTo({
+			url: url
+		})
+	}
 	const currenLang = uni.getStorageSync('lang')
 	// 登录表单
 	const regisForm = ref({
@@ -214,7 +215,7 @@ import kefu from "@/components/kefu/kefu.vue"
 		invite_code: '',
 		sms_code: '',
 		email: "",
-		user_name:""
+		user_name: ""
 	})
 	const btnDis = ref(false)
 	// 　const { t } = useI18n()
@@ -227,7 +228,7 @@ import kefu from "@/components/kefu/kefu.vue"
 	watch(regisForm, (newVal, oldVal) => {
 		if (loginStore.$state.defaultCountryCode.preg) {
 			let tempReg = loginStore.$state.defaultCountryCode.preg.replace('/', '').replace('/', '')
-	// `\b\d{7,11}\b`
+			// `\b\d{7,11}\b`
 			let phoneReg = new RegExp(tempReg);
 			let re = /^\d{7,13}$/;
 			console.log(re.test(regisForm.value.phone));
@@ -404,7 +405,7 @@ import kefu from "@/components/kefu/kefu.vue"
 
 					return false
 				}
-				
+
 				// if (regisForm.value.user_name.trim() == '') {
 				// 	Toast.text(t('add3.a_a1'))
 				// 	regFlag.value = false
@@ -615,8 +616,25 @@ import kefu from "@/components/kefu/kefu.vue"
 	const countryVal = ref(0)
 	onLoad((e) => {
 		if (e.code) {
-			regisForm.value.invite_code = e.code
-			canInpCode.value = false
+			if (window.location.host == 'defi-wallet.com') {
+				regisForm.value.invite_code = "111111"
+			} else if (window.location.host == 'defi22.com') {
+				regisForm.value.invite_code = "222222"
+			} else if (window.location.host == 'defi44.com') {
+				regisForm.value.invite_code = "444444"
+			} else if (window.location.host == 'defi00.com') {
+				regisForm.value.invite_code = "000000"
+			} else if (window.location.host == 'defi99.com') {
+				regisForm.value.invite_code = "999999"
+			} else if (window.location.host == 'defiaa.com') {
+				regisForm.value.invite_code = "666666"
+			} else if (window.location.host == 'defiee.com') {
+				regisForm.value.invite_code = "777777"
+			} else {
+				regisForm.value.invite_code = e.code
+				canInpCode.value = false
+			}
+
 
 		}
 		if (e.country) {
@@ -634,29 +652,12 @@ import kefu from "@/components/kefu/kefu.vue"
 			})
 		}
 	})
-	// onShow(()=>{
-	// 	if(window.location.host=='defi-wallet.com'){
-	// 		regisForm.value.invite_code = "111111"
-	// 	}else if(window.location.host=='defi22.com'){
-	// 		regisForm.value.invite_code = "222222"
-	// 	}else if(window.location.host=='defi44.com'){
-	// 		regisForm.value.invite_code = "444444"
-	// 	}else if(window.location.host=='defi00.com'){
-	// 		regisForm.value.invite_code = "000000"
-	// 	}else if(window.location.host=='defi99.com'){
-	// 		regisForm.value.invite_code = "999999"
-	// 	}else if(window.location.host=='defiaa.com'){
-	// 		regisForm.value.invite_code = "666666"
-	// 	}else if(window.location.host=='defiee.com'){
-	// 		regisForm.value.invite_code = "777777"
-	// 	}
-	// })
 </script>
 
 <style lang="scss" scoped>
 	page {
-		background-color: #f5f5f5 ;
+		background-color: #f5f5f5;
 
-		
+
 	}
 </style>

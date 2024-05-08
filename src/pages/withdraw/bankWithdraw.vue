@@ -27,7 +27,7 @@
 				<view class="mt68 info l_inpBg">
 					<view class="between" @click="jumpPage('../setting/set2')">
 						<view style="width: 80%;">
-							{{ t('pk.p_w1') }}
+							{{  pageData?.bankcard?pageData?.bankcard?.bank?.name:t('pk.p_w1')  }}
 						</view>
 						<image :src="store.$state.imgObj.left" mode="widthFix" style="width: 23rpx;height: 39rpx;">
 						</image>

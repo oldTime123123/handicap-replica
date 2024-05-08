@@ -40,14 +40,14 @@
 
 			<input v-model="num" class="inp" :placeholder="t('new_xq.xq_a27')" />
 
-			<view class="btn" @click="loginOutMask = true">
+			<view class="btn" @click="confirmHandle">
 				{{ t('new_xq.xq_a26') }}
 			</view>
 		</view>
-		<nut-overlay v-model:visible="loginOutMask">
+		<!-- <nut-overlay v-model:visible="loginOutMask">
 			<div class="wrapper">
 				<div class="content ">
-					<!-- <view class="f40">Tips</view> -->
+					<view class="f40">Tips</view>
 					<view class="f30 mt40"
 						style="text-align: center;width: 384rpx;font-weight: 400;font-size: 28rpx;color: #FFFFFF;">
 						Please note: Transferring into this account will return the principal within 365 days!
@@ -61,7 +61,7 @@
 					</view>
 				</div>
 			</div>
-		</nut-overlay>
+		</nut-overlay> -->
 	</view>
 </template>
 
@@ -101,6 +101,7 @@ const lockBalance = ref(0)
 const loginOutMask = ref(false)
 const num = ref()
 const confirmHandle = () => {
+	uni.showLoading()
 	request({
 		url: 'user/balanceTrade',
 		methods: 'post',
@@ -108,11 +109,14 @@ const confirmHandle = () => {
 			money: num.value
 		}
 	}).then(res => {
+		uni.hideLoading()
 		Toast.text('success')
 		num.value = ''
 		getDate()
 	}).catch(err => {
-		Toast.text(err)
+		Toast.text(err.message)
+		uni.hideLoading()
+		
 		num.value = ''
 	})
 }

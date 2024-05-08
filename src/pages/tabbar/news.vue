@@ -15,15 +15,16 @@
 
 				</view>
 				<view class="flex" style="align-items: center;">
-				<view class="appTime" style="margin-right: 20rpx;">
-					<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png" mode="">
-					</image>
-					UTC+7-{{ servetTime }}
+					<view class="appTime" style="margin-right: 20rpx;">
+						<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png"
+							mode="">
+						</image>
+						UTC+7-{{ servetTime }}
 
+					</view>
+					<image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
+						@click="jumplink('../mine/langSetting')"></image>
 				</view>
-				<image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
-					@click="jumplink('../mine/langSetting')"></image>
-			</view>
 
 			</view>
 			<view class="pdlr30" style="padding-top: 40rpx;">
@@ -69,8 +70,7 @@
 
 
 					<view class="Basic back2 flex"
-						style="width: 334rpx; height: 172rpx;justify-content: space-around;flex-direction: column;background-image: url('../../static/imgs/index/content3-2.png');"
-						>
+						style="width: 334rpx; height: 172rpx;justify-content: space-around;flex-direction: column;background-image: url('../../static/imgs/index/content3-2.png');">
 						<view class="text1">
 							{{ t('ttn.t_t3') }}
 						</view>
@@ -130,9 +130,11 @@
 									<view class="text1" style="margin-bottom: 15rpx;">{{ item.title }}</view>
 									<!-- <view class="text2">profit:{{item.rate}}</view> -->
 									<view class="text2" style="margin-bottom: 15rpx;font-size: 26rpx;">
-										{{ t('ttn.t_t28') }}:{{ ((item.rate) * 100).toFixed(2) }}%</view>
+										{{ t('ttn.t_t28') }}:{{ ((item.rate) * 100).toFixed(2) }}%
+									</view>
 									<view class="text2" style="margin-bottom: 15rpx;font-size: 26rpx;">
-										{{ t('ttn.t_t29') }}: {{ item.day }} {{ t('ttn.t_t30') }}</view>
+										{{ t('ttn.t_t29') }}: {{ item.day }} {{ t('ttn.t_t30') }}
+									</view>
 
 								</view>
 							</view>
@@ -143,7 +145,7 @@
 							</view>
 
 						</view>
-						
+
 					</view>
 					<view class="qidai">
 						{{t('lo_i.l_o13')}}
@@ -262,10 +264,9 @@
 				</view>
 
 				<view v-show='rechangeIndex == 3'>
-					<z-paging class="mt34" ref="paging" v-model="recordsList" @query="log" width="100%"
-						:fixed="false" :use-page-scroll="true" :refresher-enabled="false"
-						:to-bottom-loading-more-enabled="true" :auto-show-back-to-top="true"
-						:safe-area-inset-bottom="true" :empty-view-text="t('record.r_r1')"
+					<z-paging class="mt34" ref="paging" v-model="recordsList" @query="log" width="100%" :fixed="false"
+						:use-page-scroll="true" :refresher-enabled="false" :to-bottom-loading-more-enabled="true"
+						:auto-show-back-to-top="true" :safe-area-inset-bottom="true" :empty-view-text="t('record.r_r1')"
 						:loading-more-no-more-text="t('record.r_r1')" :empty-view-reload-text="t('record.r_r2')"
 						:loading-more-loading-text="t('record.r_r4')" :loading-more-fail-text="t('record.r_r3')">
 						<view class="listItem" style="padding-top: 30rpx;" v-for="(item, index) in recordsList"
@@ -291,7 +292,7 @@
 							</view>
 							<view class="vvItem">
 								<view class="f26">{{ t('record.r_s5') }}</view>
-								<view class="">{{ item.actual_num }}</view>
+								<view class="">{{ item.yuji_num }}</view>
 							</view>
 							<view class="vvItem">
 								<view class="f26">{{ t('record.r_s6') }}</view>
@@ -299,7 +300,7 @@
 							</view>
 							<view class="vvItem">
 								<view class="f26">{{ t('record.r_s7') }}</view>
-								<view class="">{{ item.expire_time }}</view>
+								<!-- 								<view class="">{{ item.expire_time }}</view> -->
 							</view>
 							<view class="vvItem">
 								<!-- 							<view class="f26">{{t('all.a_d2')}}</view> -->
@@ -328,175 +329,176 @@
 </template>
 
 <script setup>
-import Tabbar from '@/components/botTabbar/botTabbar.vue'
-import request from '../../../comm/request.ts';
-import topNav from "@/components/topNav/topNav.vue"
+	import Tabbar from '@/components/botTabbar/botTabbar.vue'
+	import request from '../../../comm/request.ts';
+	import topNav from "@/components/topNav/topNav.vue"
 
-import {
-	Toast
-} from '@nutui/nutui';
-import {
-	useI18n
-} from "vue-i18n";
-import {
-	onMounted
-} from 'vue';
-import useClipboard from 'vue-clipboard3'
-import {
-	onHide
-} from '@dcloudio/uni-app';
-const kurs = ref('')
+	import {
+		Toast
+	} from '@nutui/nutui';
+	import {
+		useI18n
+	} from "vue-i18n";
+	import {
+		onMounted
+	} from 'vue';
+	import useClipboard from 'vue-clipboard3'
+	import {
+		onHide
+	} from '@dcloudio/uni-app';
+	const kurs = ref('')
 
-const {
-	toClipboard
-} = useClipboard()
-const {
-	t
-} = useI18n();
-const handleToPage = (url) => {
-	uni.navigateTo({
-		url: url
-	})
-}
-const store = userStore();
-const rechangeIndex = ref(1)
-const rechangeStyle = ref({
-	color: "#4BF7F9"
-})
-const recordsList = ref([])
-
-const jumplink = (item) => {
-	uni.navigateTo({
-		url: item
-	})
-}
-const text = [{
-	index: 1,
-	text: t('ttn.t_t23')
-},
-// {
-// 	index: 2,
-// 	text: t('ttn.t_t24')
-// },
-{
-	index: 3,
-	text: t('ttn.t_t25')
-}
-]
-
-import {
-	onShow,
-	onLoad
-} from "@dcloudio/uni-app";
-import {
-	userStore
-} from "@/store/themeNum.js";
-
-const interestList = ref([])
-const paging = ref(null)
-const pages = ref({
-	page: 1,
-	size: 10
-})
-const pageData = ref()
-const vipList = ref([])
-const myList = ref()
-const userData = ref()
-const barText = ref("sfgsgdhgdhdfsfgsgdhgdhdfhfdhfd") //跑马灯
-
-const log = () =>{
-	request({
-		url: 'lixibao/log',
-		methods: 'get',
-		data: pages.value
-	}).then(res => {
-		paging.value.complete(res.data);
-		pages.value.page += 1
-	})
-}
-const getData = () => {
-
-	//获取汇率
-	request({
-		url: 'finance/usdt/recharge/index',
-		methods: 'get'
-	}).then(res => {
-		kurs.value = res.rate
-	})
-	//利息宝
-	request({
-		url: 'lixibao/list',
-		methods: 'get'
-	}).then(res => {
-		interestList.value = res
-	})
-
-	
-
-	
-
-	request({
-		url: 'home/vipList',
-		methods: 'get',
-	}).then(res => {
-		vipList.value = res
-
-		res.forEach(e => {
-			if (e.is_active == 1) {
-				myList.value = e
-			}
+	const {
+		toClipboard
+	} = useClipboard()
+	const {
+		t
+	} = useI18n();
+	const handleToPage = (url) => {
+		uni.navigateTo({
+			url: url
 		})
+	}
+	const store = userStore();
+	const rechangeIndex = ref(1)
+	const rechangeStyle = ref({
+		color: "#4BF7F9"
 	})
+	const recordsList = ref([])
 
+	const jumplink = (item) => {
+		uni.navigateTo({
+			url: item
+		})
+	}
+	const text = [{
+			index: 1,
+			text: t('ttn.t_t23')
+		},
+		// {
+		// 	index: 2,
+		// 	text: t('ttn.t_t24')
+		// },
+		{
+			index: 3,
+			text: t('ttn.t_t25')
+		}
+	]
 
-	// 公告
-	request({
-		url: 'home/marquee',
-		methods: 'get'
-	}).then(res => {
-		// res.status == 1 ? showBar.value = true : showBar.value = false
-		barText.value = res.content
+	import {
+		onShow,
+		onLoad
+	} from "@dcloudio/uni-app";
+	import {
+		userStore
+	} from "@/store/themeNum.js";
+
+	const interestList = ref([])
+	const paging = ref(null)
+	const pages = ref({
+		page: 1,
+		size: 10
 	})
-	request({
-		url: 'user/index',
-		methods: 'get',
-	}).then(res => {
-		pageData.value = res
+	const pageData = ref()
+	const vipList = ref([])
+	const myList = ref()
+	const userData = ref()
+	const barText = ref("sfgsgdhgdhdfsfgsgdhgdhdfhfdhfd") //跑马灯
+
+	const log = () => {
+		request({
+			url: 'lixibao/log',
+			methods: 'get',
+			data: pages.value
+		}).then(res => {
+			paging.value.complete(res.data);
+			pages.value.page += 1
+		})
+	}
+	const getData = () => {
+
+		//获取汇率
+		request({
+			url: 'finance/usdt/recharge/index',
+			methods: 'get'
+		}).then(res => {
+			kurs.value = res.rate
+		})
+		//利息宝
+		request({
+			url: 'lixibao/list',
+			methods: 'get'
+		}).then(res => {
+			interestList.value = res
+		})
+
+
+
+
+
+		request({
+			url: 'home/vipList',
+			methods: 'get',
+		}).then(res => {
+			vipList.value = res
+
+			res.forEach(e => {
+				if (e.is_active == 1) {
+					myList.value = e
+				}
+			})
+		})
+
+
+		// 公告
+		request({
+			url: 'home/marquee',
+			methods: 'get'
+		}).then(res => {
+			// res.status == 1 ? showBar.value = true : showBar.value = false
+			barText.value = res.content
+		})
+		request({
+			url: 'user/index',
+			methods: 'get',
+		}).then(res => {
+			pageData.value = res
+		})
+
+
+	}
+	const showTIme = setInterval(() => {
+		getEasternTime()
+	}, 1000)
+	const servetTime = ref()
+
+	function getEasternTime() {
+
+		const time = new Date().toLocaleString("en-US", {
+			timeZone: "America/New_York",
+			hour12: false,
+		});
+		servetTime.value = time.split(',')[1];
+	}
+	const currency = ref()
+
+
+	const interest = (id) => {
+		uni.navigateTo({
+			url: '../mine/investPage?id=' + id
+		})
+	}
+	onHide(() => {
+		clearInterval(showTIme.value)
 	})
-
-
-}
-const showTIme = setInterval(() => {
-	getEasternTime()
-}, 1000)
-const servetTime = ref()
-function getEasternTime() {
-
-	const time = new Date().toLocaleString("en-US", {
-		timeZone: "America/New_York",
-		hour12: false,
-	});
-	servetTime.value = time.split(',')[1];
-}
-const currency = ref()
-
-
-const interest = (id) => {
-	uni.navigateTo({
-		url: '../mine/investPage?id=' + id
+	onLoad(() => {
+		getData()
+		currency.value = uni.getStorageSync('currency')
 	})
-}
-onHide(() => {
-	clearInterval(showTIme.value)
-})
-onLoad(() => {
-	getData()
-	currency.value = uni.getStorageSync('currency')
-})
 </script>
 
 <style lang="scss" scoped>
-	.qidai{
+	.qidai {
 		width: 100%;
 		text-align: center;
 		line-height: 32rpx;
@@ -505,184 +507,185 @@ onLoad(() => {
 		margin-top: 30rpx;
 		border-radius: 20rpx;
 	}
-.kefu {
-	width: 100rpx;
-	height: 100rpx;
-}
 
-.Basic {
-	box-sizing: border-box;
-	padding: 24rpx 16rpx;
-	border-radius: 16rpx;
-
-	.text1 {
-		color: #4BF7F9
+	.kefu {
+		width: 100rpx;
+		height: 100rpx;
 	}
 
-	.text2 {
-		margin-top: 16rpx;
-		font-size: 26rpx;
-
-	}
-}
-
-.back1 {
-	background: url('../../static/egg/basic1.png') no-repeat;
-	background-size: 100% 100%;
-
-
-}
-
-.back2 {
-	background: url('../../static/egg/basic2.png') no-repeat;
-	background-size: 100% 100%;
-
-}
-
-.main {
-	background: url('../../static/back.png') no-repeat;
-	background-size: 100% 100%;
-	height: 100%;
-	min-height: 100vh;
-}
-
-.textb {
-	width: 33%;
-	text-align: center;
-}
-
-.more {
-	width: 100%;
-	height: 88rpx;
-	background-color: #242424;
-	border-radius: 24rpx;
-	text-align: center;
-	line-height: 88rpx;
-	margin-top: 24rpx;
-
-}
-
-.textc {
-	text-align: center;
-	width: 50%;
-}
-
-.box1 {
-	width: 100%;
-	border-radius: 24rpx;
-	background-color: #1E253B;
-	box-sizing: border-box;
-	padding: 32rpx;
-	margin-top: 32rpx;
-
-	.head {
-		display: flex;
-		align-items: center;
-	}
-
-	.title {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		color: #5B5E66;
-		font-size: 26rpx;
-		margin-top: 34rpx;
-	}
-
-	.WordTip {
-		color: #A2A2A2;
-		font-size: 24rpx;
-	}
-
-}
-
-.content_box {
-	box-sizing: border-box;
-	padding: 20rpx 0rpx 30rpx 0rpx;
-	background-color: #1E253B;
-	border-radius: 0rpx 0rpx 24rpx 24rpx;
-
-	.spenlen {
+	.Basic {
 		box-sizing: border-box;
-		padding: 0rpx 28rpx;
-		justify-content: space-between;
-		line-height: 62rpx;
+		padding: 24rpx 16rpx;
+		border-radius: 16rpx;
+
+		.text1 {
+			color: #4BF7F9
+		}
+
+		.text2 {
+			margin-top: 16rpx;
+			font-size: 26rpx;
+
+		}
 	}
-}
 
-.geli {
-	background-color: #212121;
-	width: 100%;
-	height: 1px;
-	margin-bottom: 24rpx;
-	margin-top: 22rpx;
-}
-
-.inver_head {
-	background: url('../../static/egg/head.png') no-repeat;
-	background-size: 50% 100%;
-	background-position: right;
-	width: 100%;
-	height: 88rpx;
-	display: flex;
-	align-items: center;
-	box-sizing: border-box;
-	padding: 0rpx 30rpx;
-}
-
-.reachange_widt {
-	width: 332rpx;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: #004284;
-	box-sizing: border-box;
-	padding: 20rpx 0rpx;
-	border-radius: 16rpx;
-	border: 1px solid #04E1F4;
-
-}
-
-.team {
-	box-sizing: border-box;
-	// padding-left: 32rpx;
-	margin-top: 28rpx;
-}
-
-.swiper_box2 {
-	width: 100%;
-	height: 64rpx;
-	background: #004284;
-	border-radius: 16rpx 16rpx 16rpx 16rpx;
-	opacity: 1;
-	position: relative;
-	box-sizing: border-box;
-	text-align: center;
-	height: 64rpx;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	box-sizing: border-box;
-	padding: 0.625rem 0;
-	border-radius: 0.5rem;
-
-	margin-left: 5rpx;
-}
-
-.topNav {
-
-	width: 100%;
-	background-color: #0C1526;
-	justify-content: space-between;
-	box-sizing: border-box;
-	padding: 16rpx 32rpx;
-	z-index: 99;
-}
+	.back1 {
+		background: url('../../static/egg/basic1.png') no-repeat;
+		background-size: 100% 100%;
 
 
-#swiper_box2_chose {
-	background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);
-	border-radius: 0.5rem;
-	width: 100%;
-}
+	}
+
+	.back2 {
+		background: url('../../static/egg/basic2.png') no-repeat;
+		background-size: 100% 100%;
+
+	}
+
+	.main {
+		background: url('../../static/back.png') no-repeat;
+		background-size: 100% 100%;
+		height: 100%;
+		min-height: 100vh;
+	}
+
+	.textb {
+		width: 33%;
+		text-align: center;
+	}
+
+	.more {
+		width: 100%;
+		height: 88rpx;
+		background-color: #242424;
+		border-radius: 24rpx;
+		text-align: center;
+		line-height: 88rpx;
+		margin-top: 24rpx;
+
+	}
+
+	.textc {
+		text-align: center;
+		width: 50%;
+	}
+
+	.box1 {
+		width: 100%;
+		border-radius: 24rpx;
+		background-color: #1E253B;
+		box-sizing: border-box;
+		padding: 32rpx;
+		margin-top: 32rpx;
+
+		.head {
+			display: flex;
+			align-items: center;
+		}
+
+		.title {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			color: #5B5E66;
+			font-size: 26rpx;
+			margin-top: 34rpx;
+		}
+
+		.WordTip {
+			color: #A2A2A2;
+			font-size: 24rpx;
+		}
+
+	}
+
+	.content_box {
+		box-sizing: border-box;
+		padding: 20rpx 0rpx 30rpx 0rpx;
+		background-color: #1E253B;
+		border-radius: 0rpx 0rpx 24rpx 24rpx;
+
+		.spenlen {
+			box-sizing: border-box;
+			padding: 0rpx 28rpx;
+			justify-content: space-between;
+			line-height: 62rpx;
+		}
+	}
+
+	.geli {
+		background-color: #212121;
+		width: 100%;
+		height: 1px;
+		margin-bottom: 24rpx;
+		margin-top: 22rpx;
+	}
+
+	.inver_head {
+		background: url('../../static/egg/head.png') no-repeat;
+		background-size: 50% 100%;
+		background-position: right;
+		width: 100%;
+		height: 88rpx;
+		display: flex;
+		align-items: center;
+		box-sizing: border-box;
+		padding: 0rpx 30rpx;
+	}
+
+	.reachange_widt {
+		width: 332rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #004284;
+		box-sizing: border-box;
+		padding: 20rpx 0rpx;
+		border-radius: 16rpx;
+		border: 1px solid #04E1F4;
+
+	}
+
+	.team {
+		box-sizing: border-box;
+		// padding-left: 32rpx;
+		margin-top: 28rpx;
+	}
+
+	.swiper_box2 {
+		width: 100%;
+		height: 64rpx;
+		background: #004284;
+		border-radius: 16rpx 16rpx 16rpx 16rpx;
+		opacity: 1;
+		position: relative;
+		box-sizing: border-box;
+		text-align: center;
+		height: 64rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-sizing: border-box;
+		padding: 0.625rem 0;
+		border-radius: 0.5rem;
+
+		margin-left: 5rpx;
+	}
+
+	.topNav {
+
+		width: 100%;
+		background-color: #0C1526;
+		justify-content: space-between;
+		box-sizing: border-box;
+		padding: 16rpx 32rpx;
+		z-index: 99;
+	}
+
+
+	#swiper_box2_chose {
+		background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);
+		border-radius: 0.5rem;
+		width: 100%;
+	}
 </style>
