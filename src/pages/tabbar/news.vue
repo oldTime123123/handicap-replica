@@ -64,7 +64,7 @@
 						</view>
 						<view class="text2" style="margin-top: 0rpx;">
 							{{ pageData?.ai_balance }} {{ currency }}
-							<p>≈$ {{ (pageData?.job_invest_balance * kurs).toFixed(2) }}</p>
+							<p>≈$ {{ (pageData?.ai_balance * kurs).toFixed(2) }}</p>
 						</view>
 					</view>
 
@@ -288,7 +288,7 @@
 							</view>
 							<view class="vvItem">
 								<view class="f26">{{ t('record.r_s4') }}</view>
-								<view class="">{{ item.rate * 100 }}%</view>
+								<view class="">{{ (item.rate * 100).toFixed(2) }}%</view>
 							</view>
 							<view class="vvItem">
 								<view class="f26">{{ t('record.r_s5') }}</view>
@@ -300,7 +300,7 @@
 							</view>
 							<view class="vvItem">
 								<view class="f26">{{ t('record.r_s7') }}</view>
-								<!-- 								<view class="">{{ item.expire_time }}</view> -->
+								<view class="">{{ item.expire_time }}</view>
 							</view>
 							<view class="vvItem">
 								<!-- 							<view class="f26">{{t('all.a_d2')}}</view> -->

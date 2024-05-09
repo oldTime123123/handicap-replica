@@ -17,7 +17,7 @@
 			{{ pro_name }}/USDT
 		</view>
 
-		<view style="width: 50rpx;" @click="jump('../mine/panelPage')">
+		<view style="width: 50rpx;" @click="jump('../record/balanceRecord')">
 			<image style="width: 62rpx;height: 62rpx;" src="../../static/gdjl.png" mode=""></image>
 		</view>
 	</view>
@@ -376,7 +376,7 @@
 	<!--   <TabBar currentIndex="3"></TabBar> -->
 	<Tabbar :activeIndex="1"></Tabbar>
 	<Loading ref="showLoading"></Loading>
-	<Loading2 ref="showLoading2"></Loading2>
+	<!-- 	<Loading2 ref="showLoading2"></Loading2> -->
 </template>
 
 <script setup>
@@ -916,7 +916,7 @@
 	const timestampToDateTime = (timestamp) => {
 		// 时间戳转时间
 		const time = new Date().toLocaleString("en-US", {
-			timeZone: "America/New_York",
+			timeZone: "Asia/Jakarta",
 			hour12: false,
 		});
 		console.log('time', time);

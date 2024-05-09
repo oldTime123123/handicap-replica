@@ -1,5 +1,5 @@
 <template>
-	<view style="background: rgb(8, 15, 50);height: 150vh;  position: relative;">
+	<view style="background: rgb(8, 15, 50); position: relative;">
 		<nut-drag attract :boundary="{ top: 50, left: 0, bottom: 55, right: 0 }" :style="{ top: '50vh', right: '0px' }">
 			<img class="kefu" type="primary" src="../../static/kefu.png" alt="" @click="Jumplink('../mine/service')">
 		</nut-drag>
@@ -53,7 +53,7 @@
 							{{ codeUrl }}
 						</view>
 						<view class="copyBtn textCenter88 ml24" @click="copyHandle(codeUrl)">
-							{{ t('pk.t_c3') }}
+							Copy
 						</view>
 					</view>
 					<view class="qrcode ">
@@ -231,7 +231,7 @@
 	const copyHandle = async (text) => {
 		try {
 			await toClipboard(text)
-			Toast.text('Copy' + " " + 'Status')
+			Toast.text(t('pk.t_c3'))
 		} catch (e) {
 			console.error(e)
 		}

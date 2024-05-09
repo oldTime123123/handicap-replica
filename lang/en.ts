@@ -5,7 +5,9 @@ export default {
 		a3: 'Low',
 		a4: 'Now',
 		a5: 'Open',
-
+		as: "Please contact customer service!",
+		a6: "Effective recharge range",
+		a7:"Effective withdrawal range"
 	},
 	sec: {
 		a1: 'SecFutures',
@@ -600,7 +602,7 @@ export default {
 		w_w3: "Please carefully check the following payment information",
 		w_w4: "Please bind the financial password",
 		w_w5: "Please enter the financial password",
-		w_w6: "Please verify wallet address",
+		w_w6: "Please bind USDT address",
 	},
 	setting: {
 		s_s1: "USDT Binding",

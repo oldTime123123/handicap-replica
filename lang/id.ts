@@ -593,7 +593,7 @@ export default {
 		w_w3: "Harap periksa dengan cermat informasi pembayaran berikut",
 		w_w4: "Tolong ikat kata sandi keuangan",
 		w_w5: "Silakan masukkan kata sandi keuangan",
-		w_w6: "Harap verifikasi alamat dompet",
+		w_w6: "Harap ikat alamat USDT",
 	},
 	setting: {
 		s_s1: "Pengikatan USDT",

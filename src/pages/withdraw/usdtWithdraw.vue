@@ -19,16 +19,16 @@
 							v-model="inpVal">
 					</view>
 				</view>
-				<!-- <view class="f20 mt30 " style="color: #fff;">
+				<view class="f20 mt30 " style="color: #fff;">
 					*{{ t('withdraw.w_w2') }}
 					{{ pageData.min + currency }} - {{ pageData.max + currency }}
-				</view> -->
+				</view>
 
 
 
 
 				<view class="mt70">
-					{{ t('withdraw.w_w6') }}
+					<!-- 					{{ t('withdraw.w_w6') }} -->
 					<view class="mt38 info l_inpBg">
 						<view class="flex col_center between ">
 							<input class="uni-input" :placeholder="t('withdraw.w_w6')" v-model="pageData.user_link"
@@ -39,7 +39,7 @@
 				</view>
 
 				<view class="mt70 " v-if="showBindPwd">
-					{{ t('withdraw.w_w5') }}
+					<!-- 					{{ t('withdraw.w_w5') }} -->
 					<view class="mt38 info  l_inpBg" style="position: relative;">
 						<view class="flex col_center between">
 							<input class="uni-input" :placeholder="t('withdraw.w_w5')" :password="showPassword"
@@ -50,10 +50,10 @@
 				</view>
 
 				<view class="mt70 " v-else>
-					Please enter the fund password
+					<!-- 					Please enter the fund password -->
 					<view class="mt38 info l_inpBg">
 						<view class="flex col_center between">
-							<input class="uni-input" placeholder="Please enter the fund password"
+							<input class="uni-input" placeholder="Please enter the financial password"
 								:password="showPassword" style="width: 100%;" v-model="fundPwd" />
 							<image src="../../static/themeNum1/l_icon/eyeOpen.png" style="width:29rpx ; height: 25rpx;"
 								@click="changePassword" v-if="!showPassword"></image>
@@ -166,7 +166,7 @@
 		}
 
 		if ((inpVal.value - 0) < (pageData.value.min - 0) || (inpVal.value - 0) > (pageData.value.max - 0)) {
-			Toast.text('The amount entered is incorrect')
+			Toast.text(`${t('mark.a7')}: ${pageData.value.min} - ${pageData.value.max}`)
 			return false
 		}
 

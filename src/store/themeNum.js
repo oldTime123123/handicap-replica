@@ -9,27 +9,28 @@ export const userStore = defineStore({
 			contentColor: '#fff',
 			btnDis: "#ccc",
 			secondColor: "linear-gradient(90deg, #51FDFE 0%, #52FCFF 100%)",
-			thirdColor:"#1c1c50",
+			thirdColor: "#1c1c50",
 			imgObj: {
-				backIcon:"/static/themeNum1/back.png",
-				left:"/static/themeNum1/icon/left.png"
+				backIcon: "/static/themeNum1/back.png",
+				left: "/static/themeNum1/icon/left.png"
 			},
-			index:{
-				red:{
+			index: {
+				red: {
 					'background': "url('/static/themeNum1/img/indexRed.png') no-repeat 100%/100%",
-					 "height": "213rpx"
+					"height": "213rpx"
 				}
 			},
 			my: {},
 			wr: {
-				reBox:{
-					background:"url('/static/themeNum1/img/reBox.png') repeat-y 100%/100%",
-					
+				reBox: {
+					background: "url('/static/themeNum1/img/reBox.png') repeat-y 100%/100%",
+
 				}
 			},
 			task: {},
 			countryCode: [],
-			socket:null
+			socket: null,
+			timeShow: null
 		}
 	},
 	actions: {
@@ -59,8 +60,11 @@ export const userStore = defineStore({
 		setTask(data) {
 			this.task = data
 		},
-		setSocket(data){
+		setSocket(data) {
 			this.socket = data
+		},
+		setTimeShow(data) {
+			this.timeShow = data
 		}
 	},
 	// 持久化存储

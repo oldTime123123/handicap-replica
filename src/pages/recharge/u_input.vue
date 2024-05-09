@@ -34,6 +34,10 @@
 				:style="{ background: store.$state.secondColor }" @click="goOrder">
 				{{ t('all.a_c1') }}
 			</view>
+
+			<view class='mt40' v-html='pageData?.u_text'>
+
+			</view>
 		</view>
 		<Loading ref="showLoading"></Loading>
 	</view>
@@ -67,7 +71,7 @@
 	const inputNum = ref("")
 	const goOrder = () => {
 		if ((inputNum.value - 0) < (pageData.value.min - 0) || (inputNum.value - 0) > (pageData.value.max - 0)) {
-			Toast.text('Please enter the correct recharge range')
+			Toast.text(`${t('mark.a6')}: ${pageData.value.min} - ${pageData.value.max}`)
 			return false
 		}
 		showLoading.value.loading = true

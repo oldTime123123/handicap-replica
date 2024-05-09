@@ -63,8 +63,14 @@
 				</view>
 			</view>
 		</view>
+		<view class="pdlr45 mt40">
+			<view class="" v-html="other_txt"></view>
+		</view>
+
+
 
 		<view style="height: 100rpx"></view>
+
 
 		<nut-overlay v-model:visible="cancleHandlemMask">
 			<div class="wrapper">
@@ -232,6 +238,7 @@
 	const uploadTxid = ref(false);
 	const rate = ref(1);
 
+	const other_txt = ref()
 	const getData = () => {
 
 
@@ -246,6 +253,7 @@
 				history.back();
 				return false;
 			}
+			other_txt.value = res.other_txt
 			addresData.value = res.address;
 			pageData.value = res.order;
 			res.type == 1 ? (uploadTxid.value = false) : (uploadTxid.value = true);

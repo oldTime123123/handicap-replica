@@ -30,58 +30,60 @@
 			</z-paging>
 		</view>
 	</view>
+	<Loading ref="showLoading"></Loading>
+
 </template>
 
 <script setup>
-import kefu from "@/components/kefu/kefu.vue"
+	import kefu from "@/components/kefu/kefu.vue"
 
-import topNav from "@/components/topNav/topNav.vue"
-import request from '../../../comm/request.ts';
-import {
-	userStore
-} from "@/store/themeNum.js";
-// import {
-// 	Toast
-// } from '@nutui/nutui';
-import {
-	onShow,
-	onLoad
-} from "@dcloudio/uni-app";
-const store = userStore();
-import {
-	useI18n
-} from 'vue-i18n'
+	import topNav from "@/components/topNav/topNav.vue"
+	import request from '../../../comm/request.ts';
+	import {
+		userStore
+	} from "@/store/themeNum.js";
+	// import {
+	// 	Toast
+	// } from '@nutui/nutui';
+	import {
+		onShow,
+		onLoad
+	} from "@dcloudio/uni-app";
+	const store = userStore();
+	import {
+		useI18n
+	} from 'vue-i18n'
 
-const {
-	t
-} = useI18n()
-const methods = {
-	back() {
-		history.back()
-	},
+	const {
+		t
+	} = useI18n()
+	const methods = {
+		back() {
+			history.back()
+		},
 
-};
-const recordsList = ref([])
-const paging = ref(null)
-const pages = ref({
-	page: 1,
-	size: 10
-})
-const getData = (page) => {
-	pages.value.page = page
-	request({
-		methods: 'get',
-		url: 'activity/integral/list',
-		data: pages.value
-	}).then(res => {
-		paging.value.complete(res.data);
-		pages.value.page += 1
+	};
+	const recordsList = ref([])
+	const paging = ref(null)
+	const pages = ref({
+		page: 1,
+		size: 10
 	})
-}
-// 终于可以用了
-onLoad(() => {
- 
-})
+	const getData = (page) => {
+		pages.value.page = page
+		request({
+			methods: 'get',
+			url: 'activity/integral/list',
+			data: pages.value
+		}).then(res => {
+			paging.value.complete(res.data);
+			pages.value.page += 1
+		})
+	}
+	// 终于可以用了
+	onLoad(() => {
+
+	})
 </script>
 
 <style lang="scss"></style>

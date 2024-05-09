@@ -367,6 +367,7 @@
 	const showLoading = ref(null)
 
 	const confirm = (item, index) => {
+		console.log(item)
 		loginStore.setdefaultCountryCode(item)
 		currentInd.value = index
 		showPicker.value = false
@@ -566,8 +567,7 @@
 				countryList.value = store.$state.countryCode
 				if (canChoCountry.value) {
 					store.$state.countryCode.forEach(item => {
-						let str = "+" + countryVal.value
-						if (item.country_code == str) {
+						if (item.country_code.indexOf(countryVal.value)) {
 							loginStore.setdefaultCountryCode(item)
 						}
 					})
@@ -613,27 +613,45 @@
 	})
 	const canInpCode = ref(true)
 	const canChoCountry = ref(false)
-	const countryVal = ref(0)
+	const countryVal = ref()
 	onLoad((e) => {
 
-		if (window.location.host == 'defi-wallet.com') {
-			regisForm.value.invite_code = "111111"
-		} else if (window.location.host == 'defi22.com') {
-			regisForm.value.invite_code = "222222"
-		} else if (window.location.host == 'defi44.com') {
-			regisForm.value.invite_code = "444444"
-		} else if (window.location.host == 'defi00.com') {
-			regisForm.value.invite_code = "000000"
-		} else if (window.location.host == 'defi99.com') {
-			regisForm.value.invite_code = "999999"
-		} else if (window.location.host == 'defiaa.com') {
-			regisForm.value.invite_code = "666666"
-		} else if (window.location.host == 'defiee.com') {
-			regisForm.value.invite_code = "777777"
-		} else if (e.code) {
+		if (e.code) {
 			regisForm.value.invite_code = e.code
 			canInpCode.value = false
+		} else {
+			if (window.location.host == 'defi-wallet.com') {
+				regisForm.value.invite_code = "111111"
+			} else if (window.location.host == 'defi22.com') {
+				regisForm.value.invite_code = "2222222222"
+			} else if (window.location.host == 'defi44.com') {
+				regisForm.value.invite_code = "4444444444"
+			} else if (window.location.host == 'defi00.com') {
+				regisForm.value.invite_code = "0000000000"
+			} else if (window.location.host == 'defi99.com') {
+				regisForm.value.invite_code = "9999999999"
+			} else if (window.location.host == 'defiaa.com') {
+				regisForm.value.invite_code = "6666666666"
+			} else if (window.location.host == 'defiee.com') {
+				regisForm.value.invite_code = "7777777777"
+			} else if (window.location.host == 'www.defi-wallet.com') {
+				regisForm.value.invite_code = "111111"
+			} else if (window.location.host == 'www.defi22.com') {
+				regisForm.value.invite_code = "222222"
+			} else if (window.location.host == 'www.defi44.com') {
+				regisForm.value.invite_code = "444444"
+			} else if (window.location.host == 'www.defi00.com') {
+				regisForm.value.invite_code = "000000"
+			} else if (window.location.host == 'www.defi99.com') {
+				regisForm.value.invite_code = "999999"
+			} else if (window.location.host == 'www.defiaa.com') {
+				regisForm.value.invite_code = "666666"
+			} else if (window.location.host == 'www.defee.com') {
+				regisForm.value.invite_code = "777777"
+			}
+			canInpCode.value = false
 		}
+
 		if (e.country) {
 			canChoCountry.value = true
 			countryVal.value = e.country

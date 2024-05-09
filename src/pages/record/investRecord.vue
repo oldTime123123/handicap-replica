@@ -62,115 +62,117 @@
 			</z-paging>
 		</view>
 	</view>
+	<Loading ref="showLoading"></Loading>
+
 </template>
 
 <script setup>
-import kefu from "@/components/kefu/kefu.vue"
+	import kefu from "@/components/kefu/kefu.vue"
 
-import topNav from "@/components/topNav/topNav.vue"
-import request from '../../../comm/request.ts';
-import {
-	userStore
-} from "@/store/themeNum.js";
-// import {
-// 	Toast
-// } from '@nutui/nutui';
-import {
-	onShow,
-	onLoad
-} from "@dcloudio/uni-app";
-const store = userStore();
-import {
-	useI18n
-} from 'vue-i18n'
+	import topNav from "@/components/topNav/topNav.vue"
+	import request from '../../../comm/request.ts';
+	import {
+		userStore
+	} from "@/store/themeNum.js";
+	// import {
+	// 	Toast
+	// } from '@nutui/nutui';
+	import {
+		onShow,
+		onLoad
+	} from "@dcloudio/uni-app";
+	const store = userStore();
+	import {
+		useI18n
+	} from 'vue-i18n'
 
-const {
-	t
-} = useI18n()
-const methods = {
-	back() {
-		history.back()
-	},
+	const {
+		t
+	} = useI18n()
+	const methods = {
+		back() {
+			history.back()
+		},
 
-};
-const recordsList = ref([])
-const paging = ref(null)
-const pages = ref({
-	page: 1,
-	size: 10,
-	invest_id: 1
-})
-
-const handleClick = () => {
-	// console.log('触发返回顶部');
-};
-const getData = (page) => {
-	pages.value.page = page
-	request({
-		methods: 'get',
-		url: 'machine/profitDetail',
-		data: pages.value
-	}).then(res => {
-		paging.value.complete(res.data);
-		pages.value.page += 1
+	};
+	const recordsList = ref([])
+	const paging = ref(null)
+	const pages = ref({
+		page: 1,
+		size: 10,
+		invest_id: 1
 	})
-}
-const topData = ref({})
-const getTopData = () => {
-	request({
-		methods: 'get',
-		url: 'machine/detail',
-		data: {
-			invest_id: pages.value.invest_id
-		}
-	}).then(res => {
-		topData.value = res
-		console.log(res);
-	})
-}
-const id = ref()
-// 终于可以用了
-onLoad((e) => {
- 
-	if (e.id) {
-		pages.value.invest_id = e.id
-		getTopData()
-	} else {
-		history.back()
+
+	const handleClick = () => {
+		// console.log('触发返回顶部');
+	};
+	const getData = (page) => {
+		pages.value.page = page
+		request({
+			methods: 'get',
+			url: 'machine/profitDetail',
+			data: pages.value
+		}).then(res => {
+			paging.value.complete(res.data);
+			pages.value.page += 1
+		})
 	}
+	const topData = ref({})
+	const getTopData = () => {
+		request({
+			methods: 'get',
+			url: 'machine/detail',
+			data: {
+				invest_id: pages.value.invest_id
+			}
+		}).then(res => {
+			topData.value = res
+			console.log(res);
+		})
+	}
+	const id = ref()
+	// 终于可以用了
+	onLoad((e) => {
+
+		if (e.id) {
+			pages.value.invest_id = e.id
+			getTopData()
+		} else {
+			history.back()
+		}
 
 
-})
+	})
 </script>
 
 <style lang="scss" scoped>
-.pass {
-	color: #60B661;
-}
+	.pass {
+		color: #60B661;
+	}
 
-.topBox {
-	padding: 30rpx 40rpx;
-	background-color: #8dc68c;
-	border-radius: 20rpx;
-	margin-bottom: 50rpx;
-	color: #fff;
-
-	.topItem {
-		width: calc(45% - 40rpx);
-		background-color: #fff;
-		height: 90rpx;
+	.topBox {
+		padding: 30rpx 40rpx;
+		background-color: #8dc68c;
 		border-radius: 20rpx;
-		color: #000;
-		padding: 30rpx 20rpx;
+		margin-bottom: 50rpx;
+		color: #fff;
 
-		.textHiddenTwo {
-			height: 60rpx;
-			text-align: center;
-		}
+		.topItem {
+			width: calc(45% - 40rpx);
+			background-color: #fff;
+			height: 90rpx;
+			border-radius: 20rpx;
+			color: #000;
+			padding: 30rpx 20rpx;
 
-		.value {
-			color: #60B661;
+			.textHiddenTwo {
+				height: 60rpx;
+				text-align: center;
+			}
+
+			.value {
+				color: #60B661;
+			}
 		}
 	}
-}
 </style>

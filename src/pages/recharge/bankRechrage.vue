@@ -71,6 +71,9 @@
 					:style="{ background: store.$state.secondColor }" @click="submitHandle">
 					{{ t('recharge.r_r6') }}
 				</view>
+				<view class='mt40' v-html='pageDatas?.other_txt'>
+
+				</view>
 			</view>
 			<view style="height: 100rpx;"></view>
 			<Loading ref="showLoading"></Loading>
@@ -79,199 +82,201 @@
 </template>
 
 <script setup>
-import kefu from "@/components/kefu/kefu.vue"
+	import kefu from "@/components/kefu/kefu.vue"
 
-import topNav from "@/components/topNav/topNav.vue"
-import request from '../../../comm/request.ts';
-import {
-	userStore
-} from "@/store/themeNum.js";
-import {
-	Toast
-} from '@nutui/nutui';
-import {
-	onShow,
-	onLoad
-} from "@dcloudio/uni-app";
-const store = userStore();
+	import topNav from "@/components/topNav/topNav.vue"
+	import request from '../../../comm/request.ts';
+	import {
+		userStore
+	} from "@/store/themeNum.js";
+	import {
+		Toast
+	} from '@nutui/nutui';
+	import {
+		onShow,
+		onLoad
+	} from "@dcloudio/uni-app";
+	const store = userStore();
 
-import {
-	useI18n
-} from "vue-i18n";
+	import {
+		useI18n
+	} from "vue-i18n";
 
-const {
-	t
-} = useI18n();
+	const {
+		t
+	} = useI18n();
 
-const choStyle = {
-	background: store.$state.secondColor,
-	boxShadow: "none ",
-	color: '#000'
-}
-const noStyle = {
-	color: store.$state.contentColor
-}
-
-
-const showLoading = ref(null)
-const nameInd = ref(-1)
-const numInd = ref(-1)
-const wayInd = ref(-1)
-const bankNameList = ref([
-
-])
-const user = ref({})
-const pageData = ref({})
-const inpVal = ref("")
-
-
-
-const inpHandle = e => {
-
-	if (nameInd.value == -1) {
-		return false
-	} else {
-		bankNameList.value[nameInd.value].buttons.forEach((item, index) => {
-			if (item !== e.detail.value) {
-				numInd.value = -1
-			}
-		})
+	const choStyle = {
+		background: store.$state.secondColor,
+		boxShadow: "none ",
+		color: '#000'
 	}
-}
-const changeInpVal = (index, item) => {
-	numInd.value = index
-	inpVal.value = item
-}
-const getData = () => {
-	request({
-		url: 'finance/bank/recharge/index',
-		methods: 'get',
-	}).then(res => {
-		bankNameList.value = res.channels
-		user.value = res.user
-	})
-}
-
-
-const submitHandle = () => {
-
-
-	showLoading.value.loading = true
-	const formData = {
-		amount: inpVal.value,
-		balance_type: balance_type.value,
-		channelId: bankNameList.value[nameInd.value]?.id,
-		way: bankNameList.value[nameInd.value]?.way.length > 0 ? bankNameList.value[nameInd.value]?.way[wayInd
-			.value]?.id : 0,
-
+	const noStyle = {
+		color: store.$state.contentColor
 	}
-	request({
-		url: '/finance/bank/recharge/submit',
-		methods: 'post',
-		data: formData
-	}).then(res => {
-		showLoading.value.loading = false
-		let data = res
-		if (data.is_post == 0) {
-			window.location.href = data.native_url;
-		} else if (data.is_post == 1) {
-			const div = document.createElement('div');
-			let inputHtml = "";
-			let params = data.params;
-			for (let key in data.params) {
-				inputHtml += `<input name="${key}" value="${params[key]}" type="hidden" />`;
-			}
-			let myHtml = `<form method="post" action='${native_url}'>
-			 		                            ${inputHtml}
-			 		                        </form>`;
-			div.innerHTML = myHtml;
-			document.body.appendChild(div);
-			document.forms[0].submit();
-		} else if (data.is_post == 2) {
-			uni.navigateTo({
-				url: "/pages/clabe/clabe?clabe=" + data.native_url + "&amount=" + data
-					.verify_money
+
+
+	const showLoading = ref(null)
+	const nameInd = ref(-1)
+	const numInd = ref(-1)
+	const wayInd = ref(-1)
+	const bankNameList = ref([
+
+	])
+	const user = ref({})
+	const pageData = ref({})
+	const inpVal = ref("")
+
+
+
+	const inpHandle = e => {
+
+		if (nameInd.value == -1) {
+			return false
+		} else {
+			bankNameList.value[nameInd.value].buttons.forEach((item, index) => {
+				if (item !== e.detail.value) {
+					numInd.value = -1
+				}
 			})
 		}
-
-	}).catch(err => {
-		showLoading.value.loading = false
-		Toast.text(err.message)
-	})
-
-}
-const currency = uni.getStorageSync('currency')
-
-const balance_type = ref()
-onLoad(e => {
-	if (e.balance_type) {
-		balance_type.value = e.balance_type
+	}
+	const changeInpVal = (index, item) => {
+		numInd.value = index
+		inpVal.value = item
+	}
+	const pageDatas = ref()
+	const getData = () => {
+		request({
+			url: 'finance/bank/recharge/index',
+			methods: 'get',
+		}).then(res => {
+			bankNameList.value = res.channels
+			user.value = res.user
+			pageDatas.value = res
+		})
 	}
 
- 
-})
-// 终于可以用了
-onShow(() => {
-	getData()
-})
+
+	const submitHandle = () => {
+
+
+		showLoading.value.loading = true
+		const formData = {
+			amount: inpVal.value,
+			balance_type: balance_type.value,
+			channelId: bankNameList.value[nameInd.value]?.id,
+			way: bankNameList.value[nameInd.value]?.way.length > 0 ? bankNameList.value[nameInd.value]?.way[wayInd
+				.value]?.id : 0,
+
+		}
+		request({
+			url: '/finance/bank/recharge/submit',
+			methods: 'post',
+			data: formData
+		}).then(res => {
+			showLoading.value.loading = false
+			let data = res
+			if (data.is_post == 0) {
+				window.location.href = data.native_url;
+			} else if (data.is_post == 1) {
+				const div = document.createElement('div');
+				let inputHtml = "";
+				let params = data.params;
+				for (let key in data.params) {
+					inputHtml += `<input name="${key}" value="${params[key]}" type="hidden" />`;
+				}
+				let myHtml = `<form method="post" action='${native_url}'>
+			 		                            ${inputHtml}
+			 		                        </form>`;
+				div.innerHTML = myHtml;
+				document.body.appendChild(div);
+				document.forms[0].submit();
+			} else if (data.is_post == 2) {
+				uni.navigateTo({
+					url: "/pages/clabe/clabe?clabe=" + data.native_url + "&amount=" + data
+						.verify_money
+				})
+			}
+
+		}).catch(err => {
+			showLoading.value.loading = false
+			Toast.text(err.message)
+		})
+
+	}
+	const currency = uni.getStorageSync('currency')
+
+	const balance_type = ref()
+	onLoad(e => {
+		if (e.balance_type) {
+			balance_type.value = e.balance_type
+		}
+
+
+	})
+	// 终于可以用了
+	onShow(() => {
+		getData()
+	})
 </script>
 
 <style lang="scss">
-.topBox {
-	width: 100%;
-	height: 350rpx;
-	background: url('/static/themeNum1/img/balanceBg.png') no-repeat 100%/100%;
-}
-
-.topItem {
-	padding: 0 34rpx;
-	height: 60rpx;
-	background: #fff;
-	border-radius: 30rpx;
-	text-align: center;
-	line-height: 60rpx;
-	color: #000;
-}
-
-.inputItem {
-	height: 115rpx;
-	background: #fff;
-	border-radius: 20rpx;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 50rpx;
-	color: #000;
-	padding-left: 40rpx;
-	// box-shadow: 0px 1px 51px 0px rgba(64,46,197,0.05);
-}
-
-.mainBox {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	// grid-template-rows: repeat(3, 1fr);
-	grid-column-gap: 0px;
-	grid-row-gap: 0px;
-
-	.chooseItem {
-		width: 90%;
-		background-color: #262626;
-		box-shadow: 0 0 10rpx 1rpx #ccc inset;
-		height: 100rpx;
-		border-radius: 15rpx;
-		margin-bottom: 20rpx;
-		text-align: center;
-		line-height: 100rpx;
+	.topBox {
+		width: 100%;
+		height: 350rpx;
+		background: url('/static/themeNum1/img/balanceBg.png') no-repeat 100%/100%;
 	}
-}
 
-.btns {
-	margin-top: 100rpx;
-	// box-shadow: 0px 11px 47px 4px rgba(247, 175, 64, 0.35);
-	height: 120rpx;
-	background-color: #fff;
-	line-height: 120rpx;
-	text-align: center;
-	border-radius: 35rpx;
-}
+	.topItem {
+		padding: 0 34rpx;
+		height: 60rpx;
+		background: #fff;
+		border-radius: 30rpx;
+		text-align: center;
+		line-height: 60rpx;
+		color: #000;
+	}
+
+	.inputItem {
+		height: 115rpx;
+		background: #fff;
+		border-radius: 20rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 50rpx;
+		color: #000;
+		padding-left: 40rpx;
+		// box-shadow: 0px 1px 51px 0px rgba(64,46,197,0.05);
+	}
+
+	.mainBox {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		// grid-template-rows: repeat(3, 1fr);
+		grid-column-gap: 0px;
+		grid-row-gap: 0px;
+
+		.chooseItem {
+			width: 90%;
+			background-color: #262626;
+			box-shadow: 0 0 10rpx 1rpx #ccc inset;
+			height: 100rpx;
+			border-radius: 15rpx;
+			margin-bottom: 20rpx;
+			text-align: center;
+			line-height: 100rpx;
+		}
+	}
+
+	.btns {
+		margin-top: 100rpx;
+		// box-shadow: 0px 11px 47px 4px rgba(247, 175, 64, 0.35);
+		height: 120rpx;
+		background-color: #fff;
+		line-height: 120rpx;
+		text-align: center;
+		border-radius: 35rpx;
+	}
 </style>

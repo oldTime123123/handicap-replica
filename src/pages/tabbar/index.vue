@@ -4,76 +4,75 @@
 			<img class="kefu" type="primary" src="../../static/kefu.png" alt=""
 				@click="handleToPage('../mine/service')">
 		</nut-drag>
-		<view class="main">
-			<view style="position: relative">
-				<view class="flex between topNav">
-					<image src="../../static/logoindex.png" mode="widthFix" style="width: 120rpx;"></image>
-					<!-- @click="handleToPage('../mine/service')" -->
-					<view class="flex" style="align-items: center;">
-						<view style="display: flex;justify-content: right;margin-right: 20rpx;" v-if="login">
-							<view class="topbtnSize topbtnText1" @click="handleToPage('../login/register')">
-								{{ t('pk.t_i1') }}
-							</view>
-							<view class="topbtnSize topbtnText2" @click="handleToPage('../login/login')">
-								{{ t('pk.t_i2') }}
-
-							</view>
+		<view>
+			<view class="flex between topNav">
+				<image src="../../static/logoindex.png" mode="widthFix" style="width: 120rpx;"></image>
+				<!-- @click="handleToPage('../mine/service')" -->
+				<view class="flex" style="align-items: center;">
+					<view style="display: flex;justify-content: right;margin-right: 20rpx;" v-if="login">
+						<view class="topbtnSize topbtnText1" @click="handleToPage('../login/register')">
+							{{ t('pk.t_i1') }}
 						</view>
-						<view class="appTime" style="margin-right: 20rpx;" v-if="!login">
-							<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png"
-								mode=""></image>
-							UTC+7-{{ servetTime }}
-						</view>
-						<img class="ml12 mr12" src="../../static/top1.png" alt="" @click="handleToPage('down')">
-						<nut-badge dot v-if="showBadge" right="10" top="5" size>
-							<img class="ml12 mr24" src="../../static/top2.png" @click="handleToPage('../mine/notice')"
-								alt="" v-show="!login">
-						</nut-badge>
-						<img class="ml12 mr24" v-else src="../../static/top2.png"
-							@click="handleToPage('../mine/notice')" alt="" v-show="!login">
+						<view class="topbtnSize topbtnText2" @click="handleToPage('../login/login')">
+							{{ t('pk.t_i2') }}
 
-						<image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
-							@click="handleToPage('../mine/langSetting')"></image>
+						</view>
 					</view>
+					<view class="appTime" style="margin-right: 20rpx;" v-if="!login">
+						<image style="width:32rpx;height: 32rpx;margin-right: 10rpx;" src="../../static/biao.png"
+							mode=""></image>
+						UTC+7-{{ servetTime }}
+					</view>
+					<img class="ml12 mr12" src="../../static/top1.png" alt="" @click="handleToPage('down')">
+					<nut-badge dot v-if="showBadge" right="10" top="5" size>
+						<img class="ml12 mr24" src="../../static/top2.png" @click="handleToPage('../mine/notice')"
+							alt="" v-show="!login">
+					</nut-badge>
+					<img class="ml12 mr24" v-else src="../../static/top2.png" @click="handleToPage('../mine/notice')"
+						alt="" v-show="!login">
 
-
-
-
+					<image src="/static/themeNum1/icon/indexlang1.png" style="width:52rpx;height:52rpx"
+						@click="handleToPage('../mine/langSetting')"></image>
 				</view>
-				<view style="height: 100rpx;">
 
-				</view>
-				<!--  -->
-				<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" next-margin="20"
-					:circular="true" style="height: 400rpx">
-					<swiper-item v-for="(item, index) in bannerList" :key="index">
-						<image :src="item.banner_image" mode="widthFix" style="width: 100%;"></image>
-					</swiper-item>
-				</swiper>
 
-				<view style="
+
+
+			</view>
+			<view style="height: 100rpx;">
+
+			</view>
+			<!--  -->
+			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" next-margin="20"
+				:circular="true" style="height: 400rpx">
+				<swiper-item v-for="(item, index) in bannerList" :key="index">
+					<image :src="item.banner_image" mode="widthFix" style="width: 100%;"></image>
+				</swiper-item>
+			</swiper>
+
+			<view style="
             position: absolute;
             width: 100%;
             height: 210rpx;
             bottom: -100rpx;
             display: none;
           ">
-					<view class="pdlr30">
-						<view class="topComm l_inpBg">
-							<view class="commItem" v-for="(item, index) in commList" @click="handleToPage(item.url)"
-								:class="index !== commList.lengthg - 1 ? 'mr20' : ''">
-								<view class="commItem" v-if="item.show">
-									<image :src="item.img" mode="widthFix" style="width: 90rpx; height: 90rpx"></image>
-									<view class="mt10">{{ item.name }}</view>
-								</view>
+				<view class="pdlr30">
+					<view class="topComm l_inpBg">
+						<view class="commItem" v-for="(item, index) in commList" @click="handleToPage(item.url)"
+							:class="index !== commList.lengthg - 1 ? 'mr20' : ''">
+							<view class="commItem" v-if="item.show">
+								<image :src="item.img" mode="widthFix" style="width: 90rpx; height: 90rpx"></image>
+								<view class="mt10">{{ item.name }}</view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
+		</view>
 
-			<view class="pdlr30" style="">
-				<view style="
+		<view class="pdlr30" style="">
+			<view style="
             width: 100%;
             height: 88rpx;
             margin-top: 20rpx;
@@ -83,388 +82,382 @@
             align-items: center;
             background-color: #00264D;
           ">
-					<view style="width: 550rpx;">
-						<nut-noticebar border-radius="40" :scrollable="true" :text="barText" color="#fff"
-							:background="'#00264D !important'" left-icon="../../static/themeNum1/icon/laba.png">
+				<view style="width: 550rpx;">
+					<nut-noticebar border-radius="40" :scrollable="true" :text="barText" color="#fff"
+						:background="'#00264D !important'" left-icon="../../static/themeNum1/icon/laba.png">
+					</nut-noticebar>
+				</view>
+
+				<view class="tz1" @click="showtz1 = true">
+					{{ t('pk.t_i3') }}
+
+				</view>
+			</view>
+			<nut-overlay v-model:visible="showtz1" :close-on-click-overlay="false">
+				<div class="overlay-body">
+					<div class="overlay-content">
+						<div @click.stop="showtz1 = false" style="position: absolute;top: 20rpx;right: 30rpx;">X
+						</div>
+						{{ barText }}
+					</div>
+				</div>
+			</nut-overlay>
+			<!-- content1 -->
+			<view style="display: flex;flex-wrap: wrap;justify-content: space-between;margin-top: 12rpx;">
+				<view class="contentCard" @click="handleToPage('../recharge/means?type=recharge')">
+					{{ t('pk.t_i4') }}
+
+				</view>
+				<view class="contentCard bg" @click="handleToPage('../withdraw/index?balance_type=1')">
+					{{ t('pk.t_i5') }}
+
+				</view>
+				<view class="contentCard bg1" @click="handleToPage('../mine/service')">
+					{{ t('pk.t_i6') }}
+
+				</view>
+				<view class="contentCard bg2" @click="handleToPage('../mine/service')">
+					{{ t('pk.t_i7') }}
+
+				</view>
+			</view>
+			<!-- content2 -->
+			<view style="display: flex;flex-wrap: wrap;justify-content: space-between;margin-top: 12rpx;">
+				<view class="contentCard2" @click="handleToPage('./construct')">
+					<p style="width: 300rpx; font-size: 24rpx;line-height: 24rpx;">
+						{{ t('pk.t_i8') }}
+					</p>
+					<view class="contentCard2text">
+						{{ t('pk.t_i9') }}
+
+					</view>
+				</view>
+				<view class="contentCard2" @click="handleToPage('down')"
+					style="background-image: url('../../static/imgs/index/content2-2.png');">
+					<p style="width: 300rpx; font-size: 24rpx;line-height: 24rpx;">
+						{{ t('pk.t_i10') }}
+
+					</p>
+					<view class="contentCard2text">
+						{{ t('pk.t_i11') }}
+					</view>
+				</view>
+			</view>
+			<!-- content3 -->
+			<view class="" style="padding-top: 40rpx;">
+				<view class="flex">
+					<image style="width: 48rpx;height: 48rpx;" src="../../static/egg/icon1.png" mode=""></image>
+					<view class="" style="margin-left: 10rpx;">
+						{{ t('ttn.t_t1') }}：{{ Number(pageDataTwo?.ai_balance) + Number(pageDataTwo?.balance) }}
+						{{ currency }}
+
+					</view>
+				</view>
+				<view class="flex mt30"
+					style="justify-content: space-between;height: 130rpx;background-repeat: no-repeat;background-size: 100%;">
+					<view class="Basic back1 flex"
+						style="flex-direction: column;width: 334rpx; height: 172rpx;justify-content: space-around;background-image: url('../../static/imgs/index/content3-1.png');background-repeat: no-repeat;background-size: 100%;">
+						<view class="text1">
+							{{ t('ttn.t_t2') }}
+						</view>
+						<view class="text2" style="margin-top: 0rpx;">
+							{{ pageDataTwo?.ai_balance }} {{ currency }}
+							<p>≈$ {{ (pageDataTwo?.ai_balance * kurs).toFixed(2) }}</p>
+						</view>
+					</view>
+
+
+					<view class="Basic back2 flex"
+						style="width: 334rpx; height: 172rpx;justify-content: space-around;flex-direction: column;background-image: url('../../static/imgs/index/content3-2.png');">
+						<view class="text1">
+							{{ t('ttn.t_t3') }}
+						</view>
+						<view class="text2" style="margin-top: 0rpx;">
+							{{ pageDataTwo?.job_invest_balance }} {{ currency }}
+							<p>≈$ {{ (pageDataTwo?.job_invest_balance * kurs).toFixed(2) }}</p>
+						</view>
+					</view>
+				</view>
+			</view>
+
+
+			<!-- 不用 -->
+			<view :style="store.$state.index.red" class="center" @click="showMask" v-if="showRegRed" v-show="false">
+				<view style="padding: 0 190rpx; line-height: 35rpx" class="f28 text_center textHiddenThree"
+					:style="{ color: '#fff' }">{{ t("other.o_a1") }}</view>
+			</view>
+
+			<view class="center" @click="handleToPage('../coupon/recive')" v-if="showParwel" v-show="false">
+
+				<image src="/static/couIndex/couInd.png" style="width: 100%; height: 200rpx"></image>
+			</view>
+			<!-- 要更改的客服跳转 -->
+			<view class="topComm2 mt40" v-show="false">
+				<view class="commItem" v-for="(item, index) in commList2" @click="juot(item)">
+					<image :src="item.img" mode="widthFix" style="width: 43rpx; height: 43rpx"></image>
+					<view class="mt22 textHiddenTwo" style="height: 80rpx; width: 100%">{{ item.name }}
+					</view>
+					<view class="text_bold f26">{{ item.value }}</view>
+					<image v-if="index == 3" style="width: 32rpx; height: 32rpx"
+						src="../../static/themeNum1/icon/icon2.png" mode=""></image>
+				</view>
+			</view>
+
+
+			<!-- invset -->
+			<view class="mt69" v-if="true">
+				<view class="f38 text_bold">
+					{{ t("other.o_a3") }}
+				</view>
+
+
+				<view class="flex mt30 mb48" style="justify-content: space-between;">
+
+					<view class="invsetbtn2" :style="invsetCard == 0 ? rechangeStyle : ''" @click="invsetChange(0)">
+						{{ t('pk.t_i12') }}
+
+					</view>
+					<view class="invsetbtn2" :style="invsetCard == 1 ? rechangeStyle : ''" @click="invsetChange(1)">
+						{{ t('pk.t_i13') }}
+
+					</view>
+				</view>
+				<view v-show="invsetCard == 0"
+					style="background-color: #080F32;border-radius: 24rpx 24rpx 24rpx 24rpx;">
+					<view class="tableHead between" v-for="item in lineData">
+						<view class="flex col_center item" style="width: 30%;">
+							<image :src="item.pro_img" style="width:52rpx ;height: 52rpx;"></image>
+							<view class="mglr14 f28 text_bold">
+								<text class="text_white" style="color: #fff;">
+									{{ item.pro_name }}
+								</text>
+								<!-- /{{ currency }} -->
+								<!-- <view class="f20">Vol:{{ item.vol }}</view> -->
+
+							</view>
+						</view>
+						<view class="item" style="width: 25%;">
+							<view class="f28" style="color: #fff;">{{ item.price }}</view>
+						</view>
+						<view class="item flex" style="flex-direction:row-reverse;width: 15%;" v-show="false">
+							<view class=" downEl" v-if="item.is_rise == 1">
+								-{{ item.rise_rate }}%
+							</view>
+
+							<view class="upEl" v-else>
+								+{{ item.rise_rate }}%
+							</view>
+						</view>
+						<view class="btcBtn" @click="handleToPage('./panel')">
+							{{ t('pk.t_i14') }}
+
+						</view>
+					</view>
+					<view class="panelbottom">
+						<p style="display: flex;justify-content: center;align-items: center;"
+							@click="handleToPage('./panel')">
+							{{ t('pk.t_i15') }}
+
+							<img class="mr24" src="../../static/imgs/index/right.png" alt="">
+						</p>
+					</view>
+
+				</view>
+				<view v-show="invsetCard == 1"
+					style="background-color: #042659;border-radius: 24rpx 24rpx 24rpx 24rpx;">
+					<view
+						style='background-color: #042659;box-sizing: border-box;padding: 40rpx 28rpx 0rpx 28rpx; margin-top: 40rpx;border-radius: 24rpx;'>
+						<view class="flex"
+							style="justify-content: space-between;margin-bottom: 32rpx;align-items: center;"
+							v-for="item of interestList">
+							<view class="flex" style="align-items: center;" @click="interest(item.id)">
+								<image style="width: 246rpx;height: 164rpx;border-radius: 16rpx;" :src="item.full_img"
+									mode="">
+								</image>
+								<view style="margin-left: 26rpx;">
+									<view class="text1 textshow3" style="margin-bottom: 15rpx;width: 300rpx;">
+										{{ item.title }}
+									</view>
+									<!-- <view class="text2">profit:{{item.rate}}</view> -->
+									<view class="text2" style="margin-bottom: 15rpx;font-size: 26rpx;">
+										{{ t('ttn.t_t28') }}:{{ ((item.rate) * 100).toFixed(2) }}%
+									</view>
+									<view class="text2" style="margin-bottom: 15rpx;font-size: 26rpx;">
+										{{ t('ttn.t_t29') }}: {{ item.day }} {{ t('ttn.t_t30') }}
+									</view>
+
+								</view>
+							</view>
+							<view class="" style="width: 48rpx;">
+								<image style="width: 36rpx;height: 36rpx;"
+									src="../../static/imgs/index/content3-2-1.png" mode="" @click="interest(item.id)">
+								</image>
+							</view>
+
+						</view>
+					</view>
+					<view class="panelbottom">
+						<p style="display: flex;justify-content: center;align-items: center;"
+							@click="handleToPage('./news')">
+							{{ t('pk.t_i15') }}
+
+							<img class="mr24" src="../../static/imgs/index/right.png" alt="">
+						</p>
+					</view>
+					<view class="fg"></view>
+				</view>
+
+				<!-- Help FAQ -->
+
+				<view>
+					<view class="assist_topic">{{ t('pk.t_i16') }}</view>
+					<view class="help_center">
+						<view class="" v-for="item in newsList" @click="changePage(item.id)">
+							<view class=""
+								style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
+								<p class="ml34 "> {{ item.des }}</p>
+								<img class="mr24" src="../../static/imgs/index/right.png" alt="">
+							</view>
+							<view class="fg"></view>
+						</view>
+
+
+					</view>
+				</view>
+
+
+
+				<view class="mt46"
+					style="display: flex;width: 652rpx;padding-left: 32rpx; height: 88rpx;background: #00264D;border-radius: 20rpx 20rpx 20rpx 20rpx;border: 2rpx solid #006BF4;align-items: center;overflow: hidden;">
+					<view class="bot">
+					</view>
+					<view style="width: 600rpx;">
+						<nut-noticebar direction='vertical' :list="horseLamp1" :speed='10' :standTime='1000'
+							:background="`#00264D`" :color="`#fff`" left-icon="'../../static/ims/index/bot.png'">
 						</nut-noticebar>
 					</view>
 
-					<view class="tz1" @click="showtz1 = true">
-						{{ t('pk.t_i3') }}
-
-					</view>
 				</view>
-				<nut-overlay v-model:visible="showtz1" :close-on-click-overlay="false">
-					<div class="overlay-body">
-						<div class="overlay-content">
-							<div @click.stop="showtz1 = false" style="position: absolute;top: 20rpx;right: 30rpx;">X
-							</div>
-							{{ barText }}
-						</div>
-					</div>
-				</nut-overlay>
-				<!-- content1 -->
-				<view style="display: flex;flex-wrap: wrap;justify-content: space-between;margin-top: 12rpx;">
-					<view class="contentCard" @click="handleToPage('../recharge/means?type=recharge')">
-						{{ t('pk.t_i4') }}
 
-					</view>
-					<view class="contentCard bg" @click="handleToPage('../withdraw/index?balance_type=1')">
-						{{ t('pk.t_i5') }}
+				<!--  -->
 
-					</view>
-					<view class="contentCard bg1" @click="handleToPage('../mine/service')">
-						{{ t('pk.t_i6') }}
-
-					</view>
-					<view class="contentCard bg2" @click="handleToPage('../mine/service')">
-						{{ t('pk.t_i7') }}
-
-					</view>
-				</view>
-				<!-- content2 -->
-				<view style="display: flex;flex-wrap: wrap;justify-content: space-between;margin-top: 12rpx;">
-					<view class="contentCard2" @click="handleToPage('./construct')">
-						<p style="width: 300rpx; font-size: 24rpx;line-height: 24rpx;">
-							{{ t('pk.t_i8') }}
-						</p>
-						<view class="contentCard2text">
-							{{ t('pk.t_i9') }}
-
-						</view>
-					</view>
-					<view class="contentCard2" @click="handleToPage('down')"
-						style="background-image: url('../../static/imgs/index/content2-2.png');">
-						<p style="width: 300rpx; font-size: 24rpx;line-height: 24rpx;">
-							{{ t('pk.t_i10') }}
-
-						</p>
-						<view class="contentCard2text">
-							{{ t('pk.t_i11') }}
+				<view class="between flex-wrap mt39" style="flex-wrap: wrap" v-show="false">
+					<view v-for="item in newsList" class="mb29 newsItem flex flex-col"
+						style="width: 48%; border-radius: 20rpx; overflow: hidden" @click="changePage(item.id)">
+						<!-- <view style="width: 100%;height:190rpx;" v-html="item.contents"></view> -->
+						<image :src="item.full_cover" style="width: 100%; height: 190rpx"></image>
+						<view class="pdtb25 pdlr32 f24 textHiddenOne"
+							style="background-color: #151527; font-weight: bold">
+							{{ item?.des }}
 						</view>
 					</view>
 				</view>
-				<!-- content3 -->
-				<view class="" style="padding-top: 40rpx;">
-					<view class="flex">
-						<image style="width: 48rpx;height: 48rpx;" src="../../static/egg/icon1.png" mode=""></image>
-						<view class="" style="margin-left: 10rpx;">
-							{{ t('ttn.t_t1') }}：{{ Number(pageDataTwo?.ai_balance) + Number(pageDataTwo?.balance) }}
-							{{ currency }}
+			</view>
 
-						</view>
-					</view>
-					<view class="flex mt30"
-						style="justify-content: space-between;height: 130rpx;background-repeat: no-repeat;background-size: 100%;">
-						<view class="Basic back1 flex"
-							style="flex-direction: column;width: 334rpx; height: 172rpx;justify-content: space-around;background-image: url('../../static/imgs/index/content3-1.png');background-repeat: no-repeat;background-size: 100%;">
-							<view class="text1">
-								{{ t('ttn.t_t2') }}
-							</view>
-							<view class="text2" style="margin-top: 0rpx;">
-								{{ pageDataTwo?.ai_balance }} {{ currency }}
-								<p>≈$ {{ (pageDataTwo?.ai_balance * kurs).toFixed(2) }}</p>
-							</view>
-						</view>
-
-
-						<view class="Basic back2 flex"
-							style="width: 334rpx; height: 172rpx;justify-content: space-around;flex-direction: column;background-image: url('../../static/imgs/index/content3-2.png');">
-							<view class="text1">
-								{{ t('ttn.t_t3') }}
-							</view>
-							<view class="text2" style="margin-top: 0rpx;">
-								{{ pageDataTwo?.job_invest_balance }} {{ currency }}
-								<p>≈$ {{ (pageDataTwo?.ai_balance * kurs).toFixed(2) }}</p>
-							</view>
-						</view>
-					</view>
-				</view>
-
-
-				<!-- 不用 -->
-				<view :style="store.$state.index.red" class="center" @click="showMask" v-if="showRegRed" v-show="false">
-					<view style="padding: 0 190rpx; line-height: 35rpx" class="f28 text_center textHiddenThree"
-						:style="{ color: '#fff' }">{{ t("other.o_a1") }}</view>
-				</view>
-
-				<view class="center" @click="handleToPage('../coupon/recive')" v-if="showParwel" v-show="false">
-
-					<image src="/static/couIndex/couInd.png" style="width: 100%; height: 200rpx"></image>
-				</view>
-				<!-- 要更改的客服跳转 -->
-				<view class="topComm2 mt40" v-show="false">
-					<view class="commItem" v-for="(item, index) in commList2" @click="juot(item)">
-						<image :src="item.img" mode="widthFix" style="width: 43rpx; height: 43rpx"></image>
-						<view class="mt22 textHiddenTwo" style="height: 80rpx; width: 100%">{{ item.name }}
-						</view>
-						<view class="text_bold f26">{{ item.value }}</view>
-						<image v-if="index == 3" style="width: 32rpx; height: 32rpx"
-							src="../../static/themeNum1/icon/icon2.png" mode=""></image>
-					</view>
-				</view>
-
-
-				<!-- invset -->
-				<view class="mt69" v-if="true">
-					<view class="f38 text_bold">
-						{{ t("other.o_a3") }}
-					</view>
-
-
-					<view class="flex mt30 mb48" style="justify-content: space-between;">
-
-						<view class="invsetbtn2" :style="invsetCard == 0 ? rechangeStyle : ''" @click="invsetChange(0)">
-							{{ t('pk.t_i12') }}
-
-						</view>
-						<view class="invsetbtn2" :style="invsetCard == 1 ? rechangeStyle : ''" @click="invsetChange(1)">
-							{{ t('pk.t_i13') }}
-
-						</view>
-					</view>
-					<view v-show="invsetCard == 0"
-						style="background-color: #080F32;border-radius: 24rpx 24rpx 24rpx 24rpx;">
-						<view class="tableHead between" v-for="item in lineData">
-							<view class="flex col_center item" style="width: 30%;">
-								<image :src="item.pro_img" style="width:52rpx ;height: 52rpx;"></image>
-								<view class="mglr14 f28 text_bold">
-									<text class="text_white" style="color: #fff;">
-										{{ item.pro_name }}
-									</text>
-									<!-- /{{ currency }} -->
-									<!-- <view class="f20">Vol:{{ item.vol }}</view> -->
-
-								</view>
-							</view>
-							<view class="item" style="width: 25%;">
-								<view class="f28" style="color: #fff;">{{ item.price }}</view>
-							</view>
-							<view class="item flex" style="flex-direction:row-reverse;width: 15%;" v-show="false">
-								<view class=" downEl" v-if="item.is_rise == 1">
-									-{{ item.rise_rate }}%
-								</view>
-
-								<view class="upEl" v-else>
-									+{{ item.rise_rate }}%
-								</view>
-							</view>
-							<view class="btcBtn" @click="handleToPage('./panel')">
-								{{ t('pk.t_i14') }}
-
-							</view>
-						</view>
-						<view class="panelbottom">
-							<p style="display: flex;justify-content: center;align-items: center;"
-								@click="handleToPage('./panel')">
-								{{ t('pk.t_i15') }}
-
-								<img class="mr24" src="../../static/imgs/index/right.png" alt="">
-							</p>
-						</view>
-
-					</view>
-					<view v-show="invsetCard == 1"
-						style="background-color: #042659;border-radius: 24rpx 24rpx 24rpx 24rpx;">
-						<view
-							style='background-color: #042659;box-sizing: border-box;padding: 40rpx 28rpx 0rpx 28rpx; margin-top: 40rpx;border-radius: 24rpx;'>
-							<view class="flex"
-								style="justify-content: space-between;margin-bottom: 32rpx;align-items: center;"
-								v-for="item of interestList">
-								<view class="flex" style="align-items: center;" @click="interest(item.id)">
-									<image style="width: 246rpx;height: 164rpx;border-radius: 16rpx;"
-										:src="item.full_img" mode="">
-									</image>
-									<view style="margin-left: 26rpx;">
-										<view class="text1 textshow3" style="margin-bottom: 15rpx;width: 300rpx;">
-											{{ item.title }}
-										</view>
-										<!-- <view class="text2">profit:{{item.rate}}</view> -->
-										<view class="text2" style="margin-bottom: 15rpx;font-size: 26rpx;">
-											{{ t('ttn.t_t28') }}:{{ ((item.rate) * 100).toFixed(2) }}%
-										</view>
-										<view class="text2" style="margin-bottom: 15rpx;font-size: 26rpx;">
-											{{ t('ttn.t_t29') }}: {{ item.day }} {{ t('ttn.t_t30') }}
-										</view>
-
-									</view>
-								</view>
-								<view class="" style="width: 48rpx;">
-									<image style="width: 36rpx;height: 36rpx;"
-										src="../../static/imgs/index/content3-2-1.png" mode=""
-										@click="interest(item.id)">
-									</image>
-								</view>
-
-							</view>
-						</view>
-						<view class="panelbottom">
-							<p style="display: flex;justify-content: center;align-items: center;"
-								@click="handleToPage('./news')">
-								{{ t('pk.t_i15') }}
-
-								<img class="mr24" src="../../static/imgs/index/right.png" alt="">
-							</p>
-						</view>
-						<view class="fg"></view>
-					</view>
-
-					<!-- Help FAQ -->
-
-					<view>
-						<view class="assist_topic">{{ t('pk.t_i16') }}</view>
-						<view class="help_center">
-							<view class="" v-for="item in newsList" @click="changePage(item.id)">
-								<view class=""
-									style="height: 99rpx;width: 100%;display: flex;justify-content: space-between;align-items: center;">
-									<p class="ml34 "> {{ item.des }}</p>
-									<img class="mr24" src="../../static/imgs/index/right.png" alt="">
-								</view>
-								<view class="fg"></view>
-							</view>
-
-
-						</view>
-					</view>
-
-
-
-					<view class="mt46"
-						style="display: flex;width: 652rpx;padding-left: 32rpx; height: 88rpx;background: #00264D;border-radius: 20rpx 20rpx 20rpx 20rpx;border: 2rpx solid #006BF4;align-items: center;overflow: hidden;">
-						<view class="bot">
-						</view>
-						<view style="width: 600rpx;">
-							<nut-noticebar direction='vertical' :list="horseLamp1" :speed='10' :standTime='1000'
-								:background="`#00264D`" :color="`#fff`" left-icon="'../../static/ims/index/bot.png'">
-							</nut-noticebar>
-						</view>
-
-					</view>
-
-					<!--  -->
-
-					<view class="between flex-wrap mt39" style="flex-wrap: wrap" v-show="false">
-						<view v-for="item in newsList" class="mb29 newsItem flex flex-col"
-							style="width: 48%; border-radius: 20rpx; overflow: hidden" @click="changePage(item.id)">
-							<!-- <view style="width: 100%;height:190rpx;" v-html="item.contents"></view> -->
-							<image :src="item.full_cover" style="width: 100%; height: 190rpx"></image>
-							<view class="pdtb25 pdlr32 f24 textHiddenOne"
-								style="background-color: #151527; font-weight: bold">
-								{{ item?.des }}
-							</view>
-						</view>
-					</view>
-				</view>
-
-				<!-- Platform Introduction -->
-				<view class="mt64">
-					<p style="
+			<!-- Platform Introduction -->
+			<view class="mt64">
+				<p style="
             font-weight: 600;
             font-size: 36rpx;
             color: #FFFFFF;
             text-align: left;">
-						{{ t('pk.t_i17') }}
+					{{ t('pk.t_i17') }}
 
+				</p>
+				<view class="mt24 pb40"
+					style="width: 686rpx;background: #042659;border-radius: 16rpx 16rpx 16rpx 16rpx;overflow: hidden;">
+					<p
+						style="width: 632rpx;overflow: hidden;margin: 34rpx auto 10rpx;font-weight: 400;font-size: 24rpx;color: #FFFFFF;">
+
+						{{ income.content }}
 					</p>
-					<view class="mt24 pb40"
-						style="width: 686rpx;background: #042659;border-radius: 16rpx 16rpx 16rpx 16rpx;overflow: hidden;">
-						<p
-							style="width: 632rpx;overflow: hidden;margin: 34rpx auto 10rpx;font-weight: 400;font-size: 24rpx;color: #FFFFFF;">
-
-							{{ income.content }}
-						</p>
+					<view
+						style="width: 632rpx; display: flex;justify-content: space-between;font-size: 24rpx; text-align: center;margin: 0 auto;">
 						<view
-							style="width: 632rpx; display: flex;justify-content: space-between;font-size: 24rpx; text-align: center;margin: 0 auto;">
-							<view
-								style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
-								<p class="mt24" style="font-weight: 500;">{{ income.day }} {{ t('pk.t_i19') }}</p>
-								<p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i20') }}</p>
-							</view>
-							<view
-								style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
-								<p class="mt24" style="font-weight: 500;">{{ income.income }} $</p>
-								<p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i21') }}</p>
-							</view>
-
+							style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
+							<p class="mt24" style="font-weight: 500;">{{ income.day }} {{ t('pk.t_i19') }}</p>
+							<p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i20') }}</p>
 						</view>
-					</view>
-				</view>
+						<view
+							style="width: 311rpx;height: 116rpx;background: #004284;border-radius: 12rpx 12rpx 12rpx 12rpx;">
+							<p class="mt24" style="font-weight: 500;">{{ income.income }} $</p>
+							<p class="mt12" style="font-weight: 400;color: #007FFF;">{{ t('pk.t_i21') }}</p>
+						</view>
 
-				<view class="newbanner" @click="changePage(newbanner.id)" v-show="false">
-					<img :src="newbanner.full_cover" alt="" style="width: 100%" />
-				</view>
-				<view class="mt69" v-if="partnerList.length > 0" v-show="false">
-					<view class="f38 text_bold">
-						{{ t("other.o_a2") }}
 					</view>
-					<view class="between flex-wrap mt39" style="flex-wrap: wrap">
-						<view v-for="item in partnerList" class="mb29" style="
+				</view>
+			</view>
+
+			<view class="newbanner" @click="changePage(newbanner.id)" v-show="false">
+				<img :src="newbanner.full_cover" alt="" style="width: 100%" />
+			</view>
+			<view class="mt69" v-if="partnerList.length > 0" v-show="false">
+				<view class="f38 text_bold">
+					{{ t("other.o_a2") }}
+				</view>
+				<view class="between flex-wrap mt39" style="flex-wrap: wrap">
+					<view v-for="item in partnerList" class="mb29" style="
                 width: 48%;
                 height: 150rpx;
                 border-radius: 20rpx;
                 overflow: hidden;
               " @click="openLink(item)">
-							<image :src="item.full_poster" style="width: 100%; height: 100%"></image>
-						</view>
+						<image :src="item.full_poster" style="width: 100%; height: 100%"></image>
 					</view>
 				</view>
 			</view>
-			<tqbTabbar :activeIndex="0"></tqbTabbar>
-			<view style="height: 120rpx"></view>
-			<view></view>
-			<nut-overlay v-model:visible="show" :overlay-style="{ background: 'rgba(0,0,0,0.3)' }"
-				:close-on-click-overlay="false">
-				<div class="wrapper flex-col" v-if="maskInd == 0">
-					<div class="normalContent desc">
-						<view v-html="maskContent.content"></view>
+		</view>
+		<view style="height: 150rpx"></view>
+		<nut-overlay v-model:visible="show" :overlay-style="{ background: 'rgba(0,0,0,0.3)' }"
+			:close-on-click-overlay="false">
+			<div class="wrapper flex-col" v-if="maskInd == 0">
+				<div class="normalContent desc">
+					<view v-html="maskContent.content"></view>
 
-					</div>
-
-					<view class="center mt20">
-						<image src="../../static/themeNum1/icon/closeBtn.png" mode="widthFix"
-							style="width: 80rpx; height: 80rpx" @click="show = false"></image>
-					</view>
 				</div>
 
-				<div class="wrapper" v-else>
-					<div class="content ml30" style="
+				<view class="center mt20">
+					<image src="../../static/themeNum1/icon/closeBtn.png" mode="widthFix"
+						style="width: 80rpx; height: 80rpx" @click="show = false"></image>
+				</view>
+			</div>
+
+			<div class="wrapper" v-else>
+				<div class="content ml30" style="
               height: 571rpx;
               background: url('/static/themeNum1/img/redMask.png') no-repeat
                 100%/100%;
               position: relative;
             ">
-						<view class="text_center f36 text_bold" style="
+					<view class="text_center f36 text_bold" style="
                 color: #aa3922;
                 padding: 0 100rpx 0 70rpx;
                 margin-top: 115rpx;
                 line-height: 55rpx;
               ">
-							{{ t("other.o_a4") }} {{ redReg }} {{ t("other.o_a5") }}
-						</view>
-						<view class="center" style="
+						{{ t("other.o_a4") }} {{ redReg }} {{ t("other.o_a5") }}
+					</view>
+					<view class="center" style="
                 position: absolute;
                 left: 50%;
                 transform: translateX(-55%);
                 bottom: 80rpx;
               ">
-							<view class="text_center f40 text_bold recBtn" style="color: #db4128" @click="closeMask">
-								{{ t("other.o_a6") }}
-							</view>
+						<view class="text_center f40 text_bold recBtn" style="color: #db4128" @click="closeMask">
+							{{ t("other.o_a6") }}
 						</view>
-					</div>
+					</view>
 				</div>
-			</nut-overlay>
-			<Loading ref="showLoading"></Loading>
-		</view>
-
-
-		<view style="height: 70rpx"> </view>
-
-
-		<view class="withdraw" style="display: none;">
-
-		</view>
+			</div>
+		</nut-overlay>
 	</view>
+
+
+
+	<tqbTabbar :activeIndex="0"></tqbTabbar>
+
+	<Loading ref="showLoading"></Loading>
+
 </template>
 
 <script setup>

@@ -41,92 +41,94 @@
 			</z-paging>
 		</view>
 	</view>
+	<Loading ref="showLoading"></Loading>
+
 </template>
 
 <script setup>
-import kefu from "@/components/kefu/kefu.vue"
+	import kefu from "@/components/kefu/kefu.vue"
 
-import topNav from "@/components/topNav/topNav.vue"
-import request from '../../../comm/request.ts';
-import {
-	userStore
-} from "@/store/themeNum.js";
-// import {
-// 	Toast
-// } from '@nutui/nutui';
-import {
-	onShow,
-	onLoad
-} from "@dcloudio/uni-app";
-import {
-	getStorageSync
-} from '@dcloudio/uni-h5';
-const store = userStore();
-import {
-	useI18n
-} from 'vue-i18n'
+	import topNav from "@/components/topNav/topNav.vue"
+	import request from '../../../comm/request.ts';
+	import {
+		userStore
+	} from "@/store/themeNum.js";
+	// import {
+	// 	Toast
+	// } from '@nutui/nutui';
+	import {
+		onShow,
+		onLoad
+	} from "@dcloudio/uni-app";
+	import {
+		getStorageSync
+	} from '@dcloudio/uni-h5';
+	const store = userStore();
+	import {
+		useI18n
+	} from 'vue-i18n'
 
-const {
-	t
-} = useI18n()
-const methods = {
-	back() {
-		history.back()
-	},
+	const {
+		t
+	} = useI18n()
+	const methods = {
+		back() {
+			history.back()
+		},
 
-};
-const recordsList = ref([])
-const paging = ref(null)
-const pages = ref({
-	page: 1,
-	size: 10
-})
-const getData = (page) => {
-	pages.value.page = page
-	request({
-		methods: 'get',
-		url: 'activity/prizePackage/log',
-		data: pages.value
-	}).then(res => {
-		paging.value.complete(res.data);
-		pages.value.page += 1
+	};
+	const recordsList = ref([])
+	const paging = ref(null)
+	const pages = ref({
+		page: 1,
+		size: 10
 	})
-}
-const currency = ref("")
-// 终于可以用了
-onLoad(() => {
-	currency.value = uni.getStorageSync('currency')
- 
-})
+	const getData = (page) => {
+		pages.value.page = page
+		request({
+			methods: 'get',
+			url: 'activity/prizePackage/log',
+			data: pages.value
+		}).then(res => {
+			paging.value.complete(res.data);
+			pages.value.page += 1
+		})
+	}
+	const currency = ref("")
+	// 终于可以用了
+	onLoad(() => {
+		currency.value = uni.getStorageSync('currency')
+
+	})
 </script>
 
 <style lang="scss">
-.listItem {
-	background: #fff;
-	border-radius: 20rpx;
-	padding: 4rpx 45rpx 34rpx 45rpx;
-	margin-bottom: 30rpx;
-	font-size: 28rpx;
-	width: 600rpx;
-	margin: 30rpx auto;
+	.listItem {
+		background: #fff;
+		border-radius: 20rpx;
+		padding: 4rpx 45rpx 34rpx 45rpx;
+		margin-bottom: 30rpx;
+		font-size: 28rpx;
+		width: 600rpx;
+		margin: 30rpx auto;
 
-	.vvItem {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-top: 29rpx;
-	}
+		.vvItem {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 29rpx;
+		}
 
-	.pass {
-		color: #5db760;
-	}
+		.pass {
+			color: #5db760;
+		}
 
-	.error {
-		color: #f5564b;
-	}
+		.error {
+			color: #f5564b;
+		}
 
-	.cancle {
-		color: #AFAFAF;
+		.cancle {
+			color: #AFAFAF;
+		}
 	}
-}
 </style>
