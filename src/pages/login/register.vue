@@ -35,8 +35,7 @@
 						</view>
 					</view>
 
-					<view class=" l_inpS  flex col_center pdlr50" style="flex:1"
-						:class="currenLang == 'ar'?'mr20':'ml20'">
+					<view class=" l_inpS  flex col_center " style="flex:1" :class="currenLang == 'ar'?'mr20':'ml20'">
 						<!-- <image src="@/static/themeNum1/country/en.png" mode="widthFix" style="width:43rpx;29rpx"></image> -->
 
 						<input type="number" :placeholder="t('login.l_l1')" v-model="regisForm.phone"
@@ -623,17 +622,17 @@
 			if (window.location.host == 'defi-wallet.com') {
 				regisForm.value.invite_code = "111111"
 			} else if (window.location.host == 'defi22.com') {
-				regisForm.value.invite_code = "2222222222"
+				regisForm.value.invite_code = "222222"
 			} else if (window.location.host == 'defi44.com') {
-				regisForm.value.invite_code = "4444444444"
+				regisForm.value.invite_code = "444444"
 			} else if (window.location.host == 'defi00.com') {
-				regisForm.value.invite_code = "0000000000"
+				regisForm.value.invite_code = "000000"
 			} else if (window.location.host == 'defi99.com') {
-				regisForm.value.invite_code = "9999999999"
+				regisForm.value.invite_code = "999999"
 			} else if (window.location.host == 'defiaa.com') {
-				regisForm.value.invite_code = "6666666666"
+				regisForm.value.invite_code = "666666"
 			} else if (window.location.host == 'defiee.com') {
-				regisForm.value.invite_code = "7777777777"
+				regisForm.value.invite_code = "777777"
 			} else if (window.location.host == 'www.defi-wallet.com') {
 				regisForm.value.invite_code = "111111"
 			} else if (window.location.host == 'www.defi22.com') {
@@ -646,7 +645,7 @@
 				regisForm.value.invite_code = "999999"
 			} else if (window.location.host == 'www.defiaa.com') {
 				regisForm.value.invite_code = "666666"
-			} else if (window.location.host == 'www.defee.com') {
+			} else if (window.location.host == 'www.defiee.com') {
 				regisForm.value.invite_code = "777777"
 			}
 			canInpCode.value = false

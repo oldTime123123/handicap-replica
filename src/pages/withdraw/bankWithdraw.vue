@@ -35,7 +35,7 @@
 				</view>
 
 				<view class="mt70  " v-if="showBindPwd">
-					{{ t('withdraw.w_w3') }}
+					<!-- 					{{ t('withdraw.w_w3') }} -->
 					<view class="mt38 info l_inpBg" style="position: relative;">
 						<view class="flex col_center between">
 							<input class="uni-input" :placeholder="t('withdraw.w_w4')" :password="showPassword"

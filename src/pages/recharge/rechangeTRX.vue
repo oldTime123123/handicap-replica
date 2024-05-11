@@ -86,7 +86,7 @@
 			balance_type: balance_type.value
 		}
 		request({
-			url: 'finance/usdt/recharge/submit',
+			url: 'finance/trx/recharge/submit',
 			methods: 'post',
 			data: data
 		}).then(res => {
@@ -103,7 +103,7 @@
 				} catch (e) {}
 			}
 			uni.navigateTo({
-				url: './usdtOrder?balance_type=' + balance_type.value
+				url: './trxOreder?balance_type=' + balance_type.value
 			})
 		}).catch(err => {
 			showLoading.value.loading = false
@@ -122,7 +122,7 @@
 	})
 	const getData = () => {
 		request({
-			url: 'finance/usdt/recharge/index',
+			url: 'finance/trx/recharge/index',
 			methods: 'get'
 		}).then(res => {
 			if (res.order) {

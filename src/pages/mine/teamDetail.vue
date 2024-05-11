@@ -10,7 +10,7 @@
 				</view>
 			</view>
 
-			<view class="mt40 f24" >
+			<view class="mt40 f24">
 
 				<z-paging class="" ref="paging" v-model="recordsList" @query="getData" width="100%" :fixed="true"
 					:use-page-scroll="false" :refresher-enabled="false" :to-bottom-loading-more-enabled="true"
@@ -28,12 +28,12 @@
 							</view>
 						</view>
 
-						<view class="vvItem">
+						<!-- <view class="vvItem">
 							<view class="f26">{{t('mine.m_d3')}}</view>
 							<view class="">
 								{{item.level}}
 							</view>
-						</view>
+						</view> -->
 
 						<view class="vvItem">
 							<view class="f26">{{t('mine.m_d4')}}</view>
@@ -45,7 +45,7 @@
 						<view class="vvItem">
 							<view class="f26">{{t('mine.m_t11')}}</view>
 							<view class="">
-								{{item.balance}}
+								{{item.total_recharge}}
 							</view>
 						</view>
 					</view>
@@ -78,10 +78,11 @@
 		t
 	} = useI18n();
 
-	const types = [{
-			name: t('mine.m_d6'),
-			value: '0'
-		},
+	const types = [
+		// {
+		// 	name: t('mine.m_d6'),
+		// 	value: '0'
+		// },
 		{
 			name: t('mine.m_t7'),
 			value: '1'
@@ -109,7 +110,7 @@
 	const pages = ref({
 		page: 1,
 		size: 10,
-		level: '0'
+		level: '1'
 	})
 	const getData = (page) => {
 		pages.value.page = page

@@ -46,7 +46,7 @@
 					<view class="vvItem">
 						<view class="f26">{{ t('rec.r_w9') }}</view>
 						<view class="pass">
-							<text v-if="item.pay_status == 1" class="cancle">{{ t('rec.r_w10') }}</text>
+							<text v-if="item.pay_status == 1" class="cancle">{{ t('rec.r_w7') }}</text>
 							<text v-if="item.pay_status == 2" class="pass">{{ t('rec.r_w11') }}</text>
 							<text v-if="item.pay_status == 3" class="error">{{ t('rec.r_w12') }}</text>
 						</view>

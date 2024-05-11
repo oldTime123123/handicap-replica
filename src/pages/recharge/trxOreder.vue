@@ -209,7 +209,7 @@
 	const confirmHandle = () => {
 		showLoading.value.loading = true;
 		request({
-				url: "finance/usdt/recharge/cancel",
+				url: "finance/trx/recharge/cancel",
 				methods: "post",
 				data: {
 					order_no: pageData.value.order_no,
@@ -243,7 +243,7 @@
 
 
 		request({
-			url: "finance/usdt/recharge/index",
+			url: "finance/trx/recharge/index",
 			methods: "get",
 			data: {
 				balance_type: balance_type.value

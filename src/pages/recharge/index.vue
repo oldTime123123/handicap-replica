@@ -33,6 +33,17 @@
 					<nut-icon name="checklist" v-if="actInd == 1" :color="store.$state.thirdColor"></nut-icon>
 				</view>
 			</view>
+			<view class="items between" v-if="showTRX" :style="actInd == 2 ? choStyle : noChoStyle" @click="actInd = 2">
+				<view class="flex col_center">
+					<image src="../../static/trx.jpg" mode="widthFix" style="width: 55rpx;height: 55rpx;"></image>
+					<view class="ml73 F28">
+						TRX
+					</view>
+				</view>
+				<view class="circle center" :class="actInd == 2 ? 'actChoose' : 'noChoose'">
+					<nut-icon name="checklist" v-if="actInd == 2" :color="store.$state.thirdColor"></nut-icon>
+				</view>
+			</view>
 			<view class=" center l_inpS mt40 l_inpBg pdlr30 color0 f32" style="margin-top:214rpx"
 				:style="{ background: store.$state.secondColor }" @click="jumpPage">
 				{{ t('all.a_c1') }}
@@ -81,6 +92,8 @@
 
 	const showUSDT = ref(false)
 	const showBANK = ref(false)
+	const showTRX = ref(false)
+
 	const AreaCode = ref()
 
 
@@ -94,6 +107,10 @@
 		} else if (actInd.value == 0 && showBANK.value) {
 			uni.navigateTo({
 				url: '../recharge/bankRechrage?balance_type=' + balance_type.value
+			})
+		} else if (actInd.value == 2 && showTRX.value) {
+			uni.navigateTo({
+				url: '../recharge/rechangeTRX?balance_type=' + balance_type.value
 			})
 		}
 	}
@@ -118,6 +135,9 @@
 			}
 			if (recharge_type.includes(2)) {
 				showBANK.value = true
+			}
+			if (recharge_type.includes(3)) {
+				showTRX.value = true
 			}
 			// console.log(res);
 		})

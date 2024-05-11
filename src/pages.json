@@ -109,13 +109,13 @@
 			"path": "pages/record/investRecord"
 		}, {
 			"path": "pages/construct/index"
-		},{
+		}, {
 			"path": "pages/construct/sign"
 		}, {
 			"path": "pages/construct/signSuccess"
 		}, {
 			"path": "pages/construct/signName"
-		},{
+		}, {
 			"path": "pages/mine/langSetting"
 		}, {
 			"path": "pages/mine/company"
@@ -127,60 +127,52 @@
 			"path": "pages/mine/redemption"
 		}, {
 			"path": "pages/record/redemRecod"
-		}
-	    ,{
-            "path" : "pages/act/lottery"
-        }
-        ,{
-            "path" : "pages/act/lottery-record"
-        }
-        ,{
-            "path" : "pages/act/goldEgg"
-        }  ,{
-            "path" : "pages/act/goldEggRecord"
-        }  ,{
-            "path" : "pages/linkEgg/linkEgg"
-        }, {
+		}, {
+			"path": "pages/act/lottery"
+		}, {
+			"path": "pages/act/lottery-record"
+		}, {
+			"path": "pages/act/goldEgg"
+		}, {
+			"path": "pages/act/goldEggRecord"
+		}, {
+			"path": "pages/linkEgg/linkEgg"
+		}, {
 			"path": "pages/act/redEnvList"
 		}, {
 			"path": "pages/act/redEnvelope"
 		}, {
 			"path": "pages/record/redenvelopeRecord"
+		}, {
+			"path": "pages/task/index"
+		}, {
+			"path": "pages/coupon/recive"
+		}, {
+			"path": "pages/coupon/couponBuyIndex"
+		}, {
+			"path": "pages/coupon/coupon"
+		}, {
+			"path": "pages/recharge/means"
+		}, {
+			"path": "pages/mine/investPage"
+
+		}, {
+			"path": "pages/mine/mission"
+
+		}, {
+			"path": "pages/mine/conversion"
+		}, {
+			"path": "pages/mine/iframe"
+		}, {
+			"path": "pages/mine/panelPage"
+		}, {
+			"path": "pages/mine/notice"
+		}, {
+			"path": "pages/recharge/rechangeTRX"
+		}, {
+			"path": "pages/recharge/trxOreder"
 		}
-        ,{
-            "path" : "pages/task/index" 
-        }
-        ,{
-            "path" : "pages/coupon/recive" 
-        },{
-            "path" : "pages/coupon/couponBuyIndex"
-        },{
-            "path" : "pages/coupon/coupon"
-        }
-        ,{
-            "path" : "pages/recharge/means"
-        }
-        ,{
-            "path" : "pages/mine/investPage"
-           
-        }
-        ,{
-            "path" : "pages/mine/mission"
-            
-        }
-        ,{
-            "path" : "pages/mine/conversion"
-        }
-        ,{
-            "path" : "pages/mine/iframe"
-        }
-        ,{
-            "path" : "pages/mine/panelPage"
-        }
-        ,{
-            "path" : "pages/mine/notice"
-        }
-    ],
+	],
 
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -39,9 +39,7 @@
 
 
 			</view>
-			<view style="height: 100rpx;">
 
-			</view>
 			<!--  -->
 			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" next-margin="20"
 				:circular="true" style="height: 400rpx">
@@ -1042,8 +1040,9 @@
 	}
 
 	.topNav {
-		position: absolute;
+		// position: absolute;
 		top: 0;
+		left: 0;
 		width: 100%;
 		background-color: #0C1526;
 		justify-content: space-between;
