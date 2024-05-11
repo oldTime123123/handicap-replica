@@ -14,7 +14,7 @@
 				</view>
 
 				<view class="flex pb30 mt78 col_center" style="border-bottom: 1rpx solid #eee;">
-					<view class="text_center" style="width: 100rpx;">USDT</view>
+					<view class="text_center" style="width: 100rpx;">TRX</view>
 					<!-- <input class="ml90 f36" type="number" disabled style="color: #F65E5E;" v-model="numRate"> -->
 					<view class="ml90 f36" style="color: #F65E5E;">
 						{{ rateNum }}

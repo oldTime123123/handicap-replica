@@ -32,7 +32,7 @@
 							<view class="iTitle"> {{ danwei }} </view>
 							<!-- <view :style="topItemStyle">{{pageData.amount ?((pageData.amount) * rate).toFixed(2):0 }}</view> -->
 							<view :style="topItemStyle">{{ pageData.amount ? (pageData.amount * rate).toFixed(2) : 0 }}
-								USDT
+								TRX
 							</view>
 						</view>
 					</view>
