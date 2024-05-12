@@ -394,7 +394,7 @@
 					{{ t("other.o_a2") }}
 				</view>
 				<view class="between flex-wrap mt39" style="flex-wrap: wrap">
-					<view v-for="item in partnerList" class="mb29" style="
+					<view v-for="(item,index) in partnerList" :key="index" class="mb29" style="
                 width: 48%;
                 height: 150rpx;
                 border-radius: 20rpx;
@@ -482,6 +482,7 @@
 	import {
 		getLocale
 	} from "i18n";
+	import { nextTick } from "vue";
 
 	const showWhere = () => {
 		document.addEventListener("mousemove", function(e) {
@@ -506,25 +507,40 @@
 		servetTime.value = time.split(',')[1];
 	}
 	const lineData = ref()
-	const socket = io('https://tujdndhsjbd.xyz', {
-		transports: ['websocket']
-	})
-	socket.on('project', (data) => {
-		lineData.value = data.list
-		// 在这里可以对服务器返回的数据进行处理
-	});
+	// 获取Investasikan的列表数据
+	// const socket = io('https://tujdndhsjbd.xyz', {
+	// 	transports: ['websocket']
+	// })
+	// socket.on('project', (data) => {
+	// 	console.log("websocket: " + data.list);
+	// 	lineData.value = data.list
+	// 	// 在这里可以对服务器返回的数据进行处理
+	// 	});
+	
+	// const getLineData = () => {
+	// 	socket.emit('project', {
+	// 		'type': 1
+	// 	})
+	// }
+	// 获取Investasikan的列表数据
 	const getLineData = () => {
-		socket.emit('project', {
-			'type': 1
-		})
+		request({
+			url: "/page/trade/productList",
+			methods: "get",
+		}).then((res) => {
+			console.log("resd===",res);
+			lineData.value = res || [];
+		});
+
 	}
 
+
 	const timer = ref(null)
-	const startTimer = () => {
-		timer.value = setInterval(() => {
-			getLineData()
-		}, 1000)
-	}
+	// const startTimer = () => {
+	// 	timer.value = setInterval(() => {
+	// 		getLineData()
+	// 	}, 1000)
+	// }
 	const showBadge = ref(false)
 	const horseLamp1 = ref(['111111111111', '2222222222222222']);
 	let serviceTime = ref('')
@@ -923,7 +939,7 @@
 
 	onLoad((e) => {
 		getLineData()
-		startTimer()
+		// startTimer()
 		request({
 			url: "home/article",
 			methods: "get",
