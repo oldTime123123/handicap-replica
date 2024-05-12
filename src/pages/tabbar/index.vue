@@ -525,7 +525,7 @@
 	// 获取Investasikan的列表数据
 	const getLineData = () => {
 		request({
-			url: "/page/trade/productList",
+			url: "page/trade/productList",
 			methods: "get",
 		}).then((res) => {
 			console.log("resd===",res);
