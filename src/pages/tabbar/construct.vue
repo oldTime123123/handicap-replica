@@ -123,7 +123,6 @@
 	const showViewer = ref("display: none;");
 	const imgurl = ref('')
 	const getImg = (url) => {
-		console.log(111111);
 		if (url == 1 && nowlang.value == 'id') {
 			imgurl.value = bannerList[2]
 		} else if (url == 1 && nowlang.value != 'id') {

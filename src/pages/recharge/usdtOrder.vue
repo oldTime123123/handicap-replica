@@ -84,11 +84,11 @@
               border: '1rpx solid' + store.$state.contentColor,
               color: store.$state.contentColor,
             }">
-							{{ t("all.a_c1") }}
+							{{ t("all.a_c2") }}
 						</view>
 						<view class="color0" :style="{ background: store.$state.secondColor, color: '#000' }"
 							@click="confirmHandle">
-							{{ t("all.a_c2") }}
+							{{ t("all.a_c1") }}
 						</view>
 					</view>
 				</div>

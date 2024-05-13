@@ -566,7 +566,7 @@
 				countryList.value = store.$state.countryCode
 				if (canChoCountry.value) {
 					store.$state.countryCode.forEach(item => {
-						if (item.country_code.indexOf(countryVal.value)) {
+						if (item.country_code == `+${countryVal.value}`) {
 							loginStore.setdefaultCountryCode(item)
 						}
 					})

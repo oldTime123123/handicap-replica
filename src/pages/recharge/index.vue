@@ -94,7 +94,7 @@
 	const showBANK = ref(false)
 	const showTRX = ref(false)
 
-	const AreaCode = ref()
+	const AreaCode = ref(0)
 
 
 	const jumpPage = () => {
@@ -121,6 +121,12 @@
 			methods: 'get'
 		}).then(res => {
 			AreaCode.value = res
+			if (res.country_code == '+62') {
+				actInd.value = 0
+			} else {
+				actInd.value = 1
+
+			}
 		})
 		request({
 			url: 'setting/financeWay',

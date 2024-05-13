@@ -82,181 +82,186 @@
 		</view>
 	</view>
 	<Loading ref="showLoading"></Loading>
-	
+
 </template>
 
 <script setup>
-import kefu from "@/components/kefu/kefu.vue"
+	import kefu from "@/components/kefu/kefu.vue"
 
-import request from '../../../comm/request.ts';
-import { defineComponent, ref } from 'vue';
-import { useRouter } from 'vue-router';
-import {
-	userStore
-} from "@/store/themeNum.js";
-// import {
-// 	Toast
-// } from '@nutui/nutui';
-import {
-	onShow,
-	onLoad
-} from "@dcloudio/uni-app";
-const store = userStore();
-import {
-	useI18n
-} from "vue-i18n";
+	import request from '../../../comm/request.ts';
+	import {
+		defineComponent,
+		ref
+	} from 'vue';
+	import {
+		useRouter
+	} from 'vue-router';
+	import {
+		userStore
+	} from "@/store/themeNum.js";
+	// import {
+	// 	Toast
+	// } from '@nutui/nutui';
+	import {
+		onShow,
+		onLoad
+	} from "@dcloudio/uni-app";
+	const store = userStore();
+	import {
+		useI18n
+	} from "vue-i18n";
 
-const {
-	t
-} = useI18n();
+	const {
+		t
+	} = useI18n();
 
-const choStyle = {
-	background: store.$state.thirdColor,
-	animation: '.2s linear all',
-	color: '#fff'
-}
-const cType = ref('usdt')
-const changeChoosed = (type) => {
-	cType.value = type
-}
-const flag = ref(true)
-const showUsdt = ref(false)
-const showBank = ref(false)
-const router = useRouter()
-const goBack = () => {
-	history.back()
-}
-const getData = () => {
-	request({
-		url: 'setting/financeWay',
-		methods: 'get'
-	}).then(res => {
-		let {
-			recharge_type
-		} = res
+	const choStyle = {
+		background: store.$state.thirdColor,
+		animation: '.2s linear all',
+		color: '#fff'
+	}
+	const cType = ref('usdt')
+	const changeChoosed = (type) => {
+		cType.value = type
+	}
+	const flag = ref(true)
+	const showUsdt = ref(false)
+	const showBank = ref(false)
+	const router = useRouter()
+	const goBack = () => {
+		history.back()
+	}
+	const getData = () => {
+		request({
+			url: 'setting/financeWay',
+			methods: 'get'
+		}).then(res => {
+			let {
+				recharge_type
+			} = res
 
-		if (recharge_type.includes(1)) {
-			showUsdt.value = true
-		}
-		if (recharge_type.includes(2)) {
-			showBank.value = true
-		}
-		// console.log(res);
-	})
-}
-
-const chooseHandle = (num) => {
-	if (type.value == 'recharge') {
-		uni.navigateTo({
-			url: "../recharge/index?balance_type=" + num
-			// 	url: '?balance_type=1'
-		})
-	} else {
-		uni.navigateTo({
-			url: "../withdraw/index?balance_type=" + num
-			// 	url: '?balance_type=1'
+			if (recharge_type.includes(1)) {
+				showUsdt.value = true
+			}
+			if (recharge_type.includes(2)) {
+				showBank.value = true
+			}
+			// console.log(res);
 		})
 	}
 
-	return
-	if (type.value == 'recharge') {
-		if (num == 1) {
+	const chooseHandle = (num) => {
+		if (type.value == 'recharge') {
 			uni.navigateTo({
-				url: "../recharge/u_input?balance_type=2"
+				url: "../recharge/index?balance_type=" + num
 				// 	url: '?balance_type=1'
 			})
 		} else {
 			uni.navigateTo({
-				url: "../recharge/u_input?balance_type=1"
+				url: "../withdraw/index?balance_type=" + num
+				// 	url: '?balance_type=1'
 			})
 		}
 
-	} else if (type.value == 'bank') {
-		if (num == 1) {
-			uni.navigateTo({
-				url: '../recharge/bankRechrage?balance_type=1'
-			})
-		} else {
-			uni.navigateTo({
-				url: '../recharge/bankRechrage?balance_type=2'
-			})
+		return
+		if (type.value == 'recharge') {
+			if (num == 1) {
+				uni.navigateTo({
+					url: "../recharge/u_input?balance_type=2"
+					// 	url: '?balance_type=1'
+				})
+			} else {
+				uni.navigateTo({
+					url: "../recharge/u_input?balance_type=1"
+				})
+			}
+
+		} else if (type.value == 'bank') {
+			if (num == 1) {
+				uni.navigateTo({
+					url: '../recharge/bankRechrage?balance_type=1'
+				})
+			} else {
+				uni.navigateTo({
+					url: '../recharge/bankRechrage?balance_type=2'
+				})
+			}
+
 		}
-
 	}
-}
-const type = ref()
-onLoad((e) => {
-	type.value = e.type
+	const type = ref()
+	onLoad((e) => {
+		type.value = e.type
 
- 
-})
-// 终于可以用了
-onShow(() => {
-	getData()
-	if (router.currentRoute.value.query.type == 'withdraw') {
-		flag.value = false
-	}
-})
+
+	})
+	// 终于可以用了
+	onShow(() => {
+		getData()
+		if (router.currentRoute.value.query.type == 'withdraw') {
+			flag.value = false
+		}
+	})
 </script>
 
 <style lang="scss">
-.main {
-	background: url('../../static/back.png') no-repeat;
-	background-size: 100% 100%;
-	height: 100vh;
-}
-
-.Smart {
-	width: 100%;
-	height: 190rpx;
-	background: url('../../static/egg/smart.png') no-repeat;
-	background-size: 100% 100%;
-	box-sizing: border-box;
-	padding: 48rpx 28rpx 24rpx 24rpx;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-
-	.text {
-		width: 246rpx;
-		font-size: 36rpx;
+	.main {
+		background: url('../../static/back.png') no-repeat;
+		background-size: 100% 100%;
+		height: 100vh;
 	}
-}
 
-.vorne {
-	background-color: #242424;
-	height: 235rpx;
-	width: 100%;
-	box-sizing: border-box;
-	padding: 24rpx 32rpx;
-	font-size: 24rpx;
-	color: #A2A2A2
-}
+	.Smart {
+		width: 100%;
+		height: 190rpx;
+		background: url('../../static/egg/smart.png') no-repeat;
+		background-size: 100% 100%;
+		box-sizing: border-box;
+		padding: 48rpx 28rpx 24rpx 24rpx;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 
-.choItem {
-	padding: 37rpx 50rpx;
-	background-color: #1a1a1a;
-	border-radius: 30rpx;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 30rpx;
-
-	.noCho {
-		width: 35rpx;
-		height: 35rpx;
-		// border: 1px solid #AFAFAF;
-		border-radius: 10rpx;
+		.text {
+			width: 246rpx;
+			font-size: 36rpx;
+		}
 	}
-}
 
-.btns {
-	margin-top: 313rpx;
-	text-align: center;
-	line-height: 100rpx;
-	color: #fff;
-	height: 100rpx;
-	border-radius: 20rpx;
-	font-size: 32rpx;
-}
+	.vorne {
+		background-color: #242424;
+		height: 235rpx;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 24rpx 32rpx;
+		font-size: 24rpx;
+		color: #A2A2A2
+	}
+
+	.choItem {
+		padding: 37rpx 50rpx;
+		background-color: #1a1a1a;
+		border-radius: 30rpx;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 30rpx;
+
+		.noCho {
+			width: 35rpx;
+			height: 35rpx;
+			// border: 1px solid #AFAFAF;
+			border-radius: 10rpx;
+		}
+	}
+
+	.btns {
+		margin-top: 313rpx;
+		text-align: center;
+		line-height: 100rpx;
+		color: #fff;
+		height: 100rpx;
+		border-radius: 20rpx;
+		font-size: 32rpx;
+	}
 </style>
