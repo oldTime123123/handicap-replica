@@ -20,6 +20,9 @@
 					</view>
 				</view>
 				<view class="f20 mt30 " style="color: #fff;">
+					handling fee:{{Number(inpVal)>Number(pageData.no_fee)?0:pageData?.fee}}
+				</view>
+				<view class="f20 mt30 " style="color: #fff;">
 					*{{ t('withdraw.w_w2') }}
 					{{ pageData?.min + "-" + pageData?.max }}
 				</view>
