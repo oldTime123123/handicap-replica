@@ -38,7 +38,7 @@
 						<view class="vvItem">
 							<view class="f26">{{t('mine.m_d4')}}</view>
 							<view class="">
-								{{item.filter_phone}}
+								{{item.phone}}
 							</view>
 						</view>
 
