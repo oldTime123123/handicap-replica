@@ -68,10 +68,10 @@
 						<img class="ml24" src="../../static/invite/down.png" alt="">
 					</view>
 				</view>
-				<view class="mt120">
+				<!-- <view class="mt120">
 					<img @click="getImg(1)" style="width: 100%;" :src="nowlang == 'id' ? bannerList[2] : bannerList[0]"
 						alt="">
-				</view>
+				</view> -->
 
 				<view class="team">
 					<view class="teamTitle mt20 flex">
@@ -97,10 +97,10 @@
 				<view class="teamstyle" style="text-align: center;margin-top: 30rpx;"
 					@click="Jumplink('../mine/teamDetail')">{{ t('pk.t_c8') }}</View>
 
-				<view class="mt40 pb160">
+				<!-- <view class="mt40 pb160">
 					<img @click="getImg(2)" style="width: 100%;" :src="nowlang == 'id' ? bannerList[3] : bannerList[1]"
 						alt="">
-				</view>
+				</view> -->
 			</view>
 
 

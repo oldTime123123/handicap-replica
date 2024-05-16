@@ -37,8 +37,11 @@
 
 						<view class="vvItem">
 							<view class="f26">{{t('mine.m_d4')}}</view>
-							<view class="">
+							<view class="" v-if="pages.level==1">
 								{{item.phone}}
+							</view>
+							<view class="" v-else>
+								{{item.filter_phone}}
 							</view>
 						</view>
 
