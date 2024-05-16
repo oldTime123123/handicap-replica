@@ -1,10 +1,10 @@
 <template>
 	<view class="normalBg" style="background: #060D1F">
 		<kefu></kefu>
-		<topNav :title="'USDT binding'"></topNav>
+		<topNav :title=" change_type + ' binding'"></topNav>
 		<view class="pdlr45 mt70">
 			<view>
-				{{ t('setting.s_s2') }}
+				{{ t('setting.s_s2') }} {{change_type}} {{ t('setting.s_s21') }}
 			</view>
 			<view class="settingInp mt30">
 				<input type="text" :placeholder="t('setting.s_s2')" placeholder-class="inpPlaceholder"
@@ -79,7 +79,9 @@
 			methods: 'post',
 			url: 'user/attribute/wallet',
 			data: {
-				address: formData.value.address
+				address: formData.value.address,
+				type: type.value
+
 			}
 		}).then(res => {
 			showLoading.value.loading = false
@@ -96,7 +98,16 @@
 	onShow(() => {
 		getData()
 	})
-	onLoad(() => {
+	const change_type = ref('USDT')
+	const type = ref()
+	onLoad((e) => {
+		if (e.type == 'trx') {
+			change_type.value = 'TRX'
+			type.value = 2
+		} else if (e.type == 'usdc') {
+			change_type.value = 'USDC'
+			type.value = 3
+		}
 
 	})
 </script>

@@ -171,6 +171,10 @@
 			"path": "pages/recharge/rechangeTRX"
 		}, {
 			"path": "pages/recharge/trxOreder"
+		}, {
+			"path": "pages/recharge/rechangeUSDC"
+		}, {
+			"path": "pages/recharge/usecOrder"
 		}
 	],
 

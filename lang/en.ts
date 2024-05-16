@@ -7,7 +7,7 @@ export default {
 		a5: 'Open',
 		as: "Please contact customer service!",
 		a6: "Effective recharge range",
-		a7:"Effective withdrawal range"
+		a7: "Effective withdrawal range"
 	},
 	sec: {
 		a1: 'SecFutures',
@@ -606,7 +606,8 @@ export default {
 	},
 	setting: {
 		s_s1: "USDT Binding",
-		s_s2: "Please Enter TRC20 USDT Address",
+		s_s2: "Please Enter TRC20 ",
+		s_s21: "Address",
 		s_s3: "Edited Successfully",
 		s_b1: "Bank Card Binding",
 		s_b2: "Please select a bank",

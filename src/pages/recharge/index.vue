@@ -35,13 +35,25 @@
 			</view>
 			<view class="items between" v-if="showTRX" :style="actInd == 2 ? choStyle : noChoStyle" @click="actInd = 2">
 				<view class="flex col_center">
-					<image src="../../static/trx.jpg" mode="widthFix" style="width: 55rpx;height: 55rpx;"></image>
+					<image src="../../static/trx.png" mode="widthFix" style="width: 55rpx;height: 55rpx;"></image>
 					<view class="ml73 F28">
 						TRX
 					</view>
 				</view>
 				<view class="circle center" :class="actInd == 2 ? 'actChoose' : 'noChoose'">
 					<nut-icon name="checklist" v-if="actInd == 2" :color="store.$state.thirdColor"></nut-icon>
+				</view>
+			</view>
+			<view class="items between" v-if="showUSDC" :style="actInd == 3 ? choStyle : noChoStyle"
+				@click="actInd = 3">
+				<view class="flex col_center">
+					<image src="../../static/usdc.png" mode="widthFix" style="width: 55rpx;height: 55rpx;"></image>
+					<view class="ml73 F28">
+						USDC
+					</view>
+				</view>
+				<view class="circle center" :class="actInd == 3 ? 'actChoose' : 'noChoose'">
+					<nut-icon name="checklist" v-if="actInd == 3" :color="store.$state.thirdColor"></nut-icon>
 				</view>
 			</view>
 			<view class=" center l_inpS mt40 l_inpBg pdlr30 color0 f32" style="margin-top:214rpx"
@@ -93,6 +105,8 @@
 	const showUSDT = ref(false)
 	const showBANK = ref(false)
 	const showTRX = ref(false)
+	const showUSDC = ref(false)
+
 
 	const AreaCode = ref(0)
 
@@ -111,6 +125,10 @@
 		} else if (actInd.value == 2 && showTRX.value) {
 			uni.navigateTo({
 				url: '../recharge/rechangeTRX?balance_type=' + balance_type.value
+			})
+		} else if (actInd.value == 3 && showUSDC.value) {
+			uni.navigateTo({
+				url: '../recharge/rechangeUSDC?balance_type=' + balance_type.value
 			})
 		}
 	}
@@ -144,6 +162,9 @@
 			}
 			if (recharge_type.includes(3)) {
 				showTRX.value = true
+			}
+			if (recharge_type.includes(4)) {
+				showUSDC.value = true
 			}
 			// console.log(res);
 		})

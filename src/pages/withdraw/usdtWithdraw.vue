@@ -38,7 +38,8 @@
 						<view class="flex col_center between ">
 							<input class="uni-input" :placeholder="t('withdraw.w_w6')" v-model="pageData.user_link"
 								style="width: 100%;" disabled />
-							<view class="bindAdd" @click="jumpPage('../setting/set1')" v-if="showBindAdd">Bind</view>
+							<view class="bindAdd" @click="jumpPage(`../setting/set1?type=${type}`)" v-if="showBindAdd">
+								Bind</view>
 						</view>
 					</view>
 				</view>
@@ -145,13 +146,14 @@
 	const getData = () => {
 		//获取汇率
 		request({
-			url: 'finance/usdt/recharge/index',
+			url: `finance/${type.value}/recharge/index`,
 			methods: 'get'
 		}).then(res => {
 			kurs.value = res.rate
 		})
+
 		request({
-			url: 'finance/usdt/withdraw/index',
+			url: `finance/${type.value}/withdraw/index`,
 			methods: 'get',
 		}).then(res => {
 			pageData.value = res
@@ -184,11 +186,10 @@
 		const data = {
 			amount: inpVal.value,
 			password: fundPwd.value,
-			balance_type: balance_type.value
 		}
 
 		request({
-			url: 'finance/usdt/withdraw/submit',
+			url: `finance/${type.value}/withdraw/submit`,
 			methods: 'post',
 			data: data
 		}).then(res => {
@@ -207,10 +208,10 @@
 			url
 		})
 	}
-	const balance_type = ref()
+	const type = ref()
 	onLoad(e => {
-		if (e.balance_type) {
-			balance_type.value = e.balance_type
+		if (e.type) {
+			type.value = e.type
 		}
 
 	})

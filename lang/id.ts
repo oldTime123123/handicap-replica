@@ -597,7 +597,8 @@ export default {
 	},
 	setting: {
 		s_s1: "Pengikatan USDT",
-		s_s2: "Silakan Masukkan Alamat TRC20 USDT",
+		s_s2: "Silahkan Masukkan TRC20",
+		s_s21: "Alamat",
 		s_s3: "Berhasil Diedit",
 		s_b1: "Pengikatan Kartu Bank",
 		s_b2: "Silakan pilih bank",
