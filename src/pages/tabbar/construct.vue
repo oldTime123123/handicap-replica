@@ -97,10 +97,10 @@
 				<view class="teamstyle" style="text-align: center;margin-top: 30rpx;"
 					@click="Jumplink('../mine/teamDetail')">{{ t('pk.t_c8') }}</View>
 
-				<!-- <view class="mt40 pb160">
+				<view class="mt40 pb160">
 					<img @click="getImg(2)" style="width: 100%;" :src="nowlang == 'id' ? bannerList[3] : bannerList[1]"
 						alt="">
-				</view> -->
+				</view>
 			</view>
 
 

@@ -57,6 +57,9 @@
 		request({
 			methods: 'get',
 			url: 'user/attribute/wallet',
+			data: {
+				type: type.value
+			}
 		}).then(res => {
 			if (res.address) {
 				formData.value.address = res.address

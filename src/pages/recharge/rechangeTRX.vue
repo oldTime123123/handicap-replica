@@ -123,11 +123,14 @@
 	const getData = () => {
 		request({
 			url: 'finance/trx/recharge/index',
-			methods: 'get'
+			methods: 'get',
+			data: {
+				balance_type: balance_type.value
+			}
 		}).then(res => {
 			if (res.order) {
 				uni.navigateTo({
-					url: './usdtOrder'
+					url: './trxOreder'
 				})
 				return false
 			}

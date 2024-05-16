@@ -18,6 +18,10 @@
 		onShow
 	} from '@dcloudio/uni-app';
 	import request from '../../../comm/request.ts';
+	const loading = ref(false)
+	defineExpose({
+		loading
+	})
 	const getActStatus = () => {
 		request({
 			url: 'user/record/recharge',

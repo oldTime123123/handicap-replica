@@ -30,7 +30,8 @@
 					<view class="between">
 						<view style="border: 1rpx solid;"
 							:style="{ 'border-color': store.$state.contentColor, color: store.$state.contentColor }">
-							{{ t('all.a_c2') }}</view>
+							{{ t('all.a_c2') }}
+						</view>
 						<view class="color0" :style="{ background: store.$state.secondColor, color: '#000' }"
 							@click="confirmHandle">
 							{{ t('all.a_c1') }}
@@ -43,110 +44,128 @@
 </template>
 
 <script setup>
-import kefu from "@/components/kefu/kefu.vue"
+	import kefu from "@/components/kefu/kefu.vue"
 
-import topNav from "@/components/topNav/topNav.vue"
-import request from '../../../comm/request.ts';
-import {
-	userStore
+	import topNav from "@/components/topNav/topNav.vue"
+	import request from '../../../comm/request.ts';
+	import {
+		userStore
 
-} from "@/store/themeNum.js";
-// import {
-// 	Toast
-// } from '@nutui/nutui';
-import {
-	onShow,
-	onLoad
-} from "@dcloudio/uni-app";
-const store = userStore();
-import {
-	useI18n
-} from "vue-i18n";
-const {
-	t
-} = useI18n();
-const loginOutMask = ref(false)
-const confirmHandle = () => {
-	uni.navigateTo({
-		url: '../login/login'
-	})
-}
-const list = ref([{
-	name: t('setting.s_c3'),
-	url: './set1',
-	flag: false,
-	img: "/static/themeNum1/setting/usdt.png"
-},
-{
-	name: t('setting.s_c4'),
-	url: './set2',
-	flag: false,
-	img: "/static/themeNum1/setting/bank.png"
-},
-{
-	name: t('setting.s_c5'),
-	url: './set3',
-	flag: true,
-	img: "/static/themeNum1/setting/fundPwd.png"
-},
-{
-	name: t('setting.s_c6'),
-	url: './set4',
-	flag: true,
-	img: "/static/themeNum1/setting/loginPwd.png"
-},
-{
-	name: t('setting.s_c7'),
-	url: '',
-	flag: true,
-	img: "/static/themeNum1/setting/loginOut.png"
-},
-])
-const jumpPage = url => {
-	if (url) {
+	} from "@/store/themeNum.js";
+	// import {
+	// 	Toast
+	// } from '@nutui/nutui';
+	import {
+		onShow,
+		onLoad
+	} from "@dcloudio/uni-app";
+	const store = userStore();
+	import {
+		useI18n
+	} from "vue-i18n";
+	const {
+		t
+	} = useI18n();
+	const loginOutMask = ref(false)
+	const confirmHandle = () => {
 		uni.navigateTo({
-			url
+			url: '../login/login'
 		})
-	} else {
-		loginOutMask.value = true
 	}
-}
+	const list = ref([{
+			name: "USDT" + t('setting.s_c3'),
+			url: './set1',
+			flag: false,
+			img: "/static/themeNum1/setting/usdt.png"
+		},
+		{
+			name: "TRX" + t('setting.s_c3'),
+			url: './set1?type=trx',
+			flag: false,
+			img: "/static/themeNum1/setting/usdt.png"
+		},
+		{
+			name: "USDC" + t('setting.s_c3'),
+			url: './set1?type=usdc',
+			flag: false,
+			img: "/static/themeNum1/setting/usdt.png"
+		},
+		{
+			name: t('setting.s_c4'),
+			url: './set2',
+			flag: false,
+			img: "/static/themeNum1/setting/bank.png"
+		},
+		{
+			name: t('setting.s_c5'),
+			url: './set3',
+			flag: true,
+			img: "/static/themeNum1/setting/fundPwd.png"
+		},
+		{
+			name: t('setting.s_c6'),
+			url: './set4',
+			flag: true,
+			img: "/static/themeNum1/setting/loginPwd.png"
+		},
+		{
+			name: t('setting.s_c7'),
+			url: '',
+			flag: true,
+			img: "/static/themeNum1/setting/loginOut.png"
+		},
+	])
+	const jumpPage = url => {
+		if (url) {
+			uni.navigateTo({
+				url
+			})
+		} else {
+			loginOutMask.value = true
+		}
+	}
 
-const getData = () => {
-	request({
-		url: 'setting/financeWay',
-		methods: 'get'
-	}).then(res => {
-		let {
-			withdraw_type
-		} = res
-		//数组 可以包含多个方式 1.USDT  2.三方
-		if (withdraw_type.includes(1)) {
-			list.value[0].flag = true
-		}
-		if (withdraw_type.includes(2)) {
-			list.value[1].flag = true
-		}
+	const getData = () => {
+		request({
+			url: 'setting/financeWay',
+			methods: 'get'
+		}).then(res => {
+			let {
+				withdraw_type
+			} = res
+			//数组 可以包含多个方式 1.USDT  2.三方
+			if (withdraw_type.includes(1)) {
+				list.value[0].flag = true
+			}
+			if (withdraw_type.includes(3)) {
+				list.value[1].flag = true
+			}
+			if (withdraw_type.includes(4)) {
+				list.value[2].flag = true
+			}
+			if (withdraw_type.includes(2)) {
+				list.value[3].flag = true
+			}
+		})
+	}
+	const curLang = uni.getStorageSync('lang')
+	// 终于可以用了
+	onShow(() => {
+		getData()
 	})
-}
-const curLang = uni.getStorageSync('lang')
-// 终于可以用了
-onShow(() => {
-	getData()
-})
-onLoad(() => {
- 
-})
+	onLoad(() => {
+
+	})
 </script>
 
 <style lang="scss">
-.listItem {
-	background: #262626;
-	border-radius: 15rpx;
-	padding: 30rpx 45rpx;
-	display: flex;
-	color: #fff;
-	align-items: center;
-	justify-content: space-between;
-}
+	.listItem {
+		background: #262626;
+		border-radius: 15rpx;
+		padding: 30rpx 45rpx;
+		display: flex;
+		color: #fff;
+		align-items: center;
+		justify-content: space-between;
+	}
 </style>

@@ -704,7 +704,7 @@ export default {
 		t_i5: "Penarikan",
 		t_i6: "Layanan daring",
 		t_i7: "Saluran resmi",
-		t_i8: "Undang teman untuk mengisi ulang dan menerima dua hadiah",
+		t_i8: "Undang teman untuk mengisi ulang dan menikmati rabat agen level 3",
 		t_i9: "Untuk berbagi",
 		t_i10: "Pengunduhan aplikasi",
 		t_i11: "Ayo unduh",
