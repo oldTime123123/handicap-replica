@@ -67,141 +67,151 @@
 </template>
 
 <script setup>
-	import kefu from "@/components/kefu/kefu.vue"
+import kefu from "@/components/kefu/kefu.vue"
 
-	import topNav from "@/components/topNav/topNav.vue"
-	import request from '../../../comm/request.ts';
-	import {
-		userStore
-	} from "@/store/themeNum.js";
-	// import {
-	// 	Toast
-	// } from '@nutui/nutui';
-	import {
-		onShow,
-		onLoad
-	} from "@dcloudio/uni-app";
-	const store = userStore();
+import topNav from "@/components/topNav/topNav.vue"
+import request from '../../../comm/request.ts';
+import {
+	userStore
+} from "@/store/themeNum.js";
+// import {
+// 	Toast
+// } from '@nutui/nutui';
+import {
+	onShow,
+	onLoad
+} from "@dcloudio/uni-app";
+const store = userStore();
 
-	import {
-		useI18n
-	} from "vue-i18n";
+import {
+	useI18n
+} from "vue-i18n";
 
-	const {
-		t
-	} = useI18n();
+const {
+	t
+} = useI18n();
 
-	const choStyle = {
-		background: store.$state.secondColor,
-		color: "#000",
-		transition: '.1s linear all'
-	}
-	const noChoStyle = {
-		background: store.$state.thirdColor,
-		color: "#fff"
-	}
-	const actInd = ref(0)
+const choStyle = {
+	background: store.$state.secondColor,
+	color: "#000",
+	transition: '.1s linear all'
+}
+const noChoStyle = {
+	background: store.$state.thirdColor,
+	color: "#fff"
+}
+const actInd = ref(0)
 
-	const showUSDT = ref(false)
-	const showBANK = ref(false)
-	const showTRX = ref(false)
-	const showUSDC = ref(false)
-
-
-	const AreaCode = ref(0)
+const showUSDT = ref(false)
+const showBANK = ref(false)
+const showTRX = ref(false)
+const showUSDC = ref(false)
 
 
-	const jumpPage = () => {
+const AreaCode = ref(0)
 
-		if (actInd.value == 1 && showUSDT.value) {
-			uni.navigateTo({
-				url: '../recharge/u_input?balance_type=' + balance_type.value
 
-			})
-		} else if (actInd.value == 0 && showBANK.value) {
-			uni.navigateTo({
-				url: '../recharge/bankRechrage?balance_type=' + balance_type.value
-			})
-		} else if (actInd.value == 2 && showTRX.value) {
-			uni.navigateTo({
-				url: '../recharge/rechangeTRX?balance_type=' + balance_type.value
-			})
-		} else if (actInd.value == 3 && showUSDC.value) {
-			uni.navigateTo({
-				url: '../recharge/rechangeUSDC?balance_type=' + balance_type.value
-			})
-		}
-	}
+const jumpPage = () => {
 
-	const getData = () => {
-		request({
-			url: 'user/index',
-			methods: 'get'
-		}).then(res => {
-			AreaCode.value = res
-			if (res.country_code == '+62') {
-				actInd.value = 0
-			} else {
-				actInd.value = 1
+	if (actInd.value == 1 && showUSDT.value) {
+		uni.navigateTo({
+			url: '../recharge/u_input?balance_type=' + balance_type.value
 
-			}
 		})
-		request({
-			url: 'setting/financeWay',
-			methods: 'get'
-		}).then(res => {
-			let {
-				recharge_type
-			} = res
-
-			if (recharge_type.includes(1)) {
-				showUSDT.value = true
-			}
-			if (recharge_type.includes(2)) {
-				showBANK.value = true
-			}
-			if (recharge_type.includes(3)) {
-				showTRX.value = true
-			}
-			if (recharge_type.includes(4)) {
-				showUSDC.value = true
-			}
-			// console.log(res);
+	} else if (actInd.value == 0 && showBANK.value) {
+		uni.navigateTo({
+			url: '../recharge/bankRechrage?balance_type=' + balance_type.value
+		})
+	} else if (actInd.value == 2 && showTRX.value) {
+		uni.navigateTo({
+			url: '../recharge/rechangeTRX?balance_type=' + balance_type.value
+		})
+	} else if (actInd.value == 3 && showUSDC.value) {
+		uni.navigateTo({
+			url: '../recharge/rechangeUSDC?balance_type=' + balance_type.value
 		})
 	}
-	const balance_type = ref()
-	onLoad(e => {
-		if (e.balance_type) {
-			balance_type.value = e.balance_type
+}
+
+const getData = () => {
+	request({
+		url: 'user/index',
+		methods: 'get'
+	}).then(res => {
+		AreaCode.value = res
+		if (res.country_code == '+62') {
+			actInd.value = 0
+		} else {
+			actInd.value = 1
+
 		}
 	})
-	// 终于可以用了
-	onShow(() => {
-		getData()
+	request({
+		url: 'setting/financeWay',
+		methods: 'get'
+	}).then(res => {
+		let {
+			recharge_type
+		} = res
+
+		if (recharge_type.includes(1)) {
+			showUSDT.value = true
+		}
+		if (recharge_type.includes(2)) {
+			showBANK.value = true
+		}
+		if (recharge_type.includes(3)) {
+			showTRX.value = true
+		}
+		if (recharge_type.includes(4)) {
+			showUSDC.value = true
+		}
+		if (showBANK.value) {
+			actInd.value = 1
+			return
+		} else if (showTRX.value) {
+			actInd.value = 2
+		} else if (showUSDT.value) {
+			actInd.value = 3
+		} else if (showUSDC.value) {
+			actInd.value = 4
+		}
+		// console.log(res);
 	})
+}
+const balance_type = ref()
+onLoad(e => {
+	if (e.balance_type) {
+		balance_type.value = e.balance_type
+	}
+})
+// 终于可以用了
+onShow(() => {
+	getData()
+})
 </script>
 
 <style lang="scss">
-	.items {
-		height: 130rpx;
-		padding: 0 50rpx;
-		border-radius: 15rpx;
-		margin-bottom: 40rpx;
+.items {
+	height: 130rpx;
+	padding: 0 50rpx;
+	border-radius: 15rpx;
+	margin-bottom: 40rpx;
 
-	}
+}
 
-	.circle {
-		height: 35rpx;
-		width: 35rpx;
-		border-radius: 10rpx;
-	}
+.circle {
+	height: 35rpx;
+	width: 35rpx;
+	border-radius: 10rpx;
+}
 
-	.actChoose {
-		background-color: #fff;
-	}
+.actChoose {
+	background-color: #fff;
+}
 
-	.noChoose {
-		border: 1rpx solid #AFAFAF;
+.noChoose {
+	border: 1rpx solid #AFAFAF;
 
-	}
+}
 </style>

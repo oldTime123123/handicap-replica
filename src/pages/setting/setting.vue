@@ -44,128 +44,135 @@
 </template>
 
 <script setup>
-	import kefu from "@/components/kefu/kefu.vue"
+import kefu from "@/components/kefu/kefu.vue"
 
-	import topNav from "@/components/topNav/topNav.vue"
-	import request from '../../../comm/request.ts';
-	import {
-		userStore
+import topNav from "@/components/topNav/topNav.vue"
+import request from '../../../comm/request.ts';
+import {
+	userStore
 
-	} from "@/store/themeNum.js";
-	// import {
-	// 	Toast
-	// } from '@nutui/nutui';
-	import {
-		onShow,
-		onLoad
-	} from "@dcloudio/uni-app";
-	const store = userStore();
-	import {
-		useI18n
-	} from "vue-i18n";
-	const {
-		t
-	} = useI18n();
-	const loginOutMask = ref(false)
-	const confirmHandle = () => {
+} from "@/store/themeNum.js";
+// import {
+// 	Toast
+// } from '@nutui/nutui';
+import {
+	onShow,
+	onLoad
+} from "@dcloudio/uni-app";
+const store = userStore();
+import {
+	useI18n
+} from "vue-i18n";
+const {
+	t
+} = useI18n();
+const loginOutMask = ref(false)
+const confirmHandle = () => {
+	uni.navigateTo({
+		url: '../login/login'
+	})
+}
+const list = ref([
+	{
+		name: t('setting.s_c4'),
+		url: './set2',
+		flag: false,
+		img: "/static/themeNum1/setting/bank.png"
+
+	},
+	{
+		name: "TRX" + t('setting.s_c3'),
+		url: './set1?type=trx',
+		flag: false,
+		img: "/static//TRX.png"
+	},
+	{
+		name: "USDT" + t('setting.s_c3'),
+		url: './set1',
+		flag: false,
+		img: "/static/themeNum1/setting/usdt.png"
+	},
+	{
+		name: "USDC" + t('setting.s_c3'),
+		url: './set1?type=usdc',
+		flag: false,
+		img: "/static/usdc.png"
+	},
+
+	{
+		name: t('setting.s_c5'),
+		url: './set3',
+		flag: true,
+		img: "/static/themeNum1/setting/fundPwd.png"
+	},
+	{
+		name: t('setting.s_c6'),
+		url: './set4',
+		flag: true,
+		img: "/static/themeNum1/setting/loginPwd.png"
+	},
+	{
+		name: t('setting.s_c7'),
+		url: '',
+		flag: true,
+		img: "/static/themeNum1/setting/loginOut.png"
+	},
+])
+const jumpPage = url => {
+	if (url) {
 		uni.navigateTo({
-			url: '../login/login'
+			url
 		})
+	} else {
+		loginOutMask.value = true
 	}
-	const list = ref([{
-			name: "USDT" + t('setting.s_c3'),
-			url: './set1',
-			flag: false,
-			img: "/static/themeNum1/setting/usdt.png"
-		},
-		{
-			name: "TRX" + t('setting.s_c3'),
-			url: './set1?type=trx',
-			flag: false,
-			img: "/static/themeNum1/setting/usdt.png"
-		},
-		{
-			name: "USDC" + t('setting.s_c3'),
-			url: './set1?type=usdc',
-			flag: false,
-			img: "/static/themeNum1/setting/usdt.png"
-		},
-		{
-			name: t('setting.s_c4'),
-			url: './set2',
-			flag: false,
-			img: "/static/themeNum1/setting/bank.png"
-		},
-		{
-			name: t('setting.s_c5'),
-			url: './set3',
-			flag: true,
-			img: "/static/themeNum1/setting/fundPwd.png"
-		},
-		{
-			name: t('setting.s_c6'),
-			url: './set4',
-			flag: true,
-			img: "/static/themeNum1/setting/loginPwd.png"
-		},
-		{
-			name: t('setting.s_c7'),
-			url: '',
-			flag: true,
-			img: "/static/themeNum1/setting/loginOut.png"
-		},
-	])
-	const jumpPage = url => {
-		if (url) {
-			uni.navigateTo({
-				url
-			})
-		} else {
-			loginOutMask.value = true
+}
+
+const getData = () => {
+	request({
+		url: 'setting/financeWay',
+		methods: 'get'
+	}).then(res => {
+		let {
+			withdraw_type
+		} = res
+		//数组 可以包含多个方式 1.USDT  2.三方 
+		if (withdraw_type.includes(1)) {
+			list.value[2].flag = true
+			//ustd
 		}
-	}
-
-	const getData = () => {
-		request({
-			url: 'setting/financeWay',
-			methods: 'get'
-		}).then(res => {
-			let {
-				withdraw_type
-			} = res
-			//数组 可以包含多个方式 1.USDT  2.三方
-			if (withdraw_type.includes(1)) {
-				list.value[0].flag = true
-			}
-			if (withdraw_type.includes(3)) {
-				list.value[1].flag = true
-			}
-			if (withdraw_type.includes(4)) {
-				list.value[2].flag = true
-			}
-			if (withdraw_type.includes(2)) {
-				list.value[3].flag = true
-			}
-		})
-	}
-	const curLang = uni.getStorageSync('lang')
-	// 终于可以用了
-	onShow(() => {
-		getData()
+		if (withdraw_type.includes(3)) {
+			list.value[1].flag = true
+			//TRX
+		}
+		if (withdraw_type.includes(4)) {
+			list.value[3].flag = true
+			//USDC
+		}
+		if (withdraw_type.includes(2)) {
+			list.value[0].flag = true
+			//银行卡
+		}
 	})
-	onLoad(() => {
+}
+const curLang = uni.getStorageSync('lang')
+// 终于可以用了
+onShow(() => {
+	getData()
+})
+onLoad(() => {
 
-	})
+})
 </script>
 
 <style lang="scss">
-	.listItem {
-		background: #262626;
-		border-radius: 15rpx;
-		padding: 30rpx 45rpx;
-		display: flex;
-		color: #fff;
-		align-items: center;
-		justify-content: space-between;
-	}
+.listItem {
+	background: #262626;
+	border-radius: 15rpx;
+	padding: 30rpx 45rpx;
+	display: flex;
+	color: #fff;
+	align-items: center;
+	justify-content: space-between;
+}
 </style>

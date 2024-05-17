@@ -554,7 +554,8 @@ export default {
 		w_w3: "Bitte überprüfen Sie die folgenden Zahlungsinformationen sorgfältig",
 		w_w4: "Bitte binden Sie das Finanzpasswort",
 		w_w5: "Bitte geben Sie das Fondspasswort ein",
-		w_w6: "Bitte überprüfen Sie die Wallet-Adresse",
+		w_w6: "Bitte binden",
+		w_w7: "Adresse"
 	},
 	setting: {
 		s_s1: "USDT-Bindung",

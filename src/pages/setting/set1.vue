@@ -7,7 +7,7 @@
 				{{ t('setting.s_s2') }} {{change_type}} {{ t('setting.s_s21') }}
 			</view>
 			<view class="settingInp mt30">
-				<input type="text" :placeholder="t('setting.s_s2')" placeholder-class="inpPlaceholder"
+				<input type="text" :placeholder="t('setting.s_s2') + change_type +' '+  t('setting.s_s21') " placeholder-class="inpPlaceholder"
 					style="height: 100%;width: 100%;" v-model="formData.address">
 			</view>
 

@@ -2,16 +2,16 @@
 export default {
 	lo_i: {
 		l_o1: "Olá",
-		l_o2:"Bem-vindo ao login",
-		l_o3:"Conta",
-		l_o4:"Senha",
-		l_o5:"Login",
-		l_o6:"Registrar",
-		l_o7:"Registrar uma conta",
-		l_o8:"Nome registrado",
-		l_o9:"Senha de registro",
-		l_o10:"Confirmar senha",
-		l_o11:"Código de convite",
+		l_o2: "Bem-vindo ao login",
+		l_o3: "Conta",
+		l_o4: "Senha",
+		l_o5: "Login",
+		l_o6: "Registrar",
+		l_o7: "Registrar uma conta",
+		l_o8: "Nome registrado",
+		l_o9: "Senha de registro",
+		l_o10: "Confirmar senha",
+		l_o11: "Código de convite",
 	},
 	ttn: {
 		t_t1: "Saldo total",
@@ -28,10 +28,10 @@ export default {
 		t_t12: "Recarregar",
 		t_t13: "Carteira da conta",
 		t_t14:
-		"Os depósitos nesta conta podem ser usados para investir em projetos de crowdfunding. Diferentes produtos têm diferentes índices de renda. Para obter detalhes, consulte a introdução do produto do projeto.",
+			"Os depósitos nesta conta podem ser usados para investir em projetos de crowdfunding. Diferentes produtos têm diferentes índices de renda. Para obter detalhes, consulte a introdução do produto do projeto.",
 		t_t15: "Conta inteligente",
 		t_t16:
-		"Depósito nesta conta para quantificação inteligente de rendimentos. Você pode ativar manualmente a quantificação inteligente e obter rendimentos 24 horas após o primeiro depósito. O principal será devolvido no vencimento.",
+			"Depósito nesta conta para quantificação inteligente de rendimentos. Você pode ativar manualmente a quantificação inteligente e obter rendimentos 24 horas após o primeiro depósito. O principal será devolvido no vencimento.",
 		t_t17: "Carteira inteligente",
 		t_t18: "Carteira da conta",
 		t_t19: "Saldo total",
@@ -97,57 +97,57 @@ export default {
 		m_m2: "idioma",
 	},
 	index: {
-		i_a1: "Lista de membros", i_a2: "Desbloquear", i_a3: "Retirada de dinheiro", i_a4: "Retirada bem-sucedida", i_a5: "Artigo", i_a6: "Recarga", i_a7: "Retirada", i_a9: "Convidar" ,
+		i_a1: "Lista de membros", i_a2: "Desbloquear", i_a3: "Retirada de dinheiro", i_a4: "Retirada bem-sucedida", i_a5: "Artigo", i_a6: "Recarga", i_a7: "Retirada", i_a9: "Convidar",
 	},
 	xy: {
 		title1: "1. Confirmação e aceitação dos termos de serviço",
 		title2:
-		"(1) Os direitos de propriedade e operação de vários serviços eletrônicos da Fluxon Quantitative Market Trading (referido como F-qmt) pertencem a 'F-qmt'. Os serviços prestados por este site serão estritamente implementados de acordo com os termos de serviço e regras operacionais publicadas por ele Quando você confirma todos os termos de serviço e conclui o processo de registro, este acordo é estabelecido e entra em vigor entre você e este site, e você se torna um usuário oficial deste site.",
+			"(1) Os direitos de propriedade e operação de vários serviços eletrônicos da Fluxon Quantitative Market Trading (referido como F-qmt) pertencem a 'F-qmt'. Os serviços prestados por este site serão estritamente implementados de acordo com os termos de serviço e regras operacionais publicadas por ele Quando você confirma todos os termos de serviço e conclui o processo de registro, este acordo é estabelecido e entra em vigor entre você e este site, e você se torna um usuário oficial deste site.",
 		title3:
-		"(2) Os operadores da plataforma F-qmt referem-se às pessoas jurídicas que operam a plataforma F-qmt. A F-qmt poderá alterar ou adicionar diversas atividades de acordo com os ajustes de negócios da plataforma. A premissa é que não afetará ou prejudicará os interesses de usuários. Você pode consultar o atendimento ao cliente e os agentes a qualquer momento.",
+			"(2) Os operadores da plataforma F-qmt referem-se às pessoas jurídicas que operam a plataforma F-qmt. A F-qmt poderá alterar ou adicionar diversas atividades de acordo com os ajustes de negócios da plataforma. A premissa é que não afetará ou prejudicará os interesses de usuários. Você pode consultar o atendimento ao cliente e os agentes a qualquer momento.",
 		title4:
-		"(3) Por favor, leia atentamente as regras sobre como prometer renda quantificada neste contrato. Ao clicar no botão 'Concordo', considera-se que você aceitou totalmente este contrato. Antes de clicar, confirme novamente que você está ciente e compreender plenamente todo o conteúdo deste acordo.",
+			"(3) Por favor, leia atentamente as regras sobre como prometer renda quantificada neste contrato. Ao clicar no botão 'Concordo', considera-se que você aceitou totalmente este contrato. Antes de clicar, confirme novamente que você está ciente e compreender plenamente todo o conteúdo deste acordo.",
 		title5: "2. Renda quantificada de nível",
 		title6:
-		"V0: Nível de experiência iniciante, todas as transações quantitativas exigem que os usuários recarreguem e prometam uma certa quantia de USDT na cadeia pública da plataforma, e o sistema inteligente de IA irá quantificá-lo automaticamente para que os usuários gerem renda. Para usuários recém-registrados, o sistema irá ajude os usuários a prometer 10USDT na rede pública.",
+			"V0: Nível de experiência iniciante, todas as transações quantitativas exigem que os usuários recarreguem e prometam uma certa quantia de USDT na cadeia pública da plataforma, e o sistema inteligente de IA irá quantificá-lo automaticamente para que os usuários gerem renda. Para usuários recém-registrados, o sistema irá ajude os usuários a prometer 10USDT na rede pública.",
 		title7:
-		"Período de recarga e penhor e desembolso: 90 dias, o nível V0 tem período de experiência de apenas 3 dias, renda quantificada 20 vezes ao dia e taxa de retorno de 0,5%. a experiência de três dias, e a renda é de pelo menos 3 USDT. Quando o requisito mínimo de retirada de 5 USDT não for atingido, os usuários podem recarregar não menos do que o requisito de capital de penhor correspondente a V1 ou nível superior, a fim de obter retornos mais elevados em. longo prazo.",
+			"Período de recarga e penhor e desembolso: 90 dias, o nível V0 tem período de experiência de apenas 3 dias, renda quantificada 20 vezes ao dia e taxa de retorno de 0,5%. a experiência de três dias, e a renda é de pelo menos 3 USDT. Quando o requisito mínimo de retirada de 5 USDT não for atingido, os usuários podem recarregar não menos do que o requisito de capital de penhor correspondente a V1 ou nível superior, a fim de obter retornos mais elevados em. longo prazo.",
 		title8:
-		"V1: Requisitos de promessa de saldo da conta do membro: mínimo de 100 USDT, máximo de 500 USDT, promessa de recarga e período de cancelamento de promessa: 90 dias, renda diária mínima de 5,6 USDT, máximo de 28 USDT, número de pessoas necessárias para serem convidadas: 2 usuários válidos." ,
+			"V1: Requisitos de promessa de saldo da conta do membro: mínimo de 100 USDT, máximo de 500 USDT, promessa de recarga e período de cancelamento de promessa: 90 dias, renda diária mínima de 5,6 USDT, máximo de 28 USDT, número de pessoas necessárias para serem convidadas: 2 usuários válidos.",
 		title9:
-		"V2: Requisitos de promessa de saldo da conta do membro: mínimo de 500 USDT, máximo de 1000 USDT, promessa de recarga e período de cancelamento de promessa: 90 dias, renda diária mínima de 31,5 USDT, máximo de 63 USDT, número de pessoas necessárias para serem convidadas: 5 usuários válidos." ,
+			"V2: Requisitos de promessa de saldo da conta do membro: mínimo de 500 USDT, máximo de 1000 USDT, promessa de recarga e período de cancelamento de promessa: 90 dias, renda diária mínima de 31,5 USDT, máximo de 63 USDT, número de pessoas necessárias para serem convidadas: 5 usuários válidos.",
 		title10:
-		"V3: Requisitos de promessa de saldo da conta do membro: mínimo de 1.000 USDT, máximo de 5.000 USDT, promessa de recarga e período de cancelamento de promessa: 90 dias, renda diária mínima de 57,6 USDT, máximo de 288 USDT, número de pessoas necessárias para serem convidadas: 10 usuários válidos." ,
+			"V3: Requisitos de promessa de saldo da conta do membro: mínimo de 1.000 USDT, máximo de 5.000 USDT, promessa de recarga e período de cancelamento de promessa: 90 dias, renda diária mínima de 57,6 USDT, máximo de 288 USDT, número de pessoas necessárias para serem convidadas: 10 usuários válidos.",
 		title11:
-		"V4: Requisitos de promessa de saldo da conta do membro: mínimo de 5.000 USDT, máximo de 10.000 USDT, promessa de recarga e período de cancelamento de promessa: 90 dias, renda diária mínima de 328 USDT, máximo de 656 USDT, número de pessoas necessárias para serem convidadas: 20 usuários válidos." ,
+			"V4: Requisitos de promessa de saldo da conta do membro: mínimo de 5.000 USDT, máximo de 10.000 USDT, promessa de recarga e período de cancelamento de promessa: 90 dias, renda diária mínima de 328 USDT, máximo de 656 USDT, número de pessoas necessárias para serem convidadas: 20 usuários válidos.",
 		title12:
-		"V5: Requisitos de promessa de saldo da conta de membro: mínimo de 10.000 USDT+, promessa de recarga e período de cancelamento de promessa: 90 dias, renda diária mínima de 475 USDT, máximo de 2.505 USDT+, número de pessoas que precisam ser convidadas: 30 usuários válidos.",
+			"V5: Requisitos de promessa de saldo da conta de membro: mínimo de 10.000 USDT+, promessa de recarga e período de cancelamento de promessa: 90 dias, renda diária mínima de 475 USDT, máximo de 2.505 USDT+, número de pessoas que precisam ser convidadas: 30 usuários válidos.",
 		title13:
-		"Observação: Os fundos recarregados por todos os usuários serão penhorados na rede pública por 90 dias. Após o vencimento, o contrato de penhor será automaticamente liberado e o principal da recarga será automaticamente devolvido ao saldo da conta do membro. regras da plataforma e não deve recarregar sem saber para evitar mal-entendidos.",
+			"Observação: Os fundos recarregados por todos os usuários serão penhorados na rede pública por 90 dias. Após o vencimento, o contrato de penhor será automaticamente liberado e o principal da recarga será automaticamente devolvido ao saldo da conta do membro. regras da plataforma e não deve recarregar sem saber para evitar mal-entendidos.",
 		title14: "3. Convide benefícios quantificados",
 		title15:
-		"1. Você compartilha com o amigo A, que se torna seu membro de primeiro nível, e receberá 20% de comissão da renda diária do subordinado A de primeiro nível todos os dias.",
+			"1. Você compartilha com o amigo A, que se torna seu membro de primeiro nível, e receberá 20% de comissão da renda diária do subordinado A de primeiro nível todos os dias.",
 		title16:
-		"2. A compartilha com o amigo B. B é seu membro de segundo nível. Você pode receber 10% de comissão da renda diária do subordinado de segundo nível B todos os dias.",
+			"2. A compartilha com o amigo B. B é seu membro de segundo nível. Você pode receber 10% de comissão da renda diária do subordinado de segundo nível B todos os dias.",
 		title17:
-		"3. B compartilha com o amigo C. C é seu membro de terceiro nível e pode receber 5% de comissão da renda diária do subordinado de terceiro nível C todos os dias.",
+			"3. B compartilha com o amigo C. C é seu membro de terceiro nível e pode receber 5% de comissão da renda diária do subordinado de terceiro nível C todos os dias.",
 		title18:
-		"A empresa reserva-se o direito de interpretação final desta atividade. Caso tenha alguma dúvida, entre em contato com o assistente ou consulte o atendimento online.",
+			"A empresa reserva-se o direito de interpretação final desta atividade. Caso tenha alguma dúvida, entre em contato com o assistente ou consulte o atendimento online.",
 		title19: "Centro de quantização",
 		title20: "Por favor, leia e concorde com o Contrato de Negociação Quantitativa do Usuário",
 	},
 	all: {
-	  // a_d1: "Confirm",
-	  a_c1: "Confirmar",
-a_c2: "Cancelar",
-a_c3: "Configurações de idioma",
-a_c4: "Atendimento ao Cliente",
-a_c7: "Todos",
-a_c8: "Pendente",
-a_c9: "Sucesso",
-a_c10: "Cancelar",
-a_d1: "Copiar",
-a_d2: "Status",
+		// a_d1: "Confirm",
+		a_c1: "Confirmar",
+		a_c2: "Cancelar",
+		a_c3: "Configurações de idioma",
+		a_c4: "Atendimento ao Cliente",
+		a_c7: "Todos",
+		a_c8: "Pendente",
+		a_c9: "Sucesso",
+		a_c10: "Cancelar",
+		a_d1: "Copiar",
+		a_d2: "Status",
 	},
 	record: {
 		r_r1: "Não há mais dados",
@@ -170,7 +170,7 @@ a_d2: "Status",
 		r_a7: "Falha no pagamento",
 		r_a8: "Cancelado",
 		r_a9: "Tempo esgotado",
-		  
+
 		r_s1: "registro skyPay",
 		r_s2: "Número da transação",
 		r_s3: "Preço",
@@ -185,13 +185,13 @@ a_d2: "Status",
 		r_s12: "benefício de interrupção",
 		r_s13: "Quer interromper a renda?",
 		r_s14: "Interrupção bem sucedida",
-		  
+
 		r_w1: "Registro de retiradas",
 		r_w2: "Taxa de serviço",
 		r_w3: "Valor do recibo",
 		r_w4: "Tipo de saque",
 		r_w5: "Status do pagamento",
-		  
+
 		r_w6: "Pagamento pendente",
 		r_w7: "Pagamento bem-sucedido",
 		r_w8: "Falha no pagamento",
@@ -263,7 +263,7 @@ a_d2: "Status",
 		i_i5: "Moeda",
 		i_i6: "Último preço",
 		i_i7: "24h Subir e descer",
-		  
+
 		a_a14: "Hoje",
 		a_a15: "quantificação.",
 		a_a16: "Obtido",
@@ -304,7 +304,7 @@ a_d2: "Status",
 		a_a14: "Processamento de dados de IA",
 		a_a15: "Pacote de dados",
 	},
-  
+
 	newTab: {
 		n_n1: "AI-Toque",
 		n_n2: "Consultoria de IA",
@@ -340,18 +340,18 @@ a_d2: "Status",
 		r_r8: "Recebido",
 		r_r9: "Registro de envelope vermelho",
 		r_r10: "Obter recompensas",
-		  
+
 		p_p1: "A ser concluído",
 		p_p2: "Para ser usado",
 		p_p3: "Usado",
-		  
+
 		g_g1: "Atividade do ovo de ouro",
 		g_g2: "Desculpe",
 		g_g3: "Parabéns",
 		g_g4: "Obrigado pela sua participação",
 		g_g5: "Recorde de ovo de ouro",
 		g_g6: "Número insuficiente de disponíveis",
-	  	},
+	},
 	newAct: {
 		l_l1: "Loteria",
 		l_l2: "Disponível",
@@ -360,7 +360,7 @@ a_d2: "Status",
 		l_l5: "Registro de loteria",
 		l_l6: "Nome do prêmio",
 		l_l7: "Preço do prêmio",
-		  
+
 		r_r1: "Resgate de pontos",
 		r_r2: "Meus pontos",
 		r_r3: "Comissão resgatada",
@@ -376,7 +376,7 @@ a_d2: "Status",
 		r_r13: "Troca bem-sucedida",
 		r_r14: "Pontos",
 		r_r15: "Transação de Pontos",
-		  
+
 		c_c1: "De mãos dadas com a caridade",
 		c_c2: "Valor total da doação",
 		c_c3: "Total de doação de pessoa",
@@ -389,7 +389,7 @@ a_d2: "Status",
 		c_c10: "Doação com sucesso",
 		c_c11: "Descrição do Projeto",
 		c_c12: "Caridade",
-		  
+
 		c_l1: "Itens promocionais",
 		c_l2: "Já convidei amigos",
 		c_l3: "Valor do desconto",
@@ -400,7 +400,7 @@ a_d2: "Status",
 		c_l8: "Lista de Produtos",
 		c_l9: "Receber sucesso",
 		c_l10: "Minha lista de cupons",
-		  
+
 		c_t1: "Transferência de fundos",
 		c_t2: "Conta de cobrança",
 		c_t4: "Por favor, insira a conta do destinatário",
@@ -553,7 +553,8 @@ a_d2: "Status",
 		w_w3: "Verifique cuidadosamente as seguintes informações de pagamento",
 		w_w4: "Por favor, vincule a senha financeira",
 		w_w5: "Por favor, insira a senha do fundo",
-		w_w6: "Por favor, verifique o endereço da carteira",
+		w_w6: "Por favor, vincule ",
+		w_w7: "endereço"
 	},
 	setting: {
 		s_s1: "Vinculação USDT",
@@ -647,5 +648,4 @@ a_d2: "Status",
 		o_p15: "Construção",
 		o_p16: "On-line",
 	},
-  };
-  
+};

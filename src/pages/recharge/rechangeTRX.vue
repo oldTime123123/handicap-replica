@@ -10,15 +10,20 @@
 			<view class="inpBox mt34">
 				<view class="flex pb30 col_center" style="border-bottom: 1rpx solid #eee;">
 					<view class="text_center" style="width: 100rpx;">{{ currency }}</view>
-					<input class="ml90 f36" type="number" placeholder="0" v-model="inputNum">
+					<!-- <input class="ml90 f36" type="number" placeholder="0" v-model="inputNum"> -->
+					<view class="ml90 f36">
+						{{ inputNum }}
+					</view>
 				</view>
 
 				<view class="flex pb30 mt78 col_center" style="border-bottom: 1rpx solid #eee;">
 					<view class="text_center" style="width: 100rpx;">TRX</view>
-					<!-- <input class="ml90 f36" type="number" disabled style="color: #F65E5E;" v-model="numRate"> -->
-					<view class="ml90 f36" style="color: #F65E5E;">
+
+					<!-- <view class="ml90 f36" style="color: #F65E5E;">
 						{{ rateNum }}
-					</view>
+					</view> -->
+					<input style="color: #F65E5E;" class="ml90 f36" type="number" placeholder="0" v-model="rateNum">
+
 				</view>
 
 				<view class="flex  mt44   f20">
@@ -68,7 +73,8 @@
 	} = useI18n();
 
 	const numRate = ref(0)
-	const inputNum = ref("")
+	// const inputNum = ref("")
+	const rateNum = ref('')
 	const goOrder = () => {
 		if ((inputNum.value - 0) < (pageData.value.min - 0) || (inputNum.value - 0) > (pageData.value.max - 0)) {
 			Toast.text(`${t('mark.a6')}: ${pageData.value.min} - ${pageData.value.max}`)
@@ -113,7 +119,8 @@
 			})
 		})
 	}
-	const rateNum = computed(() => ((inputNum.value ? inputNum.value : 0) * pageData.value.rate).toFixed(2))
+	// const rateNum = computed(() => ((inputNum.value ? inputNum.value : 0) * pageData.value.rate).toFixed(2))
+	const inputNum = computed(() => ((rateNum.value ? rateNum.value : 0) / pageData.value.rate).toFixed(2))
 	const showLoading = ref(null)
 	const pageData = ref({
 		rate: 1,

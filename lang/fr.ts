@@ -555,7 +555,8 @@ export default {
 		w_w3: "Veuillez vérifier attentivement les informations de paiement suivantes",
 		w_w4: "Veuillez lier le mot de passe financier",
 		w_w5: "Veuillez saisir le mot de passe du fonds",
-		w_w6: "Veuillez vérifier l'adresse du portefeuille",
+		w_w6: "Veuillez lier ",
+		w_w7: "adresse"
 	},
 	setting: {
 		s_s1: "Liaison USDT",

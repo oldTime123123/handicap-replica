@@ -602,7 +602,8 @@ export default {
 		w_w3: "Please carefully check the following payment information",
 		w_w4: "Please bind the financial password",
 		w_w5: "Please enter the financial password",
-		w_w6: "Please bind USDT address",
+		w_w6: "Please bind ",
+		w_w7: " address"
 	},
 	setting: {
 		s_s1: "USDT Binding",

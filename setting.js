@@ -4,7 +4,7 @@ import {
 } from "@/store/themeNum.js";
 const store = userStore();
 
-let dev = 2
+let dev = 1
 let COUNTRY = {
 	url: '',
 	qianzhui: '',

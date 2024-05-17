@@ -37,7 +37,7 @@
 					<!-- 					{{ t('withdraw.w_w6') }} -->
 					<view class="mt38 info l_inpBg">
 						<view class="flex col_center between ">
-							<input class="uni-input" :placeholder="t('withdraw.w_w6')" v-model="pageData.user_link"
+							<input class="uni-input" :placeholder="t('withdraw.w_w6') + WhichCurrency + t('withdraw.w_w7')" v-model="pageData.user_link"
 								style="width: 100%;" disabled />
 							<view class="bindAdd" @click="jumpPage(`../setting/set1?type=${type}`)" v-if="showBindAdd">
 								Bind</view>
@@ -104,7 +104,7 @@
 	import {
 		useI18n
 	} from "vue-i18n";
-
+	const WhichCurrency = ref()
 	const {
 		t
 	} = useI18n();
@@ -213,6 +213,7 @@
 	onLoad(e => {
 		if (e.type) {
 			type.value = e.type
+			WhichCurrency.value = e.type
 		}
 
 	})

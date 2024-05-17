@@ -554,7 +554,8 @@ export default {
 		w_w3: "Lütfen aşağıdaki ödeme bilgilerini dikkatlice kontrol edin",
 		w_w4: "Lütfen finansal şifreyi bağlayın",
 		w_w5: "Lütfen fon şifresini giriniz",
-		w_w6: "Lütfen cüzdan adresini doğrulayın",
+		w_w6: "Lütfen bağlayın",
+		w_w7: "adres"
 	},
 	setting: {
 		s_s1: "USDT Bağlaması",

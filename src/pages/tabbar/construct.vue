@@ -32,7 +32,7 @@
 						{{ t('new_xq.xq_a17') }}
 					</view>
 					<view class="text">
-						{{ t('new_xq.xq_a18') }}
+						{{ t('pk.t_i8') }}
 					</view>
 				</view>
 
@@ -291,6 +291,10 @@
 </script>
 
 <style lang="scss">
+	page{
+		background-color: rgb(8, 15, 50);
+
+	}
 	.teamstyle {
 		background-color: #006BF4;
 		box-sizing: border-box;
@@ -369,7 +373,7 @@
 	.main {
 		background: url('../../static/back.png') no-repeat;
 		background-size: 100% 100%;
-		height: 2400rpx;
+		//height: 2400rpx;
 
 	}
 

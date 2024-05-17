@@ -1,6 +1,6 @@
 //波兰
 export default {
-	parWel:{
+	parWel: {
 		p_p1: "Korzyści partnera",
 		p_p2: "Moja liczba zaproszonych",
 		p_p3: "Liczba zaproszonych osób",
@@ -280,7 +280,8 @@ export default {
 		w_w3: "Proszę dokładnie sprawdzić poniższe informacje o płatności",
 		w_w4: "Proszę powiązać hasło finansowe",
 		w_w5: "Proszę podać hasło do funduszu",
-		w_w6: "Proszę zweryfikować adres portfela"
+		w_w6: "Proszę związać",
+		w_w7: "adres"
 	},
 	setting: {
 		s_s1: "Wiązanie USDT",
