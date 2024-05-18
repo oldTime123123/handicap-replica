@@ -26,7 +26,7 @@
 
 		<view class="main" style="background: #080F32">
 			<view class="head"
-				style="width: 686rpx; height: 1094rpx;margin: 32rpx auto;background-image: url('../../static/invite/invitebanner.png');background-repeat: no-repeat;background-size: 100% 100%;">
+				style="width: 686rpx; height: 1050rpx;margin: 32rpx auto;background-image: url('../../static/invite/invitebanner.png');background-repeat: no-repeat;background-size: 100% 100%;">
 				<view class="head_box">
 					<view class="invte">
 						{{ t('new_xq.xq_a17') }}
@@ -36,7 +36,7 @@
 					</view>
 				</view>
 
-				<view class="InvCode mt106">
+				<view class="InvCode mt90">
 					<view class="InvTitle">
 						{{ t('pk.t_c2') }}:
 					</view>
@@ -396,7 +396,7 @@
 
 		.head_box {
 			width: 356rpx;
-			padding-top: 54rpx;
+			padding-top: 14rpx;
 
 			.invte {
 				font-size: 40rpx;

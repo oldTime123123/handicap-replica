@@ -765,8 +765,7 @@
 		}).then(res => {
 			let messages = []
 			for (let index = 0; index < res.length; index++) {
-				let message = 'Account: ' + res[index].phone + ' Withdraw earnings:' + res[index].amount +
-					' IDR'
+				let message = `Account：  ${res[index].phone}  Withdraw earnings：   ${res[index].amount}   IDR`
 				messages.push(message)
 			}
 			horseLamp1.value = messages

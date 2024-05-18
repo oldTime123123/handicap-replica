@@ -131,6 +131,9 @@ const jumpPage = () => {
 			url: '../recharge/rechangeUSDC?balance_type=' + balance_type.value
 		})
 	}
+	setTimeout(_ => {
+		actInd.value = 0
+	},500)
 }
 
 const getData = () => {
@@ -143,8 +146,8 @@ const getData = () => {
 			actInd.value = 0
 		} else {
 			actInd.value = 1
-
 		}
+		console.log("uuuu",actInd.value);
 	})
 	request({
 		url: 'setting/financeWay',
@@ -166,16 +169,16 @@ const getData = () => {
 		if (recharge_type.includes(4)) {
 			showUSDC.value = true
 		}
-		if (showBANK.value) {
-			actInd.value = 1
-			return
-		} else if (showTRX.value) {
-			actInd.value = 2
-		} else if (showUSDT.value) {
-			actInd.value = 3
-		} else if (showUSDC.value) {
-			actInd.value = 4
-		}
+		// if (showBANK.value) {
+		// 	actInd.value = 1
+		// } else if (showTRX.value) {
+		// 	actInd.value = 2
+		// } else if (showUSDT.value) {
+		// 	actInd.value = 3
+		// } else if (showUSDC.value) {
+		// 	actInd.value = 4
+		// }
+		console.log("uuu222",actInd.value);
 		// console.log(res);
 	})
 }

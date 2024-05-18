@@ -22,7 +22,7 @@
 					<!-- <view class="ml90 f36" style="color: #F65E5E;">
 						{{ rateNum }}
 					</view> -->
-					<input style="color: #F65E5E;" class="ml90 f36" type="number" placeholder="0" v-model="rateNum">
+					<input style="color: #F65E5E;font-size: 28rpx;width: 90%;" class="ml45 f36" type="number" :placeholder="t('recharge.r_r2')" v-model="rateNum">
 
 				</view>
 
