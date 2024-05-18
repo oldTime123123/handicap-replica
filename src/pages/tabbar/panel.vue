@@ -355,7 +355,8 @@
 
 			<view class="paddingLR30 mt24 flex"
 				style="justify-content: space-between;font-weight: 400;font-size: 32rpx;color: #FFFFFF;">
-				<view>{{ t('pk.t_p9') }}: {{ lockT }} min</view>
+				<!-- <view>{{ t('pk.t_p9') }}: {{ lockT }} min</view> -->
+				<view>{{ t('pk.t_p9') }}: 1~3 min</view>
 			</view>
 
 			<!-- {{ amount + (amount * rate) }} -->
