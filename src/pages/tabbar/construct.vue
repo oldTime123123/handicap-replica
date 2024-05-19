@@ -23,7 +23,6 @@
 			</view>
 		</view>
 
-
 		<view class="main" style="background: #080F32">
 			<view class="head"
 				style="width: 686rpx; height: 1094rpx;margin: 32rpx auto;background-image: url('../../static/invite/invitebanner.png');background-repeat: no-repeat;background-size: 100% 100%;">
@@ -291,10 +290,11 @@
 </script>
 
 <style lang="scss">
-	page{
+	page {
 		background-color: rgb(8, 15, 50);
 
 	}
+
 	.teamstyle {
 		background-color: #006BF4;
 		box-sizing: border-box;
