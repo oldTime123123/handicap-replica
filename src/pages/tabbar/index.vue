@@ -450,6 +450,12 @@
 		</nut-overlay>
 	</view>
 
+	<nut-drag v-if="prizePackage" attract :boundary="{ top: 60, left: 0, bottom: 55, right: 0 }"
+		:style="{ top: '30vh', right: '0px' }">
+		<image @click="handleToPage('../act/redEnvelope')" style="width: 70px; height: 80px;"
+			src='../../static/actIcon/redElove/hList.png'></image>
+
+	</nut-drag>
 
 
 	<tqbTabbar :activeIndex="0"></tqbTabbar>
@@ -482,7 +488,9 @@
 	import {
 		getLocale
 	} from "i18n";
-	import { nextTick } from "vue";
+	import {
+		nextTick
+	} from "vue";
 
 	const showWhere = () => {
 		document.addEventListener("mousemove", function(e) {
@@ -516,7 +524,7 @@
 	// 	lineData.value = data.list
 	// 	// 在这里可以对服务器返回的数据进行处理
 	// 	});
-	
+
 	// const getLineData = () => {
 	// 	socket.emit('project', {
 	// 		'type': 1
@@ -528,7 +536,7 @@
 			url: "page/trade/productList",
 			methods: "get",
 		}).then((res) => {
-			console.log("resd===",res);
+			console.log("resd===", res);
 			lineData.value = res || [];
 		});
 
@@ -744,6 +752,7 @@
 	const currency = ref('')
 	const kurs = ref('')
 	var id = ref()
+	const prizePackage = ref(false)
 	const showDetail = () => {
 		Toast.text(barText.value)
 	}
@@ -814,9 +823,8 @@
 			url: "activity/status",
 			methods: "get",
 		}).then((res) => {
-			// if (res.inviteCoupon.status == 1) {
-			// 	showParwel.value = true
-			// }
+			prizePackage.value = res.prizePackage.status == 1 ? true : false
+
 		});
 		// 公告
 		request({
