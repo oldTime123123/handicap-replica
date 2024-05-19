@@ -10,9 +10,9 @@
 			</view>
 			<view style="height: 100rpx;"></view>
 		</view>
-		<!-- 	<view class="showimg" :style="showViewer" @click="closeimg">
+		<view class="showimg" :style="showViewer" @click="closeimg">
 			<img :src="previewList[0]" alt="" style="width: 100%;">
-		</view> -->
+		</view>
 		<Loading ref="showLoading"></Loading>
 
 	</view>
@@ -52,7 +52,7 @@
 
 	}
 	const closeimg = () => {
-		// showViewer.value = "display:none;";
+		showViewer.value = "display:none;";
 
 	}
 	const {
