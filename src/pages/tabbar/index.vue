@@ -451,7 +451,7 @@
 	</view>
 
 	<nut-drag v-if="prizePackage" attract :boundary="{ top: 60, left: 0, bottom: 55, right: 0 }"
-		:style="{ top: '30vh', right: '0px' }">
+		:style="{ top: '60vh', left: '0px' }">
 		<image @click="handleToPage('../act/redEnvelope')" style="width: 70px; height: 80px;"
 			src='../../static/actIcon/redElove/hList.png'></image>
 
