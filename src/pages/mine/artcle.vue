@@ -47,8 +47,9 @@
 	const previewList = ref([]);
 	const getImg = ($event) => {
 		previewList.value = [$event.target.currentSrc];
-		console.log(previewList.value);
-		showViewer.value = "display:block;";
+		if (previewList.value[0]) {
+			showViewer.value = "display:block;";
+		}
 
 	}
 	const closeimg = () => {
