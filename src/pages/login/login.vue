@@ -43,7 +43,7 @@
 					<view class="   flex col_center" style="flex: 1;"
 						:class="currenLang == 'ar' || currenLang == 'fa' ? 'mr20' : 'ml20'">
 
-						<input type="number" placeholder-class="plaC" style="font-size: 14px;" :placeholder="t('login.l_l1')"
+						<input type="number" placeholder-class="plaC" style="font-size: 14px; width: 100%;" :placeholder="t('login.l_l1')"
 							v-model="loginForm.phone" v-if="loginStore.$state.chooseTypeInd == 1">
 
 						<input type="mail" placeholder-class="plaC" style="font-size: 14px;" :placeholder="t('email.e_a1')"
