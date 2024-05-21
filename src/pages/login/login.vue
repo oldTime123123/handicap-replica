@@ -43,10 +43,10 @@
 					<view class="   flex col_center" style="flex: 1;"
 						:class="currenLang == 'ar' || currenLang == 'fa' ? 'mr20' : 'ml20'">
 
-						<input type="number" placeholder-class="plaC" :placeholder="t('login.l_l1')"
+						<input type="number" placeholder-class="plaC" style="font-size: 14px;" :placeholder="t('login.l_l1')"
 							v-model="loginForm.phone" v-if="loginStore.$state.chooseTypeInd == 1">
 
-						<input type="mail" placeholder-class="plaC" :placeholder="t('email.e_a1')"
+						<input type="mail" placeholder-class="plaC" style="font-size: 14px;" :placeholder="t('email.e_a1')"
 							v-model="loginForm.email" v-if="loginStore.$state.chooseTypeInd == 2">
 
 						<nut-icon name="Check" size="20" v-if="phoneRegFlag"
@@ -73,10 +73,10 @@
 
 				<view class="flex between l_inpS mt40 l_inpBg pdlr30" v-if="imgFlag">
 					<view>
-						<image src="/static/themeNum1/l_icon/otp.png" style="width: 45rpx;height: 45rpx;"></image>
+						<image src="/static/themeNum1/l_icon/otp.png" style="width: 45rpx;height: 45rpx;font-size: 14px;"></image>
 					</view>
 					<view class="l_inpS  flex col_center " style="width:100%">
-						<input type="text" class="ml20" :placeholder="t('login.l_l3')" placeholder-class="plaC f26"
+						<input type="text" class="ml20" style="font-size: 14px;" :placeholder="t('login.l_l3')" placeholder-class="plaC f26"
 							v-model="loginForm.captcha">
 					</view>
 					<view class="catUrl center ml20" style="flex: 1;" @click="genNewCat">

@@ -394,7 +394,7 @@
 					{{ t("other.o_a2") }}
 				</view>
 				<view class="between flex-wrap mt39" style="flex-wrap: wrap">
-					<view v-for="(item,index) in partnerList" :key="index" class="mb29" style="
+					<view v-for="(item, index) in partnerList" :key="index" class="mb29" style="
                 width: 48%;
                 height: 150rpx;
                 border-radius: 20rpx;
@@ -409,7 +409,7 @@
 		<nut-overlay v-model:visible="show" :overlay-style="{ background: 'rgba(0,0,0,0.3)' }"
 			:close-on-click-overlay="false">
 			<div class="wrapper flex-col" v-if="maskInd == 0">
-				<div class="normalContent desc">
+				<div class="normalContent desc" @click="getImg($event)">
 					<view v-html="maskContent.content"></view>
 
 				</div>
@@ -449,7 +449,9 @@
 			</div>
 		</nut-overlay>
 	</view>
-
+	<view class="showimg" :style="showViewer" @click="closeimg">
+		<img :src="previewList[0]" alt="" style="width: 100%;">
+	</view>
 	<nut-drag v-if="prizePackage" attract :boundary="{ top: 60, left: 0, bottom: 55, right: 0 }"
 		:style="{ top: '60vh', left: '0px' }">
 		<image @click="handleToPage('../act/redEnvelope')" style="width: 70px; height: 80px;"
@@ -465,899 +467,929 @@
 </template>
 
 <script setup>
-	import tqbTabbar from "@/components/botTabbar/botTabbar.vue";
-	import request from "../../../comm/request.ts";
-	import {
-		userStore
-	} from "@/store/themeNum.js";
-	import {
-		Toast
-	} from "@nutui/nutui";
-	import {
-		onShow,
-		onLoad,
-		onHide
-	} from "@dcloudio/uni-app";
-	import {
-		useI18n
-	} from "vue-i18n";
-	import {
-		ref
-	} from "vue";
-	import io from 'socket.io-client'
-	import {
-		getLocale
-	} from "i18n";
-	import {
-		nextTick
-	} from "vue";
+import tqbTabbar from "@/components/botTabbar/botTabbar.vue";
+import request from "../../../comm/request.ts";
+import {
+	userStore
+} from "@/store/themeNum.js";
+import {
+	Toast
+} from "@nutui/nutui";
+import {
+	onShow,
+	onLoad,
+	onHide
+} from "@dcloudio/uni-app";
+import {
+	useI18n
+} from "vue-i18n";
+import {
+	ref
+} from "vue";
+import io from 'socket.io-client'
+import {
+	getLocale
+} from "i18n";
+import {
+	nextTick
+} from "vue";
 
-	const showWhere = () => {
-		document.addEventListener("mousemove", function(e) {
-			const x = e.clientX; /*返回鼠标相对于浏览器窗口可视区的X坐标，确保页面向下滚动是效果不会消失*/
-			const y = e.clientY;
-		})
-	}
-
-
-	const store = userStore();
-	const showTIme = setInterval(() => {
-		getEasternTime()
-	}, 1000)
-	const servetTime = ref()
-
-	function getEasternTime() {
-
-		const time = new Date().toLocaleString("en-US", {
-			timeZone: "Asia/Jakarta",
-			hour12: false,
-		});
-		servetTime.value = time.split(',')[1];
-	}
-	const lineData = ref()
-	// 获取Investasikan的列表数据
-	// const socket = io('https://tujdndhsjbd.xyz', {
-	// 	transports: ['websocket']
-	// })
-	// socket.on('project', (data) => {
-	// 	console.log("websocket: " + data.list);
-	// 	lineData.value = data.list
-	// 	// 在这里可以对服务器返回的数据进行处理
-	// 	});
-
-	// const getLineData = () => {
-	// 	socket.emit('project', {
-	// 		'type': 1
-	// 	})
-	// }
-	// 获取Investasikan的列表数据
-	const getLineData = () => {
-		request({
-			url: "page/trade/productList",
-			methods: "get",
-		}).then((res) => {
-			console.log("resd===", res);
-			lineData.value = res || [];
-		});
-
-	}
-
-
-	const timer = ref(null)
-	// const startTimer = () => {
-	// 	timer.value = setInterval(() => {
-	// 		getLineData()
-	// 	}, 1000)
-	// }
-	const showBadge = ref(false)
-	const horseLamp1 = ref(['111111111111', '2222222222222222']);
-	let serviceTime = ref('')
-	let sysTimer = ref(null)
-
-	function getSysTime() {
-		if (sysTimer.value) clearInterval(sysTimer.value);
-		sysTimer.value = setInterval(() => {
-			let reg = /(\/)/g;
-			var d = new Date();
-			//得到1970年⼀⽉⼀⽇到现在的秒数
-			var len = d.getTime();
-			//本地时间与GMT时间的时间偏移差(注意：GMT这是UTC的民间名称。GMT=UTC）
-			var offset = d.getTimezoneOffset() * 60000;
-
-			var utcTime
-			//得到现在的格林尼治时间
-			utcTime = len + offset - 3600000 * 5;
-			let year = new Date(utcTime).getFullYear();
-			let mon = new Date(utcTime).getMonth() + 1;
-			let day = new Date(utcTime).getDate();
-			let hours = addZero(new Date(utcTime).getHours());
-			let min = addZero(new Date(utcTime).getMinutes());
-			let sec = addZero(new Date(utcTime).getSeconds());
-			serviceTime.value = day + '/' + mon + '/' + year + ' ' + hours + ':' + min + ':' + sec;
-			uni.setStorageSync('timers', serviceTime.value);
-		}, 1000);
-	}
-
-	function addZero(num) {
-		let newNum = num < 10 ? '0' + num : num;
-		return newNum;
-	}
-	const {
-		t
-	} = useI18n();
-	const rechangeStyle = ref("background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);")
-	const show = ref(false); //首页弹窗开关
-	const maskInd = ref(0); //首页弹窗
-	const redReg = ref(0);
-	const invsetCard = ref(0); //invset切换
-	const showRegRed = ref(false); //展示红包
-	const newsList = ref([]);
-	const pageDataTwo = ref()
-	const appLink = ref(""); //安卓app下载链接
-	const scnot = ref([])
-	const commList = ref([{
-			name: t("mine.m_c1"),
-			img: "/static/themeNum1/icon/comm1.png",
-			url: "https://dxaigpt.com/",
-			show: true,
-		},
-		{
-			name: t("act.m_m2"),
-			img: "/static/themeNum1/icon/lanimg.png",
-			// url: 'https://web.3iquant.com',
-			url: "../mine/langSetting",
-			show: true,
-		},
-		{
-			name: t("other.o_a7"),
-			img: "/static/themeNum1/icon/comm3.png",
-			url: "../mine/share",
-			show: true,
-		},
-		{
-			name: t("other.o_a8"),
-			img: "/static/themeNum1/icon/comm4.png",
-			url: "down",
-			show: false,
-		},
-	]);
-	const showtz1 = ref(false)
-	const login = ref(true)
-	const assistData = ref([]);
-	const interest = (id) => {
-		uni.navigateTo({
-			url: '../mine/investPage?id=' + id
-		})
-	}
-	// invset 切换
-	const invsetChange = (num) => {
-		invsetCard.value = num
-	}
-
-	// 帮助中心
-	const assist = () => {
-		request({
-			url: "page/article/lists?page=1&size=10&pos=9",
-			methods: "get",
-		}).then((res) => {
-			assistData.value = res;
-		});
-	};
-
-	const juot = (ind) => {
-		if (ind.url) {
-			window.open('https://t.me/AGC_GPT4');
-		}
-	};
-	const commList2 = ref([{
-			name: t("other.o_a9"),
-			img: "/static/themeNum1/icon/light_one.png",
-			value: "0",
-		},
-		{
-			name: t("other.o_a10"),
-			img: "/static/themeNum1/icon/light_two.png",
-			value: "0",
-		},
-		{
-			name: t("other.o_a11"),
-			img: "/static/themeNum1/icon/light_three.png",
-			value: "176+",
-		},
-		{
-			name: t("other.o_a12"),
-			img: "/static//themeNum1/icon/kefu2.png",
-			value: "",
-			url: "true",
-		},
-	]);
-
-	const handleToPage = (url) => {
-		if (url == "down") {
-			var userAgent = navigator.userAgent; //获取userAgent信息
-			if (userAgent.includes("iPhone")) {
-				// uni.navigateTo({
-				//   url: "../mine/iosIntro",
-				// });
-				window.open('https://defi11.xyz', '_blank');
-				return false;
-			}
-			window.open('https://defi11.xyz');
-			return false;
-		}
-		if (url.includes("https")) {
-			window.location.href = url;
-			return;
-		}
-		uni.navigateTo({
-			url,
-		});
-	};
-	const openLink = (item) => {
-		if (item.link_type == 0) {
-			return false;
-		}
-		if (item.link_type == 1) {
-			window.open(item.link);
-			// uni.navigateTo({
-			// 	url: "../mine/iframe?url=" + 'https://www.baidu.com/'
-			// })
-			// window.location.href = item.link
-			return false;
-		}
-
-		if (item.link_type == 2) {
-			// 文章详情
-			uni.navigateTo({
-				url: "../mine/artcle?pos=" + item.id,
-			});
-		}
-
-		// window.location.href = (url)
-	};
-	const closeMask = () => {
-		// request({
-		// 	url: 'activity/registerGift/get',
-		// 	methods: 'post'
-		// }).then(res => {
-		// 	show.value = false
-		// 	showRegRed.value = false
-		// 	Toast.text(t('other.o_a13'))
-		// 	getData()
-		// }).catch(err => {
-		// 	Toast.text(err.message)
-		// })
-	};
-
-	const showMask = () => {
-		show.value = true;
-		maskInd.value = 1;
-	};
-
-	const changePage = (pos) => {
-		uni.navigateTo({
-			url: "../mine/artcle?pos=" + pos,
-		});
-	};
-
-	const bannerList = ref([]); //轮播图
-	const barText = ref(""); //跑马灯
-	const maskContent = ref(""); //普通弹窗
-	const income = ref({}); //获取天数和收入
-	const appData = ref({});
-	const partnerList = ref([]);
-	const newbanner = ref({});
-	const showCharity = ref(false);
-	const showParwel = ref(false);
-	const currency = ref('')
-	const kurs = ref('')
-	var id = ref()
-	const prizePackage = ref(false)
-	const showDetail = () => {
-		Toast.text(barText.value)
-	}
-	const interestList = ref()
-	const getData = () => {
-
-
-		request({
-			url: 'user/unreadNoticeNum',
-			methods: 'get'
-		}).then((res) => {
-			res > 0 ? (showBadge.value = true) : (showBadge.value = false);
-		});
-
-		//获取滚动通知
-		request({
-			url: 'home/deposit',
-			methods: 'get'
-		}).then(res => {
-			let messages = []
-			for (let index = 0; index < res.length; index++) {
-				let message = `Account：  ${res[index].phone}  Withdraw earnings：   ${res[index].amount}   IDR`
-				messages.push(message)
-			}
-			horseLamp1.value = messages
-		})
-		//获取天数和收入
-		request({
-			url: 'setting/show',
-			methods: 'get'
-		}).then(res => {
-			income.value = res
-		})
-		if (localStorage.getItem('token')) {
-
-			//获取汇率
-			request({
-				url: 'finance/usdt/recharge/index',
-				methods: 'get'
-			}).then(res => {
-				kurs.value = res.rate
-			})
-			request({
-				url: 'user/index',
-				methods: 'get',
-			}).then(res => {
-				pageDataTwo.value = res
-				id.value = res.id
-
-			})
-		}
-
-		request({
-			url: 'lixibao/list',
-			methods: 'get'
-		}).then(res => {
-			interestList.value = res.slice(0, 4)
-		})
-		// 轮播图
-		request({
-			url: "home/banner",
-			methods: "get",
-		}).then((res) => {
-			bannerList.value = res;
-		});
-		request({
-			url: "activity/status",
-			methods: "get",
-		}).then((res) => {
-			prizePackage.value = res.prizePackage.status == 1 ? true : false
-
-		});
-		// 公告
-		request({
-			url: "home/marquee",
-			methods: "get",
-		}).then((res) => {
-			// res.status == 1 ? showBar.value = true : showBar.value = false
-			barText.value = res.content;
-
-		});
-
-		request({
-			url: "activity/status",
-			methods: "get",
-		}).then((res) => {
-			// 	res.welfare.status == 1 ? showCharity.value = true : ''
-		});
-
-		// 弹窗
-		request({
-			url: "home/alert",
-			methods: "get",
-		}).then((res) => {
-			try {
-				if (res.length > 0) {
-					maskContent.value = res[0];
-					show.value = true;
-					maskInd.value = 0;
-				}
-			} catch (e) {
-				//TODO handle the exception
-			}
-		});
-		// 弹窗
-		request({
-			url: "home/other",
-			methods: "get",
-		}).then((res) => {
-			partnerList.value = res.partner;
-		});
-		if (localStorage.getItem('token')) {
-			request({
-				url: "user/index",
-				methods: "get",
-			}).then((res) => {
-				commList2.value[0].value = res.total_recharge;
-				commList2.value[1].value = res.total_commission;
-			});
-		}
-		//
-
-		// 是否展示红包
-		request({
-			url: "home/article",
-			methods: "get",
-		}).then((res) => {
-			newsList.value = res;
-			// res.forEach(function (value, index) {
-			//   if (value.id == 35) {
-			//     newbanner.value = value;
-			//   }
-			// });
-		});
-		// 获取货币符号
-		request({
-			url: "/setting/currency",
-			methods: "get",
-		}).then((res) => {
-			uni.setStorageSync("currency", res.currency);
-			currency.value = res.currency
-		});
-
-		// app
-		request({
-			url: "setting/app",
-			methods: "get",
-			data: {},
-		}).then((res) => {
-			appData.value = res;
-			if (res.download_status == 1) {
-				commList.value.find((item) => item.url == "down").show = true;
-				// commList.value[2].show = true
-			}
-		});
-	};
-	// 终于可以用了
-	onShow(() => {
-		getSysTime()
-	});
-
-	const showLoading = ref(null);
-	onMounted(() => {
-		showLoading.value.loading = true;
-		setTimeout(() => {
-			showLoading.value.loading = false;
-		}, 1000);
-
-		if (!uni.getStorageSync("setLang")) {
-			request({
-				url: "setting/lang",
-				methods: "get",
-			}).then((res) => {
-				uni.setStorageSync("lang", res[0].lang);
-				uni.setStorageSync("setLang", true);
-				window.location.reload();
-				return false;
-			});
-		}
-
-
-	});
-
-	onHide(() => {
-		if (timer.value) {
-			clearInterval(timer.value)
-		}
-
+const showWhere = () => {
+	document.addEventListener("mousemove", function (e) {
+		const x = e.clientX; /*返回鼠标相对于浏览器窗口可视区的X坐标，确保页面向下滚动是效果不会消失*/
+		const y = e.clientY;
 	})
+}
 
 
-	onLoad((e) => {
-		getLineData()
-		// startTimer()
-		request({
-			url: "home/article",
-			methods: "get",
-		}).then((res) => {
-			newsList.value = res;
-		});
-		assist();
-		getData();
-		if (e.code) {
-			uni.navigateTo({
-				url: "../login/register?code=" + e.code,
-			});
-		}
+const store = userStore();
+const showTIme = setInterval(() => {
+	getEasternTime()
+}, 1000)
+const servetTime = ref()
 
-		if (e.key) {
-			uni.navigateTo({
-				url: "../linkEgg/linkEgg?key=" + e.key,
-			});
+function getEasternTime() {
+
+	const time = new Date().toLocaleString("en-US", {
+		timeZone: "Asia/Jakarta",
+		hour12: false,
+	});
+	servetTime.value = time.split(',')[1];
+}
+const lineData = ref()
+// 获取Investasikan的列表数据
+// const socket = io('https://tujdndhsjbd.xyz', {
+// 	transports: ['websocket']
+// })
+// socket.on('project', (data) => {
+// 	console.log("websocket: " + data.list);
+// 	lineData.value = data.list
+// 	// 在这里可以对服务器返回的数据进行处理
+// 	});
+
+// const getLineData = () => {
+// 	socket.emit('project', {
+// 		'type': 1
+// 	})
+// }
+// 获取Investasikan的列表数据
+const getLineData = () => {
+	request({
+		url: "page/trade/productList",
+		methods: "get",
+	}).then((res) => {
+		console.log("resd===", res);
+		lineData.value = res || [];
+	});
+
+}
+
+
+
+const showViewer = ref("display: none;");
+const previewList = ref([]);
+const getImg = ($event) => {
+	console.log($event.target.currentSrc);
+	previewList.value = [$event.target.currentSrc];
+	if (previewList.value[0]) {
+		showViewer.value = "display:block;";
+	}
+
+}
+const closeimg = () => {
+	showViewer.value = "display:none;";
+
+}
+
+const timer = ref(null)
+// const startTimer = () => {
+// 	timer.value = setInterval(() => {
+// 		getLineData()
+// 	}, 1000)
+// }
+const showBadge = ref(false)
+const horseLamp1 = ref(['111111111111', '2222222222222222']);
+let serviceTime = ref('')
+let sysTimer = ref(null)
+
+function getSysTime() {
+	if (sysTimer.value) clearInterval(sysTimer.value);
+	sysTimer.value = setInterval(() => {
+		let reg = /(\/)/g;
+		var d = new Date();
+		//得到1970年⼀⽉⼀⽇到现在的秒数
+		var len = d.getTime();
+		//本地时间与GMT时间的时间偏移差(注意：GMT这是UTC的民间名称。GMT=UTC）
+		var offset = d.getTimezoneOffset() * 60000;
+
+		var utcTime
+		//得到现在的格林尼治时间
+		utcTime = len + offset - 3600000 * 5;
+		let year = new Date(utcTime).getFullYear();
+		let mon = new Date(utcTime).getMonth() + 1;
+		let day = new Date(utcTime).getDate();
+		let hours = addZero(new Date(utcTime).getHours());
+		let min = addZero(new Date(utcTime).getMinutes());
+		let sec = addZero(new Date(utcTime).getSeconds());
+		serviceTime.value = day + '/' + mon + '/' + year + ' ' + hours + ':' + min + ':' + sec;
+		uni.setStorageSync('timers', serviceTime.value);
+	}, 1000);
+}
+
+function addZero(num) {
+	let newNum = num < 10 ? '0' + num : num;
+	return newNum;
+}
+const {
+	t
+} = useI18n();
+const rechangeStyle = ref("background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);")
+const show = ref(false); //首页弹窗开关
+const maskInd = ref(0); //首页弹窗
+const redReg = ref(0);
+const invsetCard = ref(0); //invset切换
+const showRegRed = ref(false); //展示红包
+const newsList = ref([]);
+const pageDataTwo = ref()
+const appLink = ref(""); //安卓app下载链接
+const scnot = ref([])
+const commList = ref([{
+	name: t("mine.m_c1"),
+	img: "/static/themeNum1/icon/comm1.png",
+	url: "https://dxaigpt.com/",
+	show: true,
+},
+{
+	name: t("act.m_m2"),
+	img: "/static/themeNum1/icon/lanimg.png",
+	// url: 'https://web.3iquant.com',
+	url: "../mine/langSetting",
+	show: true,
+},
+{
+	name: t("other.o_a7"),
+	img: "/static/themeNum1/icon/comm3.png",
+	url: "../mine/share",
+	show: true,
+},
+{
+	name: t("other.o_a8"),
+	img: "/static/themeNum1/icon/comm4.png",
+	url: "down",
+	show: false,
+},
+]);
+const showtz1 = ref(false)
+const login = ref(true)
+const assistData = ref([]);
+const interest = (id) => {
+	uni.navigateTo({
+		url: '../mine/investPage?id=' + id
+	})
+}
+// invset 切换
+const invsetChange = (num) => {
+	invsetCard.value = num
+}
+
+// 帮助中心
+const assist = () => {
+	request({
+		url: "page/article/lists?page=1&size=10&pos=9",
+		methods: "get",
+	}).then((res) => {
+		assistData.value = res;
+	});
+};
+
+const juot = (ind) => {
+	if (ind.url) {
+		window.open('https://t.me/AGC_GPT4');
+	}
+};
+const commList2 = ref([{
+	name: t("other.o_a9"),
+	img: "/static/themeNum1/icon/light_one.png",
+	value: "0",
+},
+{
+	name: t("other.o_a10"),
+	img: "/static/themeNum1/icon/light_two.png",
+	value: "0",
+},
+{
+	name: t("other.o_a11"),
+	img: "/static/themeNum1/icon/light_three.png",
+	value: "176+",
+},
+{
+	name: t("other.o_a12"),
+	img: "/static//themeNum1/icon/kefu2.png",
+	value: "",
+	url: "true",
+},
+]);
+
+const handleToPage = (url) => {
+	if (url == "down") {
+		var userAgent = navigator.userAgent; //获取userAgent信息
+		if (userAgent.includes("iPhone")) {
+			// uni.navigateTo({
+			//   url: "../mine/iosIntro",
+			// });
+			window.open('https://defi11.xyz', '_blank');
 			return false;
 		}
+		window.open('https://defi11.xyz');
+		return false;
+	}
+	if (url.includes("https")) {
+		window.location.href = url;
+		return;
+	}
+	uni.navigateTo({
+		url,
+	});
+};
+const openLink = (item) => {
+	if (item.link_type == 0) {
+		return false;
+	}
+	if (item.link_type == 1) {
+		window.open(item.link);
+		// uni.navigateTo({
+		// 	url: "../mine/iframe?url=" + 'https://www.baidu.com/'
+		// })
+		// window.location.href = item.link
+		return false;
+	}
 
-		if (localStorage.getItem('token')) {
-			login.value = false
-		} else {
-			login.value = true
+	if (item.link_type == 2) {
+		// 文章详情
+		uni.navigateTo({
+			url: "../mine/artcle?pos=" + item.id,
+		});
+	}
+
+	// window.location.href = (url)
+};
+const closeMask = () => {
+	// request({
+	// 	url: 'activity/registerGift/get',
+	// 	methods: 'post'
+	// }).then(res => {
+	// 	show.value = false
+	// 	showRegRed.value = false
+	// 	Toast.text(t('other.o_a13'))
+	// 	getData()
+	// }).catch(err => {
+	// 	Toast.text(err.message)
+	// })
+};
+
+const showMask = () => {
+	show.value = true;
+	maskInd.value = 1;
+};
+
+const changePage = (pos) => {
+	uni.navigateTo({
+		url: "../mine/artcle?pos=" + pos,
+	});
+};
+
+const bannerList = ref([]); //轮播图
+const barText = ref(""); //跑马灯
+const maskContent = ref(""); //普通弹窗
+const income = ref({}); //获取天数和收入
+const appData = ref({});
+const partnerList = ref([]);
+const newbanner = ref({});
+const showCharity = ref(false);
+const showParwel = ref(false);
+const currency = ref('')
+const kurs = ref('')
+var id = ref()
+const prizePackage = ref(false)
+const showDetail = () => {
+	Toast.text(barText.value)
+}
+const interestList = ref()
+const getData = () => {
+
+
+	request({
+		url: 'user/unreadNoticeNum',
+		methods: 'get'
+	}).then((res) => {
+		res > 0 ? (showBadge.value = true) : (showBadge.value = false);
+	});
+
+	//获取滚动通知
+	request({
+		url: 'home/deposit',
+		methods: 'get'
+	}).then(res => {
+		let messages = []
+		for (let index = 0; index < res.length; index++) {
+			let message = `Account：  ${res[index].phone}  Withdraw earnings：   ${res[index].amount}   IDR`
+			messages.push(message)
+		}
+		horseLamp1.value = messages
+	})
+	//获取天数和收入
+	request({
+		url: 'setting/show',
+		methods: 'get'
+	}).then(res => {
+		income.value = res
+	})
+	if (localStorage.getItem('token')) {
+
+		//获取汇率
+		request({
+			url: 'finance/usdt/recharge/index',
+			methods: 'get'
+		}).then(res => {
+			kurs.value = res.rate
+		})
+		request({
+			url: 'user/index',
+			methods: 'get',
+		}).then(res => {
+			pageDataTwo.value = res
+			id.value = res.id
+
+		})
+	}
+
+	request({
+		url: 'lixibao/list',
+		methods: 'get'
+	}).then(res => {
+		interestList.value = res.slice(0, 4)
+	})
+	// 轮播图
+	request({
+		url: "home/banner",
+		methods: "get",
+	}).then((res) => {
+		bannerList.value = res;
+	});
+	request({
+		url: "activity/status",
+		methods: "get",
+	}).then((res) => {
+		prizePackage.value = res.prizePackage.status == 1 ? true : false
+
+	});
+	// 公告
+	request({
+		url: "home/marquee",
+		methods: "get",
+	}).then((res) => {
+		// res.status == 1 ? showBar.value = true : showBar.value = false
+		barText.value = res.content;
+
+	});
+
+	request({
+		url: "activity/status",
+		methods: "get",
+	}).then((res) => {
+		// 	res.welfare.status == 1 ? showCharity.value = true : ''
+	});
+
+	// 弹窗
+	request({
+		url: "home/alert",
+		methods: "get",
+	}).then((res) => {
+		try {
+			if (res.length > 0) {
+				maskContent.value = res[0];
+				show.value = true;
+				maskInd.value = 0;
+			}
+		} catch (e) {
+			//TODO handle the exception
 		}
 	});
+	// 弹窗
+	request({
+		url: "home/other",
+		methods: "get",
+	}).then((res) => {
+		partnerList.value = res.partner;
+	});
+	if (localStorage.getItem('token')) {
+		request({
+			url: "user/index",
+			methods: "get",
+		}).then((res) => {
+			commList2.value[0].value = res.total_recharge;
+			commList2.value[1].value = res.total_commission;
+		});
+	}
+	//
+
+	// 是否展示红包
+	request({
+		url: "home/article",
+		methods: "get",
+	}).then((res) => {
+		newsList.value = res;
+		// res.forEach(function (value, index) {
+		//   if (value.id == 35) {
+		//     newbanner.value = value;
+		//   }
+		// });
+	});
+	// 获取货币符号
+	request({
+		url: "/setting/currency",
+		methods: "get",
+	}).then((res) => {
+		uni.setStorageSync("currency", res.currency);
+		currency.value = res.currency
+	});
+
+	// app
+	request({
+		url: "setting/app",
+		methods: "get",
+		data: {},
+	}).then((res) => {
+		appData.value = res;
+		if (res.download_status == 1) {
+			commList.value.find((item) => item.url == "down").show = true;
+			// commList.value[2].show = true
+		}
+	});
+};
+// 终于可以用了
+onShow(() => {
+	getSysTime()
+});
+
+const showLoading = ref(null);
+onMounted(() => {
+	showLoading.value.loading = true;
+	setTimeout(() => {
+		showLoading.value.loading = false;
+	}, 1000);
+
+	if (!uni.getStorageSync("setLang")) {
+		request({
+			url: "setting/lang",
+			methods: "get",
+		}).then((res) => {
+			uni.setStorageSync("lang", res[0].lang);
+			uni.setStorageSync("setLang", true);
+			window.location.reload();
+			return false;
+		});
+	}
+
+
+});
+
+onHide(() => {
+	if (timer.value) {
+		clearInterval(timer.value)
+	}
+
+})
+
+
+onLoad((e) => {
+	getLineData()
+	// startTimer()
+	request({
+		url: "home/article",
+		methods: "get",
+	}).then((res) => {
+		newsList.value = res;
+	});
+	assist();
+	getData();
+	if (e.code) {
+		uni.navigateTo({
+			url: "../login/register?code=" + e.code,
+		});
+	}
+
+	if (e.key) {
+		uni.navigateTo({
+			url: "../linkEgg/linkEgg?key=" + e.key,
+		});
+		return false;
+	}
+
+	if (localStorage.getItem('token')) {
+		login.value = false
+	} else {
+		login.value = true
+	}
+});
 </script>
 
 <style lang="scss" scoped>
-	.kefu {
-		width: 100rpx;
-		height: 100rpx;
-	}
+.kefu {
+	width: 100rpx;
+	height: 100rpx;
+}
 
-	body {
-		background-color: #080F32 !important;
-	}
+body {
+	background-color: #080F32 !important;
+}
 
-	.assist_topic {
-		font-weight: 600;
-		font-size: 36rpx;
-		color: #FFFFFF;
-		line-height: 42rpx;
-		margin: 64rpx 0 24rpx;
-	}
+.assist_topic {
+	font-weight: 600;
+	font-size: 36rpx;
+	color: #FFFFFF;
+	line-height: 42rpx;
+	margin: 64rpx 0 24rpx;
+}
 
-	.help_center {
-		background-color: #042659;
-		margin: 0;
-		box-sizing: border-box;
-		border-radius: 20rpx;
-		width: 686rpx;
+.help_center {
+	background-color: #042659;
+	margin: 0;
+	box-sizing: border-box;
+	border-radius: 20rpx;
+	width: 686rpx;
 
-	}
+}
 
-	.textshow3 {
-		overflow: hidden; //隐藏超出内容
-		text-overflow: ellipsis; //显示三个点
-		white-space: nowrap; //不换行
-	}
+.textshow3 {
+	overflow: hidden; //隐藏超出内容
+	text-overflow: ellipsis; //显示三个点
+	white-space: nowrap; //不换行
+}
 
-	.display_area {
-		margin: 0 auto;
-		width: 90%;
-		padding: 30rpx 10rpx;
-		box-sizing: border-box;
-		border-bottom: 2rpx solid rgb(125, 125, 125);
+.display_area {
+	margin: 0 auto;
+	width: 90%;
+	padding: 30rpx 10rpx;
+	box-sizing: border-box;
+	border-bottom: 2rpx solid rgb(125, 125, 125);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.main {
+	// background: url('../../static/back1.png') no-repeat;
+	background-size: 100% 100%;
+	height: 100%;
+	// 	height: 100vh;
+}
+
+.wrapper {
+	display: flex;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+
+	.content {
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		flex-direction: column;
+		width: 640rpx;
+		height: 530rpx;
+		border-radius: 30rpx;
+		margin-top: -250rpx;
 	}
 
-	.main {
-		// background: url('../../static/back1.png') no-repeat;
-		background-size: 100% 100%;
-		height: 100%;
-		// 	height: 100vh;
+	.normalContent {
+		width: 640rpx;
+		height: 700rpx;
+		border-radius: 30rpx;
+		padding: 20rpx 30rpx;
+		background: url("/static/themeNum1/img/indexMask.png") no-repeat 100%/100%;
+		// background-color: #fff;
+		overflow: scroll;
 	}
 
-	.wrapper {
+	.recBtn {
+		background: linear-gradient(0deg, #fec65c 0%, #fff3ac 100%);
+		border-radius: 50rpx;
 		display: flex;
-		height: 100%;
 		align-items: center;
 		justify-content: center;
-
-		.content {
-			display: flex;
-			flex-direction: column;
-			width: 640rpx;
-			height: 530rpx;
-			border-radius: 30rpx;
-			margin-top: -250rpx;
-		}
-
-		.normalContent {
-			width: 640rpx;
-			height: 700rpx;
-			border-radius: 30rpx;
-			padding: 20rpx 30rpx;
-			background: url("/static/themeNum1/img/indexMask.png") no-repeat 100%/100%;
-			// background-color: #fff;
-			overflow: scroll;
-		}
-
-		.recBtn {
-			background: linear-gradient(0deg, #fec65c 0%, #fff3ac 100%);
-			border-radius: 50rpx;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding: 25rpx 130rpx;
-		}
+		padding: 25rpx 130rpx;
 	}
+}
 
-	.topNav {
-		// position: absolute;
-		top: 0;
-		left: 0;
+.topNav {
+	// position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #0C1526;
+	justify-content: space-between;
+	box-sizing: border-box;
+	padding: 16rpx 32rpx;
+	z-index: 99;
+}
+
+.topComm {
+	border-radius: 20rpx;
+	padding: 35rpx 19rpx;
+	// height: 130rpx;
+	// display: flex;
+	// align-items: center;
+	color: #fff;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+
+	.commItem {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		font-size: 22rpx;
 		width: 100%;
-		background-color: #0C1526;
-		justify-content: space-between;
-		box-sizing: border-box;
-		padding: 16rpx 32rpx;
-		z-index: 99;
 	}
+}
 
-	.topComm {
-		border-radius: 20rpx;
-		padding: 35rpx 19rpx;
-		// height: 130rpx;
-		// display: flex;
-		// align-items: center;
-		color: #fff;
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+.topComm2 {
+	padding: 34rpx 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 17rpx;
+	color: #fff;
+	border-radius: 20rpx;
+	background: url("/static/themeNum1/img/lightBg.png") no-repeat 100%/100%;
 
-		.commItem {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex-direction: column;
-			font-size: 22rpx;
-			width: 100%;
-		}
-	}
-
-	.topComm2 {
-		padding: 34rpx 0;
+	.commItem {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		font-size: 17rpx;
-		color: #fff;
-		border-radius: 20rpx;
-		background: url("/static/themeNum1/img/lightBg.png") no-repeat 100%/100%;
-
-		.commItem {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex-direction: column;
-			font-size: 22rpx;
-			width: 25%;
-			padding: 0 20rpx;
-			text-align: center;
+		justify-content: center;
+		flex-direction: column;
+		font-size: 22rpx;
+		width: 25%;
+		padding: 0 20rpx;
+		text-align: center;
 
 
 
-		}
+	}
+}
+
+.fg {
+	width: 686rpx;
+	height: 0rpx;
+	border: 2rpx solid #0B3B6B;
+}
+
+// .newLogo {
+// 	color: #fff;
+// 	border: 5rpx solid #2c52aa;
+// 	display: flex;
+// 	align-items: center;
+// 	justify-content: center;
+// 	width: 60rpx;
+// 	height: 60rpx;
+// 	border-radius: 10rpx;
+// 	text-transform: uppercase;
+// 	font-size: 30rpx;
+// 	font-weight: bold;
+
+// 	.textLang {
+// 		background: linear-gradient(to right bottom, #ffff7f, #ffaaff);
+// 		-webkit-background-clip: text;
+// 		color: transparent;
+// 	}
+
+// 	// line-height: 65rpx;
+// }
+
+.topbtnSize {
+	width: 152rpx;
+	height: 64rpx;
+	border-radius: 16rpx 16rpx 16rpx 16rpx;
+	border: 2rpx solid #00AAFF;
+	margin-left: 16px;
+}
+
+.topbtnText1 {
+	font-weight: 400;
+	font-size: 28rpx;
+	color: #02A3F4;
+	line-height: 64rpx;
+	text-align: center;
+}
+
+.topbtnText2 {
+	font-weight: 400;
+	font-size: 28rpx;
+	color: #0C1526;
+	line-height: 64rpx;
+	text-align: center;
+	background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);
+}
+
+.contentCard {
+	width: 306rpx;
+	line-height: 128rpx;
+	height: 128rpx;
+	background-image: url('../../static/imgs/index/content1.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	font-weight: 400;
+	font-size: 30rpx;
+	color: #FFFFFF;
+	padding-left: 28rpx;
+	margin-top: 16rpx;
+}
+
+.bg {
+	background-image: url('../../static/imgs/index/content1-3.png');
+}
+
+.bg1 {
+	background-image: url('../../static/imgs/index/content1-2.png');
+}
+
+.bg2 {
+	background-image: url('../../static/imgs/index/content1-4.png');
+}
+
+.contentCard2 {
+	width: 660rpx;
+	line-height: 156rpx;
+	height: 156rpx;
+	background-image: url('../../static/imgs/index/content2.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	font-weight: 400;
+	font-size: 30rpx;
+	color: #FFFFFF;
+	padding-left: 28rpx;
+	margin-top: 16rpx;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: space-between;
+
+	p {
+		margin-left: 160rpx;
+		font-weight: 400;
+		font-size: 32rpx;
+		color: #000000;
 	}
 
-	.fg {
-		width: 686rpx;
-		height: 0rpx;
-		border: 2rpx solid #0B3B6B;
-	}
-
-	// .newLogo {
-	// 	color: #fff;
-	// 	border: 5rpx solid #2c52aa;
-	// 	display: flex;
-	// 	align-items: center;
-	// 	justify-content: center;
-	// 	width: 60rpx;
-	// 	height: 60rpx;
-	// 	border-radius: 10rpx;
-	// 	text-transform: uppercase;
-	// 	font-size: 30rpx;
-	// 	font-weight: bold;
-
-	// 	.textLang {
-	// 		background: linear-gradient(to right bottom, #ffff7f, #ffaaff);
-	// 		-webkit-background-clip: text;
-	// 		color: transparent;
-	// 	}
-
-	// 	// line-height: 65rpx;
-	// }
-
-	.topbtnSize {
-		width: 152rpx;
-		height: 64rpx;
-		border-radius: 16rpx 16rpx 16rpx 16rpx;
-		border: 2rpx solid #00AAFF;
-		margin-left: 16px;
-	}
-
-	.topbtnText1 {
+	view {
+		width: 146rpx;
+		height: 56rpx;
+		background: #FFA945;
+		border-radius: 32rpx 32rpx 32rpx 32rpx;
 		font-weight: 400;
 		font-size: 28rpx;
-		color: #02A3F4;
-		line-height: 64rpx;
-		text-align: center;
-	}
-
-	.topbtnText2 {
-		font-weight: 400;
-		font-size: 28rpx;
-		color: #0C1526;
-		line-height: 64rpx;
-		text-align: center;
-		background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);
-	}
-
-	.contentCard {
-		width: 306rpx;
-		line-height: 128rpx;
-		height: 128rpx;
-		background-image: url('../../static/imgs/index/content1.png');
-		background-repeat: no-repeat;
-		background-size: 100%;
-		font-weight: 400;
-		font-size: 30rpx;
 		color: #FFFFFF;
-		padding-left: 28rpx;
-		margin-top: 16rpx;
-	}
-
-	.bg {
-		background-image: url('../../static/imgs/index/content1-3.png');
-	}
-
-	.bg1 {
-		background-image: url('../../static/imgs/index/content1-2.png');
-	}
-
-	.bg2 {
-		background-image: url('../../static/imgs/index/content1-4.png');
-	}
-
-	.contentCard2 {
-		width: 660rpx;
-		line-height: 156rpx;
-		height: 156rpx;
-		background-image: url('../../static/imgs/index/content2.png');
-		background-repeat: no-repeat;
-		background-size: 100%;
-		font-weight: 400;
-		font-size: 30rpx;
-		color: #FFFFFF;
-		padding-left: 28rpx;
-		margin-top: 16rpx;
-		display: flex;
-		align-items: center;
-		text-align: center;
-		justify-content: space-between;
-
-		p {
-			margin-left: 160rpx;
-			font-weight: 400;
-			font-size: 32rpx;
-			color: #000000;
-		}
-
-		view {
-			width: 146rpx;
-			height: 56rpx;
-			background: #FFA945;
-			border-radius: 32rpx 32rpx 32rpx 32rpx;
-			font-weight: 400;
-			font-size: 28rpx;
-			color: #FFFFFF;
-			line-height: 56rpx;
-			margin-right: 32rpx;
-
-		}
-
-		.contentCard2text {
-			width: 204rpx;
-			height: 56rpx;
-			background: #00AAFF;
-			border-radius: 32rpx 32rpx 32rpx 32rpx;
-			font-size: 28rpx;
-		}
-	}
-
-	.text1 {
-		height: 34rpx;
-		font-weight: 500;
-		font-size: 28rpx;
-		color: #04DFF4;
-		line-height: 33rpx;
-		margin-left: 24rpx;
+		line-height: 56rpx;
+		margin-right: 32rpx;
 
 	}
 
-	.text2 {
-		font-weight: 400;
-		font-size: 26rpx;
-		color: #FFFFFF;
-		line-height: 36rpx;
-		margin-left: 24rpx;
-	}
-
-	.invsetbtn2 {
-		width: 336rpx;
-		height: 72rpx;
-		background: #004284;
-		border-radius: 36rpx 36rpx 36rpx 36rpx;
-		font-weight: 500;
-		font-size: 28rpx;
-		color: #EFEFEF;
-		text-align: center;
-		line-height: 72rpx;
-		text-align: center;
-	}
-
-	.bot {
-		width: 16rpx;
-		height: 16rpx;
-		background: #006BF4;
-		border-radius: 8rpx;
-		// margin-left: 32rpx;
-	}
-
-	.tz1 {
-		width: 116rpx;
-		height: 52rpx;
-		background-color: #006BF4;
-		margin-right: 18rpx;
+	.contentCard2text {
+		width: 204rpx;
+		height: 56rpx;
 		background: #00AAFF;
-		border-radius: 16rpx 16rpx 16rpx 16rpx;
-		font-weight: 400;
+		border-radius: 32rpx 32rpx 32rpx 32rpx;
 		font-size: 28rpx;
-		color: #FFFFFF;
-		line-height: 52rpx;
+	}
+}
+
+.text1 {
+	height: 34rpx;
+	font-weight: 500;
+	font-size: 28rpx;
+	color: #04DFF4;
+	line-height: 33rpx;
+	margin-left: 24rpx;
+
+}
+
+.text2 {
+	font-weight: 400;
+	font-size: 26rpx;
+	color: #FFFFFF;
+	line-height: 36rpx;
+	margin-left: 24rpx;
+}
+
+.invsetbtn2 {
+	width: 336rpx;
+	height: 72rpx;
+	background: #004284;
+	border-radius: 36rpx 36rpx 36rpx 36rpx;
+	font-weight: 500;
+	font-size: 28rpx;
+	color: #EFEFEF;
+	text-align: center;
+	line-height: 72rpx;
+	text-align: center;
+}
+
+.bot {
+	width: 16rpx;
+	height: 16rpx;
+	background: #006BF4;
+	border-radius: 8rpx;
+	// margin-left: 32rpx;
+}
+
+.tz1 {
+	width: 116rpx;
+	height: 52rpx;
+	background-color: #006BF4;
+	margin-right: 18rpx;
+	background: #00AAFF;
+	border-radius: 16rpx 16rpx 16rpx 16rpx;
+	font-weight: 400;
+	font-size: 28rpx;
+	color: #FFFFFF;
+	line-height: 52rpx;
+	text-align: center;
+}
+
+.panelTitle {
+	padding: 34rpx 0;
+
+	view {
+		width: 25%;
 		text-align: center;
-	}
-
-	.panelTitle {
-		padding: 34rpx 0;
-
-		view {
-			width: 25%;
-			text-align: center;
-			font-weight: 400;
-			font-size: 32rpx;
-			color: #5B5E66;
-		}
-	}
-
-	.tableHead {
-		padding: 27rpx 0;
-		background-color: #080F32;
-	}
-
-	.btcBtn {
-		// width: 158rpx;
-		height: 64rpx;
-		background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);
-		border-radius: 16rpx 16rpx 16rpx 16rpx;
 		font-weight: 400;
-		font-size: 24rpx;
-		color: #FFFFFF;
-		line-height: 64rpx;
-		padding: 0 12rpx;
+		font-size: 32rpx;
+		color: #5B5E66;
 	}
+}
+
+.tableHead {
+	padding: 27rpx 0;
+	background-color: #080F32;
+}
+
+.btcBtn {
+	// width: 158rpx;
+	height: 64rpx;
+	background: linear-gradient(308deg, #006BF4 0%, #04E1F4 100%);
+	border-radius: 16rpx 16rpx 16rpx 16rpx;
+	font-weight: 400;
+	font-size: 24rpx;
+	color: #FFFFFF;
+	line-height: 64rpx;
+	padding: 0 12rpx;
+}
 
 
-	.panelbottom {
-		height: 50rpx;
-		text-align: center;
-		line-height: 50rpx;
-	}
+.panelbottom {
+	height: 50rpx;
+	text-align: center;
+	line-height: 50rpx;
+}
 
-	.withdraw {
-		width: 100vw;
-		background-color: rgba(0, 0, 0, 0.7);
-		position: fixed;
-		top: 0;
-	}
+.withdraw {
+	width: 100vw;
+	background-color: rgba(0, 0, 0, 0.7);
+	position: fixed;
+	top: 0;
+}
 
-	.overlay-body {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		justify-content: center;
-	}
+.overlay-body {
+	display: flex;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+}
 
-	.overlay-content {
-		display: flex;
-		width: 600rpx;
-		height: 300px;
-		background: black;
-		box-sizing: border-box;
-		padding: 30rpx;
-		border-radius: 8px;
-		align-items: center;
-		justify-content: center;
-		position: relative;
-		color: white;
+.overlay-content {
+	display: flex;
+	width: 600rpx;
+	height: 300px;
+	background: black;
+	box-sizing: border-box;
+	padding: 30rpx;
+	border-radius: 8px;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	color: white;
+}
+
+.showimg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0, 0, 0, .7);
+	line-height: 100vh;
+	z-index: 99999999;
+	img {
+		vertical-align: middle;
 	}
+}
 </style>
