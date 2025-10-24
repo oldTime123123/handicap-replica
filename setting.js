@@ -4,7 +4,7 @@ import {
 } from "@/store/themeNum.js";
 const store = userStore();
 
-let dev = 1
+let dev = 2
 let COUNTRY = {
 	url: '',
 	qianzhui: '',
@@ -20,7 +20,7 @@ if (dev == 1) {
 		COUNTRY.title = "",
 		COUNTRY.icon = "/static/defi.png"
 } else if (dev == 2) {
-	COUNTRY.url = 'follow.task678.com',
+	COUNTRY.url = 'follow.ebag7.com',
 		COUNTRY.lang = "en",
 		COUNTRY.title = "",
 		COUNTRY.icon = "/static/defi.png"
